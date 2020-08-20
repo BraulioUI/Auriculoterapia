@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Auriculoterapia_app</string>
+    <string name="app_name">Auriculoterapia</string>
+    <string name="registrar_cita">Registrar cita</string>
+    <string name="appointment_state">Estado de citas</string>
+    <string name="appointment_availability">Registrar disponibilidad</string>
+    <string name="patient_text">Paciente</string>
+    <string name="date_text">Fecha</string>
+    <string name="time_text">Hora</string>
+    <string name="date_hint">Seleccione una fecha</string>
+    <string name="time_hint">Seleccione la hora</string>
+    <string name="attention_text">Tipo de\natención</string>
+    <string name="register_appointment_button">Reservar</string>
 </resources>
