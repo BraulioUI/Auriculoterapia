@@ -1,0 +1,12 @@
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\bin\Debug\netstandard2.0\Auriculoterapia.Repository.deps.json
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\bin\Debug\netstandard2.0\Auriculoterapia.Repository.dll
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\bin\Debug\netstandard2.0\Auriculoterapia.Repository.pdb
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\bin\Debug\netstandard2.0\Auriculoterapia.Domain.dll
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.csprojAssemblyReference.cache
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.AssemblyInfoInputs.cache
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.AssemblyInfo.cs
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.csproj.CoreCompileInputs.cache
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.csproj.CopyComplete
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.dll
+D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Repository\obj\Debug\netstandard2.0\Auriculoterapia.Repository.pdb
