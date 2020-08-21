@@ -1,10 +1,10 @@
-package com.example.android.auriculoterapia_app.activities
+package com.example.android.auriculoterapia_app
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
-import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.activities.AppointmentManagement
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
