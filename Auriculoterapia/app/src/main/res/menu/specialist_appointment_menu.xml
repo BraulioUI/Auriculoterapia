@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/appointmentRegisterFragment"
+        android:icon="@drawable/appointments_image"
+        android:title="@string/registrar_cita" />
+
+    <item
+        android:id="@+id/appointmentStateFragment"
+        android:icon="@drawable/state_image"
+        android:title="@string/appointment_state" />
+
+    <item
+        android:id="@+id/availabilityFragment"
+        android:icon="@drawable/availability_image"
+        android:title="@string/appointment_availability" />
+</menu>
