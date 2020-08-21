@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Auriculoterapia_app</string>
+    <string name="user">Usuario</string>
+    <string name="nombre_de_usuario">nombre de usuario</string>
+    <string name="password">contraseña</string>
+    <string name="password2">Contraseña</string>
+    <string name="login">INGRESAR</string>
+    <string name="optionregister">Registrarse</string>
+    <string name="optionForget">¿Olvidó contraseña?</string>
+    <string name="logo">logo</string>
+    <string name="pacient">Paciente</string>
+    <string name="especialista">Especialista</string>
 </resources>
