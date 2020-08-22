@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2zmAA8MqLlqTHOaRrEzIgVL7lVNHYOeTrbiEB1uJ4pvR0BlZgpoGNvMzon69zB/abbvjg5R1tYX7Eh4NmuFzqQ==",
+  "dgSpecHash": "ZrM/vM1vv+DFJQodSzh/z7fmJ2NBebNKaIYQ+ASzuNnxw9w6klHAADspJHDyjLVp6U+/LqF/8ewt6AXlJ6B5Gg==",
   "success": true,
-  "projectFilePath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
+  "projectFilePath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
