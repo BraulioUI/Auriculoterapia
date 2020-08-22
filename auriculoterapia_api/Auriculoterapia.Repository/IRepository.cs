@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace Auriculoterapia.Repository
 {
-    public class Class1
+    public interface IRepository
     {
     }
 }
