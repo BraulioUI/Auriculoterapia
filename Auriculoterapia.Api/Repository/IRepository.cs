@@ -6,6 +6,6 @@ namespace Auriculoterapia.Api.Repository
     {
         void Save(T entity);
         IEnumerable<T> FindAll();
-
+        T FindById(int id);
     }
 }

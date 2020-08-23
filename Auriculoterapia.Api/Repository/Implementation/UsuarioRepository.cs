@@ -21,5 +21,9 @@ namespace Auriculoterapia.Api.Repository.Implementation
         public void Save(Usuario entity){
 
         }
+
+        public Usuario FindById(int id){
+            return new Usuario();
+        }
     }
 }
