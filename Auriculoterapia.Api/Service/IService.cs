@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Auriculoterapia.Service
+namespace Auriculoterapia.Api.Service
 {
     public interface IService<T>
     {

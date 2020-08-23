@@ -1,6 +1,6 @@
 using System;
-using Auriculoterapia.Domain;
-namespace Auriculoterapia.Service
+using Auriculoterapia.Api.Domain;
+namespace Auriculoterapia.Api.Service
 {
     public interface IPacienteService: IService<Paciente>
     {

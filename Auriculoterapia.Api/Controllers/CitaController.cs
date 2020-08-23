@@ -1,7 +1,7 @@
 ﻿using System;
 
-using Auriculoterapia.Domain;
-using Auriculoterapia.Service;
+using Auriculoterapia.Api.Domain;
+using Auriculoterapia.Api.Service;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
