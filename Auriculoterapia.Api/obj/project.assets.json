@@ -903,17 +903,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\César Alejandro\\.nuget\\packages\\": {}
+    "C:\\Users\\César Alejandro\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+      "projectUniqueName": "G:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
       "projectName": "Auriculoterapia.Api",
-      "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+      "projectPath": "G:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
       "packagesPath": "C:\\Users\\César Alejandro\\.nuget\\packages\\",
-      "outputPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\obj\\",
+      "outputPath": "G:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\César Alejandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

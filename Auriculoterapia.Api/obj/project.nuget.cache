@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rmfo52odj1B2CDI+97HuKliFRNTS64PA+kRHUMU3iriueMi8Ft4+ZCa18SY0aw+I/IotkYb1jlnkqH0IbF1iMQ==",
+  "dgSpecHash": "LLy3qTo7yN31kb4/ciSFCazp+bF6k7fVUB0dUQMZHSdIsnAlY7JEEbKPrMGBK9Cft/m6d668Ww44kHvpo/l+Eg==",
   "success": true,
-  "projectFilePath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+  "projectFilePath": "G:\\8voCiclo\\TDP\\Auriculoterapia\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
@@ -24,7 +24,7 @@
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.extensions.options\\3.1.4\\microsoft.extensions.options.3.1.4.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.4\\microsoft.extensions.primitives.3.1.4.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\mysqlconnector\\0.61.0\\mysqlconnector.0.61.0.nupkg.sha512",
-    "C:\\Users\\César Alejandro\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.1.1\\pomelo.entityframeworkcore.mysql.3.1.1.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\pomelo.jsonobject\\2.2.1\\pomelo.jsonobject.2.2.1.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
