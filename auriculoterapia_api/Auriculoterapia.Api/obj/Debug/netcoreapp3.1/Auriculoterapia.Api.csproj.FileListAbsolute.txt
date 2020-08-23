@@ -25,3 +25,39 @@ D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Api\o
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.dll
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.pdb
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.genruntimeconfig.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.csprojAssemblyReference.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.AssemblyInfoInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.AssemblyInfo.cs
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.csproj.CoreCompileInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.MvcApplicationPartsAssemblyInfo.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\appsettings.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.exe
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.deps.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.runtimeconfig.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.runtimeconfig.dev.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Api.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Domain.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Repository.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Service.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Domain.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Service.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\bin\Debug\netcoreapp3.1\Auriculoterapia.Repository.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.RazorTargetAssemblyInfo.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.csproj.CopyComplete
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\staticwebassets\Auriculoterapia.Api.StaticWebAssets.Manifest.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\staticwebassets\Auriculoterapia.Api.StaticWebAssets.xml
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Api\obj\Debug\netcoreapp3.1\Auriculoterapia.Api.genruntimeconfig.cache

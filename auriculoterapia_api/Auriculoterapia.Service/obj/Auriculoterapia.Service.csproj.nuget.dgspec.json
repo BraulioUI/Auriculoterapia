@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj": {}
+    "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj": {}
   },
   "projects": {
-    "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
+    "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj",
+        "projectUniqueName": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj",
         "projectName": "Auriculoterapia.Domain",
-        "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj",
-        "packagesPath": "C:\\Users\\Braulio Uribe\\.nuget\\packages\\",
-        "outputPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\obj\\",
+        "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj",
+        "packagesPath": "C:\\Users\\César Alejandro\\.nuget\\packages\\",
+        "outputPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Braulio Uribe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\César Alejandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,20 +59,17 @@
         }
       }
     },
-    "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
+    "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
+        "projectUniqueName": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
         "projectName": "Auriculoterapia.Repository",
-        "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
-        "packagesPath": "C:\\Users\\Braulio Uribe\\.nuget\\packages\\",
-        "outputPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\obj\\",
+        "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
+        "packagesPath": "C:\\Users\\César Alejandro\\.nuget\\packages\\",
+        "outputPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Braulio Uribe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\César Alejandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,8 +82,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
-                "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
+              "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
+                "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
               }
             }
           }
@@ -108,6 +102,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.1.2, )"
             }
           },
           "imports": [
@@ -124,20 +122,17 @@
         }
       }
     },
-    "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj": {
+    "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
+        "projectUniqueName": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
         "projectName": "Auriculoterapia.Service",
-        "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
-        "packagesPath": "C:\\Users\\Braulio Uribe\\.nuget\\packages\\",
-        "outputPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\obj\\",
+        "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
+        "packagesPath": "C:\\Users\\César Alejandro\\.nuget\\packages\\",
+        "outputPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Braulio Uribe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\César Alejandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -150,11 +145,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
-                "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
+              "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
+                "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
               },
-              "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
-                "projectPath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj"
+              "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
+                "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj"
               }
             }
           }

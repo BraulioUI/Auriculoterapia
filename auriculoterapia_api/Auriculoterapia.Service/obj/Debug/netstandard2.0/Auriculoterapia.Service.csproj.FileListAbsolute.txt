@@ -12,3 +12,17 @@ D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Servi
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CopyComplete
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.dll
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csprojAssemblyReference.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.AssemblyInfoInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.AssemblyInfo.cs
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CoreCompileInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.deps.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Domain.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Repository.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Repository.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CopyComplete

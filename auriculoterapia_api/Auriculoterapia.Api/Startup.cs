@@ -10,6 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;   
+using Auriculoterapia.Repository.Context; 
+using Auriculoterapia.Repository.Implementation;
+using Auriculoterapia.Repository;
+
 
 namespace Auriculoterapia.Api
 {
@@ -25,7 +31,17 @@ namespace Auriculoterapia.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            //Repositories
+            services.AddTransient<IPacienteRepository, PacienteRepository>();
+            services.AddTransient<ICitaRepository, CitaRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+
+            //Services
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

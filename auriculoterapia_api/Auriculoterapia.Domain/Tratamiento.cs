@@ -6,8 +6,8 @@ namespace Auriculoterapia.Domain
     {
         public int Id {get; set;}
         public string TipoTratamiento {get; set;}
-        public Date FechaInicio {get;set;}
-        public Date FechaFin {get; set;}
+        public DateTime FechaInicio {get;set;}
+        public DateTime FechaFin {get; set;}
         public int FrecuenciaAlDia {get; set;}
         public int TiempoPorTerapia {get; set;}
         

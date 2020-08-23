@@ -14,9 +14,9 @@
 
     <!--Strings menu principal y citas-->
     <string name="app_name">Auriculoterapia</string>
-    <string name="registrar_cita">Registrar cita</string>
-    <string name="appointment_state">Estado de citas</string>
-    <string name="appointment_availability">Registrar disponibilidad</string>
+    <string name="registrar_cita">Registro</string>
+    <string name="appointment_state">Estado</string>
+    <string name="appointment_availability">Mi disponibilidad</string>
     <string name="patient_text">Paciente</string>
     <string name="date_text">Fecha</string>
     <string name="time_text">Hora</string>

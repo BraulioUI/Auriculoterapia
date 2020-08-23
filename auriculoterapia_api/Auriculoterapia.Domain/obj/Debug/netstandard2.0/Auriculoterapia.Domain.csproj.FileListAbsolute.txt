@@ -7,3 +7,12 @@ D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Domai
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.csproj.CoreCompileInputs.cache
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.dll
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.csprojAssemblyReference.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.AssemblyInfoInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.AssemblyInfo.cs
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.csproj.CoreCompileInputs.cache
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.deps.json
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.dll
+E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
