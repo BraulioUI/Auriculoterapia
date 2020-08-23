@@ -2,7 +2,7 @@ using System;
 
 namespace Auriculoterapia.Domain
 {
-    public class Usuario
+    public class Usuario 
     {
         public int Id {get; set;}
         public string Nombres {get; set;}

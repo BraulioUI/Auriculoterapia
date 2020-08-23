@@ -1,8 +1,9 @@
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace Auriculoterapia.Api
 {
-    public class WeatherForecast
+    public class WeatherForecast: IdentityUser
     {
         public DateTime Date { get; set; }
 

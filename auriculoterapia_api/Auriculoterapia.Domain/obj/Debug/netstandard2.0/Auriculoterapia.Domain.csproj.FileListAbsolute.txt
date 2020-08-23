@@ -1,6 +1,7 @@
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.deps.json
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.dll
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.csprojAssemblyReference.cache
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.AssemblyInfoInputs.cache
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.AssemblyInfo.cs
 D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Domain\obj\Debug\netstandard2.0\Auriculoterapia.Domain.csproj.CoreCompileInputs.cache
