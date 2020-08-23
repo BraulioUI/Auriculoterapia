@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Auriculoterapia.Domain;
-using Auriculoterapia.Repository.Context;
+using Auriculoterapia.Api.Domain;
+using Auriculoterapia.Api.Repository.Context;
 
 using System.Collections.Generic;
-namespace Auriculoterapia.Repository.Implementation
+namespace Auriculoterapia.Api.Repository.Implementation
 {
     public class UsuarioRepository: IUsuarioRepository
     {

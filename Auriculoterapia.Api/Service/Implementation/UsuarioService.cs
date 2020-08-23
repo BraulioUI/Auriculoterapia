@@ -1,9 +1,9 @@
-using Auriculoterapia.Domain;
-using Auriculoterapia.Repository;
+using Auriculoterapia.Api.Domain;
+using Auriculoterapia.Api.Repository;
 using System.Collections.Generic;
 
 
-namespace Auriculoterapia.Service.Implementation
+namespace Auriculoterapia.Api.Service.Implementation
 {
     public class UsuarioService: IUsuarioService
     {

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace Auriculoterapia.Repository
+namespace Auriculoterapia.Api.Repository
 {
     public interface IRepository<T>
     {

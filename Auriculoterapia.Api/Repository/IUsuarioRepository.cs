@@ -1,6 +1,6 @@
 using System;
-using Auriculoterapia.Domain;
-namespace Auriculoterapia.Repository
+using Auriculoterapia.Api.Domain;
+namespace Auriculoterapia.Api.Repository
 {
     public interface IUsuarioRepository: IRepository<Usuario>
     {

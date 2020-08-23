@@ -1,7 +1,7 @@
 using Auriculoterapia.Api.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Auriculoterapia.Api.Repository.context
+namespace Auriculoterapia.Api.Repository.Context
 {
     public class ApplicationDbContext : DbContext
     {
