@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.deps.json
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.dll
 D:\Documentos\Documents\curso 8tvo\TDP\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.pdb
@@ -26,3 +27,19 @@ E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\
 E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Repository.pdb
 E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
 E:\8voCiclo\TDP\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CopyComplete
+=======
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.deps.json
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.dll
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Service.pdb
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Domain.dll
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Repository.dll
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Repository.pdb
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\bin\Debug\netstandard2.0\Auriculoterapia.Domain.pdb
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csprojAssemblyReference.cache
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.AssemblyInfoInputs.cache
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.AssemblyInfo.cs
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CoreCompileInputs.cache
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.csproj.CopyComplete
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.dll
+D:\Documentos\Desktop\Proyectos\Auriculoterapia\auriculoterapia_api\Auriculoterapia.Service\obj\Debug\netstandard2.0\Auriculoterapia.Service.pdb
+>>>>>>> master

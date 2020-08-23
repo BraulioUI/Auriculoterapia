@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "FilePath": "e:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+=======
+  "FilePath": "d:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+>>>>>>> master
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",

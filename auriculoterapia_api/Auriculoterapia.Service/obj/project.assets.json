@@ -1293,11 +1293,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
       "projectName": "Auriculoterapia.Service",
       "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
       "packagesPath": "C:\\Users\\César Alejandro\\.nuget\\packages\\",
       "outputPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\obj\\",
+=======
+      "projectUniqueName": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
+      "projectName": "Auriculoterapia.Service",
+      "projectPath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\Auriculoterapia.Service.csproj",
+      "packagesPath": "C:\\Users\\Braulio Uribe\\.nuget\\packages\\",
+      "outputPath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Service\\obj\\",
+>>>>>>> master
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\César Alejandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1313,11 +1321,19 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
+<<<<<<< HEAD
             "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
               "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
             },
             "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
               "projectPath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj"
+=======
+            "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj": {
+              "projectPath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Domain\\Auriculoterapia.Domain.csproj"
+            },
+            "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj": {
+              "projectPath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj"
+>>>>>>> master
             }
           }
         }

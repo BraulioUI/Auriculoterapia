@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "EyBikNQStxUK1EJ4vmvqajL8a8iP3fy9i8SszdKA4N5nRMdF9p19vDOW6OhPzqhITtTN0d6sw2Y2yrcDOReZzQ==",
   "success": true,
   "projectFilePath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
+=======
+  "dgSpecHash": "ZrM/vM1vv+DFJQodSzh/z7fmJ2NBebNKaIYQ+ASzuNnxw9w6klHAADspJHDyjLVp6U+/LqF/8ewt6AXlJ6B5Gg==",
+  "success": true,
+  "projectFilePath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Repository\\Auriculoterapia.Repository.csproj",
+>>>>>>> master
   "expectedPackageFiles": [
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

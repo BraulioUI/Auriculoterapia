@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "3/bt0oC/cQSCewSbtSxQ4VNmG6V9Ch8GaZQebc/wWS8cmkstecT6Ql1uzAquiglB3LqMX/LKGuO3MqLdf2MVIQ==",
   "success": true,
   "projectFilePath": "E:\\8voCiclo\\TDP\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
@@ -30,5 +31,11 @@
     "C:\\Users\\César Alejandro\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\César Alejandro\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.0\\system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "OBvZiNCF4zlXebBouKIPok5MWJwf192MnFbAWdP5nJ4N1r7cxb9alYZCqTVSxlh7rCsEqHwHOzY3hrSclrPW4w==",
+  "success": true,
+  "projectFilePath": "D:\\Documentos\\Desktop\\Proyectos\\Auriculoterapia\\auriculoterapia_api\\Auriculoterapia.Api\\Auriculoterapia.Api.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> master
   "logs": []
 }

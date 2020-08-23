@@ -2,7 +2,7 @@ using System;
 
 namespace Auriculoterapia.Domain
 {
-    public class Rol
+    public class Rol 
     {
 
         public int Id {get; set;}

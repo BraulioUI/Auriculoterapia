@@ -24,6 +24,16 @@
     <string name="time_hint">Seleccione la hora</string>
     <string name="attention_text">Tipo de\natención</string>
     <string name="register_appointment_button">Reservar</string>
+    <string name="registroTitulo">Registro</string>
+    <string name="str_nombre">Nombre:</string>
+    <string name="str_apellidoLabel">Apellido:</string>
+    <string name="str_fecha_de_nacimiento">Fecha de Nacimiento:</string>
+    <string name="str_usuarioLabel">Usuario:</string>
+    <string name="str_passwordLabel">Contraseña</string>
+    <string name="str_keywordLabel">Palabra clave:</string>
+    <string name="str_GenderLabel">Sexo:</string>
+    <string name="str_apellidohint">apellido</string>
+    <string name="str_keywordhint">palabra clave</string>
     <!---->
 
 
