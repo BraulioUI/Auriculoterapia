@@ -22,5 +22,9 @@ namespace Auriculoterapia.Api.Service.Implementation
            return UsuarioRepository.FindAll();
         }
 
+        public Usuario Autenticar(string nombreUsuario, string password){
+            return UsuarioRepository.Autenticar(nombreUsuario,password);
+        }
+
     }
 }

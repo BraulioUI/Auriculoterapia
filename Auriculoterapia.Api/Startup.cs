@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Auriculoterapia.Api.Repository;
+using Auriculoterapia.Api.Repository.Implementation;
 using Auriculoterapia.Api.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Auriculoterapia.Api.Service;
+using Auriculoterapia.Api.Service.Implementation;
+
 
 namespace Auriculoterapia.Api
 {
@@ -30,7 +35,20 @@ namespace Auriculoterapia.Api
             services.AddDbContext<ApplicationDbContext>(x => {
                 x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddControllers();
+
+            services.AddTransient<ICitaRepository, CitaRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IRol_UsuarioRepository, Rol_UsuarioRepository>();
+
+            services.AddTransient<ICitaService,CitaService>(); 
+            services.AddTransient<IUsuarioService,UsuarioService>(); 
+
+            services.AddControllers()
+                 .AddNewtonsoftJson(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
