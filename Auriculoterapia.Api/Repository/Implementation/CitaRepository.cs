@@ -32,5 +32,9 @@ namespace Auriculoterapia.Api.Repository.Implementation
                 throw;
             }
         }
+
+        public Cita FindById(int id){
+            return new Cita();
+        }
     }
 }

@@ -96,6 +96,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
             return user;
         }
 
+
         public void Asignar_Paciente(Usuario usuario){
             try{
                 context.Pacientes.Add(usuario.Paciente);
@@ -106,6 +107,11 @@ namespace Auriculoterapia.Api.Repository.Implementation
                 throw;
             }
 
+        }
+
+
+        public Usuario FindById(int id){
+            return new Usuario();
         }
 
     }

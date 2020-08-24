@@ -21,5 +21,16 @@ namespace Auriculoterapia.Api.Repository.Implementation
         public void Save(Paciente entity){
 
         }
+
+        
+        public Paciente FindById(int Id){
+            var paciente = new Paciente();
+            try{
+                paciente = this.context.Pacientes.Single(paciente => paciente.Id == Id);
+            }catch(System.Exception){
+                throw;
+            }
+            return paciente;
+        }
     }
 }

@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
+using Auriculoterapia.Api.Repository;
+using Auriculoterapia.Api.Repository.Implementation;
 using Auriculoterapia.Api.Service;
 using Auriculoterapia.Api.Service.Implementation;
 
@@ -37,18 +40,21 @@ namespace Auriculoterapia.Api
             });
 
             services.AddTransient<ICitaRepository, CitaRepository>();
+            services.AddTransient<IPacienteRepository, PacienteRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IRol_UsuarioRepository, Rol_UsuarioRepository>();
+            services.AddTransient<ITipoAtencionRepository, TipoAtencionRepository>();
 
             services.AddTransient<ICitaService,CitaService>(); 
             services.AddTransient<IUsuarioService,UsuarioService>(); 
-
+            services.AddTransient<IPacienteService, PacienteService>();
             services.AddControllers()
                  .AddNewtonsoftJson(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }
             );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

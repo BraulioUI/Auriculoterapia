@@ -3,14 +3,16 @@ using System;
 using Auriculoterapia.Api.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Auriculoterapia.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200823183246_SecondMigrations")]
+    partial class SecondMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,14 +40,9 @@ namespace Auriculoterapia.Api.Migrations
                     b.Property<int>("PacienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoAtencionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PacienteId");
-
-                    b.HasIndex("TipoAtencionId");
 
                     b.ToTable("Citas");
                 });
@@ -247,12 +244,6 @@ namespace Auriculoterapia.Api.Migrations
                     b.HasOne("Auriculoterapia.Api.Domain.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Auriculoterapia.Api.Domain.TipoAtencion", "TipoAtencion")
-                        .WithMany()
-                        .HasForeignKey("TipoAtencionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

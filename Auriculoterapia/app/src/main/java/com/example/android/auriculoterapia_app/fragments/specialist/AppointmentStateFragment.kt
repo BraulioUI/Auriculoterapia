@@ -1,4 +1,4 @@
-package com.example.android.auriculoterapia_app.fragments
+package com.example.android.auriculoterapia_app.fragments.specialist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -2,15 +2,11 @@ package com.example.android.auriculoterapia_app.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.android.auriculoterapia_app.R
-import com.example.android.auriculoterapia_app.fragments.AppointmentRegisterFragment
-import com.example.android.auriculoterapia_app.fragments.AppointmentStateFragment
-import com.example.android.auriculoterapia_app.fragments.AvailabilityFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentRegisterFragment
+import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
+import com.example.android.auriculoterapia_app.fragments.specialist.AvailabilityFragment
 import kotlinx.android.synthetic.main.activity_appointment_management.*
 
 class AppointmentManagement : AppCompatActivity() {
