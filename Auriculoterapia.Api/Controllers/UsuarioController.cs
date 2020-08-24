@@ -18,7 +18,7 @@ namespace Auriculoterapia.Api.Controllers
             this.usuarioService = usuarioService;
         }
 
-        //[Authorize(Roles = Rol.)]
+       // [Authorize(Roles = "Especialista")]
         [HttpGet]
         public ActionResult Get()
         {

@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -18,17 +19,19 @@ namespace Auriculoterapia.Api.Repository.Implementation
     {
         private ApplicationDbContext context;
         private readonly IConfiguration _config;
+        private readonly IRol_UsuarioRepository rol_UsuarioRepository;
 
-        public UsuarioRepository(ApplicationDbContext context, IConfiguration config)
+        public UsuarioRepository(ApplicationDbContext context, IConfiguration config,IRol_UsuarioRepository rol_UsuarioRepository)
         {
             this.context = context;
             this._config = config;
+            this.rol_UsuarioRepository = rol_UsuarioRepository;
         }
 
         public IEnumerable<Usuario> FindAll(){
             var users = new List<Usuario>();
             try{
-                users = context.Usuarios.ToList();
+                users = context.Usuarios.Include(u => u.Paciente).ToList();
             }
             catch(System.Exception)
             {
@@ -36,10 +39,28 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
             return users;
         }
-        public void Save(Usuario entity){
+        /*public void Save(Usuario entity){
             try{
                 context.Usuarios.Add(entity);
                 context.SaveChanges();
+            }
+            catch{
+                throw;
+            }
+
+        }*/
+
+        public void Save(Usuario entity){
+            
+            try{
+                context.Usuarios.Add(entity);
+                context.Pacientes.Add(entity.Paciente);
+                context.SaveChanges();
+                rol_UsuarioRepository.Asignar_Usuario_Rol(entity);
+
+                //context.Rol_Usuarios.Add();
+                //Asignar_Paciente(entity);
+                
             }
             catch{
                 throw;
@@ -74,5 +95,18 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
             return user;
         }
+
+        public void Asignar_Paciente(Usuario usuario){
+            try{
+                context.Pacientes.Add(usuario.Paciente);
+                context.SaveChanges();
+                
+            }
+            catch{
+                throw;
+            }
+
+        }
+
     }
 }
