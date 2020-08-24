@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Auriculoterapia.Api.Service;
 using Auriculoterapia.Api.Service.Implementation;
 
+
 namespace Auriculoterapia.Api
 {
     public class Startup
@@ -36,8 +37,18 @@ namespace Auriculoterapia.Api
             });
 
             services.AddTransient<ICitaRepository, CitaRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IRol_UsuarioRepository, Rol_UsuarioRepository>();
+
             services.AddTransient<ICitaService,CitaService>(); 
-            services.AddControllers();
+            services.AddTransient<IUsuarioService,UsuarioService>(); 
+
+            services.AddControllers()
+                 .AddNewtonsoftJson(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
