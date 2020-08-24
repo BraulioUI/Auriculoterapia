@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Auriculoterapia.Api.Domain;
+using Auriculoterapia.Api.Helpers;
 using Auriculoterapia.Api.Service;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +19,16 @@ namespace Auriculoterapia.Api.Controllers
             this.CitaService = CitaService;
         }
 
-        [HttpPost("paciente/{Id}")]
-        public ActionResult RegistrarCita([FromBody] FormularioCita entity, int Id){
-            CitaService.RegistrarCita(entity, Id);
+        [HttpPost]
+        public ActionResult RegistrarCita([FromBody] FormularioCita entity, [FromQuery] int PacienteId){
+            CitaService.RegistrarCita(entity, PacienteId);
             return Ok();
         
         }
 
         [HttpGet]
-        public IEnumerable<Cita> ListarCitas(){
-            return CitaService.FindAll();
+        public ActionResult ListarCitas(){
+            return Ok(CitaService.FindAll());
         }
 
         [HttpGet("hello_world")]

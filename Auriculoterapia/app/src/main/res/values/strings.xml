@@ -36,6 +36,13 @@
     <string name="str_keywordhint">palabra clave</string>
     <!---->
 
-
-
+    <!--Solo menu-->
+    <string name="citas_menu">Citas</string>
+    <string name="pacientes_menu">Pacientes</string>
+    <string name="resultados_menu">Resultados</string>
+    <string name="notificaciones_menu">Notificaciones</string>
+    <string name="configuracion_menu">Configuración</string>
+    <string name="tratamiento_menu">Tratamiento</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="num_celular_text">Celular</string>
 </resources>

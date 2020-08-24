@@ -31,11 +31,15 @@ INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '
 SELECT * FROM ESPECIALISTAS;
 SELECT * FROM PACIENTES;
 
+/*Tipo de atenciones*/
+INSERT INTO TIPOATENCIONS(Descripcion) VALUES ('Presencial');
+INSERT INTO TIPOATENCIONS(Descripcion) VALUES ('Virtual');
+SELECT * FROM TIPOATENCIONS;
 
-INSERT INTO CITAS(PacienteId,Fecha,HoraInicioAtencion,HoraFinAtencion,Estado) 
-VALUES(1, '2020-08-24', '0000-00-00 09:00:00', '0000-00-00 09:30:00', 'En proceso');
+INSERT INTO CITAS(PacienteId,Fecha,HoraInicioAtencion,HoraFinAtencion,Estado, TipoAtencionId) 
+VALUES(1, '2020-08-24', '2020-08-24 09:00:00', '2020-08-24 09:30:00', 'En proceso', 2);
 
-DELETE FROM CITAS WHERE Id = 1;
+DELETE FROM CITAS WHERE Id >= 1;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM CITAS;
 

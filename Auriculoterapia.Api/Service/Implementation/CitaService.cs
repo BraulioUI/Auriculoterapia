@@ -9,28 +9,31 @@ namespace Auriculoterapia.Api.Service.Implementation
     {
         private readonly ICitaRepository CitaRepository;
         private readonly IPacienteRepository PacienteRepository;
+        private readonly ITipoAtencionRepository tipoAtencionRepository;
 
-        private ConversorDeFechaYHora conversor = new ConversorDeFechaYHora();
 
-        public CitaService(ICitaRepository CitaRepository, IPacienteRepository PacienteRepository){
+        public CitaService(ICitaRepository CitaRepository, IPacienteRepository PacienteRepository, ITipoAtencionRepository tipoAtencionRepository){
             this.CitaRepository = CitaRepository;
             this.PacienteRepository = PacienteRepository;
+            this.tipoAtencionRepository = tipoAtencionRepository;
         }
 
         public void Save(Cita entity){
             CitaRepository.Save(entity);
         }
 
-        public void RegistrarCita(FormularioCita entity, int Id){
+        public void RegistrarCita(FormularioCita entity, int PacienteId){
             var cita = new Cita();
-            var paciente = new Paciente();
+           
             try {
-                cita.Fecha = entity.Fecha;
-                cita.HoraInicioAtencion = conversor.TransformarAHora(entity.HoraInicioAtencion);
-                cita.HoraInicioAtencion = conversor.TransformarAHora(entity.HoraFinAtencion);
+                var tipoAtencion = tipoAtencionRepository.FindByDescription(entity.TipoAtencion);
+                var paciente = PacienteRepository.FindById(PacienteId);
+                
                 cita.Estado = "En Proceso";
-                paciente = PacienteRepository.FindById(Id);
+                cita.PacienteId = paciente.Id;
                 cita.Paciente = paciente;
+                cita.TipoAtencionId = tipoAtencion.Id;
+                cita.TipoAtencion = tipoAtencion;
                 Save(cita);
 
             }catch(System.Exception){

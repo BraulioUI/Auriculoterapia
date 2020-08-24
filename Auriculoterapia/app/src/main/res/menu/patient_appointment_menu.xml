@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/appointmentPatientRegisterFragment"
+        android:icon="@drawable/appointments_image"
+        android:title="@string/registrar_cita" />
+
+    <item
+        android:id="@+id/appointmentPatientStateFragment"
+        android:icon="@drawable/state_image"
+        android:title="@string/appointment_state" />
+</menu>

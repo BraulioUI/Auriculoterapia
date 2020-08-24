@@ -39,6 +39,7 @@ namespace Auriculoterapia.Api
             services.AddTransient<ICitaService, CitaService>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
             services.AddTransient<IPacienteService, PacienteService>();
+            services.AddTransient<ITipoAtencionRepository, TipoAtencionRepository>();
             services.AddControllers();
             
         }
