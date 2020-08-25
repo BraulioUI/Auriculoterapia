@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Auriculoterapia.Api.Repository;
-using Auriculoterapia.Api.Repository.Implementation;
 using Auriculoterapia.Api.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +46,7 @@ namespace Auriculoterapia.Api
             services.AddTransient<ICitaService,CitaService>(); 
             services.AddTransient<IUsuarioService,UsuarioService>(); 
             services.AddTransient<IPacienteService, PacienteService>();
+            services.AddTransient<ITipoAtencionService, TipoAtencionService>();
             services.AddControllers()
                  .AddNewtonsoftJson(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 
@@ -55,6 +54,7 @@ namespace Auriculoterapia.Api
                 }
             );
 
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +75,8 @@ namespace Auriculoterapia.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }
     }
 }

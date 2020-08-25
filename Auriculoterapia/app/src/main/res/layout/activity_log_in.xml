@@ -76,7 +76,7 @@
     <Button
         android:id="@+id/bt_login"
         android:layout_width="128dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:background="@android:drawable/editbox_background_normal"
         android:backgroundTint="#6D82E6"

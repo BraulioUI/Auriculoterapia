@@ -16,7 +16,13 @@ namespace Auriculoterapia.Api.Repository.Implementation
         }
 
         public IEnumerable<TipoAtencion> FindAll(){
-            return new List<TipoAtencion>();
+           var atenciones = new List<TipoAtencion>();
+           try{
+               atenciones = this.context.TipoAtencions.ToList();
+           }catch(System.Exception){
+               throw;
+           }
+           return atenciones;
         }
         public void Save(TipoAtencion entity){
 

@@ -5,14 +5,15 @@ namespace Auriculoterapia.Api.Helpers
     public class ConversorDeFechaYHora
     {
         public DateTime TransformarAFecha(string fecha){
-            DateTime dt = DateTime.Parse(fecha);
-            return dt;
+            DateTime dt1 = DateTime.ParseExact(fecha, "yyyy-MM-dd", null);
+            Console.WriteLine(dt1);
+            return dt1;
         }
 
-        public DateTime TransformarAHora(string hora){
-            
-            DateTime dt = DateTime.ParseExact(hora, "HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            return dt;
+        public DateTime TransformarAHora(string hora, string fecha){
+            string horaFecha = fecha + " " + hora;
+            DateTime dt2 = DateTime.ParseExact(horaFecha, "yyyy-MM-dd HH:mm", null);
+            return dt2;
         }
     }
 }
