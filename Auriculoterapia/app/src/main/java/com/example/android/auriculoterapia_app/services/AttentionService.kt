@@ -6,6 +6,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface AttentionService {
-    @GET("api/tipoatencion/")
-    fun listAttentionTypes(): Call<List<TipoAtencion>>
+    /*@GET("api/tipoatencion/")
+    fun listAttentionTypes(): Call<List<TipoAtencion>>*/
 }

@@ -38,5 +38,17 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
             return paciente;
         }
+
+
+        public string ActualizarNumeroPaciente(string numero, Paciente paciente){
+            string actualizado = "Actualizado";
+            try{
+                paciente.Celular = numero;
+                this.context.SaveChanges();
+            } catch{
+
+            }
+            return actualizado;
+        }
     }
 }

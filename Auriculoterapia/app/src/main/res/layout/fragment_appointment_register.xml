@@ -24,7 +24,7 @@
         <Spinner
             android:id="@+id/patientSpinner"
             android:layout_width="247dp"
-            android:layout_height="34dp"
+            android:layout_height="50dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="52dp"
             android:spinnerMode="dropdown"
@@ -38,8 +38,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="24dp"
             android:text="@string/date_text"
             android:textSize="18sp"
@@ -54,7 +54,7 @@
             android:layout_height="32dp"
             android:layout_marginTop="56dp"
 
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="24dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
             app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
@@ -73,7 +73,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="54dp"
             android:layout_marginTop="44dp"
             android:text="@string/time_text"
             android:textSize="18sp"
@@ -88,7 +88,7 @@
             android:layout_width="120dp"
             android:layout_height="32dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="24dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
             app:layout_constraintTop_toBottomOf="@+id/dateEditText" />
@@ -109,16 +109,16 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="60dp"
             android:layout_marginEnd="24dp"
             android:text="@string/attention_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/registerAppointmentButton"
             app:layout_constraintEnd_toStartOf="@+id/tipoAtencionSpinner"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="0.437" />
+            app:layout_constraintVertical_bias="0.443" />
 
         <Spinner
             android:id="@+id/tipoAtencionSpinner"
@@ -133,11 +133,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewHora" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/registerAppointmentButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:text="@string/register_appointment_button"
