@@ -4,24 +4,22 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.BASE_URL
-import com.example.android.auriculoterapia_app.models.Cita
 import com.example.android.auriculoterapia_app.models.FormularioCita
 import com.example.android.auriculoterapia_app.models.Paciente
-import com.example.android.auriculoterapia_app.models.TipoAtencion
 import com.example.android.auriculoterapia_app.services.AppointmentService
-import com.example.android.auriculoterapia_app.services.AttentionService
 import com.example.android.auriculoterapia_app.services.PatientService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.ConnectException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -102,6 +100,9 @@ class AppointmentRegisterFragment : Fragment() {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val dateInString = formatter.format(date)
         dateEditText.text = dateInString
+
+
+
 
         dateButton.setOnClickListener{
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener{

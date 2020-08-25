@@ -15,7 +15,7 @@ class LogInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
 
-        val intentMain = Intent(this, MainActivityPatient::class.java)
+        val intentMain = Intent(this, MainActivity::class.java)
         val intentRegister = Intent(this, RegisterActivity::class.java)
 
         val registerButtom = findViewById<TextView>(R.id.tv_optionregister)
