@@ -45,4 +45,5 @@
     <string name="tratamiento_menu">Tratamiento</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="num_celular_text">Celular</string>
+    <string name="registrar_button_main">Registrar</string>
 </resources>

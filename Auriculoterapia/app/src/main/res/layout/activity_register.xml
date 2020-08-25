@@ -165,4 +165,12 @@
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="219dp" />
 
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrar_button_main"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="571dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

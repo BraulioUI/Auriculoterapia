@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Auriculoterapia.Api.Domain
 {
     public class Usuario 
@@ -14,9 +16,11 @@ namespace Auriculoterapia.Api.Domain
 
         //OneToOne Relationship
         //public int PacienteId {get; set;}
+        [JsonIgnore]
         public Paciente Paciente {get; set;}
 
         //public int EspecialistaId {get; set;}
+        [JsonIgnore]
         public Especialista Especialista {get; set;}
         
     }

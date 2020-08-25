@@ -1,8 +1,11 @@
 package com.example.android.auriculoterapia_app.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.android.auriculoterapia_app.MainActivity
 import com.example.android.auriculoterapia_app.R
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -14,6 +17,10 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         //calendar
+        val intent = Intent(this, MainActivity::class.java)
+        buttonRegister.setOnClickListener{
+            startActivity(intent)
+        }
 
     }
 }
