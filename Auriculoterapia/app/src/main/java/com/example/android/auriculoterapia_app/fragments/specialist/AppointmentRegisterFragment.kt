@@ -167,10 +167,7 @@ class AppointmentRegisterFragment : Fragment() {
                 textViewHora.text as String,
                 horaFinAtencion,
                 textoAtencion)
-            Log.i("Id Paciente en Click Listener", idPaciente.toString())
-            Log.i("Fecha en Click Listener", dateEditText.text as String)
-            Log.i("HoraInicio en Click Listener", textViewHora.text as String)
-            Log.i("HoraFin en Click Listener",horaFinAtencion)
+
 
             registrarCita(cita, idPaciente)
         }

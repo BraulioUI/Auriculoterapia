@@ -83,7 +83,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/appointment_option"
+                android:id="@+id/appointment_option_patient"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="16dp"
@@ -118,7 +118,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/treatment_option"
+                android:id="@+id/treatment_option_patient"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="16dp"
@@ -156,7 +156,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/results_option"
+                android:id="@+id/results_option_patient"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="16dp"
@@ -190,7 +190,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/notification_option"
+                android:id="@+id/notification_option_patient"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="16dp"
@@ -223,7 +223,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/configuration_option"
+                android:id="@+id/configuration_option_patient"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="16dp"
