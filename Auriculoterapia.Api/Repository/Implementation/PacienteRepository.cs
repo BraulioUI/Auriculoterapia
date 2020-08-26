@@ -10,9 +10,13 @@ namespace Auriculoterapia.Api.Repository.Implementation
     {
         private ApplicationDbContext context;
 
-        public PacienteRepository(ApplicationDbContext context)
+        private readonly IUsuarioRepository usuarioRepository;
+
+
+        public PacienteRepository(ApplicationDbContext context,IUsuarioRepository usuarioRepository)
         {
             this.context = context;
+            this.usuarioRepository = usuarioRepository;
         }
 
         public IEnumerable<Paciente> FindAll(){
@@ -25,7 +29,15 @@ namespace Auriculoterapia.Api.Repository.Implementation
             return pacientes;
         }
         public void Save(Paciente entity){
-
+            try{
+                usuarioRepository.Save(entity.Usuario);
+                context.Add(entity);
+                context.SaveChanges();
+                
+            }catch{
+                throw;
+            }
+            
         }
 
         
