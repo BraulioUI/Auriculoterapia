@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Auriculoterapia.Api.Domain;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Controllers
 {
@@ -17,13 +18,17 @@ namespace Controllers
             this.PacienteService = PacienteService;
         }
 
-        //[Authorize(Roles = "Paciente")]
-        [HttpGet]
-        public IEnumerable<Paciente> FindAll(){
+        //[Authorize(Roles = "paciente")]
+        [HttpGet("{id}")]
+        public IEnumerable<Paciente> FindAll(int id){
+            //var idUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var currentUserId = int.Parse(User.Identity.Name);
+            
+
             return PacienteService.FindAll();
         }       
 
-       // [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Paciente paciente)
         {

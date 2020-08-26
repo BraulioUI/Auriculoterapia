@@ -26,5 +26,9 @@ namespace Auriculoterapia.Api.Service.Implementation
             return UsuarioRepository.Autenticar(nombreUsuario,password);
         }
 
+        public Usuario FinbyId(int id){
+            return UsuarioRepository.FindById(id);
+        }
+
     }
 }
