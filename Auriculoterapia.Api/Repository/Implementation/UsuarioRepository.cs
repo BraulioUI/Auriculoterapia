@@ -82,7 +82,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, "paciente")
+                    new Claim(ClaimTypes.Role, "ROL_PACIENTE")
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

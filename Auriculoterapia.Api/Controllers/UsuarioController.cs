@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Auriculoterapia.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
@@ -18,7 +18,7 @@ namespace Auriculoterapia.Api.Controllers
             this.usuarioService = usuarioService;
         }
 
-       // [Authorize(Roles = "Especialista")]
+        [Authorize(Roles = "Especialista")]
         [HttpGet]
         public ActionResult Get()
         {
@@ -27,7 +27,7 @@ namespace Auriculoterapia.Api.Controllers
             );
         }
 
-       // [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Usuario usuario)
         {
