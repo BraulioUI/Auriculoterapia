@@ -3,6 +3,7 @@ using Auriculoterapia.Api.Repository;
 using System.Collections.Generic;
 using Auriculoterapia.Api.Helpers;
 
+
 namespace Auriculoterapia.Api.Service.Implementation
 {
     public class CitaService: ICitaService
