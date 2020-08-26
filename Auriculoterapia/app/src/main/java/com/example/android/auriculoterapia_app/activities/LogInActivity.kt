@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.android.auriculoterapia_app.MainActivity
+import com.example.android.auriculoterapia_app.MainActivityPatient
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.Usuario
@@ -29,8 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LogInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+
 
         super.onCreate(savedInstanceState)
 

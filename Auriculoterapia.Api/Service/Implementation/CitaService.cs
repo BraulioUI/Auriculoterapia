@@ -45,6 +45,30 @@ namespace Auriculoterapia.Api.Service.Implementation
             }
         }
 
+        public void RegistrarCitaPaciente(FormularioCitaPaciente entity, int PacienteId){
+            var cita = new Cita();
+            var conversor = new ConversorDeFechaYHora(); 
+            try {
+
+                var tipoAtencion = tipoAtencionRepository.FindByDescription(entity.TipoAtencion);
+                var paciente = PacienteRepository.FindById(PacienteId);
+                PacienteRepository.ActualizarNumeroPaciente(entity.Celular, paciente);
+                cita.Fecha = conversor.TransformarAFecha(entity.Fecha);
+                cita.HoraInicioAtencion = conversor.TransformarAHora(entity.HoraInicioAtencion, entity.Fecha);
+                cita.HoraFinAtencion = conversor.TransformarAHora(entity.HoraFinAtencion, entity.Fecha);
+                cita.Estado = "En Proceso";
+                cita.PacienteId = paciente.Id;
+                cita.Paciente = paciente;
+                cita.TipoAtencionId = tipoAtencion.Id;
+                cita.TipoAtencion = tipoAtencion;
+                Save(cita);
+
+            }catch(System.Exception){
+
+                throw;
+            }
+        }
+
         public IEnumerable<Cita> FindAll(){
            return CitaRepository.FindAll();
         }

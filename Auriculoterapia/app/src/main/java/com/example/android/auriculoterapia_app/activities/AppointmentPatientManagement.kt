@@ -4,27 +4,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.fragments.patient.AppointmentPatientRagisterFragment
+import com.example.android.auriculoterapia_app.fragments.patient.AppointmentPatientStateFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentRegisterFragment
-import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
-import com.example.android.auriculoterapia_app.fragments.specialist.AvailabilityFragment
-import kotlinx.android.synthetic.main.activity_appointment_management.*
 import kotlinx.android.synthetic.main.activity_appointment_patient_management.*
 
 class AppointmentPatientManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appointment_patient_management)
-        loadFragment(AppointmentRegisterFragment())
+        loadFragment(AppointmentPatientRagisterFragment())
         bottomNavigationPatient.setOnNavigationItemSelectedListener {
                 menuItem -> when{
 
             menuItem.itemId == R.id.appointmentPatientRegisterFragment -> {
-                loadFragment(AppointmentRegisterFragment())
+                loadFragment(AppointmentPatientRagisterFragment())
                 return@setOnNavigationItemSelectedListener true
             }
 
             menuItem.itemId == R.id.appointmentPatientStateFragment -> {
-                loadFragment(AppointmentStateFragment())
+                loadFragment(AppointmentPatientStateFragment())
                 return@setOnNavigationItemSelectedListener true
             }
             else -> {

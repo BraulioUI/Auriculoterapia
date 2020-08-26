@@ -19,12 +19,23 @@ namespace Auriculoterapia.Api.Controllers
             this.CitaService = CitaService;
         }
 
-        [HttpPost]
-        public ActionResult RegistrarCita([FromBody] FormularioCita entity, [FromQuery] int PacienteId){
+        [HttpPost("especialista")]
+        public ActionResult RegistrarCitaEspecialista([FromBody] FormularioCita entity, [FromQuery] int PacienteId){
             CitaService.RegistrarCita(entity, PacienteId);
-            return Ok();
+            return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created);
         
         }
+
+        [HttpPost("paciente")]
+        public ActionResult RegistrarCitaPaciente([FromBody] FormularioCitaPaciente entity, [FromQuery] int PacienteId){
+            CitaService.RegistrarCitaPaciente(entity, PacienteId);
+            Console.WriteLine(StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created));
+            return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created);
+        }
+
+
+
+
 
         [HttpGet]
         public ActionResult ListarCitas(){

@@ -3,7 +3,7 @@ using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Repository.Context;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 namespace Auriculoterapia.Api.Repository.Implementation
 {
     public class CitaRepository: ICitaRepository
@@ -18,7 +18,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
         public IEnumerable<Cita> FindAll(){
             var citas = new List<Cita>();
             try{
-                citas = this.context.Citas.ToList();
+                citas = this.context.Citas.Include(c => c.Paciente).Include(c => c.Paciente.Usuario).Include(c => c.TipoAtencion).ToList();
             } catch(System.Exception){
                 throw;
             }

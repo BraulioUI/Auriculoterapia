@@ -1,8 +1,10 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
@@ -40,6 +42,7 @@ class AppointmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         val patientText = itemView.findViewById<TextView>(R.id.cardPatientTextView)
         val stateText = itemView.findViewById<TextView>(R.id.cardStateTextView)
+        val button = itemView.findViewById<Button>(R.id.botonModificar)
 
         fun bind(cita: Cita){
             dateText.text = cita.fecha
@@ -47,6 +50,7 @@ class AppointmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             patientText.text = cita.paciente.usuario.nombre
             stateText.text = cita.estado
+            button.visibility = View.GONE
 
         }
     }
