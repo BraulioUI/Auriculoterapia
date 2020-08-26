@@ -54,7 +54,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
             
             try{
                 context.Usuarios.Add(entity);
-                context.Pacientes.Add(entity.Paciente);
+                //context.Pacientes.Add(entity.Paciente);
                 context.SaveChanges();
                 rol_UsuarioRepository.Asignar_Usuario_Rol(entity);
 
@@ -90,6 +90,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
             };
             var token = tokenHelper.CreateToken(tokenDescriptor);
             user.Token = tokenHelper.WriteToken(token);
+            context.SaveChanges();
 
             user.Contrasena = null;
 

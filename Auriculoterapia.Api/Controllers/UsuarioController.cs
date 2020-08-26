@@ -18,7 +18,7 @@ namespace Auriculoterapia.Api.Controllers
             this.usuarioService = usuarioService;
         }
 
-       // [Authorize(Roles = "Especialista")]
+        //[Authorize(Roles = "Especialista")]
         [HttpGet]
         public ActionResult Get()
         {
@@ -27,7 +27,7 @@ namespace Auriculoterapia.Api.Controllers
             );
         }
 
-       // [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Usuario usuario)
         {
@@ -35,6 +35,7 @@ namespace Auriculoterapia.Api.Controllers
             return Ok(usuario); 
         }
 
+        //[AllowAnonymous]
         [HttpPost("autenticar")]
         public IActionResult Autenticar([FromBody] Usuario usuario)
         {

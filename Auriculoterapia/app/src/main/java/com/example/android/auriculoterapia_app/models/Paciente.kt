@@ -5,7 +5,7 @@ import java.io.Serializable
 
 
 
-data class Paciente(var id: Int,
+data class Paciente(var id: Int?,
                     var fechaNacimiento: String,
                     var celular: String,
                     var usuario: Usuario): Serializable{
