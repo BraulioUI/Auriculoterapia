@@ -23,7 +23,7 @@ namespace Controllers
             return PacienteService.FindAll();
         }       
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Paciente paciente)
         {

@@ -1,6 +1,7 @@
 package com.example.android.auriculoterapia_app.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,23 +29,31 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LogInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log_in)
+
+        if(sharedPreferences.contains("id")){
+            val intentMain = Intent(this, MainActivity::class.java)
+            startActivity(intentMain)
+        }else{
+            setContentView(R.layout.activity_log_in)
 
 
-        val intentRegister = Intent(this, RegisterActivity::class.java)
+            val intentRegister = Intent(this, RegisterActivity::class.java)
 
-        val registerButton = findViewById<TextView>(R.id.tv_optionregister)
-        val loginButton = findViewById<Button>(R.id.bt_login)
+            val registerButton = findViewById<TextView>(R.id.tv_optionregister)
+            val loginButton = findViewById<Button>(R.id.bt_login)
 
-        loginButton.setOnClickListener{
-            auth()
+            loginButton.setOnClickListener{
+                auth()
+            }
+
+            registerButton.setOnClickListener{
+                startActivity(intentRegister)
+            }
         }
-
-        registerButton.setOnClickListener{
-            startActivity(intentRegister)
-        }
-
 
     }
 
@@ -70,7 +79,14 @@ class LogInActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if(response.isSuccessful){
                     Log.i("Iniciar Sesion: ", response.body().toString())
+                    val res = response.body()
+                    //val jsonString = Gson().toJson(res)
+
+                   // val _res:Usuario = G
+
                     startActivity(intentMain)
+                    saveData(res?.id!!,res?.nombreUsuario!!)
+                    finish()
                 }
                 else{
                     val res = response.errorBody()?.string()
@@ -83,4 +99,13 @@ class LogInActivity : AppCompatActivity() {
 
         })
     }
+
+    private fun saveData(id:Int,usuario:String){
+        val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
+        editor.putInt("id",id)
+        editor.putString("usuario",usuario)
+
+        editor.apply()
+    }
+
 }

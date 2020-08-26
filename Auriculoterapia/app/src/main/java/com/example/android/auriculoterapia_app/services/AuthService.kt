@@ -11,4 +11,4 @@ interface AuthService {
 }
 class AuthRequest(var nombreUsuario:String, var contrasena: String)
 
-class AuthResponse(var message: String)
+class AuthResponse(var id: Int,var usuario:String)
