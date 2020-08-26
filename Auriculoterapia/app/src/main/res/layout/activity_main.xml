@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:textAlignment="center"
         android:layout_width="380dp"
         android:layout_height="500dp"
         android:layout_marginStart="16dp"

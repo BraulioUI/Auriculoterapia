@@ -130,7 +130,7 @@ class AppointmentRegisterFragment : Fragment() {
             val timeSetListener = TimePickerDialog.OnTimeSetListener{
                 timePicker, hour, minute ->
 
-                    cal.set(Calendar.HOUR, hour)
+                    cal.set(Calendar.HOUR_OF_DAY, hour)
                     cal.set(Calendar.MINUTE, minute)
 
                     textViewHora.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time)
