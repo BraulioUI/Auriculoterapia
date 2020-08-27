@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Usuario
     (
-    var id: Int,
+    var id: Int?,
     var nombre: String,
     var apellido: String,
     var email: String,
@@ -12,7 +12,7 @@ data class Usuario
     var nombreUsuario: String,
     var sexo: String,
     var palabraClave: String,
-    var token : String
+    var token : String?
 ): Serializable{
 
 }

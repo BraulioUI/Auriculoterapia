@@ -1,5 +1,6 @@
 using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Repository;
+using Auriculoterapia.Api.Helpers;
 using System.Collections.Generic;
 
 
@@ -22,8 +23,12 @@ namespace Auriculoterapia.Api.Service.Implementation
            return UsuarioRepository.FindAll();
         }
 
-        public Usuario Autenticar(string nombreUsuario, string password){
+        public Response Autenticar(string nombreUsuario, string password){
             return UsuarioRepository.Autenticar(nombreUsuario,password);
+        }
+
+        public Usuario FinbyId(int id){
+            return UsuarioRepository.FindById(id);
         }
 
     }

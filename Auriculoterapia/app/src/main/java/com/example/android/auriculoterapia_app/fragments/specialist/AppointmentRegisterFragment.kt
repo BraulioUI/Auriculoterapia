@@ -50,6 +50,8 @@ class AppointmentRegisterFragment : Fragment() {
         val options: MutableList<String> = ArrayList()
         val selectorPacientes = view.findViewById<Spinner>(R.id.patientSpinner)
 
+        //var idUser = this.requireActivity().getSharedPreferences("db_auriculoterapia",0).getInt("id",0)
+
         var idPaciente: Int = 0
         PacienteService.listPatients().enqueue(object: Callback<List<Paciente>>{
             override fun onResponse(call: Call<List<Paciente>>, response: Response<List<Paciente>>) {
@@ -58,7 +60,7 @@ class AppointmentRegisterFragment : Fragment() {
                 if(response.isSuccessful){
                     response.body()?.map {
                         options.add("${it.usuario.nombre} ${it.usuario.apellido}")
-                        ids.add(it.id)
+                        ids.add(it.id!!)
                     }
                     Log.i("Pacientes: ", response.body().toString())
                 } else {

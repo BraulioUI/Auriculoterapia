@@ -18,7 +18,8 @@ namespace Auriculoterapia.Api.Controllers
             this.usuarioService = usuarioService;
         }
 
-        [Authorize(Roles = "Especialista")]
+
+        [Authorize(Roles = "ESPECIALISTA")]
         [HttpGet]
         public ActionResult Get()
         {
@@ -35,6 +36,7 @@ namespace Auriculoterapia.Api.Controllers
             return Ok(usuario); 
         }
 
+        [AllowAnonymous]
         [HttpPost("autenticar")]
         public IActionResult Autenticar([FromBody] Usuario usuario)
         {
@@ -45,6 +47,30 @@ namespace Auriculoterapia.Api.Controllers
             }
 
             return Ok(user);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult FindById(int id)
+        {
+            var user = usuarioService.FinbyId(id);
+
+            if(user == null){
+                return NotFound();
+            }else{
+
+                return Ok(user);
+            }
+            //return Forbid();
+
+            //var currentUserID = int.Parse(User.Identity.Name);
+            
+
+            //if (id != currentUserID && !User.IsInRole("paciente")) {
+               // return Forbid();
+            //}
+
+            
+
         }
         
     }
