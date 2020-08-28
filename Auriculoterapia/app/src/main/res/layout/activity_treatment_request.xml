@@ -232,6 +232,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/solicitudResponderBoton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -239,6 +240,7 @@
                     android:text="@string/answer_button" />
 
                 <Button
+                    android:id="@+id/solicitudHistorialBoton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
