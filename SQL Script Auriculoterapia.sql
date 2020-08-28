@@ -17,7 +17,8 @@ INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,Palabra
 VALUES ('Marcos Alonso', 'Rivas Torres', 'marcosrt@gmail.com', 'primerpaciente', 'marcosrt', 'Masculino', 'Marmota', '46584658sdfghsadgh');
 INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
-
+INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
+VALUES ('Braulio Martin', 'Uribe Iraola', 'brauliou@gmail.com', 'brauliou', 'brauliou', 'Masculino', 'Gato', 'asddsag8sdfghsadgh');
 SELECT * FROM USUARIOS;
 
 /*ROL_USUARIOS 1*/
@@ -32,6 +33,7 @@ INSERT INTO ESPECIALISTAS(AnhoExperiencia,UsuarioId) VALUES (15, 1);
 /*PACIENTE 1 - USUARIO 2*/
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '999645223', 2);
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '955645443', 3);
+INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('2000-03-11', null, 4);
 
 SELECT * FROM ESPECIALISTAS;
 SELECT * FROM PACIENTES;

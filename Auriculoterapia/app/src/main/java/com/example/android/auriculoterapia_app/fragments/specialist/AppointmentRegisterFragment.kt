@@ -33,6 +33,8 @@ class AppointmentRegisterFragment : Fragment() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +42,8 @@ class AppointmentRegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_appointment_register, container, false)
 
+        val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
+        val token = sharedPreferences.getString("token", "")
 
         var horaFinAtencion: String = ""
 
@@ -53,10 +57,11 @@ class AppointmentRegisterFragment : Fragment() {
         //var idUser = this.requireActivity().getSharedPreferences("db_auriculoterapia",0).getInt("id",0)
 
         var idPaciente: Int = 0
-        PacienteService.listPatients().enqueue(object: Callback<List<Paciente>>{
+        PacienteService.listPatients("Bearer $token").enqueue(object: Callback<List<Paciente>>{
             override fun onResponse(call: Call<List<Paciente>>, response: Response<List<Paciente>>) {
-                Log.i("Pacientes: ", "Entro pero hasta el pincho")
-                var ids: ArrayList<Int> = ArrayList()
+
+
+                val ids: ArrayList<Int> = ArrayList()
                 if(response.isSuccessful){
                     response.body()?.map {
                         options.add("${it.usuario.nombre} ${it.usuario.apellido}")
@@ -137,7 +142,7 @@ class AppointmentRegisterFragment : Fragment() {
 
                     textViewHora.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time)
 
-                    var time = cal
+                    val time = cal
                     time.add(Calendar.MINUTE, 30)
                     horaFinAtencion = SimpleDateFormat("HH:mm", Locale.getDefault()).format(time.time)
                     Log.i("Hora fin", horaFinAtencion)
@@ -165,7 +170,7 @@ class AppointmentRegisterFragment : Fragment() {
         val reservar = view.findViewById<Button>(R.id.registerAppointmentButton)
 
         reservar.setOnClickListener{
-            var cita = FormularioCita(
+            val cita = FormularioCita(
                 dateEditText.text as String,
                 textViewHora.text as String,
                 horaFinAtencion,

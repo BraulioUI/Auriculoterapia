@@ -19,14 +19,28 @@ namespace Controllers
         }
 
         //[Authorize(Roles = "paciente")]
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public IEnumerable<Paciente> FindAll(int id){
             //var idUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var currentUserId = int.Parse(User.Identity.Name);
             
 
             return PacienteService.FindAll();
-        }       
+        }    */   
+
+        [Authorize(Roles = "ESPECIALISTA")]
+        [HttpGet]
+        public IEnumerable<Paciente> FindAllByWord([FromQuery] string word){
+            return PacienteService.buscarPorPalabra(word);
+        }
+
+        [Authorize(Roles = "ESPECIALISTA")]
+        [HttpGet("lista")]
+        public IEnumerable<Paciente> FindAll(){
+            return PacienteService.FindAll();
+        }
+
+
 
         //[AllowAnonymous]
         [HttpPost]
@@ -35,5 +49,6 @@ namespace Controllers
             PacienteService.Save(paciente);
             return Ok(paciente); 
         }
+
     }
 }

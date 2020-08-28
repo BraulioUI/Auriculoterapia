@@ -12,12 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchPatientsActivity"></activity>
+        <activity android:name=".AnswerTreatmentRequestActivity"></activity>
+        <activity android:name=".activities.TreatmentRequestActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <activity android:name=".activities.PatientsManagementActivity" />
         <activity android:name=".activities.AppointmentPatientManagement" />
         <activity android:name=".MainActivityPatient" />
         <activity android:name=".activities.RegisterActivity" />

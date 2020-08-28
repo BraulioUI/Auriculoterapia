@@ -12,6 +12,9 @@ class MainActivityPatient : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_patient)
 
+        val actionBar = supportActionBar
+        actionBar!!.title = "Inicio"
+
         val appointmentOption = findViewById<CardView>(R.id.appointment_option_patient)
 
         appointmentOption.setOnClickListener{
