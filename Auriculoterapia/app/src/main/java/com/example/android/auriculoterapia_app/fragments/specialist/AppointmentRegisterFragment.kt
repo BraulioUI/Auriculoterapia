@@ -59,8 +59,6 @@ class AppointmentRegisterFragment : Fragment() {
         var idPaciente: Int = 0
         PacienteService.listPatients("Bearer $token").enqueue(object: Callback<List<Paciente>>{
             override fun onResponse(call: Call<List<Paciente>>, response: Response<List<Paciente>>) {
-
-
                 val ids: ArrayList<Int> = ArrayList()
                 if(response.isSuccessful){
                     response.body()?.map {
@@ -193,6 +191,7 @@ class AppointmentRegisterFragment : Fragment() {
 
             override fun onResponse(call: Call<FormularioCita>, response: Response<FormularioCita>) {
                 Log.i("POST", response.code().toString())
+                Toast.makeText(context, "Reserva exitosa", Toast.LENGTH_SHORT).show()
             }
         })
     }

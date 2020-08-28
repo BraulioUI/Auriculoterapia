@@ -53,7 +53,7 @@ class AppointmentStateFragment : Fragment() {
 
         AppointmentService.listAppointment().enqueue(object: Callback<List<Cita>>{
             override fun onFailure(call: Call<List<Cita>>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.i("No hay citas:", "F")
             }
 
             override fun onResponse(call: Call<List<Cita>>, response: Response<List<Cita>>) {
