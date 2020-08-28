@@ -50,11 +50,11 @@ namespace Auriculoterapia.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("actualizarContrasena")]
+        [HttpPost("actualizarContrasena")]
         public IActionResult actualizar_Contrasena([FromBody] Usuario usuario){
             var nuevaContrasena = usuarioService.actualizar_Contrasena(usuario.NombreUsuario,usuario.PalabraClave,usuario.Contrasena);
 
-            if(User == null){
+            if(nuevaContrasena == null){
                 return BadRequest(new {message = "Nombre de usuario o palabra clave incorrectos"});
             }
 

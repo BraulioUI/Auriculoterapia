@@ -127,6 +127,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
             user.Contrasena=password;
             context.SaveChanges();
+            user.Contrasena=null;
             return new ResponseActualizarPassword(user.NombreUsuario,user.PalabraClave,user.Contrasena);
 
         }

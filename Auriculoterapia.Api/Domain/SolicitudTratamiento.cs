@@ -1,3 +1,5 @@
+using System;
+
 namespace Auriculoterapia.Api.Domain
 {
     public class SolicitudTratamiento
@@ -10,6 +12,10 @@ namespace Auriculoterapia.Api.Domain
         public string Sintomas {get; set;}
         public string ImagenAreaAfectada {get;set;}
         public string OtrosSintomas {get; set;}
+
+        public DateTime fechaInicio {get; set;}
+
+        public string Estado {get;set;}
 
         public int PacienteId {get; set;}
         public Paciente Paciente {get; set;}
