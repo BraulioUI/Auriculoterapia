@@ -61,8 +61,6 @@ class LogInActivity : AppCompatActivity() {
             loginButton.setOnClickListener{
                 auth()
                 Toast.makeText(applicationContext,"Inicio de sesión exitoso!!!",Toast.LENGTH_SHORT).show()
-                val intentMain = Intent(this, MainActivity::class.java)
-                startActivity(intentMain)
             }
 
             registerButton.setOnClickListener{

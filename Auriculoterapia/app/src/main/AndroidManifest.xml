@@ -13,15 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-        <activity android:name=".AnswerTreatmentRequestActivity"></activity>
-        <activity android:name=".activities.TreatmentRequestActivity" />
-=======
-        <activity android:name=".activities.TreatmentPacientActivity"></activity>
-        <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".SearchPatientsActivity" />
->>>>>>> 50b43a94d00a4774cfc6aed44176eb8f628e3ee1
 
+        <activity android:name=".AnswerTreatmentRequestActivity" />
+        <activity android:name=".activities.TreatmentRequestActivity" />
+        <activity android:name=".activities.TreatmentPacientActivity" />
+        <activity android:name=".activities.ForgotPasswordActivity" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
