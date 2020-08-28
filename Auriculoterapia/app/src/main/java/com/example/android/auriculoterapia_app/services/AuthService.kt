@@ -7,8 +7,9 @@ import retrofit2.http.POST
 
 interface AuthService {
     @POST("api/usuario/autenticar")
-    fun authenticate(@Body authRequest:AuthRequest): Call<RespuestaLogin>
+    fun authenticate(@Body authRequest:AuthRequest): Call<AuthResponse>
+
 }
 class AuthRequest(var nombreUsuario:String, var contrasena: String)
 
-class AuthResponse(var id: Int,var usuario:String)
+data class AuthResponse(var id: Int,var nombreUsuario:String,var token:String,var rol:String)

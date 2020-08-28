@@ -14,6 +14,7 @@ import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.models.Usuario
 import com.example.android.auriculoterapia_app.services.AuthService
 import com.example.android.auriculoterapia_app.services.PatientService
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_register.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -119,12 +120,16 @@ class RegisterActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Paciente>, response: Response<Paciente>) {
                 if(response.isSuccessful){
                     Log.i("REGISTRAR PACIENTE: ", response.body().toString())
+                    Toast.makeText(applicationContext,"Se registró el usuario correctamente, por favor inicie sesión",Toast.LENGTH_SHORT).show()
                     startActivity(intentLogIn)
                 }
                 else{
                     when(response.code()){
                         400 ->{
-                            Toast.makeText(applicationContext,response.body().toString(),Toast.LENGTH_SHORT).show()
+                            val res = response.errorBody()?.string()
+                            val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                            Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

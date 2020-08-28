@@ -46,6 +46,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="num_celular_text">Celular</string>
     <string name="registrar_button_main">Registrar</string>
+
     <string name="buscar_paciente">Buscar paciente</string>
     <string name="answer_button">Responder</string>
     <string name="history_button">Historial</string>
@@ -54,4 +55,11 @@
     <string name="frecuencia_diaria">Frecuencia\ndiaria</string>
     <string name="save_text">Guardar</string>
     <string name="cancel_text">Cancelar</string>
+
+    <string name="str_cambiar_contrase_a">Actualizar Contraseña</string>
+    <string name="str_cambiar">Actualizar</string>
+    <string name="str_nueva_contrase_a">Nueva Contraseña:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

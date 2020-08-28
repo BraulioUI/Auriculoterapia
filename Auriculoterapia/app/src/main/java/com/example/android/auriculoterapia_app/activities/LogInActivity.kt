@@ -35,21 +35,27 @@ class LogInActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
 
 
-
-
-
         super.onCreate(savedInstanceState)
 
         if(sharedPreferences.contains("id")){
-            val intentMain = Intent(this, MainActivity::class.java)
-            startActivity(intentMain)
+            if(sharedPreferences.getString("rol",null)=="PACIENTE"){
+                val intentMainPatient = Intent(this, MainActivityPatient::class.java)
+                startActivity(intentMainPatient)
+            }else{
+                val intentMain = Intent(this, MainActivity::class.java)
+                startActivity(intentMain)
+            }
+
+
         }else{
             setContentView(R.layout.activity_log_in)
 
 
             val intentRegister = Intent(this, RegisterActivity::class.java)
+            val intentForget = Intent(this, ForgotPasswordActivity::class.java)
 
             val registerButton = findViewById<TextView>(R.id.tv_optionregister)
+            val forgetButton = findViewById<TextView>(R.id.tv_optionForgetPassword)
             val loginButton = findViewById<Button>(R.id.bt_login)
 
             loginButton.setOnClickListener{
@@ -62,6 +68,11 @@ class LogInActivity : AppCompatActivity() {
             registerButton.setOnClickListener{
                 startActivity(intentRegister)
             }
+
+            forgetButton.setOnClickListener {
+                startActivity(intentForget)
+            }
+
         }
 
     }
@@ -75,18 +86,22 @@ class LogInActivity : AppCompatActivity() {
         val authService = retrofit.create<AuthService>(AuthService::class.java)
         val nombreUsuario = findViewById<EditText>(R.id.et_nombreUsuario).text
         val contrasena = findViewById<EditText>(R.id.et_contrasena2).text
-        val intentMainSpecialist = Intent(this, MainActivity::class.java)
-        val intentMainPatient = Intent(this, MainActivityPatient::class.java)
+
+        val intentMain = Intent(this, MainActivity::class.java)
+        val intentMainPatient = Intent(this,MainActivityPatient::class.java)
+
 
         val authRequest = AuthRequest(nombreUsuario.toString(),contrasena.toString())
         //val authRequest = Usuario(null,null,null,null,contrasena.toString(),nombreUsuario.toString(),null,null,null)
 
-        authService.authenticate(authRequest).enqueue(object : Callback<RespuestaLogin>{
-            override fun onFailure(call: Call<RespuestaLogin>, t: Throwable) {
+
+        authService.authenticate(authRequest).enqueue(object : Callback<AuthResponse>{
+            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                 Log.i("INICIAR SESION","NO ENTRO")
             }
 
-            override fun onResponse(call: Call<RespuestaLogin>, response: Response<RespuestaLogin>) {
+            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+
                 if(response.isSuccessful){
                     Log.i("Iniciar Sesion: ", response.body().toString())
                     val res = response.body()
@@ -94,17 +109,15 @@ class LogInActivity : AppCompatActivity() {
 
                    // val _res:Usuario = G
 
-                    if(res != null){
-                        saveData(res.id, res.token, res.rol)
-
-                        if(res.rol.equals("ESPECIALISTA")){
-                            startActivity(intentMainSpecialist)
-                        } else{
-                            startActivity(intentMainPatient)
-                        }
-
-                        finish()
+                    if(res?.rol!! == "PACIENTE"){
+                        startActivity(intentMainPatient)
                     }
+                    else{
+                        startActivity(intentMain)
+                    }
+
+                    saveData(res?.id!!,res?.nombreUsuario!!,res?.token!!,res?.rol!!)
+                    finish()
 
                 }
                 else{
@@ -119,11 +132,14 @@ class LogInActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveData(id: Int, token: String, rol: String){
+
+    private fun saveData(id:Int,usuario:String,token:String,rol:String){
         val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
         editor.putInt("id",id)
+        editor.putString("usuario",usuario)
         editor.putString("token",token)
-        editor.putString("rol", rol)
+        editor.putString("rol",rol)
+
         editor.apply()
     }
 

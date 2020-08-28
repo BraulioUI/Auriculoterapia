@@ -4,6 +4,7 @@ import java.io.Serializable
 
 data class RespuestaLogin (
     var id: Int,
+    var nombre: String,
     var token: String,
     var rol: String
 ): Serializable{

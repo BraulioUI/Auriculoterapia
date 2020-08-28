@@ -8,5 +8,9 @@ namespace Auriculoterapia.Api.Repository
        Response Autenticar(string nombreUsuario, string password);
 
        void Asignar_Paciente(Usuario usuario);
+
+       ResponseActualizarPassword actualizar_Contrasena(string nombreUsuario,string palabraClave, string password);
+    
+       bool IsValidEmail(string email);
     }
 }
