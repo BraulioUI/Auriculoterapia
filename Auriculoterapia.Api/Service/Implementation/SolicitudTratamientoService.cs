@@ -1,31 +1,34 @@
+
+using System.Collections.Generic;
 using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Repository;
-using System.Collections.Generic;
 
 namespace Auriculoterapia.Api.Service.Implementation
 {
-    public class SolicitudTratamientoService: ISolicitudTratamientoService
+    public class SolicitudTratamientoService : ISolicitudTratamientoService
     {
-
-         private ISolicitudTratamientoRepository SolicitudTratamientoRepository;
-
-
-        public SolicitudTratamientoService(ISolicitudTratamientoRepository SolicitudTratamientoRepository){
-            this.SolicitudTratamientoRepository = SolicitudTratamientoRepository;
+       
+        private ISolicitudTratamientoRepository solicitudTratamientoRepository;
+        public SolicitudTratamientoService(ISolicitudTratamientoRepository solicitudTratamientoRepository)
+        {
+            this.solicitudTratamientoRepository = solicitudTratamientoRepository;
         }
 
         public IEnumerable<SolicitudTratamiento> FindAll()
         {
-            throw new System.NotImplementedException();
+             return solicitudTratamientoRepository.FindAll();
         }
 
+        
+
         public SolicitudTratamiento findByPacienteId(int pacienteId){
-            return SolicitudTratamientoRepository.findByPacienteId(pacienteId);
+            return solicitudTratamientoRepository.findByPacienteId(pacienteId);
         }
 
         public void Save(SolicitudTratamiento entity)
         {
-            throw new System.NotImplementedException();
+            solicitudTratamientoRepository.Save(entity);
+
         }
     }
 }

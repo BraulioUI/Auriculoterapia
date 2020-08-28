@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Auriculoterapia.Api.Domain;
-using Auriculoterapia.Api.Repository;
+
 using Auriculoterapia.Api.Repository.Context;
 using Microsoft.EntityFrameworkCore;
+
 namespace Auriculoterapia.Api.Repository.Implementation
 {
     public class SolicitudTratamientoRepository : ISolicitudTratamientoRepository
@@ -11,15 +12,19 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
         private ApplicationDbContext context;
 
-         public SolicitudTratamientoRepository(ApplicationDbContext context)
-        {
+        public SolicitudTratamientoRepository(ApplicationDbContext context){
             this.context = context;
         }
-
-
+        
         public IEnumerable<SolicitudTratamiento> FindAll()
         {
-            throw new System.NotImplementedException();
+            var solicitud = new List<SolicitudTratamiento>();
+                try{
+                    solicitud = this.context.SolicitudTratamientos.ToList();
+                }catch(System.Exception){
+                        throw;
+                }
+                return solicitud;
         }
 
         public SolicitudTratamiento FindById(int id)
@@ -29,7 +34,12 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
         public void Save(SolicitudTratamiento entity)
         {
-            throw new System.NotImplementedException();
+            try{
+                this.context.Add(entity);
+                this.context.SaveChanges();
+            }catch(System.Exception){
+                throw;
+            }
         }
 
         public SolicitudTratamiento findByPacienteId(int pacienteId){
@@ -44,6 +54,5 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
             return paciente;
         }
-
     }
 }

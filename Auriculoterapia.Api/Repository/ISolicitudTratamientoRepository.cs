@@ -6,4 +6,5 @@ namespace Auriculoterapia.Api.Repository
     {
         SolicitudTratamiento findByPacienteId(int pacienteId);
     }   
+
 }

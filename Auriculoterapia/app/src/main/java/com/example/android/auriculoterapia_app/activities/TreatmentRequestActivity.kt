@@ -23,7 +23,7 @@ class TreatmentRequestActivity : AppCompatActivity() {
 
         val treatmentRequestService = ApiClient.retrofit().create(TreatmentRequestService::class.java)
 
-        treatmentRequestService.findByPacienteId()
+
 
 
     }
