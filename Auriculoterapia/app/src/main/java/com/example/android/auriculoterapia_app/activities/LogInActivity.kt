@@ -60,7 +60,7 @@ class LogInActivity : AppCompatActivity() {
 
             loginButton.setOnClickListener{
                 auth()
-                Toast.makeText(applicationContext,"Inicio de sesión exitoso!!!",Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext,"Inicio de sesión exitoso!!!",Toast.LENGTH_SHORT).show()
             }
 
             registerButton.setOnClickListener{
