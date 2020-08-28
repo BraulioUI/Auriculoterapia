@@ -30,9 +30,18 @@ namespace Auriculoterapia.Api.Repository.Implementation
         }
         public void Save(Paciente entity){
             try{
+
+                var isValidEmail = usuarioRepository.IsValidEmail(entity.Usuario.Email); 
+                
+                if(isValidEmail){
+
                 usuarioRepository.Save(entity.Usuario);
                 context.Add(entity);
                 context.SaveChanges();
+                }
+                else{
+                    Console.WriteLine("Correo Inválido");
+                }
                 
             }catch{
                 throw;

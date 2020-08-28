@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.cardview.widget.CardView
 import com.example.android.auriculoterapia_app.activities.AppointmentManagement
 import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
+import com.example.android.auriculoterapia_app.activities.TreatmentPacientActivity
+import kotlinx.android.synthetic.main.activity_main_patient.*
 
 class MainActivityPatient : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +18,11 @@ class MainActivityPatient : AppCompatActivity() {
 
         appointmentOption.setOnClickListener{
             val intent = Intent(this, AppointmentPatientManagement::class.java)
+            startActivity(intent)
+        }
+
+        treatment_option_patient.setOnClickListener{
+            val intent = Intent(this,TreatmentPacientActivity::class.java)
             startActivity(intent)
         }
     }

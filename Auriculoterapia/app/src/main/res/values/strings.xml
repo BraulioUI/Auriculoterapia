@@ -46,4 +46,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="num_celular_text">Celular</string>
     <string name="registrar_button_main">Registrar</string>
+    <string name="str_cambiar_contrase_a">Actualizar Contraseña</string>
+    <string name="str_cambiar">Actualizar</string>
+    <string name="str_nueva_contrase_a">Nueva Contraseña:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

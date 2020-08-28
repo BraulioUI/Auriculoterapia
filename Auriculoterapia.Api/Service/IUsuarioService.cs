@@ -7,5 +7,7 @@ namespace Auriculoterapia.Api.Service
         Response Autenticar(string nombreUsuario, string password);
 
         Usuario FinbyId(int id);
+
+        ResponseActualizarPassword actualizar_Contrasena(string nombreUsuario,string palabraClave, string password);
     }
 }

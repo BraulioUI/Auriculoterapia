@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PacienteController: ControllerBase
@@ -18,8 +18,8 @@ namespace Controllers
             this.PacienteService = PacienteService;
         }
 
-        //[Authorize(Roles = "paciente")]
-        [HttpGet("{id}")]
+        [Authorize(Roles = "ESPECIALISTA")]
+        [HttpGet]
         public IEnumerable<Paciente> FindAll(int id){
             //var idUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var currentUserId = int.Parse(User.Identity.Name);
@@ -28,12 +28,15 @@ namespace Controllers
             return PacienteService.FindAll();
         }       
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody] Paciente paciente)
         {
             PacienteService.Save(paciente);
-            return Ok(paciente); 
+            if(paciente.Id != 0)
+                return Ok(paciente); 
+            else
+                return BadRequest(new {message = "Correo inválido"}); 
         }
     }
 }

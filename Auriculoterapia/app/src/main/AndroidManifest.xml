@@ -3,6 +3,7 @@
     package="com.example.android.auriculoterapia_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchPatientsActivity"></activity>
+        <activity android:name=".activities.TreatmentPacientActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".SearchPatientsActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/new_treatmentFragment"
+        android:icon="@drawable/tratamiento_nuevo"
+        android:title="Nuevo Tratamiento" />
+
+    <item
+        android:id="@+id/continue_treatmentFragment"
+        android:icon="@drawable/continuar_tratamiento"
+        android:title="Continuar Tratamiento" />
+
+    <item
+        android:id="@+id/formFragment"
+        android:icon="@drawable/tratamiento_formulario"
+        android:title="Formulario Evaluación" />
+
+</menu>

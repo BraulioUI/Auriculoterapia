@@ -31,5 +31,10 @@ namespace Auriculoterapia.Api.Service.Implementation
             return UsuarioRepository.FindById(id);
         }
 
+        public ResponseActualizarPassword actualizar_Contrasena(string nombreUsuario,string palabraClave, string password){
+            return UsuarioRepository.actualizar_Contrasena(nombreUsuario,palabraClave,password);
+        
+        }
+
     }
 }
