@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Auriculoterapia.Api.Controllers
 {
+    
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
     public class SolicitudTratamientoController : ControllerBase
     {
        
