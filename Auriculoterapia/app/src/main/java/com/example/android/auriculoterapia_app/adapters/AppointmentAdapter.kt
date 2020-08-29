@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.models.Cita
 
-class AppointmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items : List<Cita> = ArrayList()
-
+    private var rol: String = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CitaViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
@@ -32,11 +32,13 @@ class AppointmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun submitList(citaList: List<Cita>){
-        items = citaList
+    fun submitList(citaList: List<Cita>, rol: String){
+        this.items = citaList
+        this.rol = rol
+
     }
 
-    class CitaViewHolder constructor( itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class CitaViewHolder constructor(itemView: View): RecyclerView.ViewHolder(itemView){
         val dateText = itemView.findViewById<TextView>(R.id.cardDateTextView)
         val timeText = itemView.findViewById<TextView>(R.id.cardTimeTextView)
 
@@ -50,7 +52,10 @@ class AppointmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             patientText.text = cita.paciente.usuario.nombre
             stateText.text = cita.estado
-            button.visibility = View.GONE
+
+            if(rol == "ESPECIALISTA"){
+                button.visibility = View.GONE
+            }
 
         }
     }

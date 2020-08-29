@@ -41,6 +41,8 @@ class AppointmentStateFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_appointment_state, container, false)
 
+        val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
+        val rol = sharedPreferences.getString("rol", "")
 
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
         val formatter1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -68,23 +70,13 @@ class AppointmentStateFragment : Fragment() {
                         it.horaFinAtencion = formatter2.format(parser.parse(it.horaFinAtencion))
                         //*********************
                     }
-                    appointmentAdapter.submitList(citas)
+                    appointmentAdapter.submitList(citas, rol!!)
                 }
 
                 Log.i("Cita", response.body().toString())
 
             }
         })
-
-
-
-
-
-       /* citas.add(Cita(1, "2020-08-24", "14:00", "14:30", "En proceso", 1,  TipoAtencion( "Presencial", 1),
-        1,  Paciente(1, "2000-03-15","998234222",
-        Usuario(1, "Marcos", "Rivas", "marco@gmail.com", "123456",
-        "marcor", "Masculino", "marmota", "dagsadgdsgds")
-        )))*/
 
 
 

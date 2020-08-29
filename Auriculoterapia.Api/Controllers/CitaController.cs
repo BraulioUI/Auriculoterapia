@@ -26,10 +26,10 @@ namespace Auriculoterapia.Api.Controllers
         
         }
 
-        [HttpGet]
+        [HttpGet("paciente")]
         [Authorize(Roles = "PACIENTE")]
-        public ActionResult ListarCitasPorUsuarioId(int usuarioId){
-
+        public ActionResult ListarCitasPorUsuarioId([FromQuery] int usuarioId){
+            return Ok(this.CitaService.listarCitasPorUsuarioId(usuarioId));
         }
 
         [HttpPost("paciente")]
@@ -38,10 +38,6 @@ namespace Auriculoterapia.Api.Controllers
             Console.WriteLine(StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created));
             return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created);
         }
-
-
-
-
 
         [HttpGet]
         public ActionResult ListarCitas(){

@@ -1,5 +1,7 @@
 package com.example.android.auriculoterapia_app.models
 
+import java.io.Serializable
+
 data class SolicitudTratamiento(
     val altura: Double,
     val edad: Int,
@@ -10,4 +12,6 @@ data class SolicitudTratamiento(
     val peso: Double,
     val sintomas: String,
     val paciente: Paciente
-)
+): Serializable{
+
+}

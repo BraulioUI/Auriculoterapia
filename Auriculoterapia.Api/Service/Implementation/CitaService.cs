@@ -73,7 +73,9 @@ namespace Auriculoterapia.Api.Service.Implementation
            return CitaRepository.FindAll();
         }
 
-
+        public IEnumerable<Cita> listarCitasPorUsuarioId(int usuarioId){
+            return CitaRepository.listarCitasPorUsuarioId(usuarioId);
+        }
 
     }
 }
