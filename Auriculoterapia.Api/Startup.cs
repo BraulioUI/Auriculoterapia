@@ -83,6 +83,8 @@ namespace Auriculoterapia.Api
             services.AddTransient<IPacienteService, PacienteService>();
             services.AddTransient<ITipoAtencionService, TipoAtencionService>();
             services.AddTransient<ISolicitudTratamientoService, SolicitudTratamientoService>();
+
+
             services.AddControllers()
                  .AddNewtonsoftJson(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 

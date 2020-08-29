@@ -1,3 +1,5 @@
+
+
 using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Service;
 using System.Collections.Generic;
@@ -39,7 +41,10 @@ namespace Auriculoterapia.Api.Controllers
                 return BadRequest(new {message = "Correo inválido"}); 
         }
 
-
+        [HttpGet]
+        public SolicitudTratamiento buscarPorPacienteId([FromQuery] int pacienteId){
+            return solicitudTratamientoService.findByPacienteId(pacienteId);
+        }
 
     }
 }

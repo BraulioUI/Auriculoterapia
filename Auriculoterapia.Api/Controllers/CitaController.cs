@@ -5,7 +5,7 @@ using Auriculoterapia.Api.Helpers;
 using Auriculoterapia.Api.Service;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Auriculoterapia.Api.Controllers
 {
@@ -26,16 +26,18 @@ namespace Auriculoterapia.Api.Controllers
         
         }
 
+        [HttpGet("paciente")]
+        [Authorize(Roles = "PACIENTE")]
+        public ActionResult ListarCitasPorUsuarioId([FromQuery] int usuarioId){
+            return Ok(this.CitaService.listarCitasPorUsuarioId(usuarioId));
+        }
+
         [HttpPost("paciente")]
         public ActionResult RegistrarCitaPaciente([FromBody] FormularioCitaPaciente entity, [FromQuery] int PacienteId){
             CitaService.RegistrarCitaPaciente(entity, PacienteId);
             Console.WriteLine(StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created));
             return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created);
         }
-
-
-
-
 
         [HttpGet]
         public ActionResult ListarCitas(){

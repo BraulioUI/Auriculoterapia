@@ -4,10 +4,7 @@ import com.example.android.auriculoterapia_app.models.Cita
 import com.example.android.auriculoterapia_app.models.FormularioCita
 import com.example.android.auriculoterapia_app.models.FormularioCitaPaciente
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface AppointmentService {
 
@@ -20,4 +17,7 @@ interface AppointmentService {
                                    @Query("PacienteId") patientId: Int): Call<FormularioCitaPaciente>
     @GET("api/cita/")
     fun listAppointment(): Call<List<Cita>>
+
+    @GET("api/cita/paciente")
+    fun listPatientAppointment(@Header("Authorization") token: String, @Query("usuarioId") usuarioId: Int): Call<List<Cita>>
 }
