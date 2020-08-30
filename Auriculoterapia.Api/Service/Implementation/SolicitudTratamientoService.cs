@@ -30,5 +30,9 @@ namespace Auriculoterapia.Api.Service.Implementation
             solicitudTratamientoRepository.Save(entity);
 
         }
+
+        public void saveByUserId(SolicitudTratamiento entity,int userId){
+            solicitudTratamientoRepository.saveByUserId(entity,userId);
+        }
     }
 }

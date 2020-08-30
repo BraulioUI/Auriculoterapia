@@ -8,5 +8,7 @@ namespace Auriculoterapia.Api.Service
     {
         SolicitudTratamiento findByPacienteId(int pacienteId);
 
+        void saveByUserId(SolicitudTratamiento entity,int userId);
+
     }
 }

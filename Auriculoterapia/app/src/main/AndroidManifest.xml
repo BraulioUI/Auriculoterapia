@@ -13,11 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".activities.ChangeKeyWordActivity"></activity>
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".AnswerTreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentPacientActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

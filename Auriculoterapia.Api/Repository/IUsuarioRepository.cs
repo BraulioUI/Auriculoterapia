@@ -12,5 +12,9 @@ namespace Auriculoterapia.Api.Repository
        ResponseActualizarPassword actualizar_Contrasena(string nombreUsuario,string palabraClave, string password);
     
        bool IsValidEmail(string email);
+
+       ResponseUsuarioById BuscarPorId(int userId);
+
+       ResponseActualizarKeyWord Actualizar_KeyWord(int idUser,string palabraClave,string nuevaPalabraClave);
     }
 }

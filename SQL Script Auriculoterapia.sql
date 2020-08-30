@@ -17,9 +17,10 @@ INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,Palabra
 VALUES ('Marcos Alonso', 'Rivas Torres', 'marcosrt@gmail.com', 'primerpaciente', 'marcosrt', 'Masculino', 'Marmota', '46584658sdfghsadgh');
 INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
-INSERT INTO USUARIOS(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
-VALUES ('Braulio Martin', 'Uribe Iraola', 'brauliou@gmail.com', 'brauliou', 'brauliou', 'Masculino', 'Gato', 'asddsag8sdfghsadgh');
+
 SELECT * FROM USUARIOS;
+SELECT * FROM ROL_USUARIOS;
+SELECT * FROM PACIENTES;
 
 /*ROL_USUARIOS 1*/
 INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(1, 1);
@@ -35,7 +36,6 @@ INSERT INTO ESPECIALISTAS(AnhoExperiencia,UsuarioId) VALUES (15, 1);
 /*PACIENTE 1 - USUARIO 2*/
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '999645223', 2);
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '955645443', 3);
-INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('2000-03-11', null, 4);
 
 SELECT * FROM ESPECIALISTAS;
 SELECT * FROM PACIENTES;
@@ -53,12 +53,20 @@ DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM CITAS;
 
+<<<<<<< HEAD
 UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
+=======
+
+SELECT* FROM SOLICITUDTRATAMIENTOS;
+INSERT INTO SOLICITUDTRATAMIENTOS(Id,Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
+VALUES(3,20,60.9,1.70,"DOLOR LUMBAR","imagen.jpg","dolor de cabeza","En proceso","2020-08-28",4);
+>>>>>>> a25d97a0b7e5a134057efbc810e8d2e9e10baa4a
 
 delete from solicitudtratamientos where Id = 1;
 INSERT INTO solicitudtratamientos(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,PacienteId,Estado,fechaInicio) 
 VALUES(26, 67, 171, 'Malestar lumbar', 'sdgdsgdsagsdag', 'Me duele la cabeza y tengo mucha ansiedad', 1,"En proceso", "2020-08-31");
-SELECT * FROM solicitudtratamientos;
+
+
 
 SELECT * FROM DISPONIBILIDADES;
 SELECT * FROM HORARIOSDESCARTADOS;
