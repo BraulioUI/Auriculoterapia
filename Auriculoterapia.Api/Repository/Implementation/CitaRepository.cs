@@ -26,7 +26,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
         }
         public void Save(Cita entity){
             try{
-                this.context.Add(entity);
+                this.context.Citas.Add(entity);
                 this.context.SaveChanges();
             }catch(System.Exception){
                 throw;
@@ -50,5 +50,23 @@ namespace Auriculoterapia.Api.Repository.Implementation
         public Cita FindById(int id){
             return new Cita();
         }
+
+        public bool actualizarEstadoCita(int citaId, string estado){
+            var cita = new Cita();
+            var actualizado = false;
+            try{
+                cita = this.context.Citas.FirstOrDefault(c => c.Id == citaId);
+                cita.Estado = estado;
+                this.context.SaveChanges();
+                actualizado = true;
+
+            }catch(System.Exception){
+                throw;
+            }
+            return actualizado;
+
+        }
+
+
     }
 }

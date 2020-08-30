@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/añadirHorarioLayout"
+    android:padding="10dp"
+    android:gravity="center">
+
+        <TextView
+            android:id="@+id/hora_inicio_descartada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:text="09:00"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:text="-"/>
+        <TextView
+            android:id="@+id/hora_fin_descartada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size"
+            android:text="09:30"
+            android:layout_marginStart="10dp"/>
+        <Button
+            android:id="@+id/boton_eliminar_descartado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:layout_marginStart="24dp"
+            android:textSize="12sp"/>
+
+</LinearLayout>

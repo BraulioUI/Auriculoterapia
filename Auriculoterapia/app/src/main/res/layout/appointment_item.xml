@@ -67,7 +67,7 @@
                 android:id="@+id/cardStateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="En proceso"
+
                 android:textColor="#2BAF2B"
                 android:layout_marginTop="5dp"
                 android:textSize="18sp"/>

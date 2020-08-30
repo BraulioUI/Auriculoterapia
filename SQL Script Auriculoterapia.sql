@@ -53,8 +53,12 @@ DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM CITAS;
 
+UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
+
 delete from solicitudtratamientos where Id = 1;
 INSERT INTO solicitudtratamientos(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,PacienteId,Estado,fechaInicio) 
 VALUES(26, 67, 171, 'Malestar lumbar', 'sdgdsgdsagsdag', 'Me duele la cabeza y tengo mucha ansiedad', 1,"En proceso", "2020-08-31");
 SELECT * FROM solicitudtratamientos;
 
+SELECT * FROM DISPONIBILIDADES;
+SELECT * FROM HORARIOSDESCARTADOS;

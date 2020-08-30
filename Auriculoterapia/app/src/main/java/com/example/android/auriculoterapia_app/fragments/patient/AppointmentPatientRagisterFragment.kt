@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.BASE_URL
-import com.example.android.auriculoterapia_app.models.FormularioCitaPaciente
+import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import retrofit2.Call
 import retrofit2.Callback
@@ -118,12 +118,14 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
         buttonReservar.setOnClickListener{
 
-            var cita = FormularioCitaPaciente(celularEditText.text.toString(),
-                fechaTextView.text as String,
-                horaTextView.text as String,
-                horaFinAtencion,
-                textoAtencion
-            )
+            var cita =
+                FormularioCitaPaciente(
+                    celularEditText.text.toString(),
+                    fechaTextView.text as String,
+                    horaTextView.text as String,
+                    horaFinAtencion,
+                    textoAtencion
+                )
 
             registrarCita(cita, 1)
         }

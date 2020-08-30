@@ -49,5 +49,11 @@ namespace Auriculoterapia.Api.Controllers
         {
             return "Hello World!";
         }
+
+        [HttpPut("estado")]
+        public bool actualizarEstadoCita([FromQuery] int citaId, [FromQuery] string estado){
+            return CitaService.actualizarEstadoCita(citaId, estado);
+        }
+
     }
 }

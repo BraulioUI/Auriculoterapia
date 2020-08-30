@@ -76,6 +76,8 @@ namespace Auriculoterapia.Api.Service.Implementation
         public IEnumerable<Cita> listarCitasPorUsuarioId(int usuarioId){
             return CitaRepository.listarCitasPorUsuarioId(usuarioId);
         }
-
+        public bool actualizarEstadoCita(int citaId, string estado){
+            return CitaRepository.actualizarEstadoCita(citaId, estado);
+        }
     }
 }

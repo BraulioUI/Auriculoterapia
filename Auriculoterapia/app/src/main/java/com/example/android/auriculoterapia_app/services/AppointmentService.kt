@@ -1,8 +1,8 @@
 package com.example.android.auriculoterapia_app.services
 
 import com.example.android.auriculoterapia_app.models.Cita
-import com.example.android.auriculoterapia_app.models.FormularioCita
-import com.example.android.auriculoterapia_app.models.FormularioCitaPaciente
+import com.example.android.auriculoterapia_app.models.helpers.FormularioCita
+import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,4 +20,8 @@ interface AppointmentService {
 
     @GET("api/cita/paciente")
     fun listPatientAppointment(@Header("Authorization") token: String, @Query("usuarioId") usuarioId: Int): Call<List<Cita>>
+
+    @PUT("api/cita/estado")
+    fun updateStateOfAppointment(@Query("citaId") citaId: Int, @Query("estado") estado: String): Call<Boolean>
+
 }

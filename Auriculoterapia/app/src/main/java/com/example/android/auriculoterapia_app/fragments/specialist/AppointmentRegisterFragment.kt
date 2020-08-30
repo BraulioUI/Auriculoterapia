@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.BASE_URL
-import com.example.android.auriculoterapia_app.models.FormularioCita
+import com.example.android.auriculoterapia_app.models.helpers.FormularioCita
 import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import com.example.android.auriculoterapia_app.services.PatientService
@@ -168,11 +168,13 @@ class AppointmentRegisterFragment : Fragment() {
         val reservar = view.findViewById<Button>(R.id.registerAppointmentButton)
 
         reservar.setOnClickListener{
-            val cita = FormularioCita(
-                dateEditText.text as String,
-                textViewHora.text as String,
-                horaFinAtencion,
-                textoAtencion)
+            val cita =
+                FormularioCita(
+                    dateEditText.text as String,
+                    textViewHora.text as String,
+                    horaFinAtencion,
+                    textoAtencion
+                )
 
 
             registrarCita(cita, idPaciente)
