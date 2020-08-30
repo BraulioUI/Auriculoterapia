@@ -47,8 +47,8 @@ class TreatmentRequestActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<SolicitudTratamiento>, response: Response<SolicitudTratamiento>) {
                     val solicitud = response.body()
                     if(solicitud != null) {
-                        nombreText.text = solicitud.paciente.usuario.nombre
-                        apellidoText.text = solicitud.paciente.usuario.apellido
+                        nombreText.text = solicitud.paciente!!.usuario.nombre
+                        apellidoText.text = solicitud.paciente!!.usuario.apellido
                         edadText.text = solicitud.edad.toString()
                         pesoText.text = solicitud.peso.toString()
                         alturaText.text = solicitud.altura.toString()

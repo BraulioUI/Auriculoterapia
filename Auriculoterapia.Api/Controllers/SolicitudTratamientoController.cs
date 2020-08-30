@@ -38,8 +38,22 @@ namespace Auriculoterapia.Api.Controllers
             if(solicitudTratamiento.Id != 0)
                 return Ok(solicitudTratamiento); 
             else
-                return BadRequest(new {message = "Correo inválido"}); 
+                return BadRequest(new {message = "error en el registro, vuelva a intentar"}); 
         }
+
+        [Authorize(Roles = "PACIENTE")]
+        [HttpPost("{id}")]
+        public IActionResult Post([FromBody] SolicitudTratamiento solicitudTratamiento, int id)
+        {
+            solicitudTratamientoService.saveByUserId(solicitudTratamiento,id);
+            if(solicitudTratamiento.Id != 0){
+                solicitudTratamiento.Paciente = null;
+                return Ok(solicitudTratamiento); 
+            }      
+            else
+                return BadRequest(new {message = "error en el registro, vuelva a intentar"}); 
+        }
+
 
         [HttpGet]
         public SolicitudTratamiento buscarPorPacienteId([FromQuery] int pacienteId){

@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="70.0"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_peso"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_edad" />
 
     <TextView
         android:id="@+id/tv_otros"
@@ -124,11 +124,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_sintomas" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_edad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="75dp"
         android:layout_marginEnd="26dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -163,5 +163,17 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_sintomas"
         app:layout_constraintTop_toBottomOf="@+id/et_altura" />
+
+    <TextView
+        android:id="@+id/tv_resultEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="57dp"
+        android:text="result"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_edad"
+        app:layout_constraintStart_toEndOf="@+id/tv_edad"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

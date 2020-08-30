@@ -42,6 +42,18 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
         }
 
+        public void saveByUserId(SolicitudTratamiento entity,int userId){
+            var user = context.Usuarios.Include(s => s.Paciente).FirstOrDefault(x =>x.Id == userId);
+            
+             try{
+                 entity.PacienteId = user.Paciente.Id;
+                this.context.Add(entity);
+                this.context.SaveChanges();
+            }catch(System.Exception){
+                throw;
+            }            
+        }
+
         public SolicitudTratamiento findByPacienteId(int pacienteId){
             var solicitud = new SolicitudTratamiento();
             try{
