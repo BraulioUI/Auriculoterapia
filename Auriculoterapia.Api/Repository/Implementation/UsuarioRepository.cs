@@ -98,7 +98,9 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
             user.Contrasena = null;
 
+
             return new Response(user.Id,user.NombreUsuario,user.Token, rol.Rol.Descripcion);
+
         }
 
 
@@ -125,6 +127,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
             user.Contrasena=password;
             context.SaveChanges();
+            user.Contrasena=null;
             return new ResponseActualizarPassword(user.NombreUsuario,user.PalabraClave,user.Contrasena);
 
         }
@@ -144,6 +147,60 @@ namespace Auriculoterapia.Api.Repository.Implementation
             //return Console.Error("ff");
             throw new Exception("$No pertenece al rol paciente");
                         
+        }
+
+        public ResponseUsuarioById BuscarPorId(int userId){
+            var usuario = context.Usuarios.Include(p => p.Paciente).
+            Include(e => e.Especialista).FirstOrDefault(x => x.Id == userId);
+            var rol = context.Rol_Usuarios.Include(x =>x.Rol).FirstOrDefault(x =>x.UsuarioId == usuario.Id);
+            var paciente = context.Pacientes.FirstOrDefault(x => x.UsuarioId == userId);
+            var especialista = context.Especialistas.FirstOrDefault(x => x.UsuarioId == userId);
+
+            ResponseUsuarioById responseUsuario;
+            
+            if(rol.Rol.Descripcion == "PACIENTE"){
+                if(usuario != null)
+                {
+                    usuario.Contrasena = null;
+
+                    responseUsuario = new ResponseUsuarioById(usuario.Id,usuario.Nombre,
+                    usuario.Apellido,usuario.Email,usuario.Contrasena,
+                    usuario.NombreUsuario,usuario.Sexo,usuario.PalabraClave,
+                    paciente.FechaNacimiento);
+
+                    return responseUsuario;
+                }
+            }else{
+                if(usuario != null){
+                    usuario.Contrasena = null;
+                    Nullable<DateTime> nullDate = null;
+
+                    responseUsuario =  new ResponseUsuarioById(usuario.Id,usuario.Nombre,
+                    usuario.Apellido,usuario.Email,usuario.Contrasena,
+                    usuario.NombreUsuario,usuario.Sexo,usuario.PalabraClave,
+                    nullDate);
+
+                    return responseUsuario;
+                }
+                
+            }
+            return null;
+        }
+
+        public ResponseActualizarKeyWord Actualizar_KeyWord(int idUser,string palabraClave,string nuevaPalabraClave){
+            var usuario = context.Usuarios.Include(p => p.Paciente).
+                Include(e => e.Especialista).FirstOrDefault(x => x.Id == idUser && x.PalabraClave == palabraClave);
+            
+            ResponseActualizarKeyWord keyWord;
+
+            if(usuario != null ){
+                usuario.PalabraClave = nuevaPalabraClave;
+                context.SaveChanges();
+                keyWord = new ResponseActualizarKeyWord();
+            }else{
+                keyWord = null;
+            }    
+            return keyWord;
         }
 
         public bool IsValidEmail(string email){

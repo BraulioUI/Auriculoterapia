@@ -22,5 +22,9 @@ namespace Auriculoterapia.Api.Service.Implementation
             return PacienteRepository.FindAll();
         }
 
+        public IEnumerable<Paciente> buscarPorPalabra(string palabra){
+            return PacienteRepository.busquedaPacientePorPalabra(palabra);
+        }
+
     }
 }

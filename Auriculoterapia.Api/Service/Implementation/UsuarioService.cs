@@ -36,5 +36,13 @@ namespace Auriculoterapia.Api.Service.Implementation
         
         }
 
+        public ResponseUsuarioById BuscarPorId(int userId){
+            return UsuarioRepository.BuscarPorId(userId);
+        }
+
+        public ResponseActualizarKeyWord Actualizar_KeyWord(int idUser,string palabraClave,string nuevaPalabraClave){
+            return UsuarioRepository.Actualizar_KeyWord(idUser,palabraClave,nuevaPalabraClave);
+        }
+
     }
 }

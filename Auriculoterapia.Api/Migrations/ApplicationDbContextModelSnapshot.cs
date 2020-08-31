@@ -140,6 +140,9 @@ namespace Auriculoterapia.Api.Migrations
                     b.Property<int>("Edad")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("ImagenAreaAfectada")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -154,6 +157,9 @@ namespace Auriculoterapia.Api.Migrations
 
                     b.Property<string>("Sintomas")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("fechaInicio")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 

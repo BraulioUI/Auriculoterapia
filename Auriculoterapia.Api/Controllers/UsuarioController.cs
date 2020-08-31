@@ -50,11 +50,11 @@ namespace Auriculoterapia.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("actualizarContrasena")]
+        [HttpPost("actualizarContrasena")]
         public IActionResult actualizar_Contrasena([FromBody] Usuario usuario){
             var nuevaContrasena = usuarioService.actualizar_Contrasena(usuario.NombreUsuario,usuario.PalabraClave,usuario.Contrasena);
 
-            if(User == null){
+            if(nuevaContrasena == null){
                 return BadRequest(new {message = "Nombre de usuario o palabra clave incorrectos"});
             }
 
@@ -62,8 +62,9 @@ namespace Auriculoterapia.Api.Controllers
 
         }
 
-
-        [HttpGet("{id}")]
+      
+        
+        /*[HttpGet("{id}")]
         public IActionResult FindById(int id)
         {
             var user = usuarioService.FinbyId(id);
@@ -73,17 +74,35 @@ namespace Auriculoterapia.Api.Controllers
             }else{
 
                 return Ok(user);
-            }
-            //return Forbid();
+            }           
 
-            //var currentUserID = int.Parse(User.Identity.Name);
-            
+        }*/
 
-            //if (id != currentUserID && !User.IsInRole("paciente")) {
-               // return Forbid();
-            //}
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
+        {
+            var user = usuarioService.BuscarPorId(id);
 
-            
+            if(user == null){
+                return BadRequest(new {message = "Hubo un problema, por favor inténtelo nuevamente"});
+            }else{
+                return Ok(user);
+            }           
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("actualizarpalabraclave/{id}")]
+        public IActionResult ActualizarKeyword(int id,string PalabraClave, string NuevaPalabraClave)
+        {
+            var user = usuarioService.Actualizar_KeyWord(id,PalabraClave,NuevaPalabraClave);
+
+            if(user == null){
+                return BadRequest(new {message = "Palabra clave actual incorrecta"});
+            }else{
+                return Ok(user);
+            }           
 
         }
         

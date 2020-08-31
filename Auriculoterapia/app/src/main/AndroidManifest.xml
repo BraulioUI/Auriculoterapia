@@ -13,14 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.TreatmentPacientActivity"></activity>
+        <activity android:name=".activities.ChangeKeyWordActivity"></activity>
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".AnswerTreatmentRequestActivity" />
+        <activity android:name=".activities.TreatmentRequestActivity" />
+        <activity android:name=".activities.TreatmentPacientActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".SearchPatientsActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <activity android:name=".activities.PatientsManagementActivity" />
         <activity android:name=".activities.AppointmentPatientManagement" />
         <activity android:name=".MainActivityPatient" />
         <activity android:name=".activities.RegisterActivity" />

@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_appointment_management.*
 class AppointmentManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val actionBar = supportActionBar
+        actionBar!!.title = "Citas"
+
         setContentView(R.layout.activity_appointment_management)
         loadFragment(AppointmentRegisterFragment())
         bottomNavigationSpecialist.setOnNavigationItemSelectedListener {

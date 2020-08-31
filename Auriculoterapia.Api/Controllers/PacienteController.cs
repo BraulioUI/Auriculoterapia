@@ -18,15 +18,22 @@ namespace Controllers
             this.PacienteService = PacienteService;
         }
 
+
+    
+
         [Authorize(Roles = "ESPECIALISTA")]
         [HttpGet]
-        public IEnumerable<Paciente> FindAll(int id){
-            //var idUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var currentUserId = int.Parse(User.Identity.Name);
-            
+        public IEnumerable<Paciente> FindAllByWord([FromQuery] string word){
+            return PacienteService.buscarPorPalabra(word);
+        }
 
+        [Authorize(Roles = "ESPECIALISTA")]
+        [HttpGet("lista")]
+        public IEnumerable<Paciente> FindAll(){
             return PacienteService.FindAll();
-        }       
+        }
+
+
 
         [AllowAnonymous]
         [HttpPost]
@@ -38,5 +45,6 @@ namespace Controllers
             else
                 return BadRequest(new {message = "Correo inválido"}); 
         }
+
     }
 }

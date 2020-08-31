@@ -35,7 +35,7 @@ namespace Auriculoterapia.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {   
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
 
 
             services.AddDbContext<ApplicationDbContext>(x => {
@@ -76,11 +76,15 @@ namespace Auriculoterapia.Api
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IRol_UsuarioRepository, Rol_UsuarioRepository>();
             services.AddTransient<ITipoAtencionRepository, TipoAtencionRepository>();
+            services.AddTransient<ISolicitudTratamientoRepository, SolicitudTratamientoRepository>();
 
             services.AddTransient<ICitaService,CitaService>(); 
             services.AddTransient<IUsuarioService,UsuarioService>(); 
             services.AddTransient<IPacienteService, PacienteService>();
             services.AddTransient<ITipoAtencionService, TipoAtencionService>();
+            services.AddTransient<ISolicitudTratamientoService, SolicitudTratamientoService>();
+
+
             services.AddControllers()
                  .AddNewtonsoftJson(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 

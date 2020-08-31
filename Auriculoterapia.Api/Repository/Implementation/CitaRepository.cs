@@ -33,6 +33,20 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
         }
 
+
+        public IEnumerable<Cita> listarCitasPorUsuarioId(int usuarioId){
+            var citas = new List<Cita>();
+            try{
+                citas = this.context.Citas.Include(c => c.Paciente)
+                .Include(c => c.Paciente.Usuario)                
+                .Where(c => c.Paciente.Usuario.Id == usuarioId).ToList();
+            }catch(System.Exception){
+                throw;
+            }
+            return citas;
+        }
+
+
         public Cita FindById(int id){
             return new Cita();
         }

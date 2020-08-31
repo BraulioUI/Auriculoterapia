@@ -71,5 +71,28 @@ namespace Auriculoterapia.Api.Repository.Implementation
             }
             return actualizado;
         }
+
+        public IEnumerable<Paciente> busquedaPacientePorPalabra(string palabras){
+           var pacientes = new List<Paciente>();
+            try{
+                /*pacientes = (from p in this.context.Pacientes
+                            where (terminos.Any(r  => p.Usuario.Nombre.Contains(r))) ||
+                                  (terminos.Any(r  => p.Usuario.Apellido.Contains(r)))
+                            select p).ToList();*/
+                var dbListPacientes = from p in this.context.Pacientes
+                            select p;
+                if (!String.IsNullOrEmpty(palabras)){
+                    dbListPacientes = dbListPacientes.Where(p => (p.Usuario.Nombre + " " + p.Usuario.Apellido).Contains(palabras));
+                }
+                pacientes = dbListPacientes.Include(p => p.Usuario).ToList();
+                
+            } catch(System.Exception){
+                throw;
+            }
+            return pacientes;
+
+        }
+
+
     }
 }
