@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Helpers;
 using Auriculoterapia.Api.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -22,5 +24,10 @@ namespace Auriculoterapia.Api.Controllers
                 this.DisponibilidadService.registrarDisponibilidad(entity, especialistaId);
                 return StatusCode(Microsoft.AspNetCore.Http.StatusCodes.Status201Created);
           }
+
+        [HttpGet]
+        public Disponibilidad listarDisponibilidadPorFecha([FromQuery] string fecha){
+            return DisponibilidadService.listarPorFecha(fecha);
+        }
     }
 }

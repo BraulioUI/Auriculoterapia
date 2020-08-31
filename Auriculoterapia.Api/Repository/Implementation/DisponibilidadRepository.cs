@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Repository.Context;
-
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Auriculoterapia.Api.Helpers;
 namespace Auriculoterapia.Api.Repository.Implementation
 {
     public class DisponibilidadRepository : IDisponibilidadRepository
@@ -43,6 +45,18 @@ namespace Auriculoterapia.Api.Repository.Implementation
                     throw;
                 }
                 return disponibilidad;
+         }
+
+         public Disponibilidad listarPorFecha(string fecha){
+             var disponibilidad = new Disponibilidad();
+             var conversor = new ConversorDeFechaYHora();
+             try{
+                disponibilidad = this.context.Disponibilidades.Include(d => d.HorariosDescartados)
+                                    .FirstOrDefault(d => d.Dia == conversor.TransformarAFecha(fecha));
+             } catch(System.Exception){
+                    throw;
+             }
+             return disponibilidad;
          }
     }
 }

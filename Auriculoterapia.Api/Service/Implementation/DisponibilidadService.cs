@@ -67,5 +67,9 @@ namespace Auriculoterapia.Api.Service.Implementation
         }
 
 
+        public Disponibilidad listarPorFecha(string fecha){
+            return DisponibilidadRepository.listarPorFecha(fecha);
+        }
+
     }
 }

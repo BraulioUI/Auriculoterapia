@@ -53,14 +53,13 @@ DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM CITAS;
 
-<<<<<<< HEAD
 UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
-=======
+
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
 INSERT INTO SOLICITUDTRATAMIENTOS(Id,Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
 VALUES(3,20,60.9,1.70,"DOLOR LUMBAR","imagen.jpg","dolor de cabeza","En proceso","2020-08-28",4);
->>>>>>> a25d97a0b7e5a134057efbc810e8d2e9e10baa4a
+
 
 delete from solicitudtratamientos where Id = 1;
 INSERT INTO solicitudtratamientos(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,PacienteId,Estado,fechaInicio) 
