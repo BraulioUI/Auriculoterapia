@@ -9,11 +9,12 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.models.HorarioDescartado
+import com.example.android.auriculoterapia_app.models.helpers.FormularioDisponibilidad
 import com.example.android.auriculoterapia_app.models.helpers.FormularioHorarioDescartado
 
-class RegisterAvailabilityAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HorarioDescartadoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items: List<HorarioDescartado> = listOf()
+    private val items: ArrayList<HorarioDescartado> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AvailabilityViewHolder(
@@ -29,8 +30,20 @@ class RegisterAvailabilityAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
         when(holder){
             is AvailabilityViewHolder -> {
                 holder.bind(items.get(position))
+                holder.botonEliminar.setOnClickListener{
+                    removeElement(position)
+                    notifyItemChanged(holder.adapterPosition)
+                }
             }
         }
+    }
+
+    fun addElement(element: HorarioDescartado){
+        items.add(element)
+    }
+
+    fun removeElement(index: Int){
+        items.removeAt(index)
     }
 
     inner class AvailabilityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -44,4 +57,10 @@ class RegisterAvailabilityAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
             horaFin.hint = form.horaFin
         }
     }
+
+
+
+
+
+
 }

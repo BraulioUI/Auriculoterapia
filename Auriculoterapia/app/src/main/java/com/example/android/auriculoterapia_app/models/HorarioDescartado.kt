@@ -7,5 +7,6 @@ data class HorarioDescartado(
     var horaFin: String,
     var disponibilidadId: Int
 ): Serializable{
+    constructor(horaInicio: String, horaFin: String) : this(0, horaInicio, horaFin, 0)
 
 }
