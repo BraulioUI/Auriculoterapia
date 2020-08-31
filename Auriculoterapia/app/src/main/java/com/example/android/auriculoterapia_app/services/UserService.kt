@@ -13,7 +13,8 @@ interface UserService {
     @GET("api/usuario/{id}")
     fun getUserById(@Path("id") id:Int): Call<ResponseUserById>
 
-    fun updateKeyWord(@Path("id") id:Int):Call<>
+    @POST("api/usuario/actualizarpalabraclave")
+    fun updateKeyWord(@Body responseKeyWord: ResponseKeyWord):Call<ResponseKeyWord>
 }
 
 class ForgotPasswordRequest(var nombreUsuario:String,var palabraClave:String ,var contrasena: String)
@@ -21,4 +22,4 @@ class ForgotPasswordRequest(var nombreUsuario:String,var palabraClave:String ,va
 class ResponseUserById(var id:Int,var nombre:String,var apellido:String,var email:String,var contrasena:String,
     var nombreUsuario:String,var sexo:String,var palabraClave:String,var fechaNacimiento:String?)
 
-//class ResponseKeyWord(var id:Int), var 
+class ResponseKeyWord(var id:Int, var palabraClave:String, var nuevaPalabraClave: String)
