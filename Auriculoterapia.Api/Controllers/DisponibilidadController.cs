@@ -29,5 +29,11 @@ namespace Auriculoterapia.Api.Controllers
         public Disponibilidad listarDisponibilidadPorFecha([FromQuery] string fecha){
             return DisponibilidadService.listarPorFecha(fecha);
         }
+
+        [HttpGet("horas")]
+        public AvailabilityTimeRange listarHorasDisponibles([FromQuery] string fecha){
+            return DisponibilidadService.listarHorasDisponibles(fecha);
+        }
+
     }
 }

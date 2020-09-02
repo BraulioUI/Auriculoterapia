@@ -1,6 +1,7 @@
 package com.example.android.auriculoterapia_app.services
 
 import com.example.android.auriculoterapia_app.models.Disponibilidad
+import com.example.android.auriculoterapia_app.models.helpers.AvailabilityTimeRange
 import com.example.android.auriculoterapia_app.models.helpers.FormularioDisponibilidad
 import retrofit2.Call
 import retrofit2.http.Body
@@ -16,4 +17,8 @@ interface AvailabilityService {
 
     @GET("api/disponibilidad")
     fun getAvailabilityByDate(@Query("fecha") fecha: String): Call<Disponibilidad>
+
+
+    @GET("api/disponibilidad/horas")
+    fun getAvailableHours(@Query("fecha") fecha: String): Call<AvailabilityTimeRange>
 }

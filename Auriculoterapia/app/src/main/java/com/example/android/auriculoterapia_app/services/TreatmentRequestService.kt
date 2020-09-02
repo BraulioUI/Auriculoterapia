@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface TreatmentRequestService{
 
     @GET("api/solicitudtratamiento")
-    fun findByPacienteId(@Query("pacienteId") pacienteId: Int): Call<SolicitudTratamiento>
+    fun findByPacienteId(@Query("pacienteId") pacienteId: Int, @Header("Authorization") token:String): Call<SolicitudTratamiento>
 
     @POST("api/solicitudTratamiento/{userId}")
     fun registerTreatment(@Header("Authorization") token:String,

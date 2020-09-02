@@ -54,11 +54,13 @@ namespace Auriculoterapia.Api.Controllers
                 return BadRequest(new {message = "error en el registro, vuelva a intentar"}); 
         }
 
-
+        [Authorize(Roles="ESPECIALISTA")]
         [HttpGet]
         public SolicitudTratamiento buscarPorPacienteId([FromQuery] int pacienteId){
             return solicitudTratamientoService.findByPacienteId(pacienteId);
         }
+
+        
 
     }
 }

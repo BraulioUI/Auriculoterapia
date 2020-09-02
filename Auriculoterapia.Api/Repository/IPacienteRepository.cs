@@ -8,5 +8,7 @@ namespace Auriculoterapia.Api.Repository
        string ActualizarNumeroPaciente(string numero, Paciente paciente);
 
        IEnumerable<Paciente> busquedaPacientePorPalabra(string palabras);
+
+       Paciente buscarPorUsuarioId(int usuarioId);
     }
 }

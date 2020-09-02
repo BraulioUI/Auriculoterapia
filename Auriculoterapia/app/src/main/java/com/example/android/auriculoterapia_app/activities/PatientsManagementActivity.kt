@@ -47,7 +47,7 @@ class PatientsManagementActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
         val token = sharedPreferences.getString("token", "")
         recyclerView = findViewById(R.id.recyclerViewPatients)
-        patientsAdapter = PatientsAdapter()
+        patientsAdapter = PatientsAdapter(this)
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
