@@ -60,13 +60,15 @@
             app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
             app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
 
-        <Button
+        <ImageButton
             android:id="@+id/dateButtonDialog"
-            android:layout_width="40dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="56dp"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:tint="#F6F4F4"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="48dp"
-            android:background="@drawable/date_image"
+            android:src="@drawable/date_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
 
@@ -94,13 +96,15 @@
             app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
             app:layout_constraintTop_toBottomOf="@+id/dateEditText" />
 
-        <Button
+        <ImageButton
             android:id="@+id/timeButtonDialog"
-            android:layout_width="40dp"
-            android:layout_height="34dp"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="38dp"
             android:layout_marginEnd="48dp"
-            android:background="@drawable/time_image"
+            android:tint="#F6F4F4"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/time_image"
             app:layout_constraintBottom_toTopOf="@+id/tipoAtencionSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateButtonDialog"

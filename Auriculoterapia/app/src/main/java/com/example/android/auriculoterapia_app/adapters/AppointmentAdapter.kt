@@ -17,12 +17,17 @@ import com.example.android.auriculoterapia_app.services.AppointmentService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items : List<Cita> = ArrayList()
     private var rol: String = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+
 
         return CitaViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
@@ -54,9 +59,15 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 holder.buttonCancelar.setOnClickListener{
                     Toast.makeText(holder.context, "${position}", Toast.LENGTH_SHORT).show()
                     actualizarEstadoCita(cita.id,"Cancelado")
-                    notifyItemChanged(position)
+                    items.get(holder.adapterPosition).estado = "Cancelado"
+                    notifyItemChanged(holder.adapterPosition)
+                }
+
+                holder.buttonModificar.setOnClickListener{
 
                 }
+
+
             }
         }
 

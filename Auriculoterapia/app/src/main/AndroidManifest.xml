@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activities.ChangeKeyWordActivity" ></activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".AnswerTreatmentRequestActivity" />
+        <activity android:name=".activities.AnswerTreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentPacientActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />

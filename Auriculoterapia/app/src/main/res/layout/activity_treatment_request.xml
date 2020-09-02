@@ -74,7 +74,6 @@
                         android:id="@+id/solicitudNombreText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombres"
                         android:textSize="@dimen/text_size" />
 
                 </LinearLayout>
@@ -95,7 +94,6 @@
                         android:id="@+id/solicitudApellidoText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Apellidos"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
@@ -115,7 +113,6 @@
                         android:id="@+id/solicitudEdadText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Edad"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
@@ -135,7 +132,6 @@
                         android:id="@+id/solicitudAlturaText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Altura"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
@@ -155,7 +151,6 @@
                         android:id="@+id/solicitudPesoText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Peso"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
@@ -175,7 +170,6 @@
                         android:id="@+id/solicitudSintomasText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Síntomas"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
@@ -195,7 +189,6 @@
                         android:id="@+id/solicitudOtrosSintomasText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Otros síntomas"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 

@@ -61,6 +61,18 @@ namespace Auriculoterapia.Api.Repository.Implementation
         }
 
 
+        public Paciente buscarPorUsuarioId(int usuarioId){
+                var paciente = new Paciente();
+            try{
+                paciente = this.context.Pacientes.Single(paciente => paciente.UsuarioId == usuarioId);
+            }catch(System.Exception){
+                throw;
+            }
+            return paciente;
+        }
+
+
+
         public string ActualizarNumeroPaciente(string numero, Paciente paciente){
             string actualizado = "Actualizado";
             try{

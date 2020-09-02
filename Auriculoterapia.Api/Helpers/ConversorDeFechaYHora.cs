@@ -18,6 +18,10 @@ namespace Auriculoterapia.Api.Helpers
             return dt2;
         }
 
+        public string TransformarHoraATexto(DateTime hora){
+            return hora.ToString("HH:mm");
+        }   
+
           /*public DateTime TransformarDiaEnEspanolAFecha(string fecha){
             //Formato de disponibilidad: "dddd, dd MMMM yyyy"
 

@@ -18,7 +18,8 @@ namespace Auriculoterapia.Api.Repository.Implementation
         public IEnumerable<Cita> FindAll(){
             var citas = new List<Cita>();
             try{
-                citas = this.context.Citas.Include(c => c.Paciente).Include(c => c.Paciente.Usuario).Include(c => c.TipoAtencion).ToList();
+                citas = this.context.Citas.Include(c => c.Paciente).Include(c => c.Paciente.Usuario).Include(c => c.TipoAtencion)
+                .OrderByDescending(c => c.Fecha).ToList();
             } catch(System.Exception){
                 throw;
             }

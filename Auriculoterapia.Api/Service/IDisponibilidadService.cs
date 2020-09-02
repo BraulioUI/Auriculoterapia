@@ -9,5 +9,7 @@ namespace Auriculoterapia.Api.Service
         void registrarDisponibilidad(FormularioDisponibilidad entity, int especialistaId);
 
         Disponibilidad listarPorFecha(string fecha);
+
+        AvailabilityTimeRange listarHorasDisponibles(string fecha);
     }
 }

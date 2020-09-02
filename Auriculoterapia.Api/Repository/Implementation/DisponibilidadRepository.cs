@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Auriculoterapia.Api.Domain;
 using Auriculoterapia.Api.Repository.Context;
 using System.Linq;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Auriculoterapia.Api.Helpers;
 namespace Auriculoterapia.Api.Repository.Implementation
@@ -37,7 +38,9 @@ namespace Auriculoterapia.Api.Repository.Implementation
 
         public  Disponibilidad guardarDisponibilidad(Disponibilidad entity){
                 var disponibilidad = new Disponibilidad();
-                try{
+                
+                try{    
+    
                     this.context.Disponibilidades.Add(entity);
                     this.context.SaveChanges();
                     disponibilidad = entity;
@@ -58,5 +61,31 @@ namespace Auriculoterapia.Api.Repository.Implementation
              }
              return disponibilidad;
          }
+
+        public AvailabilityTimeRange obtenerListaHorasDisponibles(string fecha){
+            var listarHorasDisponibles = new AvailabilityTimeRange();
+            var disponibilidad = new Disponibilidad();
+            var conversor = new ConversorDeFechaYHora();
+            
+            try{
+                var fechaConvertida = conversor.TransformarAFecha(fecha);
+                disponibilidad = listarPorFecha(fecha);
+                if(disponibilidad!= null){
+                    listarHorasDisponibles.setList(disponibilidad.HoraInicio, disponibilidad.HoraFin,
+                    disponibilidad.HorariosDescartados.ToList());
+                }
+                else {
+                    listarHorasDisponibles.setList(new DateTime(fechaConvertida.Year,
+                    fechaConvertida.Month, fechaConvertida.Day, 7, 0, 0),
+                    new DateTime(fechaConvertida.Year,
+                    fechaConvertida.Month, fechaConvertida.Day, 19, 0, 0),
+                    null);
+                }
+            }catch(System.Exception){
+                throw;
+            }
+            return listarHorasDisponibles;
+        }   
+
     }
 }

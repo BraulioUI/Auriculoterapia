@@ -38,7 +38,13 @@ namespace Auriculoterapia.Api.Service.Implementation
             var conversor = new ConversorDeFechaYHora(); 
             var disponibilidad =  new Disponibilidad();
             var horariosDescartados = new List<HorarioDescartado>();
+            var disponibilidadGuardada = new Disponibilidad();
             try{
+                disponibilidadGuardada = listarPorFecha(entity.dia);
+                if (disponibilidadGuardada != null){
+                    return;
+                }
+
                 disponibilidad.Dia = conversor.TransformarAFecha(entity.dia);
                 disponibilidad.HoraInicio = conversor.TransformarAHora(entity.horaInicio, entity.dia);
                 disponibilidad.HoraFin = conversor.TransformarAHora(entity.horaFin, entity.dia);
@@ -66,9 +72,14 @@ namespace Auriculoterapia.Api.Service.Implementation
             
         }
 
+        
 
         public Disponibilidad listarPorFecha(string fecha){
             return DisponibilidadRepository.listarPorFecha(fecha);
+        }
+
+        public AvailabilityTimeRange listarHorasDisponibles(string fecha){
+            return DisponibilidadRepository.obtenerListaHorasDisponibles(fecha);
         }
 
     }

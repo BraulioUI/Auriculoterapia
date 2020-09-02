@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using Auriculoterapia.Api.Domain;
+using Auriculoterapia.Api.Helpers;
 
 namespace Auriculoterapia.Api.Repository
 {
@@ -9,5 +10,7 @@ namespace Auriculoterapia.Api.Repository
         Disponibilidad guardarDisponibilidad(Disponibilidad entity);
 
         Disponibilidad listarPorFecha(string fecha);
+
+        AvailabilityTimeRange obtenerListaHorasDisponibles(string fecha);
     }
 }

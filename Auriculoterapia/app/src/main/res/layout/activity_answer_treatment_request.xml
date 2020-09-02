@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnswerTreatmentRequestActivity">
+    tools:context=".activities.AnswerTreatmentRequestActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -146,6 +146,7 @@
                     android:text="@string/save_text" />
 
                 <Button
+                    android:id="@+id/boton_cancelar_respuesta"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"

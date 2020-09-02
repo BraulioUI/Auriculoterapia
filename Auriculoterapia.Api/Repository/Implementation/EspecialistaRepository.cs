@@ -22,7 +22,7 @@ namespace Auriculoterapia.Api.Repository.Implementation
         {
             var especialista = new Especialista();
             try{
-                especialista = this.context.Especialistas.FirstOrDefault(e => e.Id == id);
+                especialista = this.context.Especialistas.FirstOrDefault(e => e.Usuario.Id == id);
 
             }catch(System.Exception){
                 throw;

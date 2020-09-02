@@ -1,5 +1,5 @@
 use auriculoterapiadb;
-
+dssadgdgsd /* por si me equivoco al poner el ejecutar */
 /*ROL 1 - ESPECIALISTA*/
 INSERT INTO roles(Descripcion) VALUES ('ESPECIALISTA');
 /*ROL 2 - PACIENTE*/
@@ -64,8 +64,14 @@ VALUES(3,20,60.9,1.70,"DOLOR LUMBAR","imagen.jpg","dolor de cabeza","En proceso"
 delete from solicitudtratamientos where Id = 1;
 INSERT INTO solicitudtratamientos(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,PacienteId,Estado,fechaInicio) 
 VALUES(26, 67, 171, 'Malestar lumbar', 'sdgdsgdsagsdag', 'Me duele la cabeza y tengo mucha ansiedad', 1,"En proceso", "2020-08-31");
-
+select * from solicitudtratamientos;
 
 
 SELECT * FROM DISPONIBILIDADES;
 SELECT * FROM HORARIOSDESCARTADOS;
+
+DELETE FROM HORARIOSDESCARTADOS WHERE DisponibilidadId = 5;
+DELETE FROM DISPONIBILIDADES WHERE Id = 5;
+
+ALTER TABLE DISPONIBILIDADES AUTO_INCREMENT = 1;
+
