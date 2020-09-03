@@ -38,6 +38,7 @@ class ChangeKeyWordActivity : AppCompatActivity() {
         ButtonCancelar.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -66,6 +67,7 @@ class ChangeKeyWordActivity : AppCompatActivity() {
                     Log.i("CHANGEKEYWORD: ", response.body().toString())
 
                     startActivity(intent)
+                    finish()
                     Toast.makeText(applicationContext,"palabra clave cambia con éxito", Toast.LENGTH_SHORT).show()
 
                 }else{
