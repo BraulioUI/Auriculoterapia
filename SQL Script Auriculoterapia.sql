@@ -31,20 +31,20 @@ INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(2, 3);
 INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(2, 4);
 
 /*ESPECIALISTA 1 - USUARIO 1*/
-INSERT INTO ESPECIALISTAS(AnhoExperiencia,UsuarioId) VALUES (15, 1);
+INSERT INTO Especialistas(AnhoExperiencia,UsuarioId) VALUES (15, 1);
 
 /*PACIENTE 1 - USUARIO 2*/
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '999645223', 2);
 INSERT INTO PACIENTES(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '955645443', 3);
 
-SELECT * FROM ESPECIALISTAS;
+SELECT * FROM Especialistas;
 SELECT * FROM PACIENTES;
 SELECT * FROM ROL_USUARIOS;
 
 /*Tipo de atenciones*/
-INSERT INTO TIPOATENCIONS(Descripcion) VALUES ('Presencial');
-INSERT INTO TIPOATENCIONS(Descripcion) VALUES ('Virtual');
-SELECT * FROM TIPOATENCIONS;
+INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
+INSERT INTO TipoAtencions(Descripcion) VALUES ('Virtual');
+SELECT * FROM TipoAtencions;
 
 INSERT INTO CITAS(PacienteId,Fecha,HoraInicioAtencion,HoraFinAtencion,Estado, TipoAtencionId) 
 VALUES(1, '2020-08-24', '2020-08-24 09:00:00', '2020-08-24 09:30:00', 'En proceso', 2);
