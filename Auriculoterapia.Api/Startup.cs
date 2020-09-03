@@ -36,12 +36,12 @@ namespace Auriculoterapia.Api
         public void ConfigureServices(IServiceCollection services)
         {   
 
-
-
             services.AddDbContext<ApplicationDbContext>(x => {
+
                 x.UseMySql(Configuration.GetConnectionString("DefaultConnection"), 
                     providerOptions => providerOptions.EnableRetryOnFailure());
                 
+
             });
 
             
