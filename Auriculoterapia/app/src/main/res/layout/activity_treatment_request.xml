@@ -38,7 +38,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:text="07-07-2020"
                     android:textSize="@dimen/text_size" />
 
                 <TextView
@@ -48,7 +47,6 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
                     android:gravity="end"
-                    android:text="En proceso"
                     android:textSize="@dimen/text_size" />
 
             </LinearLayout>

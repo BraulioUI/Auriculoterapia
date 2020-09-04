@@ -12,9 +12,12 @@ import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.models.SolicitudTratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TreatmentRequestActivity : AppCompatActivity() {
@@ -30,6 +33,8 @@ class TreatmentRequestActivity : AppCompatActivity() {
         val sintomasText = findViewById<TextView>(R.id.solicitudSintomasText)
         val otrosSintomasText = findViewById<TextView>(R.id.solicitudOtrosSintomasText)
         val botonResponder = findViewById<Button>(R.id.solicitudResponderBoton)
+        val estadoSolicitud = findViewById<TextView>(R.id.estadoSolicitudTratamiento)
+        val fechaInicioSolicitada = findViewById<TextView>(R.id.fechaEnvioSolicitudTratamiento)
 
         val actionBar = supportActionBar
         actionBar!!.title = "Solicitud"
@@ -42,6 +47,8 @@ class TreatmentRequestActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
         val token = sharedPreferences.getString("token", "")
 
+        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
         treatmentRequestService.findByPacienteId(pacienteId, "Bearer $token")
             .enqueue(object: Callback<SolicitudTratamiento>{
@@ -59,6 +66,14 @@ class TreatmentRequestActivity : AppCompatActivity() {
                         alturaText.text = solicitud.altura.toString()
                         sintomasText.text = solicitud.sintomas
                         otrosSintomasText.text = solicitud.otrosSintomas
+                        estadoSolicitud.text = solicitud.estado
+                        fechaInicioSolicitada.text = formatter.format(parser.parse(solicitud.fechaInicio))
+
+
+                        botonResponder.setOnClickListener{
+                            val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)
+                            startActivity(intent.putExtra("solicitudTratamientoId", solicitud.id))
+                        }
                     } else {
                         Toast.makeText(this@TreatmentRequestActivity, "No hay datos", Toast.LENGTH_SHORT).show()
                     }
@@ -66,10 +81,7 @@ class TreatmentRequestActivity : AppCompatActivity() {
                 }
             })
 
-            botonResponder.setOnClickListener{
-                val intent = Intent(this, AnswerTreatmentRequestActivity::class.java)
-                startActivity(intent)
-            }
+
 
     }
 }

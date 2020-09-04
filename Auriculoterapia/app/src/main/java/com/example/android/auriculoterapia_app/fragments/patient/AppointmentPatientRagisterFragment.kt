@@ -83,7 +83,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
             }, year, month, day
             )
             temp = 1
-
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             dpd.show()
         }
 
@@ -161,7 +161,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                     )
 
                 Log.i("Cita a registrar", cita.toString())
-                registrarCita(cita, usuarioId)
+                registrarCita(cita, usuarioId, horaTextView)
             }
         }
 
@@ -172,7 +172,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
     }
 
 
-    fun registrarCita(cita: FormularioCitaPaciente, idPaciente: Int){
+    fun registrarCita(cita: FormularioCitaPaciente, idPaciente: Int, time: TextView){
 
         val CitaService = retrofit.create(AppointmentService::class.java)
 
@@ -183,6 +183,8 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
             override fun onResponse(call: Call<FormularioCitaPaciente>, response: Response<FormularioCitaPaciente>) {
                 Log.i("POST", response.code().toString())
+                Toast.makeText(mContext, "Reserva exitosa", Toast.LENGTH_SHORT).show()
+                time.text = "__:__"
             }
         })
     }
@@ -202,24 +204,31 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 call: Call<AvailabilityTimeRange>,
                 response: Response<AvailabilityTimeRange>
             ) {
+                val horarios = response.body()
                 if(response.isSuccessful){
-                    Log.i("Horarios Disponibles",response.body().toString())
-                    adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response.body()!!.hours)
-                    listView.adapter = adapter
+                    if(horarios == null || horarios.hours.size == 0){
 
-                    var alertBuilder = AlertDialog.Builder(requireContext())
-                    alertBuilder.setCancelable(true)
-                    alertBuilder.setView(listView)
-                    var dialog = alertBuilder.create()
-                    dialog.setCancelable(false)
-                    listView.setOnItemClickListener{
-                            parent, view, position, id ->
-                        textView.text = adapter.getItem(position)
-                        dialog.dismiss()
-                        (listView.getParent() as ViewGroup).removeView(listView)
-                    }
-                    dialog.show()
+                        Toast.makeText(requireContext(), "No hay horarios disponibles", Toast.LENGTH_SHORT).show()
 
+                    }else{
+
+                        Log.i("Horarios Disponibles",response.body().toString())
+                        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response.body()!!.hours)
+                        listView.adapter = adapter
+
+                        var alertBuilder = AlertDialog.Builder(requireContext())
+                        alertBuilder.setCancelable(true)
+                        alertBuilder.setView(listView)
+                        var dialog = alertBuilder.create()
+                        dialog.setCancelable(false)
+                        listView.setOnItemClickListener{
+                                parent, view, position, id ->
+                            textView.text = adapter.getItem(position)
+                            dialog.dismiss()
+                            (listView.getParent() as ViewGroup).removeView(listView)
+                        }
+                        dialog.show()
+                        }
                 }
 
 
