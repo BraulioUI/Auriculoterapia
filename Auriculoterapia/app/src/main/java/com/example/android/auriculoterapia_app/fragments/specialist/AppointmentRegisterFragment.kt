@@ -108,7 +108,7 @@ class AppointmentRegisterFragment : Fragment() {
 
         val dateEditText = view.findViewById<TextView>(R.id.dateEditText)
         val dateButton = view.findViewById<ImageButton>(R.id.dateButtonDialog)
-
+        val textViewHora = view.findViewById<TextView>(R.id.textViewHora)
         val dateInString = "____-__-__"//formatter.format(date)
         dateEditText.text = dateInString
 
@@ -129,10 +129,12 @@ class AppointmentRegisterFragment : Fragment() {
                     dayText = "0$dayText"
                 }
                 dateEditText.text = "$yearText-${monthText}-$dayText"
+                textViewHora.text = "__:__"
+
             }, year, month, day
             )
             temp = 1
-
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             dpd.show()
         }
 
@@ -140,7 +142,7 @@ class AppointmentRegisterFragment : Fragment() {
 
         //val informacionDisponibilidad = view.findViewById<TextView>(R.id.availabilityInformationText)
         val cal = Calendar.getInstance()
-        val textViewHora = view.findViewById<TextView>(R.id.textViewHora)
+
         val timeButton = view.findViewById<ImageButton>(R.id.timeButtonDialog)
         val hora = Calendar.getInstance().time
         textViewHora.text = "__:__"//SimpleDateFormat("HH:mm", Locale.getDefault()).format(hora)
@@ -219,13 +221,13 @@ class AppointmentRegisterFragment : Fragment() {
                     )
 
                 Log.i("Cita a registrar", cita.toString())
-                registrarCita(cita, idPaciente)
+                registrarCita(cita, idPaciente,  textViewHora)
         }
         }
         return view;
     }
 
-    fun registrarCita(cita: FormularioCita, idPaciente: Int){
+    fun registrarCita(cita: FormularioCita, idPaciente: Int, time: TextView){
 
         val CitaService = retrofit.create(AppointmentService::class.java)
 
@@ -236,7 +238,8 @@ class AppointmentRegisterFragment : Fragment() {
 
             override fun onResponse(call: Call<FormularioCita>, response: Response<FormularioCita>) {
                 Log.i("POST", response.code().toString())
-                Toast.makeText(context, "Reserva exitosa", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Reserva exitosa", Toast.LENGTH_SHORT).show()
+                time.text = "__:__"
             }
         })
     }
@@ -265,25 +268,34 @@ class AppointmentRegisterFragment : Fragment() {
                 call: Call<AvailabilityTimeRange>,
                 response: Response<AvailabilityTimeRange>
             ) {
+                val horarios = response.body()
                 if(response.isSuccessful){
-                    Log.i("Horarios Disponibles",response.body().toString())
-                    adapter = ArrayAdapter(mContext, android.R.layout.simple_list_item_1, response.body()!!.hours)
-                    listView.adapter = adapter
+                    if(horarios == null || horarios.hours.size == 0){
 
-                    var alertBuilder = AlertDialog.Builder(mContext)
-                    alertBuilder.setCancelable(true)
-                    alertBuilder.setView(listView)
-                    var dialog = alertBuilder.create()
-                    dialog.setCancelable(false)
-                    listView.setOnItemClickListener{
-                        parent, view, position, id ->
-                            textView.text = adapter.getItem(position)
-                            dialog.dismiss()
-                        (listView.getParent() as ViewGroup).removeView(listView)
+                        Toast.makeText(requireContext(), "No hay horarios disponibles", Toast.LENGTH_SHORT).show()
+
+                    }else{
+                                Log.i("Horarios Disponibles",response.body().toString())
+                                adapter = ArrayAdapter(mContext, android.R.layout.simple_list_item_1, response.body()!!.hours)
+                                listView.adapter = adapter
+
+                                var alertBuilder = AlertDialog.Builder(mContext)
+                                alertBuilder.setCancelable(true)
+                                alertBuilder.setView(listView)
+                                var dialog = alertBuilder.create()
+                                dialog.setCancelable(false)
+
+                                listView.setOnItemClickListener{
+                                    parent, view, position, id ->
+                                        textView.text = adapter.getItem(position)
+                                        dialog.dismiss()
+                                    (listView.getParent() as ViewGroup).removeView(listView)
+                                }
+                                dialog.show()
+
                     }
-                    dialog.show()
-
                 }
+
 
 
             }
