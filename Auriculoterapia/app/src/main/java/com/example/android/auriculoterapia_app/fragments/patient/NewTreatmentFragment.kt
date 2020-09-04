@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.SolicitudTratamiento
+import com.example.android.auriculoterapia_app.services.ResponseUserById
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
+import com.example.android.auriculoterapia_app.services.UserService
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_treatment_pacient.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.time.Period
 import java.util.*
 
 class NewTreatmentFragment  : Fragment(){
@@ -29,22 +32,25 @@ class NewTreatmentFragment  : Fragment(){
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_new_treatment, container, false)
+        val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
 
+        val userId = sharedPreferences.getInt("id",0)
 
-        val optionEdad = view.findViewById<Spinner>(R.id.spinner_edad)
+        //val optionEdad = view.findViewById<Spinner>(R.id.spinner_edad)
+        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
         val resultEdad = view.findViewById<TextView>(R.id.tv_resultEdad)
 
 
 
         val registerButton = view.findViewById<Button>(R.id.btn_registrarTratamiento)
-        resultEdad.visibility = View.GONE
+        //resultEdad.visibility = View.GONE
 
-        val options = arrayOf(18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,
-        36,37,38,39,40,41,42,43,44,45,46,47,48,49,50)
+        //val options = arrayOf(18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,
+        //36,37,38,39,40,41,42,43,44,45,46,47,48,49,50)
 
-        optionEdad.adapter = ArrayAdapter<Int>(requireContext(),android.R.layout.simple_list_item_1,options)
+        //optionEdad.adapter = ArrayAdapter<Int>(requireContext(),android.R.layout.simple_list_item_1,options)
 
-        optionEdad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        /*optionEdad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 resultEdad.text = "edad:"
             }
@@ -58,7 +64,24 @@ class NewTreatmentFragment  : Fragment(){
                 resultEdad.text = options.get(position).toString()
             }
 
-        }
+        }*/
+        userService.getUserById(userId).enqueue(object : Callback<ResponseUserById>{
+            override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                Log.i("NewTreatment: ","Fallo edad")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseUserById>,
+                response: Response<ResponseUserById>
+            ) {
+                if(response.isSuccessful){
+                    val res = response.body()
+                    resultEdad.text = res?.edad.toString()
+                }
+            }
+
+        })
+
 
         registerButton.setOnClickListener {
             registrarTratamiento()
@@ -78,7 +101,9 @@ class NewTreatmentFragment  : Fragment(){
 
         val date = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
         val dateInString = formatter.format(date)
+
 
 
         val peso = requireView().findViewById<EditText>(R.id.et_peso).text
@@ -88,44 +113,49 @@ class NewTreatmentFragment  : Fragment(){
         val imagenAreaAfectada = "imagenPrueba.jpg"
         val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad).text
 
-        val solicitudTratamiento = SolicitudTratamiento(altura.toString().toDouble(),
-            edad.toString().toInt(),null,imagenAreaAfectada,otros.toString(),null,
-            peso.toString().toDouble(),sintomas.toString(),
-            dateInString,"En proceso",null)
+        if(peso.isEmpty() || altura.isEmpty() || sintomas.isEmpty() || otros.isEmpty() || edad.isEmpty() || imagenAreaAfectada.isEmpty()){
+            Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
+        }else{
+            val solicitudTratamiento = SolicitudTratamiento(altura.toString().toDouble(),
+                edad.toString().toInt(),null,imagenAreaAfectada,otros.toString(),null,
+                peso.toString().toDouble(),sintomas.toString(),
+                dateInString,"En proceso",null)
 
-        Log.i("UserId: ","$userId")
+            Log.i("UserId: ","$userId")
 
-        treatmentRequestService.registerTreatment("Bearer $token",userId,solicitudTratamiento)
-            .enqueue(object : Callback<SolicitudTratamiento>{
-                override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
-                    Log.i("REGISTRAR TRATAMIENTO","GG WP")
-                }
-
-                override fun onResponse(
-                    call: Call<SolicitudTratamiento>,
-                    response: Response<SolicitudTratamiento>
-                ) {
-                    if(response.isSuccessful){
-                        Log.i("REGISTRAR TRATAMIENTO: ", response.body().toString())
-                        Toast.makeText(requireContext(),"Se registró el tratamiento correctamente",Toast.LENGTH_SHORT).show()
-                        //fragmentTreatmentContainer.
-                        //startActivity(intentContinueTreatment)
+            treatmentRequestService.registerTreatment("Bearer $token",userId,solicitudTratamiento)
+                .enqueue(object : Callback<SolicitudTratamiento>{
+                    override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
+                        Log.i("REGISTRAR TRATAMIENTO","GG WP")
                     }
-                    else{
-                        when(response.code()){
-                            400 ->{
-                                val res = response.errorBody()?.string()
-                                val message = JsonParser().parse(res).asJsonObject["message"].asString
 
-                                Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+                    override fun onResponse(
+                        call: Call<SolicitudTratamiento>,
+                        response: Response<SolicitudTratamiento>
+                    ) {
+                        if(response.isSuccessful){
+                            Log.i("REGISTRAR TRATAMIENTO: ", response.body().toString())
+                            Toast.makeText(requireContext(),"Se registró el tratamiento correctamente",Toast.LENGTH_SHORT).show()
+                            //fragmentTreatmentContainer.
+                            //startActivity(intentContinueTreatment)
+                        }
+                        else{
+                            when(response.code()){
+                                400 ->{
+                                    val res = response.errorBody()?.string()
+                                    val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                                    Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                     }
-                }
 
-            })
+                })
+        }
+
+
     }
-
 
 
 }

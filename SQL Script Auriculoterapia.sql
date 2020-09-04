@@ -27,9 +27,9 @@ SELECT * FROM Pacientes;
 INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(1, 1);
 
 /*ROL_USUARIOS 2*/
-INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(2, 2);
-INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(2, 3);
-INSERT INTO ROL_USUARIOS(RolId,UsuarioId) VALUES(2, 4);
+INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(2, 2);
+INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(2, 3);
+INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(2, 4);
 
 /*ESPECIALISTA 1 - USUARIO 1*/
 INSERT INTO Especialistas(AnhoExperiencia,UsuarioId) VALUES (15, 1);
@@ -39,8 +39,8 @@ INSERT INTO Pacientes(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '
 INSERT INTO Pacientes(FechaNacimiento,Celular,UsuarioId) VALUES ('1994-07-15', '955645443', 3);
 
 SELECT * FROM Especialistas;
-SELECT * FROM PACIENTES;
-SELECT * FROM ROL_USUARIOS;
+SELECT * FROM Pacientes;
+SELECT * FROM Rol_Usuarios;
 
 /*Tipo de atenciones*/
 

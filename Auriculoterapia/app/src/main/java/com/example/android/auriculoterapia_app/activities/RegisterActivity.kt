@@ -106,35 +106,41 @@ class RegisterActivity : AppCompatActivity() {
 
         val intentLogIn = Intent(this, LogInActivity::class.java)
 
-        val usuario = Usuario(null,nombre.toString(),apellido.toString(),email.toString(),
-            contrasena.toString(),nombreUsuario.toString(),sexo.toString(),palabraClave.toString(),
-            null)
+        if(nombre.isEmpty()|| apellido.isEmpty() || fechaNacimiento.isEmpty()||sexo.isEmpty()|| nombreUsuario.isEmpty() || contrasena.isEmpty()||palabraClave.isEmpty()||email.isEmpty()){
+            Toast.makeText(applicationContext,"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
+        }else{
+            val usuario = Usuario(null,nombre.toString(),apellido.toString(),email.toString(),
+                contrasena.toString(),nombreUsuario.toString(),sexo.toString(),palabraClave.toString(),
+                null)
 
-        val paciente = Paciente(null,fechaNacimiento.toString(),"",usuario)
+            val paciente = Paciente(null,fechaNacimiento.toString(),"",usuario)
 
-        pacienteService.registerPatient(paciente).enqueue(object : Callback<Paciente>{
-            override fun onFailure(call: Call<Paciente>, t: Throwable) {
-                Log.i("REGISTRAR PACIENTE","NO ENTRO")
-            }
-
-            override fun onResponse(call: Call<Paciente>, response: Response<Paciente>) {
-                if(response.isSuccessful){
-                    Log.i("REGISTRAR PACIENTE: ", response.body().toString())
-                    Toast.makeText(applicationContext,"Se registró el usuario correctamente, por favor inicie sesión",Toast.LENGTH_SHORT).show()
-                    startActivity(intentLogIn)
+            pacienteService.registerPatient(paciente).enqueue(object : Callback<Paciente>{
+                override fun onFailure(call: Call<Paciente>, t: Throwable) {
+                    Log.i("REGISTRAR PACIENTE","NO ENTRO")
                 }
-                else{
-                    when(response.code()){
-                        400 ->{
-                            val res = response.errorBody()?.string()
-                            val message = JsonParser().parse(res).asJsonObject["message"].asString
 
-                            Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+                override fun onResponse(call: Call<Paciente>, response: Response<Paciente>) {
+                    if(response.isSuccessful){
+                        Log.i("REGISTRAR PACIENTE: ", response.body().toString())
+                        Toast.makeText(applicationContext,"Se registró el usuario correctamente, por favor inicie sesión",Toast.LENGTH_SHORT).show()
+                        startActivity(intentLogIn)
+                    }
+                    else{
+                        when(response.code()){
+                            400 ->{
+                                val res = response.errorBody()?.string()
+                                val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                                Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }
-            }
 
-        })
+            })
+        }
+
+
     }
 }
