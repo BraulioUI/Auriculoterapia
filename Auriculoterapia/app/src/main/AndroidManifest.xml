@@ -7,15 +7,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_ear_2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_ear_2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ChangeKeyWordActivity"></activity>
+        <activity android:name=".activities.ChangeKeyWordActivity" ></activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".AnswerTreatmentRequestActivity" />
+        <activity android:name=".activities.AnswerTreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentRequestActivity" />
         <activity android:name=".activities.TreatmentPacientActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />

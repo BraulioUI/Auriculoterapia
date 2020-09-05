@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnswerTreatmentRequestActivity">
+    tools:context=".activities.AnswerTreatmentRequestActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -91,6 +91,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +110,26 @@
                     android:layout_height="match_parent" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/tiempo_de_cada_terapia"
+                    android:textSize="@dimen/text_size" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,6 +167,7 @@
                     android:text="@string/save_text" />
 
                 <Button
+                    android:id="@+id/boton_cancelar_respuesta"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"

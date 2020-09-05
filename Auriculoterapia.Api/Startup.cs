@@ -36,10 +36,12 @@ namespace Auriculoterapia.Api
         public void ConfigureServices(IServiceCollection services)
         {   
 
-
-
             services.AddDbContext<ApplicationDbContext>(x => {
-                x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+
+                x.UseMySql(Configuration.GetConnectionString("DefaultConnection2"), 
+                    providerOptions => providerOptions.EnableRetryOnFailure());
+                
+
             });
 
             
@@ -73,16 +75,20 @@ namespace Auriculoterapia.Api
 
             services.AddTransient<ICitaRepository, CitaRepository>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
+            services.AddTransient<IEspecialistaRepository, EspecialistaRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IRol_UsuarioRepository, Rol_UsuarioRepository>();
             services.AddTransient<ITipoAtencionRepository, TipoAtencionRepository>();
             services.AddTransient<ISolicitudTratamientoRepository, SolicitudTratamientoRepository>();
+            services.AddTransient<IDisponibilidadRepository, DisponibilidadRepository>();
+            services.AddTransient<IHorarioDescartadoRepository, HorarioDescartadoRepository>();
 
             services.AddTransient<ICitaService,CitaService>(); 
             services.AddTransient<IUsuarioService,UsuarioService>(); 
             services.AddTransient<IPacienteService, PacienteService>();
             services.AddTransient<ITipoAtencionService, TipoAtencionService>();
             services.AddTransient<ISolicitudTratamientoService, SolicitudTratamientoService>();
+            services.AddTransient<IDisponibilidadService, DisponibilidadService>();
 
 
             services.AddControllers()

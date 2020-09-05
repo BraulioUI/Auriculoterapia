@@ -58,6 +58,7 @@ class SettingsActivity : AppCompatActivity() {
             editor.remove("id")
             editor.apply()
             startActivity(intentLogin)
+            finish()
         }
 
         userService.getUserById(userId).enqueue(object : Callback<ResponseUserById>{

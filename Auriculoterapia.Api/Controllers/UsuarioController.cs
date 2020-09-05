@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Auriculoterapia.Api.Helpers;
 
 namespace Auriculoterapia.Api.Controllers
 {
@@ -93,10 +94,10 @@ namespace Auriculoterapia.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("actualizarpalabraclave/{id}")]
-        public IActionResult ActualizarKeyword(int id,string PalabraClave, string NuevaPalabraClave)
+        [HttpPost("actualizarpalabraclave")]
+        public IActionResult ActualizarKeyword([FromBody] ResponseActualizarKeyWord response)
         {
-            var user = usuarioService.Actualizar_KeyWord(id,PalabraClave,NuevaPalabraClave);
+            var user = usuarioService.Actualizar_KeyWord(response.Id,response.PalabraClave,response.NuevaPalabraClave);
 
             if(user == null){
                 return BadRequest(new {message = "Palabra clave actual incorrecta"});

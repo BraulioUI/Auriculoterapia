@@ -81,6 +81,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     Log.i("ACTUALIZAR CONTRASENA: ", response.body().toString())
                     Toast.makeText(applicationContext,"Contraseña actualizada con éxito",Toast.LENGTH_SHORT).show()
                     startActivity(intentLogin)
+                    finish()
 
                 }
                 else{

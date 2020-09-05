@@ -50,6 +50,31 @@ namespace Auriculoterapia.Api.Migrations
                     b.ToTable("Citas");
                 });
 
+            modelBuilder.Entity("Auriculoterapia.Api.Domain.Disponibilidad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Dia")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("EspecialistaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("HoraFin")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("HoraInicio")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EspecialistaId");
+
+                    b.ToTable("Disponibilidades");
+                });
+
             modelBuilder.Entity("Auriculoterapia.Api.Domain.Especialista", b =>
                 {
                     b.Property<int>("Id")
@@ -68,6 +93,28 @@ namespace Auriculoterapia.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Especialistas");
+                });
+
+            modelBuilder.Entity("Auriculoterapia.Api.Domain.HorarioDescartado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisponibilidadId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("HoraFin")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("HoraInicio")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DisponibilidadId");
+
+                    b.ToTable("HorariosDescartados");
                 });
 
             modelBuilder.Entity("Auriculoterapia.Api.Domain.Paciente", b =>
@@ -263,11 +310,29 @@ namespace Auriculoterapia.Api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Auriculoterapia.Api.Domain.Disponibilidad", b =>
+                {
+                    b.HasOne("Auriculoterapia.Api.Domain.Especialista", "Especialista")
+                        .WithMany()
+                        .HasForeignKey("EspecialistaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Auriculoterapia.Api.Domain.Especialista", b =>
                 {
                     b.HasOne("Auriculoterapia.Api.Domain.Usuario", "Usuario")
                         .WithOne("Especialista")
                         .HasForeignKey("Auriculoterapia.Api.Domain.Especialista", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Auriculoterapia.Api.Domain.HorarioDescartado", b =>
+                {
+                    b.HasOne("Auriculoterapia.Api.Domain.Disponibilidad", "Disponibilidad")
+                        .WithMany("HorariosDescartados")
+                        .HasForeignKey("DisponibilidadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -12,11 +12,18 @@ namespace Auriculoterapia.Api.Service.Implementation
         private readonly IPacienteRepository PacienteRepository;
         private readonly ITipoAtencionRepository tipoAtencionRepository;
 
+        private readonly IDisponibilidadRepository disponibilidadRepository;
+        private IHorarioDescartadoRepository horarioDescartadoRepository;
+    
 
-        public CitaService(ICitaRepository CitaRepository, IPacienteRepository PacienteRepository, ITipoAtencionRepository tipoAtencionRepository){
+        public CitaService(ICitaRepository CitaRepository, IPacienteRepository PacienteRepository, ITipoAtencionRepository tipoAtencionRepository,
+        IDisponibilidadRepository disponibilidadRepository, IHorarioDescartadoRepository horarioDescartadoRepository){
             this.CitaRepository = CitaRepository;
             this.PacienteRepository = PacienteRepository;
             this.tipoAtencionRepository = tipoAtencionRepository;
+            this.disponibilidadRepository = disponibilidadRepository;
+            this.horarioDescartadoRepository = horarioDescartadoRepository;
+      
         }
 
         public void Save(Cita entity){
@@ -26,6 +33,7 @@ namespace Auriculoterapia.Api.Service.Implementation
         public void RegistrarCita(FormularioCita entity, int PacienteId){
             var cita = new Cita();
             var conversor = new ConversorDeFechaYHora(); 
+             var disponibilidad = new Disponibilidad();
             try {
                 var tipoAtencion = tipoAtencionRepository.FindByDescription(entity.TipoAtencion);
                 var paciente = PacienteRepository.FindById(PacienteId);
@@ -38,6 +46,17 @@ namespace Auriculoterapia.Api.Service.Implementation
                 cita.TipoAtencionId = tipoAtencion.Id;
                 cita.TipoAtencion = tipoAtencion;
                 Save(cita);
+
+                disponibilidad = disponibilidadRepository.listarPorFecha(entity.Fecha);
+                
+
+                var horarioDescartado = new HorarioDescartado();
+                    horarioDescartado.HoraInicio = cita.HoraInicioAtencion;
+                    horarioDescartado.HoraFin = cita.HoraFinAtencion;
+                    horarioDescartado.DisponibilidadId = disponibilidad.Id;
+                    horarioDescartado.Disponibilidad = disponibilidad;
+                
+                this.horarioDescartadoRepository.Save(horarioDescartado);
 
             }catch(System.Exception){
 
@@ -48,10 +67,11 @@ namespace Auriculoterapia.Api.Service.Implementation
         public void RegistrarCitaPaciente(FormularioCitaPaciente entity, int PacienteId){
             var cita = new Cita();
             var conversor = new ConversorDeFechaYHora(); 
+            var disponibilidad = new Disponibilidad();
             try {
 
                 var tipoAtencion = tipoAtencionRepository.FindByDescription(entity.TipoAtencion);
-                var paciente = PacienteRepository.FindById(PacienteId);
+                var paciente = PacienteRepository.buscarPorUsuarioId(PacienteId);
                 PacienteRepository.ActualizarNumeroPaciente(entity.Celular, paciente);
                 cita.Fecha = conversor.TransformarAFecha(entity.Fecha);
                 cita.HoraInicioAtencion = conversor.TransformarAHora(entity.HoraInicioAtencion, entity.Fecha);
@@ -62,6 +82,17 @@ namespace Auriculoterapia.Api.Service.Implementation
                 cita.TipoAtencionId = tipoAtencion.Id;
                 cita.TipoAtencion = tipoAtencion;
                 Save(cita);
+                disponibilidad = disponibilidadRepository.listarPorFecha(entity.Fecha);
+                
+
+                var horarioDescartado = new HorarioDescartado();
+                    horarioDescartado.HoraInicio = cita.HoraInicioAtencion;
+                    horarioDescartado.HoraFin = cita.HoraFinAtencion;
+                    horarioDescartado.DisponibilidadId = disponibilidad.Id;
+                    horarioDescartado.Disponibilidad = disponibilidad;
+                
+                this.horarioDescartadoRepository.Save(horarioDescartado);
+                
 
             }catch(System.Exception){
 
@@ -76,6 +107,8 @@ namespace Auriculoterapia.Api.Service.Implementation
         public IEnumerable<Cita> listarCitasPorUsuarioId(int usuarioId){
             return CitaRepository.listarCitasPorUsuarioId(usuarioId);
         }
-
+        public bool actualizarEstadoCita(int citaId, string estado){
+            return CitaRepository.actualizarEstadoCita(citaId, estado);
+        }
     }
 }

@@ -1,6 +1,7 @@
-package com.example.android.auriculoterapia_app.models
+package com.example.android.auriculoterapia_app.models.helpers
 
-data class FormularioCita(
+data class FormularioCitaPaciente(
+    var celular: String,
     var fecha: String,
     var horaInicioAtencion: String,
     var horaFinAtencion: String,

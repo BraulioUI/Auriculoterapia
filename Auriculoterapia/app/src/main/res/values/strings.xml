@@ -61,5 +61,7 @@
     <string name="str_nueva_contrase_a">Nueva Contraseña:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="disponibilidad_seleccionar_dia">Seleccione\nel día:</string>
+    <string name="tiempo_de_cada_terapia">Tiempo de\ncada terapia</string>
 
 </resources>
