@@ -15,10 +15,12 @@ namespace Auriculoterapia.Api.Helpers
         public string PalabraClave {get; set;}
 
         public DateTime? FechaNacimiento {get; set;}
+
+        public int Edad { get; set; }
         //public Paciente Paciente {get; set;}
         //public Especialista Especialista {get; set;}
 
-        public ResponseUsuarioById(int Id,string Nombre,string Apellido,string Email,string Contrasena,string nombreUsuario,string Sexo,string PalabraClave,DateTime? fechaNacimiento){
+        public ResponseUsuarioById(int Id,string Nombre,string Apellido,string Email,string Contrasena,string nombreUsuario,string Sexo,string PalabraClave,DateTime? fechaNacimiento,int edad){
             this.Id = Id;
             this.Nombre = Nombre;
             this.Apellido = Apellido;
@@ -28,6 +30,7 @@ namespace Auriculoterapia.Api.Helpers
             this.Contrasena = Contrasena;
             this.Sexo = Sexo;
             this.FechaNacimiento = fechaNacimiento;
+            this.Edad = edad;
             //this.Paciente =paciente;
             //this.Especialista = especialista;
         }

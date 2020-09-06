@@ -1,5 +1,6 @@
 package com.example.android.auriculoterapia_app.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -46,5 +47,9 @@ class TreatmentPacientActivity : AppCompatActivity() {
                 fragmentTransaction -> fragmentTransaction.replace(R.id.fragmentTreatmentContainer, fragment)
             fragmentTransaction.commit()
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
