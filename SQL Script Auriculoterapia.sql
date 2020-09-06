@@ -70,7 +70,8 @@ ALTER TABLE solicitudtratamientos AUTO_INCREMENT = 1;
 INSERT INTO solicitudtratamientos(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,PacienteId,Estado,fechaInicio) 
 VALUES(26, 67, 1.71, 'Malestar lumbar', 'sdgdsgdsagsdag', 'Me duele la cabeza y tengo mucha ansiedad', 1,"En proceso", "2020-08-31");
 select * from solicitudtratamientos;
-
+DELETE FROM solicitudtratamientos WHERE id = 2;
+ALTER TABLE solicitudtratamientos AUTO_INCREMENT = 1;
 
 SELECT * FROM DISPONIBILIDADES;
 SELECT * FROM HORARIOSDESCARTADOS;
