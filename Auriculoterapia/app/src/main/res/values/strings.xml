@@ -53,7 +53,7 @@
     <string name="seleccionar_tratamiento">Seleccionar\ntratamiento</string>
     <string name="fecha_de_tratamiento_text">Fecha de\ntratamiento</string>
     <string name="frecuencia_diaria">Frecuencia\ndiaria</string>
-    <string name="save_text">Guardar</string>
+    <string name="send_text">Enviar</string>
     <string name="cancel_text">Cancelar</string>
 
     <string name="str_cambiar_contrase_a">Actualizar Contraseña</string>
@@ -63,5 +63,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="disponibilidad_seleccionar_dia">Seleccione\nel día:</string>
     <string name="tiempo_de_cada_terapia">Tiempo de\ncada terapia</string>
+    <string name="foto_de_la_oreja_texto">Foto de la oreja:</string>
+    <string name="history_option_text">Indicaciones</string>
+    <string name="results_option_text">Resultados</string>
+    <string name="indication_tratamiento_text">Tratamiento:</string>
+    <string name="indicacion_frecuencia_text">Frecuencia diaria:</string>
+    <string name="indicacion_tiempo_terapia_text">Tiempo de cada terapia:</string>
 
 </resources>

@@ -9,10 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
-import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.models.SolicitudTratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +33,7 @@ class TreatmentRequestActivity : AppCompatActivity() {
         val botonResponder = findViewById<Button>(R.id.solicitudResponderBoton)
         val estadoSolicitud = findViewById<TextView>(R.id.estadoSolicitudTratamiento)
         val fechaInicioSolicitada = findViewById<TextView>(R.id.fechaEnvioSolicitudTratamiento)
+        val botonHistorial = findViewById<Button>(R.id.solicitudHistorialBoton)
 
         val actionBar = supportActionBar
         actionBar!!.title = "Solicitud"
@@ -43,12 +42,16 @@ class TreatmentRequestActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras!!
         val pacienteId = bundle!!.getInt("pacienteId")
+        val nombrePaciente = bundle.getString("nombrePaciente")
+        val apellidoPaciente = bundle.getString("apellidoPaciente")
 
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
         val token = sharedPreferences.getString("token", "")
 
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+
 
         treatmentRequestService.findByPacienteId(pacienteId, "Bearer $token")
             .enqueue(object: Callback<SolicitudTratamiento>{
@@ -81,7 +84,13 @@ class TreatmentRequestActivity : AppCompatActivity() {
                 }
             })
 
-
+            botonHistorial.setOnClickListener{
+                val intent = Intent(this, HistoryActivity::class.java)
+                intent.putExtra("pacienteId", pacienteId)
+                intent.putExtra("nombrePaciente", nombrePaciente)
+                intent.putExtra("apellidoPaciente", apellidoPaciente)
+                startActivity(intent)
+            }
 
     }
 }

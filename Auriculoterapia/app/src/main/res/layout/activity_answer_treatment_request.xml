@@ -34,7 +34,7 @@
                     android:src="@drawable/appointments_image" />
 
                 <TextView
-                    android:id="@+id/fechaRespuestaTratamiento"
+                    android:id="@+id/fechaEnvioRespuestaTratamiento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -57,6 +57,7 @@
                     android:textSize="@dimen/text_size" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_tipo_tratamiento"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
@@ -75,20 +76,37 @@
                     android:text="@string/fecha_de_tratamiento_text"
                     android:textSize="@dimen/text_size" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:text="2020-08-27\n2020-08-31"
-                    android:textSize="@dimen/text_size" />
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/startDateTreatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
 
-                <Button
-                    android:layout_width="50dp"
+                        android:textSize="@dimen/text_size" />
+                    <TextView
+                        android:id="@+id/endDateTreatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+
+                        android:textSize="@dimen/text_size" />
+
+                </LinearLayout>
+
+
+
+                <ImageButton
+                    android:id="@+id/btn_rango_fecha_tratamiento"
+                    android:layout_width="45dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="center"
-
-                    android:background="@drawable/date_image" />
-
+                    android:tint="#F6F4F4"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/date_image" />
             </LinearLayout>
 
 
@@ -101,13 +119,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="30dp"
                     android:text="@string/frecuencia_diaria"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/text_size"
+                    android:layout_gravity="center"
+                    />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/frecuencia_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="5 "
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="veces"
+                    android:textSize="@dimen/text_size" />
 
             </LinearLayout>
 
@@ -122,12 +152,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:text="@string/tiempo_de_cada_terapia"
+                    android:textSize="@dimen/text_size"
+                    android:layout_gravity="center"/>
+
+                <EditText
+                    android:id="@+id/tiempo_terapia_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="15"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="number" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:text="minutos"
                     android:textSize="@dimen/text_size" />
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
             </LinearLayout>
 
 
@@ -142,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="12dp"
-                    android:text="Foto de la oreja:"
+                    android:text="@string/foto_de_la_oreja_texto"
                     android:textSize="18sp" />
 
                 <Button
@@ -160,15 +200,16 @@
                 android:padding="16dp">
 
                 <Button
-                    android:layout_width="0dp"
+                    android:id="@+id/send_answer_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
                     android:layout_weight="1"
-                    android:text="@string/save_text" />
+                    android:text="@string/send_text" />
 
                 <Button
                     android:id="@+id/boton_cancelar_respuesta"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
                     android:layout_weight="1"

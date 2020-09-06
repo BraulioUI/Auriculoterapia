@@ -11,6 +11,6 @@ data class Paciente(var id: Int?,
                     var usuario: Usuario): Serializable{
 
     override fun toString(): String {
-        return "Patient(id='$id', fecha='$fechaNacimiento', celular='$celular')"
+        return "Patient(id='$id', fecha='$fechaNacimiento', celular='$celular', usuario='$usuario')"
     }
 }

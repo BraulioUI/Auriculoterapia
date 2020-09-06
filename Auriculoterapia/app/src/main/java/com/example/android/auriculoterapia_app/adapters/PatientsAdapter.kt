@@ -32,8 +32,11 @@ class PatientsAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.V
 
             botonVerMas.setOnClickListener{
                 //itemView.context.startActivity(Intent(itemView.context, ViajeDetail::class.java).putExtra("via", viaje.id))
-                itemView.context.startActivity(Intent(itemView.context, TreatmentRequestActivity::class.java)
-                    .putExtra("pacienteId", paciente.id))
+                val intent = Intent(itemView.context, TreatmentRequestActivity::class.java)
+                intent.putExtra("pacienteId", paciente.id)
+                intent.putExtra("nombrePaciente", paciente.usuario.nombre)
+                intent.putExtra("apellidoPaciente", paciente.usuario.apellido)
+                itemView.context.startActivity(intent)
             }
         }
     }
