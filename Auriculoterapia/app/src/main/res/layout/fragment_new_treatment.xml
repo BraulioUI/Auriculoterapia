@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="113dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:gravity="start|top"
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="70.0"
@@ -42,17 +42,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="64dp"
         android:text="Otros:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_examinarFoto" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_otros"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/et_altura"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="1.70"
@@ -66,7 +65,7 @@
         android:id="@+id/btn_registrarTratamiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="32dp"
         android:text="Registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -78,62 +77,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="84dp"
         android:text="Edad:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_resultEdad"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_sintomas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="68dp"
         android:text="Síntomas:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_altura" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_Sintomas"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_peso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="60dp"
         android:text="Peso (kg):"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edad" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_peso"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_altura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="60dp"
         android:text="Altura (m):"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_peso" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_altura"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_examinarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="64dp"
         android:text="Examinar:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sintomas" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_InsertarImagen"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_InsertarImagen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
         android:layout_marginTop="46dp"
         android:layout_marginEnd="70dp"
         android:text="Subir Foto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_examinarFoto"
         app:layout_constraintTop_toBottomOf="@+id/et_Sintomas" />
 
     <EditText
@@ -141,11 +132,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="dolor..."
+        android:hint="Dolor..."
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -157,7 +148,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="24dp"
         android:text="result"
         app:layout_constraintStart_toEndOf="@+id/tv_edad"
         app:layout_constraintTop_toTopOf="parent" />
@@ -166,12 +157,10 @@
         android:id="@+id/tv_urlImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="44dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/btn_InsertarImagen"
+        app:layout_constraintBottom_toTopOf="@+id/btn_InsertarImagen"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_examinarFoto"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sintomas" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Sintomas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
