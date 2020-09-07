@@ -233,12 +233,12 @@ class AppointmentRegisterFragment : Fragment() {
 
         CitaService.registerAppointment(cita, idPaciente).enqueue(object: Callback<FormularioCita>{
             override fun onFailure(call: Call<FormularioCita>, t: Throwable) {
-
+                Toast.makeText(mContext, "Fallo en reserva", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<FormularioCita>, response: Response<FormularioCita>) {
                 Log.i("POST", response.code().toString())
-                Toast.makeText(requireContext(), "Reserva exitosa", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "Se reservó correctamente la cita", Toast.LENGTH_SHORT).show()
                 time.text = "__:__"
             }
         })
