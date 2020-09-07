@@ -50,5 +50,5 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation group: 'com.cloudinary', name: 'cloudinary-android', version: '1.28.2'
-
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

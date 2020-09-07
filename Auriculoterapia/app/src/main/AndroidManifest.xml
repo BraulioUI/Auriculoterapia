@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/logo_ear_2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <activity android:name=".activities.EditPhotoFromRequestActivity"></activity>
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.InitialImageActivity" />

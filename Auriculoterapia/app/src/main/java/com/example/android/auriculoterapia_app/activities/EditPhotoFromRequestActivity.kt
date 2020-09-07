@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.with
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
+import com.example.android.auriculoterapia_app.util.MyGlideApp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +40,7 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     val imagen = response.body()!!
                     Log.i("URL", imagen)
-                   /* Glide.with(imagenEditable.context)
+                   /* MyGlideApp.with(imagenEditable.context)
                         .load(imagen)
                         .into(imagenEditable)*/
 

@@ -4,8 +4,8 @@ class ListaTiposDeTratamiento {
     companion object{
         val lista: ArrayList<String> = arrayListOf(
             "Dolor lumbar",
-            "Sobrepeso",
-            "Apnea del sueño"
+            "Obesidad",
+            "Ansiedad"
         )
 
     }
