@@ -15,4 +15,7 @@ interface TreatmentRequestService{
                           @Path("userId") userId:Int,
                           @Body treatmentRequest: SolicitudTratamiento): Call<SolicitudTratamiento>
 
+    @GET("api/solicitudtratamiento/imagen")
+    fun findImageByRequest(@Header("Authorization") token: String,
+                            @Query("solicitudId") solicitudId: Int): Call<String>
 }

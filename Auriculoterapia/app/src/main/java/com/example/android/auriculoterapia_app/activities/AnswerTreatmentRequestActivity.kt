@@ -33,7 +33,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         val startDateText = findViewById<TextView>(R.id.startDateTreatment)
         val endDateText = findViewById<TextView>(R.id.endDateTreatment)
         val fechaEnvioText = findViewById<TextView>(R.id.fechaEnvioRespuestaTratamiento)
-
+        val editarFoto = findViewById<Button>(R.id.botonEditar)
 
 
 
@@ -117,6 +117,11 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
             registrarRepuestaTratamiento(body)
         }
 
+        editarFoto.setOnClickListener{
+            val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
+            intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
+            startActivity(intent)
+        }
 
     }
 

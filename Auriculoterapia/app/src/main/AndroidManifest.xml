@@ -7,7 +7,6 @@
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo_ear_2"
@@ -16,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.HistoryActivity"/>
+        <activity android:name=".activities.EditPhotoFromRequestActivity"></activity>
+        <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.InitialImageActivity" />
-
         <activity android:name=".activities.ChangeKeyWordActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.AnswerTreatmentRequestActivity" />
