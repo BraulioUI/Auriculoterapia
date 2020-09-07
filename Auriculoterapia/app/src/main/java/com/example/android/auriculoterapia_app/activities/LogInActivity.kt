@@ -114,7 +114,7 @@ class LogInActivity : AppCompatActivity() {
                         startActivity(intentMain)
                     }
 
-                    saveData(res?.id!!,res?.nombreUsuario!!,res?.token!!,res?.rol!!)
+                    saveData(res?.id!!,res?.nombreUsuario!!,res?.token!!,res?.rol!!,res?.nombre!!,res?.apellido!!)
                     finish()
 
                 }
@@ -131,12 +131,14 @@ class LogInActivity : AppCompatActivity() {
     }
 
 
-    private fun saveData(id:Int,usuario:String,token:String,rol:String){
+    private fun saveData(id:Int,usuario:String,token:String,rol:String,nombre:String,apellido:String){
         val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
         editor.putInt("id",id)
         editor.putString("usuario",usuario)
         editor.putString("token",token)
         editor.putString("rol",rol)
+        editor.putString("nombre",nombre)
+        editor.putString("apellido",apellido)
 
         editor.apply()
     }

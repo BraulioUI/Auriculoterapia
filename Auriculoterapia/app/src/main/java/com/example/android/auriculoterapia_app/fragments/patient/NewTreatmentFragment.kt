@@ -157,6 +157,7 @@ class NewTreatmentFragment  : Fragment(){
         val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage).text
         val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad).text
 
+
         if(peso.isEmpty() || altura.isEmpty() || sintomas.isEmpty() || otros.isEmpty() || edad.isEmpty() || imagenAreaAfectada!!.isEmpty()){
             Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
         }else{
@@ -204,6 +205,7 @@ class NewTreatmentFragment  : Fragment(){
      private fun uploadToCloudinary(filename : String){
         Log.i("UPLOAD: ","UPLOAD TO CLOUDINARY")
          val tv_imageURL = requireView().findViewById<TextView>(R.id.tv_urlImage)
+         tv_imageURL.visibility = View.GONE
          //urlImage=""
         MediaManager.get().upload(filename).callback(object: UploadCallback {
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {

@@ -10,7 +10,7 @@
         android:id="@+id/tv_Registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="4dp"
         android:text="@string/registroTitulo"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -21,14 +21,16 @@
 
     <EditText
         android:id="@+id/et_nombreRegistro"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/nombre_de_usuario"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNombre"
         app:layout_constraintTop_toBottomOf="@+id/tv_Registro" />
 
     <TextView
@@ -63,9 +65,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
+        android:layout_marginTop="29dp"
         android:text="@string/str_GenderLabel"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_resultadoGenero"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimiento" />
 
     <TextView
         android:id="@+id/tvUsuario"
@@ -96,70 +99,82 @@
 
     <EditText
         android:id="@+id/et_apellido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/str_apellidohint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvApellido"
         app:layout_constraintTop_toBottomOf="@+id/et_nombreRegistro" />
 
     <EditText
         android:id="@+id/et_usuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/nombre_de_usuario"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUsuario"
         app:layout_constraintTop_toBottomOf="@+id/spinner3" />
 
     <EditText
         android:id="@+id/et_keyword"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/str_keywordhint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvKeyWordRegistro"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvPasswordRegistro"
         app:layout_constraintTop_toBottomOf="@+id/et_usuario" />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="213dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvSeleccionarSexo"
         app:layout_constraintTop_toBottomOf="@+id/et_Fecha" />
 
     <EditText
         android:id="@+id/et_Fecha"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="seleccionar fecha"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvFechaNacimiento"
         app:layout_constraintTop_toBottomOf="@+id/et_apellido" />
 
@@ -167,10 +182,10 @@
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="101dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="148dp"
         android:text="@string/registrar_button_main"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -180,7 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="29dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/spinner3"
@@ -198,13 +213,15 @@
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="correo"
         android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_email"
         app:layout_constraintTop_toBottomOf="@+id/et_keyword" />
 
