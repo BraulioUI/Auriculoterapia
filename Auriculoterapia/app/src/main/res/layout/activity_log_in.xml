@@ -28,13 +28,15 @@
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="35dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/logo"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tv_userlog"
+        app:layout_constraintBottom_toTopOf="@+id/et_nombreUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,9 +45,11 @@
 
     <Button
         android:id="@+id/bt_login"
-        android:layout_width="134dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="94dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="125dp"
         android:background="@android:drawable/editbox_background_normal"
         android:backgroundTint="#6D82E6"
         android:text="@string/login"
@@ -82,25 +86,27 @@
 
     <EditText
         android:id="@+id/et_contrasena2"
-        android:layout_width="196dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="55dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintStart_toEndOf="@+id/tv_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombreUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_password" />
 
     <EditText
         android:id="@+id/et_nombreUsuario"
-        android:layout_width="196dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="55dp"
         android:ems="10"
         android:hint="@string/nombre_de_usuario"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/tv_userlog"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_userlog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_userlog" />
 </androidx.constraintlayout.widget.ConstraintLayout>

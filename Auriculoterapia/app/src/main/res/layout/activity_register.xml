@@ -10,24 +10,27 @@
         android:id="@+id/tv_Registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="4dp"
         android:text="@string/registroTitulo"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_nombreRegistro"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/nombre_de_usuario"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNombre"
         app:layout_constraintTop_toBottomOf="@+id/tv_Registro" />
 
     <TextView
@@ -35,37 +38,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="56dp"
         android:text="@string/str_nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Registro" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_nombreRegistro"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
         android:text="@string/str_apellidoLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_apellido"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvFechaNacimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
         android:text="@string/str_fecha_de_nacimiento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvApellido" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_Fecha"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvSeleccionarSexo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="29dp"
         android:text="@string/str_GenderLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFechaNacimiento" />
@@ -75,108 +75,117 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
         android:text="@string/str_usuarioLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSeleccionarSexo" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_usuario"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPasswordRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
         android:text="@string/str_passwordLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_password"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvKeyWordRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
         android:text="@string/str_keywordLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPasswordRegistro" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_keyword"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/et_apellido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/str_apellidohint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvApellido"
         app:layout_constraintTop_toBottomOf="@+id/et_nombreRegistro" />
 
     <EditText
         android:id="@+id/et_usuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/nombre_de_usuario"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUsuario"
         app:layout_constraintTop_toBottomOf="@+id/spinner3" />
 
     <EditText
         android:id="@+id/et_keyword"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/str_keywordhint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvKeyWordRegistro"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvPasswordRegistro"
         app:layout_constraintTop_toBottomOf="@+id/et_usuario" />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="213dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvSeleccionarSexo"
         app:layout_constraintTop_toBottomOf="@+id/et_Fecha" />
 
     <EditText
         android:id="@+id/et_Fecha"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="seleccionar fecha"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvFechaNacimiento"
         app:layout_constraintTop_toBottomOf="@+id/et_apellido" />
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="120dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="148dp"
         android:text="@string/registrar_button_main"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -186,7 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="29dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/spinner3"
@@ -198,20 +207,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:text="Correo:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvKeyWordRegistro" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_email"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="correo"
         android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_email"
         app:layout_constraintTop_toBottomOf="@+id/et_keyword" />
 
