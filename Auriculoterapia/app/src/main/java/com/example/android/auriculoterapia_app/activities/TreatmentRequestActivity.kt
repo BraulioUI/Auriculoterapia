@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.SolicitudTratamiento
@@ -34,7 +36,7 @@ class TreatmentRequestActivity : AppCompatActivity() {
         val estadoSolicitud = findViewById<TextView>(R.id.estadoSolicitudTratamiento)
         val fechaInicioSolicitada = findViewById<TextView>(R.id.fechaEnvioSolicitudTratamiento)
         val botonHistorial = findViewById<Button>(R.id.solicitudHistorialBoton)
-
+        val imagenSolicitud = findViewById<ImageView>(R.id.solicitudFoto)
         val actionBar = supportActionBar
         actionBar!!.title = "Solicitud"
 
@@ -72,6 +74,9 @@ class TreatmentRequestActivity : AppCompatActivity() {
                         estadoSolicitud.text = solicitud.estado
                         fechaInicioSolicitada.text = formatter.format(parser.parse(solicitud.fechaInicio))
 
+                        Glide.with(this@TreatmentRequestActivity)
+                            .load(solicitud.imagenAreaAfectada)
+                            .into(imagenSolicitud)
 
                         botonResponder.setOnClickListener{
                             val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)

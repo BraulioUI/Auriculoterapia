@@ -56,6 +56,7 @@ class TreatmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
             val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
             codigo.text = tratamiento.id.toString()
             fechaEnvioTratamiento.text = formatter.format(parser.parse(tratamiento.fechaEnvio))
             estadoTratamiento.text = tratamiento.estado
@@ -63,9 +64,10 @@ class TreatmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             fechaFin.text = formatter.format(parser.parse(tratamiento.fechaFin))
             frecuencia.text = "${tratamiento.frecuenciaAlDia} veces"
             tiempoTerapia.text = "${tratamiento.tiempoPorTerapia} minutos"
+            tipoTratamiento.text = tratamiento.tipoTratamiento
 
             Glide.with(itemView.context)
-                .load("https://static2.laverdad.es/www/multimedia/201712/04/media/cortadas/oreja-kuQE-U50293632228i2D-624x385@La%20Verdad.jpg")
+                .load("http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg")
                 .into(imagen)
         }
     }

@@ -141,4 +141,8 @@ class LogInActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }
