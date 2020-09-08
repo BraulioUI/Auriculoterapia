@@ -3,7 +3,6 @@ package com.example.android.auriculoterapia_app.fragments.patient
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import com.example.android.auriculoterapia_app.models.helpers.AvailabilityTimeRa
 import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import com.example.android.auriculoterapia_app.services.AvailabilityService
-import kotlinx.android.synthetic.main.fragment_appointment_register.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,6 +51,14 @@ class AppointmentPatientRagisterFragment : Fragment() {
         val buttonFecha = view.findViewById<ImageButton>(R.id.dateButtonDialogPatient)
         var horaFinAtencion = ""
         val buttonReservar = view.findViewById<Button>(R.id.registerAppointmentButtonPatient)
+
+        //Errores
+        val errorFecha = view.findViewById<TextView>(R.id.errorVacioFechaPaciente)
+        val errorHora = view.findViewById<TextView>(R.id.errorVacioHoraPaciente)
+        val errorAtencion = view.findViewById<TextView>(R.id.errorVacioTipoAtencion)
+
+
+
         val listView = ListView(requireContext())
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -80,6 +86,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                     dayText = "0$dayText"
                 }
                 fechaTextView.text = "$yearText-${monthText}-$dayText"
+                errorFecha.visibility = View.GONE
                 horaTextView.text = "__:__"
             }, year, month, day
             )
@@ -94,6 +101,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
         horaTextView.text = "__:__"
         buttonHora.setOnClickListener{
             if(temp == 1) {
+                errorHora.visibility = View.GONE
                 obtenerHorariosDisponibles(fechaTextView.text.toString(), listView, horaTextView)
             }
         }
@@ -115,6 +123,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?,
                                         position: Int, id: Long) {
+                errorAtencion.visibility = View.GONE
                 textoAtencion = atenciones.get(position)
             }
         }
@@ -144,24 +153,24 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
                 Log.i("Cita a registrar", cita.toString())
                 registrarCita(cita, usuarioId, horaTextView)
+                horaTextView.text = "__:__"
             } else{
                 Toast.makeText(mContext, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
             if(celularEditText.text.isEmpty()){
                 celularEditText.setError("Debes ingresar tu número")
+                horaTextView.requestFocus()
             }
             if (fechaTextView.text == "____-__-__"){
-                fechaTextView.setError("Debes escoger una fecha")
+                errorFecha.visibility = View.VISIBLE
             }
             if(horaTextView.text == "__:__"){
-                horaTextView.setError("Debes escoger una hora")
+                errorHora.visibility = View.VISIBLE
             }
 
             if(textoAtencion == atenciones.get(0)){
-                val errorText = spinnerAtencion.selectedView as TextView
-                errorText.error = ""
-                errorText.setTextColor(Color.RED)
-                errorText.text = "Debes seleccionar el tipo de atención"
+
+                errorAtencion.visibility = View.VISIBLE
             }
 
 
@@ -185,7 +194,10 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
             override fun onResponse(call: Call<FormularioCitaPaciente>, response: Response<FormularioCitaPaciente>) {
                 Log.i("POST", response.code().toString())
-                Toast.makeText(mContext, "Se reservó correctamente la cita", Toast.LENGTH_SHORT).show()
+                if(response.isSuccessful){
+                    Toast.makeText(mContext, "Se reservó correctamente la cita", Toast.LENGTH_SHORT).show()
+                }
+
                 time.text = "__:__"
             }
         })
@@ -216,19 +228,22 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
                         Log.i("Horarios Disponibles",response.body().toString())
                         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response.body()!!.hours)
+                        if (listView.getParent() != null) {
+                            (listView.getParent() as ViewGroup).removeView(listView)
+                        }
                         listView.adapter = adapter
 
                         var alertBuilder = AlertDialog.Builder(requireContext())
                         alertBuilder.setCancelable(true)
                         alertBuilder.setView(listView)
                         var dialog = alertBuilder.create()
-                        dialog.setCancelable(false)
                         listView.setOnItemClickListener{
                                 parent, view, position, id ->
                             textView.text = adapter.getItem(position)
                             dialog.dismiss()
                             (listView.getParent() as ViewGroup).removeView(listView)
                         }
+
                         dialog.show()
                         }
                 }

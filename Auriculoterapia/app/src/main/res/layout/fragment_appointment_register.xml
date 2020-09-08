@@ -15,20 +15,39 @@
             android:layout_marginStart="40dp"
             android:text="@string/patient_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/patientSpinner"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutSelectorPacientes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/patientSpinner" />
+            app:layout_constraintTop_toTopOf="@+id/layoutSelectorPacientes" />
 
-        <Spinner
-            android:id="@+id/patientSpinner"
-            android:layout_width="220dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:spinnerMode="dropdown"
+        <LinearLayout
+            android:id="@+id/layoutSelectorPacientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
+                <Spinner
+                    android:id="@+id/patientSpinner"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/errorVacioPacienteEspecialista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Debes seleccionar un paciente"
+                    android:textColor="#D51212"
+                    android:layout_gravity="start"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/fechaCitaEspecialista"
@@ -37,39 +56,58 @@
             android:layout_marginStart="76dp"
             android:text="@string/date_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutDateSpecialist"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayoutDateSpecialist" />
+            app:layout_constraintTop_toTopOf="@+id/layoutLinearConTextoFecha" />
 
         <LinearLayout
-            android:id="@+id/linearLayoutDateSpecialist"
+            android:id="@+id/layoutLinearConTextoFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="56dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patientSpinner">
+            app:layout_constraintTop_toBottomOf="@+id/layoutSelectorPacientes">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutDateSpecialist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSelectorPacientes">
+
+                        <TextView
+                            android:id="@+id/dateEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="16dp"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
+                            app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+
+                        <ImageButton
+                            android:id="@+id/dateButtonDialog"
+                            android:layout_width="45dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:src="@drawable/date_image"
+                            android:tint="#F6F4F4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/dateEditText"
+                    android:id="@+id/errorVacioFechaEspecialista"
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
-                    app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+                    android:layout_height="wrap_content"
+                    android:text="Debes seleccionar una fecha"
+                    android:textAlignment="textEnd"
+                    android:textColor="#D51212"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
 
-                <ImageButton
-                    android:id="@+id/dateButtonDialog"
-                    android:layout_width="45dp"
-                    android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
-                    android:src="@drawable/date_image"
-                    android:tint="#F6F4F4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/pacienteTextView4"
@@ -78,7 +116,6 @@
             android:layout_marginStart="88dp"
             android:text="@string/time_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutTimeSpecialist"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/linearLayoutTimeSpecialist" />
 
@@ -86,31 +123,50 @@
             android:id="@+id/linearLayoutTimeSpecialist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="56dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist">
+            app:layout_constraintTop_toBottomOf="@+id/layoutLinearConTextoFecha">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewHora"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="16dp"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist" />
+
+                        <ImageButton
+                            android:id="@+id/timeButtonDialog"
+                            android:layout_width="45dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:src="@drawable/time_image"
+                            android:tint="#F6F4F4"
+                            app:layout_constraintBottom_toTopOf="@+id/tipoAtencionSpinner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist"
+                            app:layout_constraintVertical_bias="0.0" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textViewHora"
+                    android:id="@+id/errorVacioHoraEspecialista"
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist" />
+                    android:layout_height="wrap_content"
+                    android:text="Debes seleccionar una hora"
+                    android:textAlignment="textEnd"
+                    android:textColor="#D51212"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
 
-                <ImageButton
-                    android:id="@+id/timeButtonDialog"
-                    android:layout_width="45dp"
-                    android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
-                    android:src="@drawable/time_image"
-                    android:tint="#F6F4F4"
-                    app:layout_constraintBottom_toTopOf="@+id/tipoAtencionSpinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist"
-                    app:layout_constraintVertical_bias="0.0" />
         </LinearLayout>
 
         <TextView
@@ -118,23 +174,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
-            android:textAlignment="textEnd"
             android:text="@string/attention_text"
+            android:textAlignment="textEnd"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tipoAtencionSpinner"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tipoAtencionSpinner" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutAtencion" />
 
-        <Spinner
-            android:id="@+id/tipoAtencionSpinner"
-            android:layout_width="175dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="56dp"
-            android:spinnerMode="dropdown"
+        <LinearLayout
+            android:id="@+id/linearLayoutAtencion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTimeSpecialist" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTimeSpecialist">
 
+                <Spinner
+                    android:id="@+id/tipoAtencionSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="2dp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearTimeLayout" />
+
+                <TextView
+                    android:id="@+id/errorVacioTipoAtencionEspecialista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Debes seleccionar el tipo de\natención"
+                    android:textAlignment="textEnd"
+                    android:textColor="#D51212"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
+
+        </LinearLayout>
         <Button
             android:id="@+id/registerAppointmentButton"
             style="@style/Widget.AppCompat.Button"
@@ -146,7 +222,7 @@
             android:text="@string/register_appointment_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipoAtencionSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutAtencion" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
