@@ -7,151 +7,146 @@
     android:layout_gravity="center"
     tools:context=".fragments.specialist.AppointmentRegisterFragment">
 
-        
-        
+
         <TextView
             android:id="@+id/pacienteTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="40dp"
             android:text="@string/patient_text"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/patientSpinner"
+            app:layout_constraintBottom_toBottomOf="@+id/patientSpinner"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/patientSpinner" />
 
         <Spinner
             android:id="@+id/patientSpinner"
-            android:layout_width="247dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="52dp"
+            android:layout_width="220dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/pacienteTextView"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/pacienteTextView3"
+            android:id="@+id/fechaCitaEspecialista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="76dp"
             android:text="@string/date_text"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/dateEditText"
-            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutDateSpecialist"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pacienteTextView" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutDateSpecialist" />
 
-        <TextView
-            android:id="@+id/dateEditText"
-            android:layout_width="120dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="56dp"
-
-            android:layout_marginEnd="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
-            app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
-
-        <ImageButton
-            android:id="@+id/dateButtonDialog"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:tint="#F6F4F4"
-            android:background="@color/colorPrimary"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="48dp"
-            android:src="@drawable/date_image"
+        <LinearLayout
+            android:id="@+id/linearLayoutDateSpecialist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="56dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/patientSpinner">
+
+                <TextView
+                    android:id="@+id/dateEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
+                    app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+
+                <ImageButton
+                    android:id="@+id/dateButtonDialog"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/date_image"
+                    android:tint="#F6F4F4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/patientSpinner" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/pacienteTextView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="88dp"
             android:text="@string/time_text"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/textViewHora"
-            app:layout_constraintHorizontal_bias="0.424"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutTimeSpecialist"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pacienteTextView3" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutTimeSpecialist" />
 
-
-        <TextView
-            android:id="@+id/textViewHora"
-            android:layout_width="120dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
-            app:layout_constraintTop_toBottomOf="@+id/dateEditText" />
-
-        <ImageButton
-            android:id="@+id/timeButtonDialog"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginEnd="48dp"
-            android:tint="#F6F4F4"
-            android:background="@color/colorPrimary"
-            android:src="@drawable/time_image"
-            app:layout_constraintBottom_toTopOf="@+id/tipoAtencionSpinner"
+        <LinearLayout
+            android:id="@+id/linearLayoutTimeSpecialist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="56dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateButtonDialog"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist">
+
+                <TextView
+                    android:id="@+id/textViewHora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/timeButtonDialog"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist" />
+
+                <ImageButton
+                    android:id="@+id/timeButtonDialog"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/time_image"
+                    android:tint="#F6F4F4"
+                    app:layout_constraintBottom_toTopOf="@+id/tipoAtencionSpinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutDateSpecialist"
+                    app:layout_constraintVertical_bias="0.0" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/pacienteTextView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="56dp"
+            android:textAlignment="textEnd"
             android:text="@string/attention_text"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/registerAppointmentButton"
-            app:layout_constraintEnd_toStartOf="@+id/tipoAtencionSpinner"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/tipoAtencionSpinner"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pacienteTextView4"
-            app:layout_constraintVertical_bias="0.443" />
+            app:layout_constraintTop_toTopOf="@+id/tipoAtencionSpinner" />
 
         <Spinner
             android:id="@+id/tipoAtencionSpinner"
             android:layout_width="175dp"
             android:layout_height="28dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="56dp"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pacienteTextView5"
-            app:layout_constraintTop_toBottomOf="@+id/textViewHora" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTimeSpecialist" />
 
         <Button
             android:id="@+id/registerAppointmentButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="68dp"
             android:text="@string/register_appointment_button"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipoAtencionSpinner"
-            app:layout_constraintVertical_bias="0.014" />
+            app:layout_constraintTop_toBottomOf="@+id/tipoAtencionSpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

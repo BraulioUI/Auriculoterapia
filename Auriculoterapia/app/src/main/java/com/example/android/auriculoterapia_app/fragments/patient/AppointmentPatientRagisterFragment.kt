@@ -2,23 +2,23 @@ package com.example.android.auriculoterapia_app.fragments.patient
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.helpers.AvailabilityTimeRange
-import com.example.android.auriculoterapia_app.models.helpers.FormularioCita
 import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import com.example.android.auriculoterapia_app.services.AvailabilityService
+import kotlinx.android.synthetic.main.fragment_appointment_register.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +26,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class AppointmentPatientRagisterFragment : Fragment() {
 
@@ -50,19 +51,18 @@ class AppointmentPatientRagisterFragment : Fragment() {
         val spinnerAtencion = view.findViewById<Spinner>(R.id.spinnerAttentionPatient)
         val buttonHora = view.findViewById<ImageButton>(R.id.timeButtonDialogPatient)
         val buttonFecha = view.findViewById<ImageButton>(R.id.dateButtonDialogPatient)
-        var horaFinAtencion: String = ""
+        var horaFinAtencion = ""
         val buttonReservar = view.findViewById<Button>(R.id.registerAppointmentButtonPatient)
-        val listView: ListView = ListView(requireContext())
-        //DatePickerDialog actions
+        val listView = ListView(requireContext())
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-        val date = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val dateInString = formatter.format(date)
+
+        ///////////DATEPICKER//////////////////////
+        val dateInString = "____-__-__"
         fechaTextView.text = dateInString
 
         var temp = 0
@@ -80,54 +80,33 @@ class AppointmentPatientRagisterFragment : Fragment() {
                     dayText = "0$dayText"
                 }
                 fechaTextView.text = "$yearText-${monthText}-$dayText"
+                horaTextView.text = "__:__"
             }, year, month, day
             )
             temp = 1
             dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             dpd.show()
         }
+        /////////////////////////////////////////////
 
 
-
-        //TimePickerDialog actions
-
-        val cal = Calendar.getInstance()
-        val hora = Calendar.getInstance().time
-        horaTextView.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(hora)
-
+        ///////////TIME LIST OF AVAILABLE SCHEDULES//////////////////////
+        horaTextView.text = "__:__"
         buttonHora.setOnClickListener{
             if(temp == 1) {
-                // Toast.makeText(requireContext(), "${dateEditText.text}", Toast.LENGTH_SHORT).show()
                 obtenerHorariosDisponibles(fechaTextView.text.toString(), listView, horaTextView)
             }
         }
+        /////////////////////////////////////////////
 
 
-       /* buttonHora.setOnClickListener{
-            val timeSetListener = TimePickerDialog.OnTimeSetListener{
-                    timePicker, hour, minute ->
-
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-
-                horaTextView.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time)
-
-                val time = cal
-                time.add(Calendar.MINUTE, 30)
-                horaFinAtencion = SimpleDateFormat("HH:mm", Locale.getDefault()).format(time.time)
-                Log.i("Hora fin", horaFinAtencion)
-            }
-            TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(
-                Calendar.MINUTE), true).show()
-        }*/
-
-        //Atencion
+        ///////////////ATENTION TYPES////////////////////////
         val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
         val usuarioId = sharedPreferences.getInt("id", 0)
 
-        var textoAtencion: String = ""
+        var textoAtencion: String = " "
 
-        val atenciones = arrayOf("Presencial", "Virtual")
+        val atenciones = arrayOf("--Seleccionar--","Presencial", "Virtual")
         spinnerAtencion.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, atenciones)
         spinnerAtencion.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -139,10 +118,13 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 textoAtencion = atenciones.get(position)
             }
         }
+        /////////////////////////////////////////////
 
+
+        ////////////RESERVAR///////////////////////
         buttonReservar.setOnClickListener{
-            if(!fechaTextView.text.isEmpty() && !horaTextView.text.isEmpty()
-                && !textoAtencion.isEmpty())    {
+            if(!celularEditText.text.isEmpty() && fechaTextView.text != "____-__-__" && horaTextView.text != "__:__"
+                && textoAtencion != atenciones.get(0))    {
                 val parser = SimpleDateFormat("HH:mm", Locale.getDefault())
                 val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
                 val calendar = Calendar.getInstance()
@@ -162,9 +144,29 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
                 Log.i("Cita a registrar", cita.toString())
                 registrarCita(cita, usuarioId, horaTextView)
+            } else{
+                Toast.makeText(mContext, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
-        }
+            if(celularEditText.text.isEmpty()){
+                celularEditText.setError("Debes ingresar tu número")
+            }
+            if (fechaTextView.text == "____-__-__"){
+                fechaTextView.setError("Debes escoger una fecha")
+            }
+            if(horaTextView.text == "__:__"){
+                horaTextView.setError("Debes escoger una hora")
+            }
 
+            if(textoAtencion == atenciones.get(0)){
+                val errorText = spinnerAtencion.selectedView as TextView
+                errorText.error = ""
+                errorText.setTextColor(Color.RED)
+                errorText.text = "Debes seleccionar el tipo de atención"
+            }
+
+
+        }
+        /////////////////////////////////////////////
 
 
 

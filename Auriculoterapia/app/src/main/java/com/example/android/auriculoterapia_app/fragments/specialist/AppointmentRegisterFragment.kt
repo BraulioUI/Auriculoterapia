@@ -141,10 +141,8 @@ class AppointmentRegisterFragment : Fragment() {
         //TimePickerDialog actions
 
         //val informacionDisponibilidad = view.findViewById<TextView>(R.id.availabilityInformationText)
-        val cal = Calendar.getInstance()
 
         val timeButton = view.findViewById<ImageButton>(R.id.timeButtonDialog)
-        val hora = Calendar.getInstance().time
         textViewHora.text = "__:__"//SimpleDateFormat("HH:mm", Locale.getDefault()).format(hora)
 
         timeButton.setOnClickListener{

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.android.auriculoterapia_app.activities.AppointmentManagement
 import com.example.android.auriculoterapia_app.activities.PatientsManagementActivity
@@ -25,10 +26,14 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Inicio"
 
-        val sb = StringBuilder()
+        /*val sb = StringBuilder()
         sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
-        username.text = sb.toString()
-
+        username.text = sb.toString()*/
+        val nombre = sharedPreferences.getString("nombre", "")
+        val apellido = sharedPreferences.getString("apellido", "")
+        val nombreUsuario = "$nombre $apellido"
+        Toast.makeText(this, "Bienvenido $nombre $apellido", Toast.LENGTH_SHORT).show()
+        username.text = nombreUsuario
 
         appointmentOption.setOnClickListener{
             val intent = Intent(this, AppointmentManagement::class.java)
