@@ -99,6 +99,7 @@ class AppointmentRegisterFragment : Fragment() {
                         if(position >= 1) {
                             idPaciente = ids.get(position - 1)
                         }
+                        Log.i("Paciente ID", "$idPaciente")
                     }
                 }
 
@@ -220,16 +221,18 @@ class AppointmentRegisterFragment : Fragment() {
                     textViewHora.setError("Debes seleccionar una hora")
                 }
                 if(textoAtencion == "--Seleccionar--"){
+                    errorAtencion.visibility = View.VISIBLE
                     errorAtencion.setError("Debes seleccionar un tipo de atención")
                 }
 
                 if(idPaciente == -1){
-
+                    errorPaciente.visibility = View.VISIBLE
                     errorPaciente.setError("Debes seleccionar a un paciente")
                 }
 
             } else{
                 textViewHora.text = "__:__"
+                reservaExitosa = false
             }
 
         }

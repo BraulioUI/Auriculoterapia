@@ -30,6 +30,7 @@
         android:inputType="phone"
         android:maxLength="9"
         android:digits="1234567890"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

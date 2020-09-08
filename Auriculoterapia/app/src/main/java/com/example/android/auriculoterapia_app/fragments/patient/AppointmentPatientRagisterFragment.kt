@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
@@ -58,7 +60,15 @@ class AppointmentPatientRagisterFragment : Fragment() {
         val errorHora = view.findViewById<TextView>(R.id.errorVacioHoraPaciente)
         val errorAtencion = view.findViewById<TextView>(R.id.errorVacioTipoAtencion)
 
-
+        celularEditText.setOnEditorActionListener{
+            v, actionId, event ->
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                    true
+                }
+            false
+        }
 
         val listView = ListView(requireContext())
         val c = Calendar.getInstance()
@@ -187,6 +197,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 }
             } else {
                 horaTextView.text = "__:__"
+                reservaExitosa = false
             }
 
 
