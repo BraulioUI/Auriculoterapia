@@ -93,6 +93,9 @@ class AppointmentRegisterFragment : Fragment() {
                     override fun onItemSelected(parent: AdapterView<*>?,view: View?,
                                                 position: Int,id: Long) {
                         errorPaciente.visibility = View.GONE
+                        if(position == 0 || options.get(position) == "--Seleccionar--"){
+                            idPaciente = -1
+                        }
                         if(position >= 1) {
                             idPaciente = ids.get(position - 1)
                         }
@@ -137,8 +140,9 @@ class AppointmentRegisterFragment : Fragment() {
                     dayText = "0$dayText"
                 }
                 dateEditText.text = "$yearText-${monthText}-$dayText"
+                dateEditText.error = null
                 textViewHora.text = "__:__"
-                errorFecha.visibility = View.GONE
+
 
             }, year, month, day
             )
@@ -147,47 +151,18 @@ class AppointmentRegisterFragment : Fragment() {
             dpd.show()
         }
 
-        //TimePickerDialog actions
-
-        //val informacionDisponibilidad = view.findViewById<TextView>(R.id.availabilityInformationText)
 
         val timeButton = view.findViewById<ImageButton>(R.id.timeButtonDialog)
-        textViewHora.text = "__:__"//SimpleDateFormat("HH:mm", Locale.getDefault()).format(hora)
+        textViewHora.text = "__:__"
 
         timeButton.setOnClickListener{
             if(temp == 1) {
-               // Toast.makeText(mContext, "${dateEditText.text}", Toast.LENGTH_SHORT).show()
-                errorHora.visibility = View.GONE
+
+                textViewHora.error = null
                 obtenerHorariosDisponibles(dateEditText.text.toString(), listView, textViewHora)
 
             }
         }
-
-       /*
-        timeButton.setOnClickListener{
-            val timeSetListener = TimePickerDialog.OnTimeSetListener{
-                timePicker, hour, minute ->
-
-                        cal.set(Calendar.HOUR_OF_DAY, hour)
-                        cal.set(Calendar.MINUTE, minute)
-
-                        textViewHora.text =
-                            SimpleDateFormat("HH:mm", Locale.getDefault()).format(cal.time)
-
-                        val time = cal
-                        time.add(Calendar.MINUTE, 30)
-                        horaFinAtencion =
-                            SimpleDateFormat("HH:mm", Locale.getDefault()).format(time.time)
-                        Log.i("Hora fin", horaFinAtencion)
-
-            }
-
-            val timePickerDialogCustom = CustomTimePickerDialog(mContext, timeSetListener,  cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true)
-            timePickerDialogCustom.show()
-
-        }*/
-
-
 
 
         val selectorTipoAtencion = view.findViewById<Spinner>(R.id.tipoAtencionSpinner)
@@ -209,6 +184,8 @@ class AppointmentRegisterFragment : Fragment() {
 
         val reservar = view.findViewById<Button>(R.id.registerAppointmentButton)
 
+        /////////////RESERVA////////////////
+        var reservaExitosa = false
         reservar.setOnClickListener{
           if(dateEditText.text != "____-__-__" && textViewHora.text != "__:__"
               && textoAtencion != "--Seleccionar--" && idPaciente != -1)    {
@@ -230,22 +207,29 @@ class AppointmentRegisterFragment : Fragment() {
 
                 Log.i("Cita a registrar", cita.toString())
                 registrarCita(cita, idPaciente,  textViewHora)
+               reservaExitosa = true
         } else{
               Toast.makeText(mContext, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
           }
-            if(dateEditText.text == "____-__-__"){
-                errorFecha.visibility = View.VISIBLE
-            }
-            if (textViewHora.text == "__:__"){
-                errorHora.visibility = View.VISIBLE
-            }
-            if(textoAtencion == "--Seleccionar--"){
-                errorAtencion.visibility = View.VISIBLE
-            }
+            if(!reservaExitosa){
+                if(dateEditText.text == "____-__-__"){
+                    dateEditText.setError("Debes seleccionar una fecha")
 
-            if(idPaciente == -1){
+                }
+                if (textViewHora.text == "__:__"){
+                    textViewHora.setError("Debes seleccionar una hora")
+                }
+                if(textoAtencion == "--Seleccionar--"){
+                    errorAtencion.setError("Debes seleccionar un tipo de atención")
+                }
 
-                errorPaciente.visibility = View.VISIBLE
+                if(idPaciente == -1){
+
+                    errorPaciente.setError("Debes seleccionar a un paciente")
+                }
+
+            } else{
+                textViewHora.text = "__:__"
             }
 
         }
@@ -267,7 +251,7 @@ class AppointmentRegisterFragment : Fragment() {
                     Toast.makeText(mContext, "Se reservó correctamente la cita", Toast.LENGTH_SHORT).show()
                 }
 
-                time.text = "__:__"
+
             }
         })
     }

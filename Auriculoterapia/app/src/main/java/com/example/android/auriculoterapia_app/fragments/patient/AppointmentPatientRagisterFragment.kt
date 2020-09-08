@@ -3,6 +3,7 @@ package com.example.android.auriculoterapia_app.fragments.patient
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,7 +43,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_appointment_patient_ragister, container, false)
-
+        val campoHora = view.findViewById<TextView>(R.id.tvHora)
         val celularEditText = view.findViewById<EditText>(R.id.celularEditText)
         val fechaTextView = view.findViewById<TextView>(R.id.textViewFechaPaciente)
         val horaTextView = view.findViewById<TextView>(R.id.pacienteTextViewHora)
@@ -86,7 +87,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                     dayText = "0$dayText"
                 }
                 fechaTextView.text = "$yearText-${monthText}-$dayText"
-                errorFecha.visibility = View.GONE
+                fechaTextView.error = null
                 horaTextView.text = "__:__"
             }, year, month, day
             )
@@ -101,9 +102,12 @@ class AppointmentPatientRagisterFragment : Fragment() {
         horaTextView.text = "__:__"
         buttonHora.setOnClickListener{
             if(temp == 1) {
-                errorHora.visibility = View.GONE
+                horaTextView.error = null
                 obtenerHorariosDisponibles(fechaTextView.text.toString(), listView, horaTextView)
+            } else{
+                horaTextView.setError("Debe seleccionar una fecha primero")
             }
+
         }
         /////////////////////////////////////////////
 
@@ -131,46 +135,58 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
 
         ////////////RESERVAR///////////////////////
+        var reservaExitosa = false
         buttonReservar.setOnClickListener{
             if(!celularEditText.text.isEmpty() && fechaTextView.text != "____-__-__" && horaTextView.text != "__:__"
                 && textoAtencion != atenciones.get(0))    {
-                val parser = SimpleDateFormat("HH:mm", Locale.getDefault())
-                val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
-                val calendar = Calendar.getInstance()
-                val horaTime = parser.parse(horaTextView.text as String)
-                calendar.time = horaTime!!
-                calendar.add(Calendar.MINUTE, 30)
+                if(celularEditText.text.length < 9) {
+                    celularEditText.setError("El número debe tener 9 dígitos")
+                } else {
+                    val parser = SimpleDateFormat("HH:mm", Locale.getDefault())
+                    val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+                    val calendar = Calendar.getInstance()
+                    val horaTime = parser.parse(horaTextView.text as String)
+                    calendar.time = horaTime!!
+                    calendar.add(Calendar.MINUTE, 30)
 
-                horaFinAtencion = formatter.format(calendar.time)
-                val cita =
-                    FormularioCitaPaciente(
-                        celularEditText.text.toString(),
-                        fechaTextView.text as String,
-                        horaTextView.text as String,
-                        horaFinAtencion,
-                        textoAtencion
-                    )
+                    horaFinAtencion = formatter.format(calendar.time)
+                    val cita =
+                        FormularioCitaPaciente(
+                            celularEditText.text.toString(),
+                            fechaTextView.text as String,
+                            horaTextView.text as String,
+                            horaFinAtencion,
+                            textoAtencion
+                        )
 
-                Log.i("Cita a registrar", cita.toString())
-                registrarCita(cita, usuarioId, horaTextView)
-                horaTextView.text = "__:__"
+                    Log.i("Cita a registrar", cita.toString())
+                    registrarCita(cita, usuarioId, horaTextView)
+                    reservaExitosa = true
+                }
             } else{
                 Toast.makeText(mContext, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
-            if(celularEditText.text.isEmpty()){
-                celularEditText.setError("Debes ingresar tu número")
-                horaTextView.requestFocus()
-            }
-            if (fechaTextView.text == "____-__-__"){
-                errorFecha.visibility = View.VISIBLE
-            }
-            if(horaTextView.text == "__:__"){
-                errorHora.visibility = View.VISIBLE
-            }
+            if(!reservaExitosa){
+                if(celularEditText.text.isEmpty()){
+                    celularEditText.setError("Debes ingresar tu número")
 
-            if(textoAtencion == atenciones.get(0)){
+                }
+                if (fechaTextView.text == "____-__-__"){
+                    fechaTextView.setError("Debes seleccionar una fecha")
 
-                errorAtencion.visibility = View.VISIBLE
+                }
+                if(horaTextView.text == "__:__"){
+                    horaTextView.setError("Debes seleccionar una hora")
+
+                }
+
+                if(textoAtencion == atenciones.get(0)){
+                    errorAtencion.visibility = View.VISIBLE
+                    errorAtencion.setError("Debes seleccionar un tipo de atención")
+
+                }
+            } else {
+                horaTextView.text = "__:__"
             }
 
 
@@ -196,9 +212,10 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 Log.i("POST", response.code().toString())
                 if(response.isSuccessful){
                     Toast.makeText(mContext, "Se reservó correctamente la cita", Toast.LENGTH_SHORT).show()
+
                 }
 
-                time.text = "__:__"
+
             }
         })
     }

@@ -27,6 +27,7 @@ SELECT * FROM Rol_Usuarios;
 SELECT * FROM Pacientes;
 DELETE FROM Rol_Usuarios Where Id = 5;
 ALTER TABLE Rol_Usuarios auto_increment=1;
+SELECT * FROM especialistas;
 /*ROL_USUARIOS 1*/
 INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(1, 1);
 
