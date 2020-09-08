@@ -46,8 +46,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun actualizarContrasena(){
 
 
-        val palabraClave = findViewById<EditText>(R.id.et_keyWord2).text
-        val nuevaContrasena = findViewById<EditText>(R.id.et_password).text
+        val palabraClave = findViewById<EditText>(R.id.et_keyWord2)
+        val nuevaContrasena = findViewById<EditText>(R.id.et_password)
 
         val nombreUsuario = sharedPreferences.getString("usuario", "")
 
@@ -56,44 +56,56 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val forgotPassword:Any
 
-        if(sharedPreferences.contains("id")){
-            forgotPassword = ForgotPasswordRequest(nombreUsuario.toString(),palabraClave.toString(),
-                nuevaContrasena.toString())
+        if(palabraClave.text.toString().length < 8){
+            palabraClave.setError("La pabala clave debe tener mínimo 8 caracteres")
+            palabraClave.setText("")
+            palabraClave.requestFocus()
+        }else if(nuevaContrasena.text.toString().length <8){
+            nuevaContrasena.setError("La contraseña de tener mínimo 8 caracteres")
+            nuevaContrasena.setText("")
+            nuevaContrasena.requestFocus()
         }else{
-            val usuario2 = findViewById<EditText>(R.id.et_usuario).text
-            forgotPassword = ForgotPasswordRequest(usuario2.toString(),palabraClave.toString(),
-                nuevaContrasena.toString())
+            if(sharedPreferences.contains("id")){
+                forgotPassword = ForgotPasswordRequest(nombreUsuario.toString(),palabraClave.text.toString(),
+                    nuevaContrasena.text.toString())
+            }else{
+                val usuario2 = findViewById<EditText>(R.id.et_usuario).text
+                forgotPassword = ForgotPasswordRequest(usuario2.toString(),palabraClave.text.toString(),
+                    nuevaContrasena.text.toString())
+            }
+
+
+            val userService = ApiClient.retrofit().create(UserService::class.java)
+
+            userService.forgotPassword(forgotPassword).enqueue(object : Callback<ForgotPasswordRequest>{
+                override fun onFailure(call: Call<ForgotPasswordRequest>, t: Throwable) {
+                    Log.i("ACTUALIZAR CONTRASENA: ","NO ENTRO")
+                }
+
+                override fun onResponse(
+                    call: Call<ForgotPasswordRequest>,
+                    response: Response<ForgotPasswordRequest>
+                ) {
+                    if(response.isSuccessful){
+                        Log.i("ACTUALIZAR CONTRASENA: ", response.body().toString())
+                        Toast.makeText(applicationContext,"Contraseña actualizada con éxito",Toast.LENGTH_SHORT).show()
+                        startActivity(intentLogin)
+                        finish()
+
+                    }
+                    else{
+                        val res = response.errorBody()?.string()
+                        val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                        Toast.makeText(applicationContext,message, Toast.LENGTH_SHORT).show()
+                        Log.i("Respuesta: ", "WHAT FUEEE")
+                    }
+                }
+
+            })
         }
 
 
-        val userService = ApiClient.retrofit().create(UserService::class.java)
-
-        userService.forgotPassword(forgotPassword).enqueue(object : Callback<ForgotPasswordRequest>{
-            override fun onFailure(call: Call<ForgotPasswordRequest>, t: Throwable) {
-                Log.i("ACTUALIZAR CONTRASENA: ","NO ENTRO")
-            }
-
-            override fun onResponse(
-                call: Call<ForgotPasswordRequest>,
-                response: Response<ForgotPasswordRequest>
-            ) {
-                if(response.isSuccessful){
-                    Log.i("ACTUALIZAR CONTRASENA: ", response.body().toString())
-                    Toast.makeText(applicationContext,"Contraseña actualizada con éxito",Toast.LENGTH_SHORT).show()
-                    startActivity(intentLogin)
-                    finish()
-
-                }
-                else{
-                    val res = response.errorBody()?.string()
-                    val message = JsonParser().parse(res).asJsonObject["message"].asString
-
-                    Toast.makeText(applicationContext,message, Toast.LENGTH_SHORT).show()
-                    Log.i("Respuesta: ", "WHAT FUEEE")
-                }
-            }
-
-        })
     }
 
 

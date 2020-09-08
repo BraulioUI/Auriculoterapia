@@ -52,10 +52,12 @@ class NewTreatmentFragment  : Fragment(){
         //val optionEdad = view.findViewById<Spinner>(R.id.spinner_edad)
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
         val resultEdad = view.findViewById<TextView>(R.id.tv_resultEdad)
+        val checkimage = view.findViewById<ImageView>(R.id.iv_checkImage)
 
         val tv_imageURL = view.findViewById<TextView>(R.id.tv_urlImage)
-        //tv_imageURL.visibility = View.GONE
+        tv_imageURL.visibility = View.INVISIBLE
 
+        checkimage.visibility = View.INVISIBLE
 
 
         val registerButton = view.findViewById<Button>(R.id.btn_registrarTratamiento)
@@ -212,7 +214,7 @@ class NewTreatmentFragment  : Fragment(){
          //urlImage=""
         MediaManager.get().upload(filename).callback(object: UploadCallback {
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
-                Toast.makeText(requireContext(), resultData?.get("url").toString(),Toast.LENGTH_LONG).show()
+                //Toast.makeText(requireContext(), resultData?.get("url").toString(),Toast.LENGTH_LONG).show()
                 tv_imageURL!!.text = resultData?.get("url").toString()
                 registrarTratamiento()
             }
@@ -245,6 +247,9 @@ class NewTreatmentFragment  : Fragment(){
 
             val config = ConfigCloudinary.config()
             MediaManager.init(requireContext(),config)
+
+            val checkimage = requireView().findViewById<ImageView>(R.id.iv_checkImage)
+            checkimage!!.visibility = View.VISIBLE
 
         }
     }
