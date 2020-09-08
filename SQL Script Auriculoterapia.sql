@@ -1,5 +1,6 @@
 use auriculoterapiadb;
 use m9wogfp1a7afp76v;
+aadsgfsdg
 /* por si me equivoco al poner el ejecutar */
 /*ROL 1 - ESPECIALISTA*/
 INSERT INTO Roles(Descripcion) VALUES ('ESPECIALISTA');
@@ -20,9 +21,12 @@ INSERT INTO Usuarios(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,Palabra
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
 
 SELECT * FROM Usuarios;
+DELETE FROM Usuarios Where Id = 5;
+ALTER TABLE Usuarios auto_increment=1;
 SELECT * FROM Rol_Usuarios;
 SELECT * FROM Pacientes;
-
+DELETE FROM Rol_Usuarios Where Id = 5;
+ALTER TABLE Rol_Usuarios auto_increment=1;
 /*ROL_USUARIOS 1*/
 INSERT INTO Rol_Usuarios(RolId,UsuarioId) VALUES(1, 1);
 
