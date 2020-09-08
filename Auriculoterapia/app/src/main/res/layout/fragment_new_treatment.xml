@@ -31,7 +31,7 @@
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="70.0"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_peso"
@@ -55,7 +55,7 @@
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="1.70"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_altura"
@@ -120,12 +120,13 @@
 
     <Button
         android:id="@+id/btn_InsertarImagen"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="70dp"
         android:text="Subir Foto"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_examinarFoto"
         app:layout_constraintTop_toBottomOf="@+id/et_Sintomas" />
 
     <EditText
@@ -163,5 +164,15 @@
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/tv_examinarFoto"
         app:layout_constraintTop_toBottomOf="@+id/tv_sintomas" />
+
+    <ImageView
+        android:id="@+id/iv_checkImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_InsertarImagen"
+        app:layout_constraintTop_toBottomOf="@+id/et_Sintomas"
+        app:srcCompat="@drawable/check" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

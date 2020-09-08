@@ -82,52 +82,60 @@ class LogInActivity : AppCompatActivity() {
             .build()
 
         val authService = retrofit.create<AuthService>(AuthService::class.java)
-        val nombreUsuario = findViewById<EditText>(R.id.et_nombreUsuario).text
-        val contrasena = findViewById<EditText>(R.id.et_contrasena2).text
+        val nombreUsuario = findViewById<EditText>(R.id.et_nombreUsuario)
+        val contrasena = findViewById<EditText>(R.id.et_contrasena2)
 
         val intentMain = Intent(this, MainActivity::class.java)
         val intentMainPatient = Intent(this,MainActivityPatient::class.java)
 
+        if(nombreUsuario.text.toString().isEmpty()){
+            nombreUsuario.setError("Completar este campo")
+            nombreUsuario.requestFocus()
+        }else if(contrasena.text.toString().isEmpty()){
+            contrasena.setError("Conpletar este campo")
+            contrasena.requestFocus()
+        }else{
+            val authRequest = AuthRequest(nombreUsuario.text.toString(),contrasena.text.toString())
+            //val authRequest = Usuario(null,null,null,null,contrasena.toString(),nombreUsuario.toString(),null,null,null)
 
-        val authRequest = AuthRequest(nombreUsuario.toString(),contrasena.toString())
-        //val authRequest = Usuario(null,null,null,null,contrasena.toString(),nombreUsuario.toString(),null,null,null)
 
+            authService.authenticate(authRequest).enqueue(object : Callback<AuthResponse>{
+                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                    Log.i("INICIAR SESION","NO ENTRO")
+                }
 
-        authService.authenticate(authRequest).enqueue(object : Callback<AuthResponse>{
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.i("INICIAR SESION","NO ENTRO")
-            }
+                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
 
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                    if(response.isSuccessful){
+                        Log.i("Iniciar Sesion: ", response.body().toString())
+                        val res = response.body()
+                        //val jsonString = Gson().toJson(res)
 
-                if(response.isSuccessful){
-                    Log.i("Iniciar Sesion: ", response.body().toString())
-                    val res = response.body()
-                    //val jsonString = Gson().toJson(res)
+                        // val _res:Usuario = G
 
-                   // val _res:Usuario = G
+                        if(res?.rol!! == "PACIENTE"){
+                            startActivity(intentMainPatient)
+                        }
+                        else{
+                            startActivity(intentMain)
+                        }
 
-                    if(res?.rol!! == "PACIENTE"){
-                        startActivity(intentMainPatient)
+                        saveData(res?.id!!,res?.nombreUsuario!!,res?.token!!,res?.rol!!,res?.nombre!!,res?.apellido!!)
+                        finish()
+
                     }
                     else{
-                        startActivity(intentMain)
+                        val res = response.errorBody()?.string()
+                        val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                        Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+                        Log.i("Respuesta: ", "WHAT FUEEE")
                     }
-
-                    saveData(res?.id!!,res?.nombreUsuario!!,res?.token!!,res?.rol!!,res?.nombre!!,res?.apellido!!)
-                    finish()
-
                 }
-                else{
-                    val res = response.errorBody()?.string()
-                    val message = JsonParser().parse(res).asJsonObject["message"].asString
 
-                    Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
-                    Log.i("Respuesta: ", "WHAT FUEEE")
-                }
-            }
+            })
+        }
 
-        })
     }
 
 
