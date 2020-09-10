@@ -30,6 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LogInActivity : AppCompatActivity() {
 
+    var completeAll: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
@@ -59,6 +61,7 @@ class LogInActivity : AppCompatActivity() {
             val loginButton = findViewById<Button>(R.id.bt_login)
 
             loginButton.setOnClickListener{
+                completeAll = true
                 auth()
                 //Toast.makeText(applicationContext,"Inicio de sesión exitoso!!!",Toast.LENGTH_SHORT).show()
             }
@@ -91,10 +94,14 @@ class LogInActivity : AppCompatActivity() {
         if(nombreUsuario.text.toString().isEmpty()){
             nombreUsuario.setError("Completar este campo")
             nombreUsuario.requestFocus()
-        }else if(contrasena.text.toString().isEmpty()){
+            completeAll = false
+        }
+        if(contrasena.text.toString().isEmpty()){
             contrasena.setError("Conpletar este campo")
             contrasena.requestFocus()
-        }else{
+            completeAll = false
+        }
+        if(completeAll){
             val authRequest = AuthRequest(nombreUsuario.text.toString(),contrasena.text.toString())
             //val authRequest = Usuario(null,null,null,null,contrasena.toString(),nombreUsuario.toString(),null,null,null)
 
