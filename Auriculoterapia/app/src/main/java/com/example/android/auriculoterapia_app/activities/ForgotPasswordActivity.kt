@@ -23,6 +23,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     //lateinit var forgotPassword:Any
     //lateinit var usuario : Any
 
+    var completeAll: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
@@ -39,6 +40,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
 
         ActualizarButton.setOnClickListener {
+            completeAll = true
             actualizarContrasena()
         }
     }
@@ -56,15 +58,19 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val forgotPassword:Any
 
-        if(palabraClave.text.toString().length < 8){
-            palabraClave.setError("La pabala clave debe tener mínimo 8 caracteres")
+        if(palabraClave.text.toString().length < 4 || palabraClave.text.toString().length > 15){
+            palabraClave.setError("La pabala clave debe tener mínimo 4 caracteres y máximo 15")
             palabraClave.setText("")
             palabraClave.requestFocus()
-        }else if(nuevaContrasena.text.toString().length <8){
-            nuevaContrasena.setError("La contraseña de tener mínimo 8 caracteres")
+            completeAll = false
+        }
+        if(nuevaContrasena.text.toString().length <6 || nuevaContrasena.text.toString().length > 15){
+            nuevaContrasena.setError("La contraseña de tener mínimo 6 caracteres y máximo 15")
             nuevaContrasena.setText("")
             nuevaContrasena.requestFocus()
-        }else{
+            completeAll = false
+        }
+        if(completeAll){
             if(sharedPreferences.contains("id")){
                 forgotPassword = ForgotPasswordRequest(nombreUsuario.toString(),palabraClave.text.toString(),
                     nuevaContrasena.text.toString())
@@ -88,7 +94,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 ) {
                     if(response.isSuccessful){
                         Log.i("ACTUALIZAR CONTRASENA: ", response.body().toString())
-                        Toast.makeText(applicationContext,"Contraseña actualizada con éxito",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,"Credenciales actualizadas",Toast.LENGTH_SHORT).show()
                         startActivity(intentLogin)
                         finish()
 

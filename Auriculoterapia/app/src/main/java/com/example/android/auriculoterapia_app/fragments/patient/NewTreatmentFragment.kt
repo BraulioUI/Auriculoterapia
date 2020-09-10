@@ -38,6 +38,7 @@ class NewTreatmentFragment  : Fragment(){
     var REQUEST_CODE = 11
     val RESULT_CODE =12
     lateinit var filePath :String
+    var completeAll: Boolean = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +60,7 @@ class NewTreatmentFragment  : Fragment(){
 
         checkimage.visibility = View.INVISIBLE
 
+        filePath = ""
 
         val registerButton = view.findViewById<Button>(R.id.btn_registrarTratamiento)
         val instertImageButton = view.findViewById<Button>(R.id.btn_InsertarImagen)
@@ -84,8 +86,13 @@ class NewTreatmentFragment  : Fragment(){
 
 
         registerButton.setOnClickListener {
-
-            uploadToCloudinary(filePath)
+            completeAll = true
+            if(filePath!=""){
+                uploadToCloudinary(filePath)
+            }
+            else{
+                Toast.makeText(requireContext(),"No ha registrado la imagen",Toast.LENGTH_SHORT).show()
+            }
         }
 
         instertImageButton.setOnClickListener {
@@ -155,20 +162,42 @@ class NewTreatmentFragment  : Fragment(){
 
 
 
-        val peso = requireView().findViewById<EditText>(R.id.et_peso).text
-        val altura = requireView().findViewById<EditText>(R.id.et_altura).text
-        val sintomas = requireView().findViewById<EditText>(R.id.et_Sintomas).text
-        val otros = requireView().findViewById<EditText>(R.id.et_otros).text
-        val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage).text
-        val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad).text
+        val peso = requireView().findViewById<EditText>(R.id.et_peso)
+        val altura = requireView().findViewById<EditText>(R.id.et_altura)
+        val sintomas = requireView().findViewById<EditText>(R.id.et_Sintomas)
+        val otros = requireView().findViewById<EditText>(R.id.et_otros)
+        val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage)
+        val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad)
 
 
-        if(peso.isEmpty() || altura.isEmpty() || sintomas.isEmpty() || otros.isEmpty() || edad.isEmpty() || imagenAreaAfectada!!.isEmpty()){
+        if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() || imagenAreaAfectada!!.text.isEmpty()){
             Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
-        }else{
-            val solicitudTratamiento = SolicitudTratamiento(altura.toString().toDouble(),
-                edad.toString().toInt(),null, imagenAreaAfectada.toString(),otros.toString(),null,
-                peso.toString().toDouble(),sintomas.toString(),
+        }
+        if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
+            peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
+            peso.setText("")
+            peso.requestFocus()
+            completeAll = false
+        }
+
+        if(altura.text.toString().toDouble() < 1 || altura.text.toString().toDouble() > 2.10){
+            altura.setError("La altura debe estarentre 1.00 y 2.10 m")
+            altura.setText("")
+            altura.requestFocus()
+            completeAll = false
+        }
+
+        if(sintomas.text.toString().length < 5 || sintomas.text.toString().length > 30){
+            sintomas.setError("Máximo 30 caracteres")
+            sintomas.requestFocus()
+            completeAll = false
+        }
+
+
+        if(completeAll){
+            val solicitudTratamiento = SolicitudTratamiento(altura.text.toString().toDouble(),
+                edad.text.toString().toInt(),null, imagenAreaAfectada.text.toString(),otros.text.toString(),null,
+                peso.text.toString().toDouble(),sintomas.text.toString(),
                 dateInString,"En proceso",null)
 
             Log.i("UserId: ","$userId")
@@ -251,6 +280,10 @@ class NewTreatmentFragment  : Fragment(){
             val checkimage = requireView().findViewById<ImageView>(R.id.iv_checkImage)
             checkimage!!.visibility = View.VISIBLE
 
+        }
+        else{
+            Toast.makeText(requireContext(),"No se registró la imagen, volver a intentar",Toast.LENGTH_LONG).show()
+            completeAll = false
         }
     }
 

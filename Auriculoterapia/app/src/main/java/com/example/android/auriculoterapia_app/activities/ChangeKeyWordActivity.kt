@@ -20,6 +20,7 @@ import retrofit2.Response
 class ChangeKeyWordActivity : AppCompatActivity() {
 
     lateinit var sharedPreferences: SharedPreferences
+    var completeAll: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_key_word)
@@ -32,6 +33,7 @@ class ChangeKeyWordActivity : AppCompatActivity() {
 
 
         ButtonActualizar.setOnClickListener {
+            completeAll = true
             actualizarKeyword()
         }
 
@@ -43,43 +45,61 @@ class ChangeKeyWordActivity : AppCompatActivity() {
     }
 
     private fun actualizarKeyword(){
-        val palabraClaveActual = findViewById<EditText>(R.id.et_palabraClaveActual).text
-        val palabraClaveNueva = findViewById<EditText>(R.id.et_PalabraClaveNueva).text
+        val palabraClaveActual = findViewById<EditText>(R.id.et_palabraClaveActual)
+        val palabraClaveNueva = findViewById<EditText>(R.id.et_PalabraClaveNueva)
         val idUser = sharedPreferences.getInt("id",0)
         val update:Any
 
         val userService = ApiClient.retrofit().create(UserService::class.java)
         val intent = Intent(this, SettingsActivity::class.java)
 
-        update = ResponseKeyWord(idUser,palabraClaveActual.toString(),palabraClaveNueva.toString())
+
+        if (palabraClaveActual.text.toString().length < 4 || palabraClaveActual.text.toString().length > 15){
+            palabraClaveActual.setError("La palabra clave de tener al menos 4 caracteres y máximo 15")
+            palabraClaveActual.setText("")
+            palabraClaveActual.requestFocus()
+            completeAll = false
+        }
+
+        if (palabraClaveNueva.text.toString().length < 4 || palabraClaveActual.text.toString().length > 15){
+            palabraClaveNueva.setError("La palabra clave de tener al menos 4 caracteres y máximo 15")
+            palabraClaveNueva.setText("")
+            palabraClaveNueva.requestFocus()
+            completeAll = false
+        }
+        if(completeAll){
+            update = ResponseKeyWord(idUser,palabraClaveActual.text.toString(),palabraClaveNueva.text.toString())
 
 
-        userService.updateKeyWord(update).enqueue(object: Callback<ResponseKeyWord>{
-            override fun onFailure(call: Call<ResponseKeyWord>, t: Throwable) {
-                Log.i("CHANGEKEYWORD","NO ENTRO")
-            }
-
-            override fun onResponse(
-                call: Call<ResponseKeyWord>,
-                response: Response<ResponseKeyWord>
-            ) {
-                if(response.isSuccessful){
-                    Log.i("CHANGEKEYWORD: ", response.body().toString())
-
-                    startActivity(intent)
-                    finish()
-                    Toast.makeText(applicationContext,"palabra clave cambia con éxito", Toast.LENGTH_SHORT).show()
-
-                }else{
-                    val res = response.errorBody()?.string()
-                    val message = JsonParser().parse(res).asJsonObject["message"].asString
-
-                    Toast.makeText(applicationContext,message, Toast.LENGTH_SHORT).show()
-                    Log.i("CHANGEKEYWORD: ", "WHAT FUEEE")
+            userService.updateKeyWord(update).enqueue(object: Callback<ResponseKeyWord>{
+                override fun onFailure(call: Call<ResponseKeyWord>, t: Throwable) {
+                    Log.i("CHANGEKEYWORD","NO ENTRO")
                 }
-            }
 
-        })
+                override fun onResponse(
+                    call: Call<ResponseKeyWord>,
+                    response: Response<ResponseKeyWord>
+                ) {
+                    if(response.isSuccessful){
+                        Log.i("CHANGEKEYWORD: ", response.body().toString())
+
+                        startActivity(intent)
+                        finish()
+                        Toast.makeText(applicationContext,"palabra clave cambia con éxito", Toast.LENGTH_SHORT).show()
+
+                    }else{
+                        val res = response.errorBody()?.string()
+                        val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                        Toast.makeText(applicationContext,message, Toast.LENGTH_SHORT).show()
+                        Log.i("CHANGEKEYWORD: ", "WHAT FUEEE")
+                    }
+                }
+
+            })
+        }
+
+
 
 
 
