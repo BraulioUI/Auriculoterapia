@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.fragments.patient.ContinueTreatmentFragment
 import com.example.android.auriculoterapia_app.fragments.patient.EvaluationFormTreatmentFragment
 import com.example.android.auriculoterapia_app.fragments.patient.NewTreatmentFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentRegisterFragment
@@ -25,6 +26,11 @@ class TreatmentPacientActivity : AppCompatActivity() {
 
             menuItem.itemId == R.id.new_treatmentFragment -> {
                 loadFragment(NewTreatmentFragment())
+                return@setOnNavigationItemSelectedListener true
+            }
+
+            menuItem.itemId == R.id.continue_treatmentFragment -> {
+                loadFragment(ContinueTreatmentFragment())
                 return@setOnNavigationItemSelectedListener true
             }
 
