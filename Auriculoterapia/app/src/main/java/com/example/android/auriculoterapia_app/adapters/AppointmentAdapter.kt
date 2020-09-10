@@ -88,7 +88,7 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val dateText = itemView.findViewById<TextView>(R.id.cardDateTextView)
         val timeText = itemView.findViewById<TextView>(R.id.cardTimeTextView)
         val context = itemView.context
-
+        val numeroCelular = itemView.findViewById<TextView>(R.id.cardPhoneTextView)
         val patientText = itemView.findViewById<TextView>(R.id.cardPatientTextView)
         val stateText = itemView.findViewById<TextView>(R.id.cardStateTextView)
         val buttonModificar = itemView.findViewById<Button>(R.id.botonModificar)
@@ -97,11 +97,14 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(cita: Cita){
             dateText.text = cita.fecha
             timeText.text = cita.horaInicioAtencion
-
-            patientText.text = cita.paciente.usuario.nombre
             stateText.text = cita.estado
+            patientText.text = cita.paciente.usuario.nombre
 
-
+            if(rol == "ESPECIALISTA"){
+                numeroCelular.text = cita.paciente.celular
+            } else {
+                numeroCelular.visibility = View.GONE
+            }
 
 
 
