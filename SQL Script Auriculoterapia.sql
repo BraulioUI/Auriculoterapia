@@ -66,8 +66,11 @@ UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
 
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
-INSERT INTO SOLICITUDTRATAMIENTOS(Id,Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
-VALUES(3,20,60.9,1.70,"DOLOR LUMBAR","imagen.jpg","Dolor de cabeza","En proceso","2020-08-28",4);
+INSERT INTO SOLICITUDTRATAMIENTOS(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
+VALUES(20,60.9,1.70,"DOLOR LUMBAR","imagen.jpg","Dolor de cabeza","En proceso","2020-09-09",1);
+
+update solicitudtratamientos set ImagenAreaAfectada = 'http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg' WHERE Id = 2;
+update solicitudtratamientos set Sintomas = 'Dolor lumbar' WHERE Id = 2;
 
 
 delete from solicitudtratamientos where Id = 2;

@@ -4,6 +4,7 @@ package com.example.android.auriculoterapia_app.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -78,10 +79,16 @@ class TreatmentRequestActivity : AppCompatActivity() {
                             .load(solicitud.imagenAreaAfectada)
                             .into(imagenSolicitud)
 
-                        botonResponder.setOnClickListener{
-                            val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)
-                            startActivity(intent.putExtra("solicitudTratamientoId", solicitud.id))
+                        if (solicitud.estado == "En proceso"){
+                            botonResponder.setOnClickListener{
+                                val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)
+                                startActivity(intent.putExtra("solicitudTratamientoId", solicitud.id))
+                            }
+                        } else {
+                            botonResponder.visibility = View.INVISIBLE
                         }
+
+
                     } else {
                         Toast.makeText(this@TreatmentRequestActivity, "No hay datos", Toast.LENGTH_SHORT).show()
                     }

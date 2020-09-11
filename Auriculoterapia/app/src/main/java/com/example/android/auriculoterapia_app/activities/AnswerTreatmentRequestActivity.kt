@@ -38,6 +38,9 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
 
 
         ///////////Material Date Picker///////////
+
+        ////VALIDAR QUE SEA MÁXIMO DE UNA SEMANA
+
         startDateText.text = "____-__-__"
         endDateText.text = "____-__-__"
         //DatePickerBuilder
@@ -59,6 +62,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
 
             }
         }
+
 
 
         //Logic
@@ -104,17 +108,24 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         }
 
         botonEnviar.setOnClickListener{
-            val body = FormularioTratamiento(textoTipoTratamiento,
-                fechaEnvioText.text.toString(),
-                startDateText.text.toString(),
-                endDateText.text.toString(),
-                Integer.parseInt(frecuenciaEditText.text.toString()),
-                Integer.parseInt(tiempoTerapiaEditText.text.toString()),
-                "asdgsdgdgds.jpg",
-                solicitudTratamientoId
-            )
-            Log.i("Tratamiento", body.toString())
-            registrarRepuestaTratamiento(body)
+          if(!(startDateText.text == "____-__-__") &&
+              !(endDateText.text == "____-__-__") &&
+              !frecuenciaEditText.text.isEmpty() &&
+              !tiempoTerapiaEditText.text.isEmpty()){
+              
+              val body = FormularioTratamiento(textoTipoTratamiento,
+                  fechaEnvioText.text.toString(),
+                  startDateText.text.toString(),
+                  endDateText.text.toString(),
+                  Integer.parseInt(frecuenciaEditText.text.toString()),
+                  Integer.parseInt(tiempoTerapiaEditText.text.toString()),
+                  "asdgsdgdgds.jpg",
+                  solicitudTratamientoId
+              )
+              Log.i("Tratamiento", body.toString())
+              registrarRepuestaTratamiento(body)
+          }
+
         }
 
         editarFoto.setOnClickListener{
