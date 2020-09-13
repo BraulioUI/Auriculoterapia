@@ -3,10 +3,7 @@ package com.example.android.auriculoterapia_app.services
 import com.example.android.auriculoterapia_app.models.Tratamiento
 import com.example.android.auriculoterapia_app.models.helpers.FormularioTratamiento
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface TreatmentService {
 
@@ -15,4 +12,14 @@ interface TreatmentService {
 
     @GET("api/tratamiento/historial")
     fun getByPatientId(@Query("pacienteId") pacienteId: Int): Call<List<Tratamiento>>
+
+    @GET("api/tratamiento/{id}")
+    fun getById(@Path("id")id:Int):Call<Tratamiento>
+
+    @POST("api/evolucion/{IdPaciente}")
+    fun registerFormTreatmentEvolucion(@Body body:FormularioEvolucion,
+                                       @Path("IdPaciente")IdPaciente:Int):Call<FormularioEvolucion>
 }
+
+data class FormularioEvolucion(var evolucionNumero:Int,var peso:Double,
+                          var otros:String,var tipoTratamiento:String,var tratamientoId:Int)
