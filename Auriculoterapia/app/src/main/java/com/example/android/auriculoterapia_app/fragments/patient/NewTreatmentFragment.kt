@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
+import com.cloudinary.android.uploadwidget.model.Media
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.activities.InitialImageActivity
 import com.example.android.auriculoterapia_app.constants.ApiClient
@@ -49,6 +50,8 @@ class NewTreatmentFragment  : Fragment(){
         val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
 
         val userId = sharedPreferences.getInt("id",0)
+
+
 
         //val optionEdad = view.findViewById<Spinner>(R.id.spinner_edad)
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
@@ -274,8 +277,10 @@ class NewTreatmentFragment  : Fragment(){
             val result = data?.getStringExtra("filepath")
             filePath = result.toString()
 
-            val config = ConfigCloudinary.config()
-            MediaManager.init(requireContext(),config)
+            //val config = ConfigCloudinary.config()
+            //MediaManager.init(requireContext(),config) //problema se vuelve a generar
+
+
 
             val checkimage = requireView().findViewById<ImageView>(R.id.iv_checkImage)
             checkimage!!.visibility = View.VISIBLE

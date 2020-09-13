@@ -50,19 +50,19 @@
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Disminucion del malestar:"
+        android:text="Evolución:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Tratamiento" />
 
     <TextView
         android:id="@+id/tv_Tratamiento"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="Tratamiento:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Codigo" />
 
     <TextView
         android:id="@+id/tv_peso"
@@ -75,27 +75,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_malestar" />
 
     <Spinner
-        android:id="@+id/spinner_tratamiento"
+        android:id="@+id/spinner_disminucion"
         android:layout_width="185dp"
         android:layout_height="36dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_malestar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_Tratamiento"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner_disminucion"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_malestar"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_tratamiento" />
+        app:layout_constraintTop_toTopOf="@+id/tv_malestar" />
 
     <Button
         android:id="@+id/btn_guardar_formulario"
@@ -111,13 +97,12 @@
 
     <TextView
         android:id="@+id/tv_tratamiento"
-        android:layout_width="wrap_content"
+        android:layout_width="58dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="155dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tv_Tratamiento"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_Tratamiento"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tv_malestar2"
@@ -128,5 +113,33 @@
         android:text="1"
         app:layout_constraintStart_toEndOf="@+id/tv_malestar"
         app:layout_constraintTop_toBottomOf="@+id/tv_tratamiento" />
+
+    <TextView
+        android:id="@+id/tv_Codigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="16dp"
+        android:text="Codigo: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_codigoTratamiento"
+        android:layout_width="185dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Codigo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_Codigo" />
+
+    <TextView
+        android:id="@+id/tv_resultCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="83dp"
+        android:text="1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_Codigo"
+        app:layout_constraintStart_toEndOf="@+id/tv_Codigo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

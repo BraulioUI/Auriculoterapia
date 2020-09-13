@@ -1,6 +1,6 @@
 use auriculoterapiadb;
 use m9wogfp1a7afp76v;
-aadsgfsdg
+
 /* por si me equivoco al poner el ejecutar */
 /*ROL 1 - ESPECIALISTA*/
 INSERT INTO Roles(Descripcion) VALUES ('ESPECIALISTA');
@@ -88,3 +88,4 @@ ALTER TABLE DISPONIBILIDADES AUTO_INCREMENT = 1;
 ALTER TABLE tratamientos AUTO_INCREMENT = 1;
 SELECT * FROM tratamientos;
 UPDATE tratamientos SET Id = 1 WHERE Id = 2;
+select* from evoluciones;

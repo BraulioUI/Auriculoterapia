@@ -26,8 +26,6 @@ class InitialImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_initial_image)
 
-        val config = ConfigCloudinary.config()
-
         pickImageFromGallery()
 
         //MediaManager.init(this,config)
@@ -38,7 +36,7 @@ class InitialImageActivity : AppCompatActivity() {
             val intent = Intent()
             intent.putExtra("filepath",filepath)
             setResult(12,intent)
-            finish()
+            finishAndRemoveTask()
         }
 
     }
@@ -52,6 +50,7 @@ class InitialImageActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type ="image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
