@@ -12,12 +12,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo_ear_2"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/logo_ear_2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".activities.EditPhotoFromRequestActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activities.GeneralResultsActivity"></activity>
+        <activity android:name=".activities.EditPhotoFromRequestActivity" />
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.InitialImageActivity" />
         <activity android:name=".activities.ChangeKeyWordActivity" />

@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.android.auriculoterapia_app.activities.AppointmentManagement
+import com.example.android.auriculoterapia_app.activities.GeneralResultsActivity
 import com.example.android.auriculoterapia_app.activities.PatientsManagementActivity
 import com.example.android.auriculoterapia_app.activities.SettingsActivity
 
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val appointmentOption = findViewById<CardView>(R.id.appointment_option)
         val patientOption = findViewById<CardView>(R.id.patient_option)
         val configurationOption = findViewById<CardView>(R.id.configuration_option)
+        val resultsOption = findViewById<CardView>(R.id.results_option)
         val username = findViewById<TextView>(R.id.user_name)
 
         val actionBar = supportActionBar
@@ -47,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         configurationOption.setOnClickListener {
             val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        resultsOption.setOnClickListener{
+            val intent = Intent(this, GeneralResultsActivity::class.java)
             startActivity(intent)
         }
 

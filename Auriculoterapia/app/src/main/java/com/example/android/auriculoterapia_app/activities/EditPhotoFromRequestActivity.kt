@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.with
 import com.example.android.auriculoterapia_app.R
@@ -27,11 +28,12 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         intent.extras?.let{
             val bundle: Bundle = it
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
-        }
 
+        }
+        Toast.makeText(this, "$solicitudTratamientoId", Toast.LENGTH_SHORT)
         val solicitudService = ApiClient.retrofit().create(TreatmentRequestService::class.java)
 
-        solicitudService.findImageByRequest(token!!, solicitudTratamientoId).enqueue(object: Callback<String>{
+        solicitudService.findImageByRequest("Bearer $token", solicitudTratamientoId).enqueue(object: Callback<String>{
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.i("Error", "Fallo al recuperar la imagen")
             }
@@ -39,10 +41,10 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful){
                     val imagen = response.body()!!
-                    Log.i("URL", imagen)
-                   /* MyGlideApp.with(imagenEditable.context)
+                    Toast.makeText(this@EditPhotoFromRequestActivity, "URL $imagen", Toast.LENGTH_SHORT).show()
+                    with(this@EditPhotoFromRequestActivity)
                         .load(imagen)
-                        .into(imagenEditable)*/
+                        .into(imagenEditable)
 
 
                 }
