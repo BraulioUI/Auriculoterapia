@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import com.example.android.auriculoterapia_app.activities.AppointmentManagement
-import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
-import com.example.android.auriculoterapia_app.activities.SettingsActivity
-import com.example.android.auriculoterapia_app.activities.TreatmentPacientActivity
+import com.example.android.auriculoterapia_app.activities.*
 import kotlinx.android.synthetic.main.activity_main_patient.*
 
 class MainActivityPatient : AppCompatActivity() {
@@ -24,6 +21,7 @@ class MainActivityPatient : AppCompatActivity() {
 
         val appointmentOption = findViewById<CardView>(R.id.appointment_option_patient)
         val configurationOption = findViewById<CardView>(R.id.configuration_option_patient)
+        val resultOption = findViewById<CardView>(R.id.results_option_patient)
         val username = findViewById<TextView>(R.id.user_name)
 
         //val sb = StringBuilder()
@@ -48,6 +46,10 @@ class MainActivityPatient : AppCompatActivity() {
 
         configurationOption.setOnClickListener {
             val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+        resultOption.setOnClickListener {
+            val intent = Intent(this,ResultPatientActivity::class.java)
             startActivity(intent)
         }
     }

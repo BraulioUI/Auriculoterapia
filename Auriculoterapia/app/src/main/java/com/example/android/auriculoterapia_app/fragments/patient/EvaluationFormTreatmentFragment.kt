@@ -10,9 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
-import com.example.android.auriculoterapia_app.adapters.TreatmentAdapter
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.Tratamiento
 import com.example.android.auriculoterapia_app.services.FormularioEvolucion
@@ -53,7 +51,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
         optionMalestar = view.findViewById(R.id.spinner_disminucion)
         selectorCodigoTratamiento = view.findViewById(R.id.spinner_codigoTratamiento)
 
-        resultTratamiento= view.findViewById(R.id.tv_tratamiento)
+        resultTratamiento= view.findViewById(R.id.tv_tratamientoResult)
         resultMalestar=view.findViewById(R.id.tv_malestar2)
         resultCodigo = view.findViewById(R.id.tv_resultCodigo)
 
@@ -128,7 +126,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
 
         val formularioEvolucion = FormularioEvolucion(evolucion,
             peso.text.toString().toDouble(),otros.text.toString(),
-            tipoTratamiento,tratamientoId)
+            tipoTratamiento,tratamientoId,null)
         Log.i("formularioEvaluacion: ",formularioEvolucion.toString())
         tratamientoService.registerFormTreatmentEvolucion(formularioEvolucion,pacienteId).enqueue(object:Callback<FormularioEvolucion>{
             override fun onFailure(call: Call<FormularioEvolucion>, t: Throwable) {

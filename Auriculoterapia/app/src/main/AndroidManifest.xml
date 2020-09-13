@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.GeneralResultsActivity"></activity>
+        <activity android:name=".activities.RatioEvolucionActivity"></activity>
+        <activity android:name=".activities.PesoPatientActivity" />
+        <activity android:name=".activities.EvolucionSintomasPacienteActivity" />
+        <activity android:name=".activities.ResultPatientActivity" />
+        <activity android:name=".activities.GeneralResultsActivity" />
         <activity android:name=".activities.EditPhotoFromRequestActivity" />
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.InitialImageActivity" />
