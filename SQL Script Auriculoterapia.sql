@@ -97,7 +97,12 @@ select* from evoluciones;
 INSERT INTO tratamientos(TipoTratamiento,FechaInicio,FechaFin,FrecuenciaAlDia,TiempoPorTerapia,SolicitudTratamientoId,FechaEnvio,ImagenEditada,Estado)
 VALUES("Dolor lumbar","2020-09-07", "2020-09-14", 5, 10, 2, "2020-09-07", "asdgsdgdgds.jpg", "En Proceso" );
 
-SELECT DISTINCT COUNT(u.Id) FROM Usuarios u JOIN Pacientes p ON p.UsuarioId = u.Id JOIN SolicitudTratamientos s ON p.Id = s.PacienteId
-JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE t.TipoTratamiento = "Dolor lumbar"
-AND u.Sexo = "Masculino";
-
+delimiter //
+CREATE PROCEDURE PacientesPorSexo(IN sexo longtext, IN tipoTratamiento longtext, OUT numPacientes int)
+	BEGIN
+		SELECT DISTINCT COUNT(p.Id) FROM Usuarios u JOIN Pacientes p ON p.UsuarioId = u.Id JOIN SolicitudTratamientos s ON p.Id = s.PacienteId
+		JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE t.TipoTratamiento = tipoTratamiento
+		AND u.Sexo = sexo group by s.Id;
+	END //
+    
+SELECT p.Id FROM Pacientes p 
