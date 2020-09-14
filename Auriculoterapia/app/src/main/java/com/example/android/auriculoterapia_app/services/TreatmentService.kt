@@ -19,7 +19,11 @@ interface TreatmentService {
     @POST("api/evolucion/{IdPaciente}")
     fun registerFormTreatmentEvolucion(@Body body:FormularioEvolucion,
                                        @Path("IdPaciente")IdPaciente:Int):Call<FormularioEvolucion>
+
+    @GET("api/evolucion/{IdPaciente}/{TipoTratamiento}")
+    fun getByIdPacienteTipoTratamiento(@Path("TipoTratamiento")TipoTratamiento:String,
+                                       @Path("IdPaciente")IdPaciente: Int):Call<List<FormularioEvolucion>>
 }
 
 data class FormularioEvolucion(var evolucionNumero:Int,var peso:Double,
-                          var otros:String,var tipoTratamiento:String,var tratamientoId:Int)
+                          var otros:String,var tipoTratamiento:String,var tratamientoId:Int,var sesion:Int?)
