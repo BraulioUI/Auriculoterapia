@@ -3,14 +3,13 @@ package com.example.android.auriculoterapia_app.activities
 
 import android.app.SearchManager
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class PatientsManagementActivity : AppCompatActivity() {
     //Retrofit
@@ -64,6 +64,9 @@ class PatientsManagementActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.patientSearch)
         val searchView = searchItem?.actionView as SearchView
 
+        searchView.inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME or InputType.TYPE_CLASS_TEXT
+
+
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
         searchView.setIconifiedByDefault(false)
 
@@ -89,6 +92,7 @@ class PatientsManagementActivity : AppCompatActivity() {
                 return false
             }
         })
+
 
 
         return true

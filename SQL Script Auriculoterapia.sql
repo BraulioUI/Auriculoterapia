@@ -47,6 +47,8 @@ SELECT * FROM Especialistas;
 SELECT * FROM Pacientes;
 SELECT * FROM Rol_Usuarios;
 
+SELECT distinct p.Id FROM Pacientes p JOIN SolicitudTratamientos s ON s.PacienteId = p.Id;
+
 /*Tipo de atenciones*/
 
 INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
@@ -60,9 +62,10 @@ VALUES(1, '2020-08-24', '2020-08-24 09:00:00', '2020-08-24 09:30:00', 'En proces
 
 DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
-SELECT * FROM Citas;
+SELECT * FROM Citas order by Id desc;
 
-UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
+UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 39;
+UPDATE CITAS SET Estado = "Completado" WHERE Estado = "Finalizado" and Id >= 1;
 
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
@@ -93,6 +96,8 @@ SELECT * FROM tratamientos;
 UPDATE tratamientos SET Id = 1 WHERE Id = 2;
 
 select* from evoluciones;
+
+
 
 INSERT INTO tratamientos(TipoTratamiento,FechaInicio,FechaFin,FrecuenciaAlDia,TiempoPorTerapia,SolicitudTratamientoId,FechaEnvio,ImagenEditada,Estado)
 VALUES("Dolor lumbar","2020-09-07", "2020-09-14", 5, 10, 2, "2020-09-07", "asdgsdgdgds.jpg", "En Proceso" );

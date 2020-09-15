@@ -50,7 +50,7 @@ class AppointmentStateFragment : Fragment() {
 
 
         recyclerView.layoutManager = LinearLayoutManager(context)
-        appointmentAdapter = AppointmentAdapter()
+        appointmentAdapter = AppointmentAdapter(requireContext())
 
 
         loadAppointments()
