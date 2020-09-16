@@ -1,10 +1,11 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
-import android.opengl.Visibility
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
 import com.example.android.auriculoterapia_app.constants.ApiClient
+import com.example.android.auriculoterapia_app.fragments.patient.AppointmentPatientRagisterFragment
 import com.example.android.auriculoterapia_app.models.Cita
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import retrofit2.Call
@@ -23,6 +29,7 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -79,6 +86,11 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
                 val horaActual = Calendar.getInstance().time
                 val builder = AlertDialog.Builder(context)
 
+                if (citaParaBoton.estado == "En Proceso" && horaFin!! < horaActual){
+                    holder.buttonCancelar.visibility = View.GONE
+                    holder.buttonModificar.visibility = View.GONE
+                }
+
                 holder.buttonCancelar.setOnClickListener{
 
                     if(horaFin!! > horaActual){
@@ -129,6 +141,28 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
                 }
 
                 holder.buttonModificar.setOnClickListener{
+                     if(citaParaBoton.estado == "En Proceso"){
+                         builder.setMessage(R.string.confirmacion_modificar_cita)
+                             .setPositiveButton("Aceptar",
+                                 DialogInterface.OnClickListener { dialog, id ->
+                                     val bundle = Bundle()
+                                     bundle.putBoolean("paraModificar", true)
+                                     bundle.putInt("citaIdParaModificar", citaParaBoton.id)
+
+                                     val fragment = AppointmentPatientRagisterFragment()
+                                     fragment.arguments = bundle
+                                     cargarFragmento(fragment)
+                                 })
+                             .setNegativeButton("Cancelar",
+                                 DialogInterface.OnClickListener { dialog, id ->
+                                     dialog.dismiss()
+                                 })
+                         // Create the AlertDialog object and return it
+                         val dialog = builder.create()
+                         dialog.show()
+                     }
+
+
 
                 }
 
@@ -196,5 +230,15 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
     }
 
+    fun cargarFragmento(fragment: Fragment){
+        val fm = this.context as AppointmentPatientManagement
+        val manager: FragmentManager = fm.supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+        ft.replace(R.id.fragmentContainer, fragment)
+
+        ft.commit()
+    }
+
 
 }
+

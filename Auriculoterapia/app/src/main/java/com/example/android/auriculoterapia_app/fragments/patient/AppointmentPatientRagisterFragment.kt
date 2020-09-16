@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.constants.BASE_URL
+import com.example.android.auriculoterapia_app.models.Cita
 import com.example.android.auriculoterapia_app.models.helpers.AvailabilityTimeRange
 import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
@@ -59,6 +61,10 @@ class AppointmentPatientRagisterFragment : Fragment() {
         val errorFecha = view.findViewById<TextView>(R.id.errorVacioFechaPaciente)
         val errorHora = view.findViewById<TextView>(R.id.errorVacioHoraPaciente)
         val errorAtencion = view.findViewById<TextView>(R.id.errorVacioTipoAtencion)
+
+
+
+
 
         celularEditText.setOnEditorActionListener{
             v, actionId, event ->
@@ -125,6 +131,48 @@ class AppointmentPatientRagisterFragment : Fragment() {
         ///////////////ATENTION TYPES////////////////////////
         val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
         val usuarioId = sharedPreferences.getInt("id", 0)
+        val token = sharedPreferences.getString("token", "")
+
+        var citaId = 0
+        var paraModificar = false
+
+        arguments?.let{
+            citaId = it.getInt("citaIdParaModificar")
+            paraModificar = it.getBoolean("paraModificar")
+        }
+        Log.i("Cita Id", citaId.toString())
+
+        // CONDICIÓN PARA MODIFICAR CITA
+        if(citaId != 0 && paraModificar){
+            val CitaService = retrofit.create(AppointmentService::class.java)
+
+            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val formatter1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formatter2 = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+            CitaService.findAppointmentById("Bearer $token", citaId).enqueue(object: Callback<Cita>{
+                override fun onFailure(call: Call<Cita>, t: Throwable) {
+                    Toast.makeText(mContext, "No se han podido extraer los datos de la cita", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Cita>, response: Response<Cita>) {
+                    if(response.isSuccessful){
+                        val cita = response.body()
+
+                        celularEditText.setText(cita!!.paciente.celular, TextView.BufferType.EDITABLE)
+                        fechaTextView.text = formatter1.format(parser.parse(cita.fecha))
+                        horaTextView.text = formatter2.format(parser.parse(cita.horaInicioAtencion))
+
+                    }
+
+
+
+                }
+            })
+
+
+        }
+        Log.i("Texto de la fecha", fechaTextView.text.toString())
 
         var textoAtencion: String = " "
 
@@ -146,6 +194,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
         ////////////RESERVAR///////////////////////
         var reservaExitosa = false
+        var actualizacionExitosa = false
         buttonReservar.setOnClickListener{
             if(!celularEditText.text.isEmpty() && fechaTextView.text != "____-__-__" && horaTextView.text != "__:__"
                 && textoAtencion != atenciones.get(0))    {
@@ -169,14 +218,21 @@ class AppointmentPatientRagisterFragment : Fragment() {
                             textoAtencion
                         )
 
-                    Log.i("Cita a registrar", cita.toString())
-                    registrarCita(cita, usuarioId, horaTextView)
-                    reservaExitosa = true
+                    if(citaId != 0 && paraModificar){
+                        Log.i("Cita a actualizar", cita.toString())
+                        actualizarCita(cita, citaId, "Bearer $token")
+                        actualizacionExitosa = true
+                    } else{
+                        Log.i("Cita a registrar", cita.toString())
+                        registrarCita(cita, usuarioId, horaTextView)
+                        reservaExitosa = true
+                    }
+
                 }
             } else{
                 Toast.makeText(mContext, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             }
-            if(!reservaExitosa){
+            if(!reservaExitosa || !actualizacionExitosa){
                 if(celularEditText.text.isEmpty()){
                     celularEditText.setError("Debes ingresar tu número")
 
@@ -198,6 +254,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
             } else {
                 horaTextView.text = "__:__"
                 reservaExitosa = false
+                actualizacionExitosa = false
             }
 
 
@@ -227,6 +284,22 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 }
 
 
+            }
+        })
+    }
+
+    fun actualizarCita(cita: FormularioCitaPaciente, citaId: Int, token: String){
+        val CitaService = retrofit.create(AppointmentService::class.java)
+
+        CitaService.updateAppointmentForPatient(token, citaId, cita).enqueue(object: Callback<Boolean>{
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                if(response.isSuccessful){
+                    Toast.makeText(mContext, "Se modificó correctamente la cita", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

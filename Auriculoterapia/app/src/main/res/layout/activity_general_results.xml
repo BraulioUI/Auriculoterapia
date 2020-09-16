@@ -19,9 +19,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="12dp">
+        android:padding="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,6 +43,47 @@
             />
 
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginEnd="12dp"
+                android:text="Sexo"
+                android:layout_gravity="center"
+
+                />
+
+            <Spinner
+                android:id="@+id/spinnerSeleccionarSexo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center"
+                />
+            <Button
+                android:id="@+id/botonFiltrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="FILTRAR"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
 
 
     <FrameLayout

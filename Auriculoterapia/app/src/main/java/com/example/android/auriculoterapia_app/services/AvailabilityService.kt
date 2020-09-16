@@ -13,7 +13,7 @@ interface AvailabilityService {
 
     @POST("api/disponibilidad")
     fun saveAvailability(@Body form: FormularioDisponibilidad, @Query("especialistaId") especialistaId: Int)
-                        : Call<FormularioDisponibilidad>
+                        : Call<Boolean>
 
     @GET("api/disponibilidad")
     fun getAvailabilityByDate(@Query("fecha") fecha: String): Call<Disponibilidad>

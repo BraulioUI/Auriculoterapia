@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
@@ -40,6 +41,8 @@ class GeneralResultsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_general_results, container, false)
+
+        val detalleObesidad = view.findViewById<LinearLayout>(R.id.detalleIMCPorTipoDePaciente)
 
         pieChartPacientesPorNiveles = view.findViewById(R.id.pieChartNivelesMejoraPacientes)
 
@@ -83,8 +86,8 @@ class GeneralResultsFragment : Fragment() {
                     if(res!!.cantidadHombres != 0){
                         list.add(PieEntry(response.body()!!.cantidadHombres.toFloat(), "Masculino"))
                     }
-                    if(res.cantidadMujeres == 0){
-                        list.add(PieEntry(1F, "Femenino"))
+                    if(res.cantidadMujeres != 0){
+                        list.add(PieEntry(response.body()!!.cantidadHombres.toFloat(), "Femenino"))
                     }
 
                     Log.i("Lista de datos: ", list.toString())
@@ -116,21 +119,8 @@ class GeneralResultsFragment : Fragment() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /////////////// PACIENTES POR NIVEL DE MEJORA /////////////////
+
         colorsArrayPacientesPorNiveles = arrayListOf(
             Color.parseColor("#F53F21"),
             Color.parseColor("#F59627"),
@@ -159,7 +149,7 @@ class GeneralResultsFragment : Fragment() {
         leyendaPorNiveles.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         leyendaPorNiveles.orientation = Legend.LegendOrientation.HORIZONTAL
         leyendaPorNiveles.setDrawInside(false)
-    ////////////////////////////////////////
+        ////////////////////////////////////////
 
 
 
@@ -169,11 +159,14 @@ class GeneralResultsFragment : Fragment() {
 
     fun fillPacientesPorNivelPieChart(): ArrayList<PieEntry>{
         val list =  ArrayList<PieEntry>()
-        var pieEntry: PieEntry
-        for(x in 1..5){
-            pieEntry = PieEntry((x*10).toFloat(), "$x")
-            list.add(pieEntry)
-        }
+
+
+        list.add(PieEntry((10).toFloat(), "Muy Baja"))
+        list.add(PieEntry((10).toFloat(), "Baja"))
+        list.add(PieEntry((10).toFloat(), "Media"))
+        list.add(PieEntry((10).toFloat(), "Alta"))
+        list.add(PieEntry((10).toFloat(), "Muy Alta"))
+
         return list
     }
 
