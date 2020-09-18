@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
-import com.example.android.auriculoterapia_app.services.FormularioEvolucion
-import com.example.android.auriculoterapia_app.services.ResponseUserById
-import com.example.android.auriculoterapia_app.services.TreatmentService
-import com.example.android.auriculoterapia_app.services.UserService
+import com.example.android.auriculoterapia_app.services.*
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -39,8 +36,6 @@ class PesoPatientActivity : AppCompatActivity() {
         val userId = sharedPreferences.getInt("id",0)
 
 
-
-
         userService.getUserById(userId).enqueue(object: Callback<ResponseUserById> {
             override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
                 Log.i("PESO: ","NO ENTRO")
@@ -58,20 +53,20 @@ class PesoPatientActivity : AppCompatActivity() {
                     Log.i("PACIENTEID",pacienteId.toString())
                     val tratamientoService = ApiClient.retrofit().create(TreatmentService::class.java)
 
-                    tratamientoService.getByIdPacienteTipoTratamiento(tipoTratamiento!!,pacienteId).enqueue(object:
-                        Callback<List<FormularioEvolucion>> {
-                        override fun onFailure(call: Call<List<FormularioEvolucion>>, t: Throwable) {
-                            Log.i("PESO: ","ONFAILURE")
+
+                    tratamientoService.getByIdPacienteTipoTratamientoResults(tipoTratamiento!!,pacienteId).enqueue(object: Callback<List<ResultsByPatient>>{
+                        override fun onFailure(call: Call<List<ResultsByPatient>>, t: Throwable) {
+                            Log.i("IMC: ","ONFAILURE")
                         }
 
                         override fun onResponse(
-                            call: Call<List<FormularioEvolucion>>,
-                            response: Response<List<FormularioEvolucion>>
+                            call: Call<List<ResultsByPatient>>,
+                            response: Response<List<ResultsByPatient>>
                         ) {
                             if(response.isSuccessful){
                                 Log.i("RESPONSE: ",response.body().toString())
                                 response.body()?.map {
-                                   yvalues.add(BarEntry(it.sesion?.toFloat()!!,it.peso.toFloat()))
+                                    yvalues.add(BarEntry(it.sesion?.toFloat()!!,it.imc.toFloat()))
                                 }
                                 Log.i("VALUES: ",yvalues.toString())
 
@@ -88,14 +83,14 @@ class PesoPatientActivity : AppCompatActivity() {
 
 
                             }else{
-                                Log.i("PESO: ","FALLO")
+                                Log.i("IMC: ","FALLO")
                             }
                         }
 
                     })
 
                 }else{
-                    Log.i("PESO: ","QUE FUE")
+                    Log.i("IMC: ","QUE FUE")
                 }
             }
 
