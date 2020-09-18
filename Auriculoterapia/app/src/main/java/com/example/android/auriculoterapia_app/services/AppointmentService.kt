@@ -24,4 +24,11 @@ interface AppointmentService {
     @PUT("api/cita/estado")
     fun updateStateOfAppointment(@Query("citaId") citaId: Int, @Query("estado") estado: String): Call<Boolean>
 
+    @GET("api/cita/{id}")
+    fun findAppointmentById(@Header("Authorization") token: String, @Path("id") citaId: Int): Call<Cita>
+
+    @PUT("api/cita/{id}")
+    fun updateAppointmentForPatient(@Header("Authorization") token: String,
+                                    @Path("id") citaId: Int,
+                                    @Body form: FormularioCitaPaciente): Call<Boolean>
 }

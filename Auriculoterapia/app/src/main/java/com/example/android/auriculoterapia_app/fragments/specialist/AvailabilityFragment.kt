@@ -135,16 +135,26 @@ class AvailabilityFragment : Fragment() {
         val nuevaDisponibilidad = FormularioDisponibilidad(horaInicio, horaFin, dia, horarioDescartados)
 
         Log.i("Disponibilidad: ", "${nuevaDisponibilidad} Especialista ID: $especialistaId")
-       disponibilidadService.saveAvailability(nuevaDisponibilidad, especialistaId).enqueue(object: Callback<FormularioDisponibilidad>{
-            override fun onFailure(call: Call<FormularioDisponibilidad>, t: Throwable) {
+       disponibilidadService.saveAvailability(nuevaDisponibilidad, especialistaId).enqueue(object: Callback<Boolean>{
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<FormularioDisponibilidad>,
-                response: Response<FormularioDisponibilidad>
+                call: Call<Boolean>,
+                response: Response<Boolean>
             ) {
-                Toast.makeText(context, "Registro exitoso!", Toast.LENGTH_SHORT).show()
+
+                if(response.isSuccessful){
+
+                    if(response.body()!!){
+                        Toast.makeText(context, "Registro de disponibilidad exitoso!", Toast.LENGTH_SHORT).show()
+                    } else{
+                        Toast.makeText(context, "Ya existe una disponibilidad para esta fecha!", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
             }
         })
     }

@@ -70,4 +70,10 @@
     <string name="indicacion_frecuencia_text">Frecuencia diaria:</string>
     <string name="indicacion_tiempo_terapia_text">Tiempo de cada terapia:</string>
 
+
+    <!--Mensajes de diálogo de validación-->
+    <string name="no_puede_finalizar_cita">No puede finalizar la cita hasta su hora de fin</string>
+    <string name="confirmacion_cancelar_cita">¿Seguro que desea cancelar la cita?</string>
+    <string name="confirmacion_modificar_cita">¿Seguro que desea modificar la cita?</string>
+
 </resources>

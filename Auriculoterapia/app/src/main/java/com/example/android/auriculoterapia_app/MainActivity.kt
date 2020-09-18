@@ -3,6 +3,7 @@ package com.example.android.auriculoterapia_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
-
         val appointmentOption = findViewById<CardView>(R.id.appointment_option)
         val patientOption = findViewById<CardView>(R.id.patient_option)
         val configurationOption = findViewById<CardView>(R.id.configuration_option)

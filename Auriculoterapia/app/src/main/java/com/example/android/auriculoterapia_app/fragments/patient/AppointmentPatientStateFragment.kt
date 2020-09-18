@@ -50,7 +50,7 @@ class AppointmentPatientStateFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.patientAppointmentsRecycler)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val appointmentAdapter = AppointmentAdapter()
+        val appointmentAdapter = AppointmentAdapter(requireContext())
 
         AppointmentService.listPatientAppointment("Bearer $token", usuarioId).enqueue(object: Callback<List<Cita>> {
             override fun onFailure(call: Call<List<Cita>>, t: Throwable) {

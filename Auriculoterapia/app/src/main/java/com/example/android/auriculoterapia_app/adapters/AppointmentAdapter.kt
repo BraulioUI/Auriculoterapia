@@ -1,7 +1,11 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
-import android.opengl.Visibility
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +13,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
 import com.example.android.auriculoterapia_app.constants.ApiClient
+import com.example.android.auriculoterapia_app.fragments.patient.AppointmentPatientRagisterFragment
 import com.example.android.auriculoterapia_app.models.Cita
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import retrofit2.Call
@@ -21,7 +30,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items : List<Cita> = ArrayList()
     private var rol: String = ""
@@ -43,27 +53,116 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is CitaViewHolder->{
                 val cita = items.get(position)
                 holder.bind(cita)
-
+                val pos = holder.adapterPosition
                 if (cita.estado.equals("Cancelado")){
                     holder.stateText.setTextColor(Color.RED)
-                    holder.buttonCancelar.visibility = View.GONE
-                } else {
+                } else if(cita.estado.equals("Completado")) {
+                    holder.stateText.setTextColor(Color.parseColor("#32ACFC"))
+                } else{
                     holder.stateText.setTextColor(Color.GREEN)
-                    holder.buttonCancelar.visibility = View.VISIBLE
                 }
 
-                if(rol == "ESPECIALISTA"){
+                if (cita.estado.equals("Cancelado") || cita.estado.equals("Completado")){
+                    holder.buttonCancelar.visibility = View.GONE
+                    holder.buttonFinalizar.visibility = View.GONE
+                    holder.buttonModificar.visibility = View.GONE
+                } else {
+                    if (rol == "PACIENTE") {
+                        holder.buttonModificar.visibility = View.VISIBLE
+                        holder.buttonFinalizar.visibility = View.GONE
+                    } else {
+
+                        holder.buttonFinalizar.visibility = View.VISIBLE
+                        holder.buttonModificar.visibility = View.GONE
+                    }
+                    holder.buttonCancelar.visibility = View.VISIBLE
+
+                }
+
+                val citaParaBoton = items.get(pos)
+                val parser = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+                val horaFinalCita = "${citaParaBoton.fecha} ${citaParaBoton.horaFinAtencion}"
+                val horaFin = parser.parse(horaFinalCita)
+                val horaActual = Calendar.getInstance().time
+                val builder = AlertDialog.Builder(context)
+
+                if (citaParaBoton.estado == "En Proceso" && horaFin!! < horaActual){
+                    holder.buttonCancelar.visibility = View.GONE
                     holder.buttonModificar.visibility = View.GONE
                 }
 
                 holder.buttonCancelar.setOnClickListener{
-                    Toast.makeText(holder.context, "${position}", Toast.LENGTH_SHORT).show()
-                    actualizarEstadoCita(cita.id,"Cancelado")
-                    items.get(holder.adapterPosition).estado = "Cancelado"
-                    notifyItemChanged(holder.adapterPosition)
+
+                    if(horaFin!! > horaActual){
+                        builder.setMessage(R.string.confirmacion_cancelar_cita)
+                            .setPositiveButton("Aceptar",
+                                DialogInterface.OnClickListener { dialog, id ->
+                                    actualizarEstadoCita(cita.id,"Cancelado")
+                                    citaParaBoton.estado = "Cancelado"
+                                    notifyItemChanged(pos)
+                                    Toast.makeText(context,"La cita se canceló correctamente.", Toast.LENGTH_SHORT).show()
+                                })
+                            .setNegativeButton("Cancelar",
+                                DialogInterface.OnClickListener { dialog, id ->
+                                    dialog.dismiss()
+                                })
+                        // Create the AlertDialog object and return it
+                        val dialog = builder.create()
+                        dialog.show()
+                    } else{
+                        actualizarEstadoCita(cita.id,"Cancelado")
+                        citaParaBoton.estado = "Cancelado"
+                        notifyItemChanged(pos)
+                        Toast.makeText(context,"La cita se canceló correctamente.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                holder.buttonFinalizar.setOnClickListener{
+
+                    //Validación de hora actual mayor a hora de fin
+
+                    if(horaFin!! < horaActual){
+                        actualizarEstadoCita(cita.id,"Completado")
+                        citaParaBoton.estado = "Completado"
+                        notifyItemChanged(pos)
+                        Toast.makeText(context,"La cita se finalizó con exito", Toast.LENGTH_SHORT).show()
+                    }else{
+                        builder.setMessage(R.string.no_puede_finalizar_cita)
+                            .setPositiveButton("Aceptar",
+                                DialogInterface.OnClickListener { dialog, id ->
+                                    dialog.dismiss()
+                                })
+                        // Create the AlertDialog object and return it
+                        val dialog = builder.create()
+                        dialog.show()
+                    }
+
+
                 }
 
                 holder.buttonModificar.setOnClickListener{
+                     if(citaParaBoton.estado == "En Proceso"){
+                         builder.setMessage(R.string.confirmacion_modificar_cita)
+                             .setPositiveButton("Aceptar",
+                                 DialogInterface.OnClickListener { dialog, id ->
+                                     val bundle = Bundle()
+                                     bundle.putBoolean("paraModificar", true)
+                                     bundle.putInt("citaIdParaModificar", citaParaBoton.id)
+
+                                     val fragment = AppointmentPatientRagisterFragment()
+                                     fragment.arguments = bundle
+                                     cargarFragmento(fragment)
+                                 })
+                             .setNegativeButton("Cancelar",
+                                 DialogInterface.OnClickListener { dialog, id ->
+                                     dialog.dismiss()
+                                 })
+                         // Create the AlertDialog object and return it
+                         val dialog = builder.create()
+                         dialog.show()
+                     }
+
+
 
                 }
 
@@ -93,6 +192,7 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val stateText = itemView.findViewById<TextView>(R.id.cardStateTextView)
         val buttonModificar = itemView.findViewById<Button>(R.id.botonModificar)
         val buttonCancelar = itemView.findViewById<Button>(R.id.botonCancelar)
+        val buttonFinalizar = itemView.findViewById<Button>(R.id.botonFinalizar)
 
         fun bind(cita: Cita){
             dateText.text = cita.fecha
@@ -130,5 +230,15 @@ class AppointmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
+    fun cargarFragmento(fragment: Fragment){
+        val fm = this.context as AppointmentPatientManagement
+        val manager: FragmentManager = fm.supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+        ft.replace(R.id.fragmentContainer, fragment)
+
+        ft.commit()
+    }
+
 
 }
+

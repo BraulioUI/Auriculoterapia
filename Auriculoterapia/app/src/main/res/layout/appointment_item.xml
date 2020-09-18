@@ -95,6 +95,9 @@
                 android:layout_height="wrap_content"
                 android:text="Cancelar"/>
 
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
             <Button
                 android:id="@+id/botonModificar"
                 android:layout_width="wrap_content"
@@ -102,7 +105,15 @@
                 android:text="Modificar"
                 android:layout_marginStart="10dp"
                 />
+               <Button
+                   android:id="@+id/botonFinalizar"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Finalizar"
 
+                   android:layout_marginStart="10dp"
+                   />
+           </RelativeLayout>
         </LinearLayout>
 
 

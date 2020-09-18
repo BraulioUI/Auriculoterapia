@@ -109,6 +109,7 @@ class LogInActivity : AppCompatActivity() {
             authService.authenticate(authRequest).enqueue(object : Callback<AuthResponse>{
                 override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                     Log.i("INICIAR SESION","NO ENTRO")
+
                 }
 
                 override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
