@@ -79,12 +79,18 @@ class RatioEvolucionActivity : AppCompatActivity() {
                                 }
                                 val lastEvolucionesNum = evolucionesNum.last()
                                 val ratio = (100*lastEvolucionesNum)/5
-                                if (ratio < 60){
-                                    backgroundShape.setColor(Color.RED)
-                                } else if(ratio > 60){
-                                    backgroundShape.setColor(Color.GREEN)
-                                } else{
-                                    backgroundShape.setColor(Color.YELLOW)
+                                if (ratio <= 20){
+                                    backgroundShape.setColor(Color.parseColor("#43AD28"))
+                                } else if(ratio <= 40){
+                                    backgroundShape.setColor(Color.parseColor("#FDC629"))
+                                }else if(ratio <= 60){
+                                    backgroundShape.setColor(Color.parseColor("#CFFE11"))
+                                }
+                                else if(ratio <= 80){
+                                    backgroundShape.setColor( Color.parseColor("#21E545"))
+                                }
+                                else{
+                                    backgroundShape.setColor( Color.parseColor("#18B034"))
                                 }
 
                                 tvRatioEvolucion.text = "${ratio.toInt()}%"
