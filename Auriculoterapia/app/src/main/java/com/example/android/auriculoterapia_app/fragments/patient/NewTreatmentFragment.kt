@@ -218,6 +218,7 @@ class NewTreatmentFragment  : Fragment(){
                         if(response.isSuccessful){
                             Log.i("REGISTRAR TRATAMIENTO: ", response.body().toString())
                             Toast.makeText(requireContext(),"Se registró el tratamiento correctamente",Toast.LENGTH_SHORT).show()
+                            activity?.finish() //REVISAR
                             //fragmentTreatmentContainer.
                             //startActivity(intentContinueTreatment)
                         }

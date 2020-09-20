@@ -54,6 +54,14 @@ class ChangeKeyWordActivity : AppCompatActivity() {
         val intent = Intent(this, SettingsActivity::class.java)
 
 
+        if(palabraClaveActual.text.isEmpty()||palabraClaveNueva.text.isEmpty()){
+            Toast.makeText(applicationContext,
+                "Complete todos los campos",Toast.LENGTH_SHORT).show()
+            completeAll = false
+        }
+
+
+
         if (palabraClaveActual.text.toString().length < 4 || palabraClaveActual.text.toString().length > 15){
             palabraClaveActual.setError("La palabra clave de tener al menos 4 caracteres y máximo 15")
             palabraClaveActual.setText("")

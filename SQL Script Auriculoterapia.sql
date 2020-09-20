@@ -20,7 +20,7 @@ VALUES ('Marcos Alonso', 'Rivas Torres', 'marcosrt@gmail.com', 'primerpaciente',
 INSERT INTO Usuarios(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
 
-SELECT * FROM Usuarios;
+1
 DELETE FROM Usuarios Where Id = 5;
 ALTER TABLE Usuarios auto_increment=1;
 SELECT * FROM Rol_Usuarios;
@@ -47,8 +47,6 @@ SELECT * FROM Especialistas;
 SELECT * FROM Pacientes;
 SELECT * FROM Rol_Usuarios;
 
-SELECT distinct p.Id FROM Pacientes p JOIN SolicitudTratamientos s ON s.PacienteId = p.Id;
-
 /*Tipo de atenciones*/
 
 INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
@@ -62,17 +60,10 @@ VALUES(1, '2020-08-24', '2020-08-24 09:00:00', '2020-08-24 09:30:00', 'En proces
 
 DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
-SELECT * FROM Citas order by Estado and Id desc;
+SELECT * FROM Citas;
 
-UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 39;
-UPDATE CITAS SET Estado = "Completado" WHERE Estado = "Finalizado" and Id >= 1;
-DELETE FROM CITAS WHERE Fecha < curdate() and Id >= 1;
+UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
 
-DELETE FROM horariosdescartados 
-WHERE DisponibilidadId in (SELECT Id from Disponibilidades WHERE Dia < curdate())
-AND Id >= 1;
-
-DELETE FROM Disponibilidades WHERE Dia < curdate() AND Id >= 1;
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
 INSERT INTO SOLICITUDTRATAMIENTOS(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
@@ -103,17 +94,10 @@ UPDATE tratamientos SET Id = 1 WHERE Id = 2;
 
 select* from evoluciones;
 
-
-
 INSERT INTO tratamientos(TipoTratamiento,FechaInicio,FechaFin,FrecuenciaAlDia,TiempoPorTerapia,SolicitudTratamientoId,FechaEnvio,ImagenEditada,Estado)
 VALUES("Dolor lumbar","2020-09-07", "2020-09-14", 5, 10, 2, "2020-09-07", "asdgsdgdgds.jpg", "En Proceso" );
 
-delimiter //
-CREATE PROCEDURE PacientesPorSexo(IN sexo longtext, IN tipoTratamiento longtext, OUT numPacientes int)
-	BEGIN
-		SELECT DISTINCT COUNT(p.Id) FROM Usuarios u JOIN Pacientes p ON p.UsuarioId = u.Id JOIN SolicitudTratamientos s ON p.Id = s.PacienteId
-		JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE t.TipoTratamiento = tipoTratamiento
-		AND u.Sexo = sexo group by s.Id;
-	END //
-    
-SELECT p.Id FROM Pacientes p 
+SELECT DISTINCT COUNT(u.Id) FROM Usuarios u JOIN Pacientes p ON p.UsuarioId = u.Id JOIN SolicitudTratamientos s ON p.Id = s.PacienteId
+JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE t.TipoTratamiento = "Dolor lumbar"
+AND u.Sexo = "Masculino";
+
