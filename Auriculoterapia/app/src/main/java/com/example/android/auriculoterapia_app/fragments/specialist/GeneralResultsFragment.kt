@@ -48,9 +48,11 @@ class GeneralResultsFragment : Fragment() {
 
 
         var tratamiento = ""
+        var genero = ""
         arguments?.let{
             val bundle: Bundle = it
             tratamiento = bundle.getString("tratamiento").toString()
+            genero = bundle.getString("genero").toString()
         }
 
 

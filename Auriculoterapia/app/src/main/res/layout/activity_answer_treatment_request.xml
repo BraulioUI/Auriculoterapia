@@ -174,47 +174,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="12dp"
-                    android:text="@string/foto_de_la_oreja_texto"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/botonEditar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"
-                    android:text="Editar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:padding="16dp">
+                android:padding="4dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="end">
 
                 <Button
-                    android:id="@+id/send_answer_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:layout_weight="1"
-                    android:text="@string/send_text" />
 
-                <Button
-                    android:id="@+id/boton_cancelar_respuesta"
+                    android:id="@+id/botonSiguiente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:layout_weight="1"
-                    android:text="@string/cancel_text" />
+
+                    android:text="SIGUIENTE" />
+
 
             </LinearLayout>
         </LinearLayout>

@@ -7,10 +7,7 @@
     tools:context=".fragments.specialist.AvailabilityFragment">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,12 +29,28 @@
                     android:textAlignment="textEnd"
                     android:textSize="@dimen/text_size"
                     android:layout_marginEnd="10dp"/>
-
-                <Spinner
-                    android:id="@+id/spinner_fecha_disponibilidad"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size" />
+                    android:orientation="horizontal">
+                    <Spinner
+                        android:id="@+id/spinner_fecha_disponibilidad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size"
+                        android:layout_marginEnd="2dp"/>
+
+                    <TextView
+                        android:id="@+id/availability_date_not_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:visibility="gone" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -45,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="8dp"
                 android:layout_marginBottom="@dimen/disponibilidad_margin_bottom">
 
             <TextView
@@ -87,7 +101,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +156,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/disponibilidad_margin_bottom">
+                android:layout_marginBottom="@dimen/disponibilidad_margin_bottom"
+                android:padding="8dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -156,7 +172,6 @@
 
 
 
-    </androidx.cardview.widget.CardView>
 
 
 

@@ -24,8 +24,6 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_answer_treatment_request)
 
         //Elementos de UI
-        val botonCancelar = findViewById<Button>(R.id.boton_cancelar_respuesta)
-        val botonEnviar = findViewById<Button>(R.id.send_answer_button)
         val selectorTipoTratamiento = findViewById<Spinner>(R.id.spinner_tipo_tratamiento)
         val botonFecha = findViewById<ImageButton>(R.id.btn_rango_fecha_tratamiento)
         val frecuenciaEditText = findViewById<EditText>(R.id.frecuencia_edit_text)
@@ -33,7 +31,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         val startDateText = findViewById<TextView>(R.id.startDateTreatment)
         val endDateText = findViewById<TextView>(R.id.endDateTreatment)
         val fechaEnvioText = findViewById<TextView>(R.id.fechaEnvioRespuestaTratamiento)
-        val editarFoto = findViewById<Button>(R.id.botonEditar)
+        val siguiente = findViewById<Button>(R.id.botonSiguiente)
 
 
 
@@ -101,7 +99,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Id de solicitud: $solicitudTratamientoId", Toast.LENGTH_SHORT).show()
 
-
+/*
         botonCancelar.setOnClickListener{
             val intent = Intent(this, TreatmentRequestActivity::class.java)
             startActivity(intent)
@@ -126,9 +124,9 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
               registrarRepuestaTratamiento(body)
           }
 
-        }
+        }*/
 
-        editarFoto.setOnClickListener{
+        siguiente.setOnClickListener{
             val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
             intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
             startActivity(intent)
