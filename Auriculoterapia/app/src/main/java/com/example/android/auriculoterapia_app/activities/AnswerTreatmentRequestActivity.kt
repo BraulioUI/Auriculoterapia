@@ -32,8 +32,8 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         val endDateText = findViewById<TextView>(R.id.endDateTreatment)
         val fechaEnvioText = findViewById<TextView>(R.id.fechaEnvioRespuestaTratamiento)
         val siguiente = findViewById<Button>(R.id.botonSiguiente)
-
-
+        val errorSpinnerTratamiento = findViewById<TextView>(R.id.respuesta_error_tratamiento_no_seleccionado)
+        val errorFechas = findViewById<TextView>(R.id.respuesta_error_fechas_no_seleccionadas)
 
         ///////////Material Date Picker///////////
 
@@ -57,47 +57,41 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
                 val offsetFromUTC: Int = timeZoneUTC.getOffset(Date().time) * -1
                 startDateText.text = formatter.format(it.first?.plus(offsetFromUTC))
                 endDateText.text = formatter.format(it.second?.plus(offsetFromUTC))
-
+                errorFechas.visibility = View.GONE
             }
         }
 
-
-
-        //Logic
-
-
-
-        /////////////////////////////////////////
-
-
+        /// SETTING THE APPOINTMENT ID
         var solicitudTratamientoId = 0
         intent.extras?.let{
             val bundle: Bundle = it
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
         }
+        /////////////////////////////////////////
 
 
+        /// COMBO BOX TIPO TRATAMIENTO
         var textoTipoTratamiento: String = ""
-        val lista =  ListaTiposDeTratamiento.lista
+        val listaDeTratamientos =  ListaTiposDeTratamiento.lista
 
-        selectorTipoTratamiento.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lista)
+        selectorTipoTratamiento.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaDeTratamientos)
         selectorTipoTratamiento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                textoTipoTratamiento = lista.get(0)
+                textoTipoTratamiento = listaDeTratamientos.get(0)
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?,
                                         position: Int, id: Long) {
-                textoTipoTratamiento = lista.get(position)
+                errorSpinnerTratamiento.visibility = View.GONE
+                textoTipoTratamiento = listaDeTratamientos.get(position)
             }
         }
+        /////////////////////////////////////////
 
-
+        /////SETTING PUBLICATION DATE
        fechaEnvioText.text = formatter.format(Calendar.getInstance().time)
+        /////////////////////////////////////////
 
-
-
-        Toast.makeText(this, "Id de solicitud: $solicitudTratamientoId", Toast.LENGTH_SHORT).show()
 
 /*
         botonCancelar.setOnClickListener{
@@ -127,9 +121,48 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         }*/
 
         siguiente.setOnClickListener{
-            val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
-            intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
-            startActivity(intent)
+
+            if(!(startDateText.text == "____-__-__") &&
+                !(endDateText.text == "____-__-__") &&
+                !frecuenciaEditText.text.isEmpty() &&
+                !tiempoTerapiaEditText.text.isEmpty() &&
+                !(textoTipoTratamiento.equals(listaDeTratamientos.get(0)))
+            ) {
+
+                val body = FormularioTratamiento(textoTipoTratamiento,
+                    fechaEnvioText.text.toString(),
+                    startDateText.text.toString(),
+                    endDateText.text.toString(),
+                    Integer.parseInt(frecuenciaEditText.text.toString()),
+                    Integer.parseInt(tiempoTerapiaEditText.text.toString()),
+                    "asdgsdgdgds.jpg",
+                    solicitudTratamientoId
+                )
+                val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
+                intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
+                startActivity(intent)
+
+                Log.i("Tratamiento", body.toString())
+
+            } else{
+                if(textoTipoTratamiento.equals(listaDeTratamientos.get(0))){
+                    errorSpinnerTratamiento.visibility = View.VISIBLE
+                    errorSpinnerTratamiento.setError("Debes seleccionar el tratamiento")
+                }
+                if (startDateText.text == "____-__-__" || endDateText.text == "____-__-__"){
+                    errorFechas.visibility = View.VISIBLE
+                    errorFechas.setError("Debes ingresar el rango de fechas del tratamiento")
+                }
+                if(frecuenciaEditText.text.isEmpty()){
+                    frecuenciaEditText.setError("Debes seleccionar la frecuencia diaria")
+                }
+                if(tiempoTerapiaEditText.text.isEmpty()){
+                    tiempoTerapiaEditText.setError("Debe seleccionar el tiempo de\ncada terapia")
+                }
+
+            }
+
+
         }
 
     }

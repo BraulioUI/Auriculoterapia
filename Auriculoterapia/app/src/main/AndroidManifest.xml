@@ -36,13 +36,20 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.PatientsManagementActivity" />
-        <activity android:name=".activities.AppointmentPatientManagement" />
-        <activity android:name=".MainActivityPatient" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.AppointmentManagement" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".activities.LogInActivity">
+        <activity android:name=".activities.PatientsManagementActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AppointmentPatientManagement"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivityPatient"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AppointmentManagement"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LogInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
