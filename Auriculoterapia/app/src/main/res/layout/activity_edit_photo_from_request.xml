@@ -29,11 +29,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp">
 
 
            <Button
@@ -51,10 +53,10 @@
                 android:text="LIMPIAR" />
             </LinearLayout>
             <Button
-                android:id="@+id/saveEditedImage"
+                android:id="@+id/saveFormTreatment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="GUARDAR" />
+                android:text="ENVIAR" />
 
         </LinearLayout>
     </LinearLayout>

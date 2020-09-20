@@ -1,11 +1,14 @@
 package com.example.android.auriculoterapia_app.activities
 
+import android.app.AlertDialog
 import android.content.ContentValues
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.media.MediaMetadata
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,16 +19,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.cloudinary.android.MediaManager
+import com.cloudinary.android.callback.ErrorInfo
+import com.cloudinary.android.callback.UploadCallback
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
+import com.example.android.auriculoterapia_app.models.helpers.FormularioTratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
+import com.example.android.auriculoterapia_app.services.TreatmentService
 import com.example.android.auriculoterapia_app.util.DrawableImageView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
+
 
 
 class EditPhotoFromRequestActivity : AppCompatActivity() {
@@ -35,68 +48,47 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
     lateinit var bitmapAlterado: Bitmap
     lateinit var escogerImagenBoton: Button
     lateinit var botonLimpiar: Button
-    lateinit var guardarImagen: Button
+    lateinit var enviarForm: Button
     lateinit var cancelarBoton: Button
     lateinit var imagenAEditar: DrawableImageView
+    lateinit var urlImagenEnCloudinary: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_photo_from_request)
 
+        var solicitudTratamientoId = 0
+        var form = FormularioTratamiento("","","", "",
+            0, 0, "", 0)
+        var imagenUrlAreaFectada = ""
+
+        intent.extras?.let{
+            val bundle: Bundle = it
+            solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
+            form = it.getSerializable("formTratamiento") as FormularioTratamiento
+            imagenUrlAreaFectada = it.getString("imagenUrl").toString()
+        }
+
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        val token = sharedPreferences.getString("token", "")
+
         //Para dibujar
         imagenAEditar = findViewById(R.id.toEditPhoto)
+        imagenAEditar.setImagenUrl(imagenUrlAreaFectada)
+
+
        /* bitmapActual = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
         bitmapAlterado = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)*/
         cancelarBoton = findViewById(R.id.cancelButton)
         botonLimpiar = findViewById(R.id.clearPoints)
 
-        guardarImagen = findViewById(R.id.saveEditedImage)
-        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
-        val token = sharedPreferences.getString("token", "")
+        ///lo importante
+        urlImagenEnCloudinary = ""
 
-        var solicitudTratamientoId = 0
-        intent.extras?.let{
-            val bundle: Bundle = it
-            solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
+        enviarForm = findViewById(R.id.saveFormTreatment)
 
-        }
+
+
         Toast.makeText(this, "$solicitudTratamientoId", Toast.LENGTH_SHORT).show()
-        val solicitudService = ApiClient.retrofit().create(TreatmentRequestService::class.java)
-
- /*      solicitudService.findImageByRequest("Bearer $token", solicitudTratamientoId).enqueue(object: Callback<String>{
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("Error", "Fallo al recuperar la imagen")
-            }
-
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if(response.isSuccessful){
-                    val imagen = response.body()!!
-                    Toast.makeText(this@EditPhotoFromRequestActivity, "URL $imagen", Toast.LENGTH_SHORT).show()
-                        bitmapActual = getBitmapPersonalizado(imagen, contentResolver)!!
-
-
-                        bitmapAlterado = Bitmap.createBitmap(bitmapActual.width,
-                        bitmapActual.height, bitmapActual.config)
-
-                        imagenAEditar.setNuevaImagen(bitmapAlterado, bitmapActual)
-
-
-                }
-            }
-        })
-*/
-     /*   val imagen = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg"
-     //imagenAEditar.setImagen(imagen)
-        Glide.with(this)
-            .asBitmap()
-            .load(imagen)
-            .into(object : CustomTarget<Bitmap>(){
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    bitmapActual = resource
-                    imagenAEditar.setImageBitmap(bitmapActual)
-                }
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })*/
 
         cancelarBoton.setOnClickListener{
             finish()
@@ -106,51 +98,86 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
             imagenAEditar.startNew()
         }
 
-        guardarImagen.setOnClickListener{
-            val contentValues = ContentValues(3)
-            contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, "Draw on ear")
+        enviarForm.setOnClickListener{
+            if(form.solicitudTratamientoId != 0){
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage(R.string.confirmacion_envio_tratamiento)
+                    .setPositiveButton("Enviar",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            uploadToCloudinaryAndRegisterTreatment(form, imagenAEditar.overlay()!!)
+                        })
+                    .setNegativeButton("Cancelar",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            dialog.dismiss()
+                        })
+                // Create the AlertDialog object and return it
+                val dialog = builder.create()
+                dialog.show()
 
-            val imageFileUrl = contentResolver.insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues
-            )
-            try{
-                if (imageFileUrl != null){
-                val imageFileOs = contentResolver.openOutputStream(imageFileUrl)
-                    val imagenAGuardar = imagenAEditar.overlay()
-                    if (imagenAGuardar != null) {
-                        imagenAGuardar.compress(CompressFormat.JPEG, 90, imageFileOs)
-                    }
-                    Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
-
-                }
-            } catch(e: Exception){
-                Log.v("EXCEPTION", e.message!!)
             }
-
         }
 
-      /*  guardarImagen.setOnClickListener{
-            val b = getBitmapFromView(imagenAEditar)
-            var fos: FileOutputStream? = null
-            try {
-                fos = FileOutputStream(getFile)
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
+    }
+
+    fun uploadToCloudinaryAndRegisterTreatment(form: FormularioTratamiento, bitmap: Bitmap){
+        val byteArrayOfBitmap = convertirBitmapAByteArray(bitmap)
+        MediaManager.get().upload(byteArrayOfBitmap).callback(object: UploadCallback{
+            override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
+                form.imagenEditada = resultData?.get("url").toString()
+                registrarTratamiento(form)
+
             }
 
-            b.compress(CompressFormat.PNG, 95, fos)
-        }*/
+            override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
+                Log.i("onProgress: ", "Subiendo Imagen")
+            }
 
+            override fun onReschedule(requestId: String?, error: ErrorInfo?) {
+                Log.i("onReschedule: ", error!!.description)
+            }
+
+            override fun onError(requestId: String?, error: ErrorInfo?) {
+                Log.i("onError: ", error!!.description)
+                Toast.makeText(this@EditPhotoFromRequestActivity, "No se registró la imagen, vuelva a intentar", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onStart(requestId: String?) {
+                Log.i("START: ", "empezando")
+            }
+        }).dispatch()
     }
 
-    fun getBitmapFromView(view: View): Bitmap{
-        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.draw(canvas)
-        return bitmap
+    fun registrarTratamiento(form: FormularioTratamiento){
+        val tratamientoService = ApiClient.retrofit().create(TreatmentService::class.java)
+        tratamientoService.registerTreatment(form).enqueue(object: Callback<Boolean>{
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Toast.makeText(applicationContext, "Fallo en el envío de tratamiento", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                if(response.isSuccessful){
+                    Toast.makeText(this@EditPhotoFromRequestActivity, "Registro de tratamiento exitoso", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
 
+    fun convertirBitmapAByteArray(bitmap: Bitmap): ByteArray{
+        val baos = ByteArrayOutputStream()
+        try{
+            bitmap.compress(CompressFormat.JPEG, 90, baos)
+            return baos.toByteArray()
+
+        }finally {
+            try{
+                baos.close()
+            } catch(e: Exception){
+                e.printStackTrace()
+            }
+        }
+
+    }
 
   /*  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -184,7 +211,19 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         }
     }*/
 
-    fun getBitmapPersonalizado(imageUrl: String): Bitmap? {
+    /*  guardarImagen.setOnClickListener{
+        val b = getBitmapFromView(imagenAEditar)
+        var fos: FileOutputStream? = null
+        try {
+            fos = FileOutputStream(getFile)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+
+        b.compress(CompressFormat.PNG, 95, fos)
+    }*/
+
+   /* fun getBitmapPersonalizado(imageUrl: String): Bitmap? {
         /*var bitmap: Bitmap ?= null
         try {
             val imageUrl = URL(url)
@@ -208,7 +247,29 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         }
 
     }
+*/
 
+
+    ///// LA PARTE DEL ENVÍO
+    /* val contentValues = ContentValues(3)
+          contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, "Draw on ear")
+
+          val imageFileUrl = contentResolver.insert(
+              MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues
+          )
+          try{
+              if (imageFileUrl != null){
+              val imageFileOs = contentResolver.openOutputStream(imageFileUrl)
+                  val imagenAGuardar = imagenAEditar.overlay()
+                  if (imagenAGuardar != null) {
+                      imagenAGuardar.compress(CompressFormat.JPEG, 90, imageFileOs)
+                  }
+                  Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
+
+              }
+          } catch(e: Exception){
+              Log.v("EXCEPTION", e.message!!)
+          }*/
 
 
 }

@@ -21,6 +21,7 @@ class DrawableImageView @JvmOverloads constructor(
     private var paint = Paint()
     private var canvas = Canvas()
     private lateinit var bitmap: Bitmap
+    private lateinit var imagenUrl: String
 
 
     init{
@@ -32,26 +33,31 @@ class DrawableImageView @JvmOverloads constructor(
 
     }
 
+    fun setImagenUrl(url: String){
+        this.imagenUrl = url;
+    }
+
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-        val imagen = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg"
+        //val imagen = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg"
 
-        Glide.with(this)
-            .asBitmap()
-            .load(imagen)
-            .override(bitmap.width, bitmap.height)
-            .centerCrop()
-            .into(object : CustomTarget<Bitmap>(){
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+        if(imagenUrl != ""){
+            Glide.with(this)
+                .asBitmap()
+                .load(imagenUrl)
+                .override(bitmap.width, bitmap.height)
+                .centerCrop()
+                .into(object : CustomTarget<Bitmap>(){
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
 
-                    setImageBitmap(resource)
-                }
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })
-
+                        setImageBitmap(resource)
+                    }
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        }
 
         canvas = Canvas(bitmap)
 

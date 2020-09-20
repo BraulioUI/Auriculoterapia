@@ -75,5 +75,6 @@
     <string name="no_puede_finalizar_cita">No puede finalizar la cita hasta su hora de fin</string>
     <string name="confirmacion_cancelar_cita">¿Seguro que desea cancelar la cita?</string>
     <string name="confirmacion_modificar_cita">¿Seguro que desea modificar la cita?</string>
+    <string name="confirmacion_envio_tratamiento">¿Está conforme con los datos ingresados?</string>
 
 </resources>

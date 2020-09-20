@@ -67,7 +67,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         constraintsBuilderRange.setValidator(validators)
 
         builder.setCalendarConstraints(constraintsBuilderRange.build())
-        Log.i("HMMM", "¿Por qué no abre a la primera?")
+
         val picker = builder.build()
         //DatePicker
         botonFecha.setOnClickListener{
@@ -87,9 +87,11 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
 
         /// SETTING THE APPOINTMENT ID
         var solicitudTratamientoId = 0
+        var imagenUrl = ""
         intent.extras?.let{
             val bundle: Bundle = it
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
+            imagenUrl = bundle.getString("imageUrl").toString()
         }
         /////////////////////////////////////////
 
@@ -164,6 +166,8 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
                 )
                 val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
                 intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
+                intent.putExtra("imagenUrl", imagenUrl)
+                intent.putExtra("formTratamiento", body)
                 startActivity(intent)
 
                 Log.i("Tratamiento", body.toString())
