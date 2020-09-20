@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.*
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
-import org.w3c.dom.Text
 
 class ResultPatientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +15,7 @@ class ResultPatientActivity : AppCompatActivity() {
 
 
         val evolucionbutton = findViewById<Button>(R.id.btn_EvolucionSintomas)
-        val resultTratamiento = findViewById<TextView>(R.id.tv_resultspinnerTratamiento)
+        val resultTratamiento = findViewById<TextView>(R.id.tv_RatioEvolucion)
         val selectorTratamiento = findViewById<Spinner>(R.id.spinner_TratamientosResultadosPacientes)
         val pesoButton = findViewById<Button>(R.id.btn_Peso)
         val ratioButton = findViewById<Button>(R.id.btn_RatioEvolucion)

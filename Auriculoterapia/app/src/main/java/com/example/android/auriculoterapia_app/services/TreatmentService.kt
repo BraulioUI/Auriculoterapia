@@ -23,7 +23,13 @@ interface TreatmentService {
     @GET("api/evolucion/{IdPaciente}/{TipoTratamiento}")
     fun getByIdPacienteTipoTratamiento(@Path("TipoTratamiento")TipoTratamiento:String,
                                        @Path("IdPaciente")IdPaciente: Int):Call<List<FormularioEvolucion>>
+
+    @GET("api/evolucion/{IdPaciente}/{TipoTratamiento}")
+    fun getByIdPacienteTipoTratamientoResults(@Path("TipoTratamiento")TipoTratamiento:String,
+                                       @Path("IdPaciente")IdPaciente: Int):Call<List<ResultsByPatient>>
 }
 
 data class FormularioEvolucion(var evolucionNumero:Int,var peso:Double,
                           var otros:String,var tipoTratamiento:String,var tratamientoId:Int,var sesion:Int?)
+
+data class ResultsByPatient(var evolucionNumero:Int,var peso:Double,var tipoTratamiento:String,var tratamientoId:Int,var sesion:Int?,var imc:Double,var grasaCorporal:Double)
