@@ -11,7 +11,7 @@ import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.helpers.FormularioTratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentService
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,11 +47,34 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
         builder.setTheme(R.style.ThemeOverlay_MaterialComponents_MaterialCalendar)
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        builder.setTitleText("Selecciona un rango de fechas")
+        //CONSTRAINTS
+        val constraintsBuilderRange = CalendarConstraints.Builder()
+
+        val calendar = Calendar.getInstance()
+        val minDate = Calendar.getInstance().time
+        calendar.add(Calendar.DATE, 8)
+        val maxDate = calendar.time
+
+        val dateValidatorMin = DateValidatorPointForward.from(minDate.time)
+        val dateValidatorMax = DateValidatorPointBackward.before(maxDate.time)
+
+        val listValidators = arrayListOf<CalendarConstraints.DateValidator>(
+            dateValidatorMin, dateValidatorMax
+        )
+
+        val validators = CompositeDateValidator.allOf(listValidators)
+        constraintsBuilderRange.setValidator(validators)
+
+        builder.setCalendarConstraints(constraintsBuilderRange.build())
+        Log.i("HMMM", "¿Por qué no abre a la primera?")
+        val picker = builder.build()
         //DatePicker
         botonFecha.setOnClickListener{
-            val picker = builder.build()
             picker.show(supportFragmentManager, picker.toString())
-            picker.addOnNegativeButtonClickListener{  }
+            picker.addOnNegativeButtonClickListener{
+                picker.dismiss()
+            }
             picker.addOnPositiveButtonClickListener {
                 val timeZoneUTC = TimeZone.getDefault()
                 val offsetFromUTC: Int = timeZoneUTC.getOffset(Date().time) * -1
@@ -59,6 +82,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
                 endDateText.text = formatter.format(it.second?.plus(offsetFromUTC))
                 errorFechas.visibility = View.GONE
             }
+
         }
 
         /// SETTING THE APPOINTMENT ID
@@ -151,7 +175,7 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
                 }
                 if (startDateText.text == "____-__-__" || endDateText.text == "____-__-__"){
                     errorFechas.visibility = View.VISIBLE
-                    errorFechas.setError("Debes ingresar el rango de fechas del tratamiento")
+                    errorFechas.setError("Debes ingresar el rango de fechas")
                 }
                 if(frecuenciaEditText.text.isEmpty()){
                     frecuenciaEditText.setError("Debes seleccionar la frecuencia diaria")
