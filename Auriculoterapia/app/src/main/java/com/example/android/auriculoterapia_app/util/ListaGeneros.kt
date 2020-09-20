@@ -1,12 +1,11 @@
 package com.example.android.auriculoterapia_app.util
 
-class ListaTiposDeTratamiento {
+class ListaGeneros {
     companion object{
         val lista: ArrayList<String> = arrayListOf(
-            "--Seleccionar--",
-            "Dolor lumbar",
-            "Obesidad",
-            "Ansiedad"
+            "Ambos",
+            "Masculino",
+            "Femenino"
         )
 
     }

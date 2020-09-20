@@ -146,9 +146,9 @@ class AppointmentPatientRagisterFragment : Fragment() {
         if(citaId != 0 && paraModificar){
             val CitaService = retrofit.create(AppointmentService::class.java)
 
-            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            /*val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
             val formatter1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formatter2 = SimpleDateFormat("HH:mm", Locale.getDefault())
+            val formatter2 = SimpleDateFormat("HH:mm", Locale.getDefault())*/
 
             CitaService.findAppointmentById("Bearer $token", citaId).enqueue(object: Callback<Cita>{
                 override fun onFailure(call: Call<Cita>, t: Throwable) {
@@ -160,8 +160,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                         val cita = response.body()
 
                         celularEditText.setText(cita!!.paciente.celular, TextView.BufferType.EDITABLE)
-                        fechaTextView.text = formatter1.format(parser.parse(cita.fecha))
-                        horaTextView.text = formatter2.format(parser.parse(cita.horaInicioAtencion))
+
 
                     }
 

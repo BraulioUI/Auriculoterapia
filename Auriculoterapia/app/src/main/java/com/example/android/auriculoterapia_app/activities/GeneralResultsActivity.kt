@@ -4,34 +4,44 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.fragments.specialist.GeneralResultsFragment
+import com.example.android.auriculoterapia_app.util.ListaGeneros
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
+import kotlinx.android.synthetic.main.activity_general_results.*
 
 class GeneralResultsActivity : AppCompatActivity() {
 
 
     private lateinit var spinnerTratamientos: Spinner
+    private lateinit var spinnerSexo: Spinner
+    private lateinit var buttonFiltrar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_general_results)
 
+
         var tratamiento =  "Dolor lumbar"
+        var genero = "Ambos"
 
         val bundleFirst = Bundle()
         bundleFirst.putString("tratamiento", tratamiento)
 
         spinnerTratamientos = findViewById(R.id.spinnerTratamientosResultados)
+        spinnerSexo = findViewById(R.id.spinnerSeleccionarSexo)
+        buttonFiltrar = findViewById(R.id.botonFiltrar)
+        val bundle = Bundle()
         val generalResultsFragment = GeneralResultsFragment()
 
         generalResultsFragment.arguments = bundleFirst
 
-
         loadFragment(GeneralResultsFragment())
+
         spinnerTratamientos.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ListaTiposDeTratamiento.lista)
         spinnerTratamientos.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -44,14 +54,41 @@ class GeneralResultsActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val bundle = Bundle()
+
                 tratamiento = ListaTiposDeTratamiento.lista.get(position)
                 bundle.putString("tratamiento", tratamiento)
-                generalResultsFragment.arguments = bundle
-                loadFragment(generalResultsFragment)
+
                 }
             }
-        }
+
+            spinnerSexo.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ListaGeneros.lista)
+            spinnerSexo.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    genero = ListaGeneros.lista.get(0)
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    genero = ListaGeneros.lista.get(position)
+                    bundle.putString("genero", genero)
+                }
+            }
+
+            botonFiltrar.setOnClickListener{
+                generalResultsFragment.arguments = bundle
+                loadFragment(generalResultsFragment)
+            }
+
+
+
+    }
+
+
+
 
 
 

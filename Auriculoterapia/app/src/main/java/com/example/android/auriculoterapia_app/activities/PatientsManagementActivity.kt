@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,7 @@ class PatientsManagementActivity : AppCompatActivity() {
 
     lateinit var patientsAdapter : PatientsAdapter
     lateinit var recyclerView: RecyclerView
-
+    lateinit var errorBuscador: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,7 @@ class PatientsManagementActivity : AppCompatActivity() {
         val token = sharedPreferences.getString("token", "")
         recyclerView = findViewById(R.id.recyclerViewPatients)
         patientsAdapter = PatientsAdapter(this)
+        errorBuscador = findViewById(R.id.errorBuscadorPacientes)
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -63,9 +65,7 @@ class PatientsManagementActivity : AppCompatActivity() {
         val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.patientSearch)
         val searchView = searchItem?.actionView as SearchView
-
-        searchView.inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME or InputType.TYPE_CLASS_TEXT
-
+        searchView.inputType =  InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PERSON_NAME
 
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
         searchView.setIconifiedByDefault(false)
@@ -87,7 +87,14 @@ class PatientsManagementActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                fetchPatients(token!!, newText!!, patientsAdapter)
+                if(hasOnlyLetters(newText!!)){
+                    errorBuscador.visibility = View.GONE
+                    fetchPatients(token!!, newText, patientsAdapter)
+                } else{
+                    errorBuscador.visibility = View.VISIBLE
+                    errorBuscador.setError("Solo se deben ingresar letras")
+                }
+
                 //Toast.makeText(this@PatientsManagementActivity, "Looking for: $newText", Toast.LENGTH_SHORT).show()
                 return false
             }
@@ -125,6 +132,16 @@ class PatientsManagementActivity : AppCompatActivity() {
             })
 
 
+    }
+
+    fun hasOnlyLetters(item: String): Boolean {
+        val chars = item.toCharArray()
+        for (c in chars) {
+            if (!Character.isLetter(c)) {
+                return false
+            }
+        }
+        return true
     }
 
 

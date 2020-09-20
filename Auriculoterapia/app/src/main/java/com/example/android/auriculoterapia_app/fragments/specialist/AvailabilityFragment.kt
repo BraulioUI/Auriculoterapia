@@ -57,6 +57,8 @@ class AvailabilityFragment : Fragment() {
         horaDescarteFin = view.findViewById(R.id.hora_descarte_fin)
         addButton = view.findViewById(R.id.añadir_horario_descartado)
         saveButton = view.findViewById(R.id.boton_guardar_disponibilidad)
+
+        val errorFecha = view.findViewById<TextView>(R.id.availability_date_not_selected)
         //horariosDescartados = ArrayList()
 
 
@@ -73,21 +75,27 @@ class AvailabilityFragment : Fragment() {
         val cal = Calendar.getInstance()
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val dateStringList: MutableList<String> = mutableListOf()
+        dateStringList.add("--Seleccione--")
         for (x in 0 until 7){
             val date = cal.time
             dateStringList.add(formatter.format(date))
             cal.add(Calendar.DATE, 1)
         }
 
-
+        var fechaText = dateStringList.get(0)
         fechaSelector.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, dateStringList)
         fechaSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                fechaText = dateStringList.get(0)
+
+
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?,
                                         position: Int, id: Long) {
 
                     fechaText = dateStringList.get(position)
+                    errorFecha.visibility = View.GONE
 
             }
         }
@@ -110,13 +118,29 @@ class AvailabilityFragment : Fragment() {
         saveButton.setOnClickListener{
             if(!horaInicioDisponibilidadEditText.text.isEmpty()
               and !horaFinDisponibilidadEditText.text.isEmpty()
-               and !fechaText.isEmpty()
+               and !(fechaText.equals(dateStringList.get(0)))
              ) {
                 registrarDisponibilidad(horaInicioDisponibilidadEditText.text.toString(),
                                         horaFinDisponibilidadEditText.text.toString(),
                                         fechaText,
                                         horarioDescartadoAdapter.getFormsDescartes(),
                                         especialistaId)
+            } else{
+                Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                if(fechaText.equals(dateStringList.get(0))){
+                    //ERROR
+                    errorFecha.visibility = View.VISIBLE
+                    errorFecha.setError("Debe seleccionar una fecha")
+                }
+
+                if(horaInicioDisponibilidadEditText.text.isEmpty()){
+                    horaInicioDisponibilidadEditText.setError("Debe ingresar una hora de inicio")
+                }
+                if (horaFinDisponibilidadEditText.text.isEmpty()){
+                    horaFinDisponibilidadEditText.setError("Debe ingresar una hora de fin")
+                }
+
+
             }
         }
 

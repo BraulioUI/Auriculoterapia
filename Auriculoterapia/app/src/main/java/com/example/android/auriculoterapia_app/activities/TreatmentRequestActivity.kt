@@ -82,7 +82,9 @@ class TreatmentRequestActivity : AppCompatActivity() {
                         if (solicitud.estado == "En proceso"){
                             botonResponder.setOnClickListener{
                                 val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)
-                                startActivity(intent.putExtra("solicitudTratamientoId", solicitud.id))
+                                intent.putExtra("solicitudTratamientoId", solicitud.id)
+                                intent.putExtra("imageUrl", solicitud.imagenAreaAfectada)
+                                startActivity(intent)
                             }
                         } else {
                             botonResponder.visibility = View.INVISIBLE

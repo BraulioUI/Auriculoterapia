@@ -11,7 +11,7 @@ import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.helpers.FormularioTratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentService
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,8 +24,6 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_answer_treatment_request)
 
         //Elementos de UI
-        val botonCancelar = findViewById<Button>(R.id.boton_cancelar_respuesta)
-        val botonEnviar = findViewById<Button>(R.id.send_answer_button)
         val selectorTipoTratamiento = findViewById<Spinner>(R.id.spinner_tipo_tratamiento)
         val botonFecha = findViewById<ImageButton>(R.id.btn_rango_fecha_tratamiento)
         val frecuenciaEditText = findViewById<EditText>(R.id.frecuencia_edit_text)
@@ -33,9 +31,9 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         val startDateText = findViewById<TextView>(R.id.startDateTreatment)
         val endDateText = findViewById<TextView>(R.id.endDateTreatment)
         val fechaEnvioText = findViewById<TextView>(R.id.fechaEnvioRespuestaTratamiento)
-        val editarFoto = findViewById<Button>(R.id.botonEditar)
-
-
+        val siguiente = findViewById<Button>(R.id.botonSiguiente)
+        val errorSpinnerTratamiento = findViewById<TextView>(R.id.respuesta_error_tratamiento_no_seleccionado)
+        val errorFechas = findViewById<TextView>(R.id.respuesta_error_fechas_no_seleccionadas)
 
         ///////////Material Date Picker///////////
 
@@ -49,59 +47,79 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
         builder.setTheme(R.style.ThemeOverlay_MaterialComponents_MaterialCalendar)
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        builder.setTitleText("Selecciona un rango de fechas")
+        //CONSTRAINTS
+        val constraintsBuilderRange = CalendarConstraints.Builder()
+
+        val calendar = Calendar.getInstance()
+        val minDate = Calendar.getInstance().time
+        calendar.add(Calendar.DATE, 8)
+        val maxDate = calendar.time
+
+        val dateValidatorMin = DateValidatorPointForward.from(minDate.time)
+        val dateValidatorMax = DateValidatorPointBackward.before(maxDate.time)
+
+        val listValidators = arrayListOf<CalendarConstraints.DateValidator>(
+            dateValidatorMin, dateValidatorMax
+        )
+
+        val validators = CompositeDateValidator.allOf(listValidators)
+        constraintsBuilderRange.setValidator(validators)
+
+        builder.setCalendarConstraints(constraintsBuilderRange.build())
+
+        val picker = builder.build()
         //DatePicker
         botonFecha.setOnClickListener{
-            val picker = builder.build()
             picker.show(supportFragmentManager, picker.toString())
-            picker.addOnNegativeButtonClickListener{  }
+            picker.addOnNegativeButtonClickListener{
+                picker.dismiss()
+            }
             picker.addOnPositiveButtonClickListener {
                 val timeZoneUTC = TimeZone.getDefault()
                 val offsetFromUTC: Int = timeZoneUTC.getOffset(Date().time) * -1
                 startDateText.text = formatter.format(it.first?.plus(offsetFromUTC))
                 endDateText.text = formatter.format(it.second?.plus(offsetFromUTC))
-
+                errorFechas.visibility = View.GONE
             }
+
         }
 
-
-
-        //Logic
-
-
-
-        /////////////////////////////////////////
-
-
+        /// SETTING THE APPOINTMENT ID
         var solicitudTratamientoId = 0
+        var imagenUrl = ""
         intent.extras?.let{
             val bundle: Bundle = it
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
+            imagenUrl = bundle.getString("imageUrl").toString()
         }
+        /////////////////////////////////////////
 
 
+        /// COMBO BOX TIPO TRATAMIENTO
         var textoTipoTratamiento: String = ""
-        val lista =  ListaTiposDeTratamiento.lista
+        val listaDeTratamientos =  ListaTiposDeTratamiento.lista
 
-        selectorTipoTratamiento.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lista)
+        selectorTipoTratamiento.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaDeTratamientos)
         selectorTipoTratamiento.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                textoTipoTratamiento = lista.get(0)
+                textoTipoTratamiento = listaDeTratamientos.get(0)
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?,
                                         position: Int, id: Long) {
-                textoTipoTratamiento = lista.get(position)
+                errorSpinnerTratamiento.visibility = View.GONE
+                textoTipoTratamiento = listaDeTratamientos.get(position)
             }
         }
+        /////////////////////////////////////////
 
-
+        /////SETTING PUBLICATION DATE
        fechaEnvioText.text = formatter.format(Calendar.getInstance().time)
+        /////////////////////////////////////////
 
 
-
-        Toast.makeText(this, "Id de solicitud: $solicitudTratamientoId", Toast.LENGTH_SHORT).show()
-
-
+/*
         botonCancelar.setOnClickListener{
             val intent = Intent(this, TreatmentRequestActivity::class.java)
             startActivity(intent)
@@ -126,12 +144,53 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
               registrarRepuestaTratamiento(body)
           }
 
-        }
+        }*/
 
-        editarFoto.setOnClickListener{
-            val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
-            intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
-            startActivity(intent)
+        siguiente.setOnClickListener{
+
+            if(!(startDateText.text == "____-__-__") &&
+                !(endDateText.text == "____-__-__") &&
+                !frecuenciaEditText.text.isEmpty() &&
+                !tiempoTerapiaEditText.text.isEmpty() &&
+                !(textoTipoTratamiento.equals(listaDeTratamientos.get(0)))
+            ) {
+
+                val body = FormularioTratamiento(textoTipoTratamiento,
+                    fechaEnvioText.text.toString(),
+                    startDateText.text.toString(),
+                    endDateText.text.toString(),
+                    Integer.parseInt(frecuenciaEditText.text.toString()),
+                    Integer.parseInt(tiempoTerapiaEditText.text.toString()),
+                    "asdgsdgdgds.jpg",
+                    solicitudTratamientoId
+                )
+                val intent = Intent(this, EditPhotoFromRequestActivity::class.java)
+                intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
+                intent.putExtra("imagenUrl", imagenUrl)
+                intent.putExtra("formTratamiento", body)
+                startActivity(intent)
+
+                Log.i("Tratamiento", body.toString())
+
+            } else{
+                if(textoTipoTratamiento.equals(listaDeTratamientos.get(0))){
+                    errorSpinnerTratamiento.visibility = View.VISIBLE
+                    errorSpinnerTratamiento.setError("Debes seleccionar el tratamiento")
+                }
+                if (startDateText.text == "____-__-__" || endDateText.text == "____-__-__"){
+                    errorFechas.visibility = View.VISIBLE
+                    errorFechas.setError("Debes ingresar el rango de fechas")
+                }
+                if(frecuenciaEditText.text.isEmpty()){
+                    frecuenciaEditText.setError("Debes seleccionar la frecuencia diaria")
+                }
+                if(tiempoTerapiaEditText.text.isEmpty()){
+                    tiempoTerapiaEditText.setError("Debe seleccionar el tiempo de\ncada terapia")
+                }
+
+            }
+
+
         }
 
     }
