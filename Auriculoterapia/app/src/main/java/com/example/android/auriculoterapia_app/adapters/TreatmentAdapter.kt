@@ -67,7 +67,7 @@ class TreatmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             tipoTratamiento.text = tratamiento.tipoTratamiento
 
             Glide.with(itemView.context)
-                .load("http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg")
+                .load(tratamiento.imagenEditada)
                 .into(imagen)
         }
     }

@@ -99,6 +99,8 @@ DELETE FROM DISPONIBILIDADES WHERE Id = 5;
 ALTER TABLE DISPONIBILIDADES AUTO_INCREMENT = 1;
 ALTER TABLE tratamientos AUTO_INCREMENT = 1;
 SELECT * FROM tratamientos;
+UPDATE tratamientos set ImagenEditada = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1600646069/wwzvqizz4voddcsoxpoe.jpg" where Id = 1;
+DELETE FROM tratamientos where SolicitudTratamientoId = 2;
 UPDATE tratamientos SET Id = 1 WHERE Id = 2;
 
 select* from evoluciones;
