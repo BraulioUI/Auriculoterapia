@@ -59,7 +59,7 @@ class TreatmentRequestActivity : AppCompatActivity() {
         treatmentRequestService.findByPacienteId(pacienteId, "Bearer $token")
             .enqueue(object: Callback<SolicitudTratamiento>{
                 override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
-                    Toast.makeText(this@TreatmentRequestActivity, "Perdimos Stark", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@TreatmentRequestActivity, "Perdimos Stark", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onResponse(call: Call<SolicitudTratamiento>, response: Response<SolicitudTratamiento>) {

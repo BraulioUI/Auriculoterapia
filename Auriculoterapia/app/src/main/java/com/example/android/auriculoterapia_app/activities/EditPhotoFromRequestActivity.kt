@@ -125,6 +125,7 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
                 form.imagenEditada = resultData?.get("url").toString()
                 registrarTratamiento(form)
+                Toast.makeText(this@EditPhotoFromRequestActivity, "Registro de tratamiento exitoso", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -155,9 +156,7 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if(response.isSuccessful){
-                    Toast.makeText(this@EditPhotoFromRequestActivity, "Registro de tratamiento exitoso", Toast.LENGTH_SHORT).show()
-                }
+
             }
         })
     }
