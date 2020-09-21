@@ -12,12 +12,11 @@ import android.widget.Toast
 import com.example.android.auriculoterapia_app.MainActivity
 import com.example.android.auriculoterapia_app.MainActivityPatient
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.RespuestaLogin
 import com.example.android.auriculoterapia_app.models.Usuario
-import com.example.android.auriculoterapia_app.services.AuthRequest
-import com.example.android.auriculoterapia_app.services.AuthResponse
-import com.example.android.auriculoterapia_app.services.AuthService
+import com.example.android.auriculoterapia_app.services.*
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.json.JSONObject
@@ -35,18 +34,39 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
 
+        val intentMainPatient = Intent(this, MainActivityPatient::class.java)
+        val intentMain = Intent(this, MainActivity::class.java)
+
+        val iduser =sharedPreferences.getInt("id",0)
 
         super.onCreate(savedInstanceState)
 
         if(sharedPreferences.contains("id")){
-            if(sharedPreferences.getString("rol",null)=="PACIENTE"){
-                val intentMainPatient = Intent(this, MainActivityPatient::class.java)
-                startActivity(intentMainPatient)
-            }else{
-                val intentMain = Intent(this, MainActivity::class.java)
-                startActivity(intentMain)
-            }
+            userService.getUserById(iduser).enqueue(object:Callback<ResponseUserById>{
+                override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                    Log.i("LOGIN: ","NO HAY CONEXION")
+                    setContentView(R.layout.activity_log_in)
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseUserById>,
+                    response: Response<ResponseUserById>
+                ) {
+                    if(response.isSuccessful){
+                        if(sharedPreferences.getString("rol",null)=="PACIENTE"){
+                            startActivity(intentMainPatient)
+                        }else{
+                            startActivity(intentMain)
+                        }
+                    }else{
+                        Log.i("LOGIN: ","TODAVIA NO INICA SESION")
+                        //setContentView(R.layout.activity_log_in)
+
+                    }
+                }
+            })
 
 
         }else{

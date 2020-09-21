@@ -33,6 +33,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
 
     val optionsCodigo:MutableList<String> = ArrayList()
     var pacienteId: Int = 0
+    var completeAll: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -124,6 +125,15 @@ class EvaluationFormTreatmentFragment : Fragment() {
         val tipoTratamiento = resultTratamiento.text.toString()
         val evolucion = resultMalestar.text.toString().toInt()
 
+        if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
+            peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
+            peso.setText("")
+            peso.requestFocus()
+            completeAll = false
+        }
+
+
+
         val formularioEvolucion = FormularioEvolucion(evolucion,
             peso.text.toString().toDouble(),otros.text.toString(),
             tipoTratamiento,tratamientoId,null)
@@ -171,9 +181,10 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 optionsCodigo.add("--Seleccionar--")
                 if(response.isSuccessful){
                     response.body()?.map {
-                        optionsCodigo.add("${it.id}")
-                        ids.add(it.id)
-
+                        if(it.estado == "En Proceso"){
+                            optionsCodigo.add("${it.id}")
+                            ids.add(it.id)
+                        }
                     }
 
                     Log.i("Lista de tratamientos", "xd")
