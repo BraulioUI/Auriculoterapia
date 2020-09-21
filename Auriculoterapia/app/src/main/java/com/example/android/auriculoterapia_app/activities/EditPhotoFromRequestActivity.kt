@@ -3,6 +3,7 @@ package com.example.android.auriculoterapia_app.activities
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
@@ -59,6 +60,12 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         var solicitudTratamientoId = 0
         var form = FormularioTratamiento("","","", "",
             0, 0, "", 0)
+
+        ///EXTRAS
+        var pacienteId = 0
+        var nombrePaciente = ""
+        var apellidoPaciente = ""
+
         var imagenUrlAreaFectada = ""
 
         intent.extras?.let{
@@ -66,6 +73,9 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
             form = it.getSerializable("formTratamiento") as FormularioTratamiento
             imagenUrlAreaFectada = it.getString("imagenUrl").toString()
+            pacienteId = bundle.getInt("pacienteId")
+            nombrePaciente = bundle.getString("nombrePaciente").toString()
+            apellidoPaciente = bundle.getString("apellidoPaciente").toString()
         }
 
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
@@ -87,9 +97,6 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         enviarForm = findViewById(R.id.saveFormTreatment)
 
 
-
-        Toast.makeText(this, "$solicitudTratamientoId", Toast.LENGTH_SHORT).show()
-
         cancelarBoton.setOnClickListener{
             finish()
         }
@@ -104,7 +111,8 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
                 builder.setMessage(R.string.confirmacion_envio_tratamiento)
                     .setPositiveButton("Enviar",
                         DialogInterface.OnClickListener { dialog, id ->
-                            uploadToCloudinaryAndRegisterTreatment(form, imagenAEditar.overlay()!!)
+                            uploadToCloudinaryAndRegisterTreatment(form, imagenAEditar.overlay()!!, pacienteId, nombrePaciente, apellidoPaciente)
+
                         })
                     .setNegativeButton("Cancelar",
                         DialogInterface.OnClickListener { dialog, id ->
@@ -119,14 +127,19 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
 
     }
 
-    fun uploadToCloudinaryAndRegisterTreatment(form: FormularioTratamiento, bitmap: Bitmap){
+    fun uploadToCloudinaryAndRegisterTreatment(form: FormularioTratamiento, bitmap: Bitmap, pacienteId: Int,
+    nombrePaciente:String, apellidoPaciente: String){
         val byteArrayOfBitmap = convertirBitmapAByteArray(bitmap)
         MediaManager.get().upload(byteArrayOfBitmap).callback(object: UploadCallback{
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
                 form.imagenEditada = resultData?.get("url").toString()
                 registrarTratamiento(form)
                 Toast.makeText(this@EditPhotoFromRequestActivity, "Registro de tratamiento exitoso", Toast.LENGTH_SHORT).show()
-
+                val intent = Intent(this@EditPhotoFromRequestActivity, HistoryActivity::class.java)
+                intent.putExtra("pacienteId", pacienteId)
+                intent.putExtra("nombrePaciente", nombrePaciente)
+                intent.putExtra("apellidoPaciente", apellidoPaciente)
+                startActivity(intent)
             }
 
             override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
@@ -146,6 +159,8 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
                 Log.i("START: ", "empezando")
             }
         }).dispatch()
+
+
     }
 
     fun registrarTratamiento(form: FormularioTratamiento){

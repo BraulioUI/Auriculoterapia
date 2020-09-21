@@ -84,6 +84,9 @@ class TreatmentRequestActivity : AppCompatActivity() {
                                 val intent = Intent(this@TreatmentRequestActivity, AnswerTreatmentRequestActivity::class.java)
                                 intent.putExtra("solicitudTratamientoId", solicitud.id)
                                 intent.putExtra("imageUrl", solicitud.imagenAreaAfectada)
+                                intent.putExtra("pacienteId", pacienteId)
+                                intent.putExtra("nombrePaciente", nombrePaciente)
+                                intent.putExtra("apellidoPaciente", apellidoPaciente)
                                 startActivity(intent)
                             }
                         } else {

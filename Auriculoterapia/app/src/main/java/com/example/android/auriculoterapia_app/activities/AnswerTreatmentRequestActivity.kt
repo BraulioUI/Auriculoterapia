@@ -88,10 +88,19 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         /// SETTING THE APPOINTMENT ID
         var solicitudTratamientoId = 0
         var imagenUrl = ""
+        var pacienteId = 0
+        var nombrePaciente = ""
+        var apellidoPaciente = ""
+
+
         intent.extras?.let{
             val bundle: Bundle = it
             solicitudTratamientoId = bundle.getInt("solicitudTratamientoId")
             imagenUrl = bundle.getString("imageUrl").toString()
+            pacienteId = bundle.getInt("pacienteId")
+            nombrePaciente = bundle.getString("nombrePaciente").toString()
+            apellidoPaciente = bundle.getString("apellidoPaciente").toString()
+
         }
         /////////////////////////////////////////
 
@@ -168,6 +177,9 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
                 intent.putExtra("solicitudTratamientoId", solicitudTratamientoId)
                 intent.putExtra("imagenUrl", imagenUrl)
                 intent.putExtra("formTratamiento", body)
+                intent.putExtra("pacienteId", pacienteId)
+                intent.putExtra("nombrePaciente", nombrePaciente)
+                intent.putExtra("apellidoPaciente", apellidoPaciente)
                 startActivity(intent)
 
                 Log.i("Tratamiento", body.toString())

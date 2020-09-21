@@ -14,6 +14,7 @@ import com.example.android.auriculoterapia_app.adapters.TreatmentAdapter
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.models.Tratamiento
 import com.example.android.auriculoterapia_app.services.TreatmentService
+import com.example.android.auriculoterapia_app.services.UserService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +31,8 @@ class IndicationsHistoryFragment : Fragment() {
 
         val textoNombrePaciente = view.findViewById<TextView>(R.id.nombrePacienteIndicaciones)
 
+        val usuarioService = ApiClient.retrofit().create(UserService::class.java)
+
         val treatmentRecyclerView: RecyclerView =  view.findViewById(R.id.tratamientoPacienteRecyclerView)
         val adapter = TreatmentAdapter()
 
@@ -45,6 +48,8 @@ class IndicationsHistoryFragment : Fragment() {
             nombrePaciente = bundle.getString("nombrePaciente").toString()
             apellidoPaciente = bundle.getString("apellidoPaciente").toString()
         }
+
+
         textoNombrePaciente.text = "${nombrePaciente} ${apellidoPaciente}"
         obtenerTratamientosPorPaciente(pacienteId, adapter, treatmentRecyclerView)
 

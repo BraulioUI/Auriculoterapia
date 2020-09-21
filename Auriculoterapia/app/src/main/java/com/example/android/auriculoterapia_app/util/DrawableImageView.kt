@@ -95,14 +95,11 @@ class DrawableImageView @JvmOverloads constructor(
 
     override fun performClick(): Boolean {
 
-        mostrarMensaje()
         return super.performClick()
 
     }
 
-    fun mostrarMensaje(){
-        Toast.makeText(context, "Punto dibujado", Toast.LENGTH_SHORT).show()
-    }
+
 
     fun startNew() {
         bitmap.eraseColor(Color.TRANSPARENT);
