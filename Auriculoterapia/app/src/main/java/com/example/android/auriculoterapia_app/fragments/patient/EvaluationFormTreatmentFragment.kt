@@ -34,6 +34,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
     val optionsCodigo:MutableList<String> = ArrayList()
     var pacienteId: Int = 0
     var completeAll: Boolean = true
+    lateinit var errorCodigo :TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +57,12 @@ class EvaluationFormTreatmentFragment : Fragment() {
         resultMalestar=view.findViewById(R.id.tv_malestar2)
         resultCodigo = view.findViewById(R.id.tv_resultCodigo)
 
+        errorCodigo = view.findViewById(R.id.tv_errorSpinnerCodigo)
+
+
         resultMalestar.visibility = View.INVISIBLE
+        errorCodigo.visibility = View.INVISIBLE
+        resultCodigo.visibility = View.INVISIBLE
 
         val ButtonGuardar = view.findViewById<Button>(R.id.btn_guardar_formulario)
 
@@ -109,6 +115,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
         })
 
         ButtonGuardar.setOnClickListener {
+            completeAll = true
             registrarFormulario()
         }
 
@@ -125,41 +132,58 @@ class EvaluationFormTreatmentFragment : Fragment() {
         val tipoTratamiento = resultTratamiento.text.toString()
         val evolucion = resultMalestar.text.toString().toInt()
 
-        if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
+        if(resultCodigo.text.toString().toInt() == -1||peso.text.isEmpty()){
+            completeAll = false
             peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
             peso.setText("")
             peso.requestFocus()
+            Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
+        }
+
+        if(resultCodigo.text.toString().toInt() == -1){
+            errorCodigo.visibility = View.VISIBLE
+            errorCodigo.setError("Selecciona un código")
+            errorCodigo.requestFocus()
             completeAll = false
         }
 
-
-
-        val formularioEvolucion = FormularioEvolucion(evolucion,
-            peso.text.toString().toDouble(),otros.text.toString(),
-            tipoTratamiento,tratamientoId,null)
-        Log.i("formularioEvaluacion: ",formularioEvolucion.toString())
-        tratamientoService.registerFormTreatmentEvolucion(formularioEvolucion,pacienteId).enqueue(object:Callback<FormularioEvolucion>{
-            override fun onFailure(call: Call<FormularioEvolucion>, t: Throwable) {
-                Log.i("EVOLUCION", "ONFAILURE")
+        if(peso.text.isNotEmpty()) {
+            if (peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200) {
+                peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
+                peso.setText("")
+                peso.requestFocus()
+                completeAll = false
             }
+        }
 
-            override fun onResponse(
-                call: Call<FormularioEvolucion>,
-                response: Response<FormularioEvolucion>
-            ) {
-                if(response.isSuccessful){
-
-                    Log.i("REGISTRAR EVOLUCION: ", response.body().toString())
-                    Toast.makeText(requireContext(),"Se registró el formulario correctamente",Toast.LENGTH_SHORT).show()
-
-
-
-                }else{
-                    Log.i("EVOLUCION", response.errorBody().toString())
+        if(completeAll){
+            val formularioEvolucion = FormularioEvolucion(evolucion,
+                peso.text.toString().toDouble(),otros.text.toString(),
+                tipoTratamiento,tratamientoId,null)
+            Log.i("formularioEvaluacion: ",formularioEvolucion.toString())
+            tratamientoService.registerFormTreatmentEvolucion(formularioEvolucion,pacienteId).enqueue(object:Callback<FormularioEvolucion>{
+                override fun onFailure(call: Call<FormularioEvolucion>, t: Throwable) {
+                    Log.i("EVOLUCION", "ONFAILURE")
                 }
-            }
 
-        })
+                override fun onResponse(
+                    call: Call<FormularioEvolucion>,
+                    response: Response<FormularioEvolucion>
+                ) {
+                    if(response.isSuccessful){
+
+                        Log.i("REGISTRAR EVOLUCION: ", response.body().toString())
+                        Toast.makeText(requireContext(),"Se registró el formulario correctamente",Toast.LENGTH_SHORT).show()
+                        activity?.finish()
+
+
+                    }else{
+                        Log.i("EVOLUCION", response.errorBody().toString())
+                    }
+                }
+
+            })
+        }
 
     }
 
@@ -208,10 +232,12 @@ class EvaluationFormTreatmentFragment : Fragment() {
                         if(position == 0 || optionsCodigo.get(position) == "--Seleccionar--"){
                             idCodigo = -1
                             resultCodigo.text = idCodigo.toString()
+                            resultTratamiento.text = "Tipo"
                         }
                         if(position >=1){
                             idCodigo = ids.get(position - 1)
                             resultCodigo.text = idCodigo.toString()
+                            errorCodigo.visibility = View.INVISIBLE
                             tratamientoService.getById(idCodigo).enqueue(object: Callback<Tratamiento>{
                                 override fun onFailure(call: Call<Tratamiento>, t: Throwable) {
                                     Log.i("Tratamiento", "ONFAILURE")

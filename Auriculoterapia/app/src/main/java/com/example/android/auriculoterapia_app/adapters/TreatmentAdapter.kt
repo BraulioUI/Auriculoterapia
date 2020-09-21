@@ -56,6 +56,7 @@ class TreatmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
             val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            var imagenEditada:String = ""
 
             codigo.text = tratamiento.id.toString()
             fechaEnvioTratamiento.text = formatter.format(parser.parse(tratamiento.fechaEnvio))
@@ -66,8 +67,16 @@ class TreatmentAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             tiempoTerapia.text = "${tratamiento.tiempoPorTerapia} minutos"
             tipoTratamiento.text = tratamiento.tipoTratamiento
 
+            /*if(tratamiento.imagenEditada =="asdgsdgdgds.jpg"){
+                imagenEditada = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1600582101/lzhwqrasv9nrwgxbseqw.jpg"
+            }else{
+                imagenEditada = tratamiento.imagenEditada
+            }*/
+
+            imagenEditada = tratamiento.imagenEditada
+
             Glide.with(itemView.context)
-                .load("http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg")
+                .load(imagenEditada)
                 .into(imagen)
         }
     }
