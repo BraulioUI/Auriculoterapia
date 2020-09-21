@@ -90,11 +90,30 @@ class NewTreatmentFragment  : Fragment(){
 
         registerButton.setOnClickListener {
             completeAll = true
-            if(filePath!=""){
+            val peso = requireView().findViewById<EditText>(R.id.et_peso)
+            val altura = requireView().findViewById<EditText>(R.id.et_altura)
+            val sintomas = requireView().findViewById<EditText>(R.id.et_Sintomas)
+            val otros = requireView().findViewById<EditText>(R.id.et_otros)
+            val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage)
+            val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad)
+
+
+            if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() || imagenAreaAfectada!!.text.isEmpty()){
+                Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
+                completeAll = false
+            }
+
+            if(filePath!="" && completeAll){
                 uploadToCloudinary(filePath)
             }
             else{
-                Toast.makeText(requireContext(),"No ha registrado la imagen",Toast.LENGTH_SHORT).show()
+                if(completeAll) {
+                    Toast.makeText(
+                        requireContext(),
+                        "No ha registrado la imagen",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
 
@@ -175,26 +194,29 @@ class NewTreatmentFragment  : Fragment(){
 
         if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() || imagenAreaAfectada!!.text.isEmpty()){
             Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
-        }
-        if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
-            peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
-            peso.setText("")
-            peso.requestFocus()
             completeAll = false
+        }else{
+            if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
+                peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
+                peso.setText("")
+                peso.requestFocus()
+                completeAll = false
+            }
+
+            if(altura.text.toString().toDouble() < 1 || altura.text.toString().toDouble() > 2.10){
+                altura.setError("La altura debe estarentre 1.00 y 2.10 m")
+                altura.setText("")
+                altura.requestFocus()
+                completeAll = false
+            }
+
+            if(sintomas.text.toString().length < 5 || sintomas.text.toString().length > 30){
+                sintomas.setError("Máximo 30 caracteres")
+                sintomas.requestFocus()
+                completeAll = false
+            }
         }
 
-        if(altura.text.toString().toDouble() < 1 || altura.text.toString().toDouble() > 2.10){
-            altura.setError("La altura debe estarentre 1.00 y 2.10 m")
-            altura.setText("")
-            altura.requestFocus()
-            completeAll = false
-        }
-
-        if(sintomas.text.toString().length < 5 || sintomas.text.toString().length > 30){
-            sintomas.setError("Máximo 30 caracteres")
-            sintomas.requestFocus()
-            completeAll = false
-        }
 
 
         if(completeAll){

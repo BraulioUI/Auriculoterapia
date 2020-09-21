@@ -52,14 +52,23 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val nuevaContrasena = findViewById<EditText>(R.id.et_password)
 
         val nombreUsuario = sharedPreferences.getString("usuario", "")
+        val usuario2 = findViewById<EditText>(R.id.et_usuario)
 
 
         val intentLogin = Intent(this,LogInActivity::class.java)
 
         val forgotPassword:Any
 
+
+        if(usuario2.text.toString().length < 2 || usuario2.text.toString().length >15){
+            completeAll = false
+            usuario2.setError("el usuario debe tener mínimo 2 caracteres y máximo 15")
+            usuario2.setText("")
+            usuario2.requestFocus()
+        }
+
         if(palabraClave.text.toString().length < 4 || palabraClave.text.toString().length > 15){
-            palabraClave.setError("La pabala clave debe tener mínimo 4 caracteres y máximo 15")
+            palabraClave.setError("La palabra clave debe tener mínimo 4 caracteres y máximo 15")
             palabraClave.setText("")
             palabraClave.requestFocus()
             completeAll = false
@@ -75,8 +84,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 forgotPassword = ForgotPasswordRequest(nombreUsuario.toString(),palabraClave.text.toString(),
                     nuevaContrasena.text.toString())
             }else{
-                val usuario2 = findViewById<EditText>(R.id.et_usuario).text
-                forgotPassword = ForgotPasswordRequest(usuario2.toString(),palabraClave.text.toString(),
+                //val usuario2 = findViewById<EditText>(R.id.et_usuario).text
+                forgotPassword = ForgotPasswordRequest(usuario2.text.toString(),palabraClave.text.toString(),
                     nuevaContrasena.text.toString())
             }
 
