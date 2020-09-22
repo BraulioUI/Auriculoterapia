@@ -5,8 +5,10 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
@@ -22,6 +24,7 @@ class DrawableImageView @JvmOverloads constructor(
     private var canvas = Canvas()
     private lateinit var bitmap: Bitmap
     private lateinit var imagenUrl: String
+    private var cantidadDePuntos: Int = 0
 
 
     init{
@@ -37,11 +40,13 @@ class DrawableImageView @JvmOverloads constructor(
         this.imagenUrl = url;
     }
 
+    fun getCantidadPuntos(): Int{
+        return cantidadDePuntos;
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-        //val imagen = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1599423450/vgnzh4wmpn5d9xuniehu.jpg"
 
         if(imagenUrl != ""){
             Glide.with(this)
@@ -63,9 +68,6 @@ class DrawableImageView @JvmOverloads constructor(
 
     }
 
-    fun cargarFoto(){
-
-    }
 
     override fun onDraw(canvas: Canvas){
         super.onDraw(canvas)
@@ -82,10 +84,13 @@ class DrawableImageView @JvmOverloads constructor(
             val touchX = event.x
             val touchY = event.y
             val radius = 10F
+            var startClickTime = 0.toLong()
+
             when(event.action){
                 MotionEvent.ACTION_DOWN ->
                     canvas.drawCircle(touchX, touchY, radius, paint)
             }
+
 
         }
         performClick()
@@ -95,6 +100,8 @@ class DrawableImageView @JvmOverloads constructor(
 
     override fun performClick(): Boolean {
 
+        this.cantidadDePuntos += 1
+        Log.i("Cantidad de puntos", cantidadDePuntos.toString())
         return super.performClick()
 
     }
@@ -103,6 +110,8 @@ class DrawableImageView @JvmOverloads constructor(
 
     fun startNew() {
         bitmap.eraseColor(Color.TRANSPARENT);
+        this.cantidadDePuntos = 0
+        Log.i("Cantidad de puntos", cantidadDePuntos.toString())
         invalidate()
     }
 
