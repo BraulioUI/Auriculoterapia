@@ -76,7 +76,11 @@ class DrawableImageView @JvmOverloads constructor(
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean{
+        return true
 
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event != null){
             val touchX = event.x
             val touchY = event.y
@@ -91,11 +95,7 @@ class DrawableImageView @JvmOverloads constructor(
         }
         performClick()
         invalidate()
-        return true
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return true
+        return super.onTouchEvent(event)
     }
 
     override fun performClick(): Boolean {
