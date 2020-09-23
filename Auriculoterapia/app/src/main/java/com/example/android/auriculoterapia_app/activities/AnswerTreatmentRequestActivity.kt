@@ -63,23 +63,29 @@ class AnswerTreatmentRequestActivity : AppCompatActivity() {
         endDateText.text = "____-__-__"
         //DatePickerBuilder
         val builder = MaterialDatePicker.Builder.dateRangePicker()
+
         val now = Calendar.getInstance()
-        builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
+        now.add(Calendar.DATE, -1)
+        val min = now.time
+        now.add(Calendar.DATE, 1)
+        val max = now.time
+        now.add(Calendar.DATE, -1)
+        builder.setSelection(androidx.core.util.Pair(min.time, max.time))
         builder.setTheme(R.style.ThemeOverlay_MaterialComponents_MaterialCalendar)
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         builder.setTitleText("Selecciona un rango de fechas")
-
         //CONSTRAINTS
         val constraintsBuilderRange = CalendarConstraints.Builder()
 
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, -1)
-        val minDate = calendar.time
-        calendar.add(Calendar.DATE, 8)
-        val maxDate = calendar.time
 
-        val dateValidatorMin = DateValidatorPointForward.from(minDate.time)
-        val dateValidatorMax = DateValidatorPointBackward.before(maxDate.time)
+        //calendar.add(Calendar.DATE, -1)
+
+        val dateValidatorMin = DateValidatorPointForward.now()
+        //val minDate = calendar.time
+        now.add(Calendar.DATE, 8)
+        val calendar = now.time
+        //val maxDate = calendar.time
+        val dateValidatorMax = DateValidatorPointBackward.before(calendar.time)
 
         val listValidators = arrayListOf<CalendarConstraints.DateValidator>(
             dateValidatorMin, dateValidatorMax
