@@ -9,7 +9,8 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
-import com.example.android.auriculoterapia_app.fragments.specialist.GeneralResultsFragment
+import com.example.android.auriculoterapia_app.fragments.specialist.results.GeneralResultsFragment
+import com.example.android.auriculoterapia_app.fragments.specialist.results.ObesityResultsFragment
 import com.example.android.auriculoterapia_app.util.ListaGeneros
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
 import kotlinx.android.synthetic.main.activity_general_results.*
@@ -26,20 +27,18 @@ class GeneralResultsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_general_results)
 
 
-        var tratamiento =  "Dolor lumbar"
-        var genero = "Ambos"
+        var tratamiento =  "--Seleccione--"
+        var genero = "--Seleccione--"
 
         val bundleFirst = Bundle()
-        bundleFirst.putString("tratamiento", tratamiento)
+
 
         spinnerTratamientos = findViewById(R.id.spinnerTratamientosResultados)
         spinnerSexo = findViewById(R.id.spinnerSeleccionarSexo)
         buttonFiltrar = findViewById(R.id.botonFiltrar)
         val bundle = Bundle()
-        val generalResultsFragment = GeneralResultsFragment()
-
-        generalResultsFragment.arguments = bundleFirst
-
+        val generalResultsFragment =  GeneralResultsFragment()
+        val obesityResultsFragment = ObesityResultsFragment()
         loadFragment(GeneralResultsFragment())
 
         spinnerTratamientos.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ListaTiposDeTratamiento.lista)
@@ -79,18 +78,17 @@ class GeneralResultsActivity : AppCompatActivity() {
             }
 
             botonFiltrar.setOnClickListener{
-                generalResultsFragment.arguments = bundle
-                loadFragment(generalResultsFragment)
+                when(tratamiento){
+                    "Obesidad" ->
+                        if(genero != "--Seleccione--"){
+                            obesityResultsFragment.arguments = bundle
+                            loadFragment(obesityResultsFragment)
+                        }
+
+                }
+
             }
-
-
-
     }
-
-
-
-
-
 
 
     private fun loadFragment(fragment: Fragment){

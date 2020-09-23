@@ -1,4 +1,4 @@
-package com.example.android.auriculoterapia_app.fragments.specialist
+package com.example.android.auriculoterapia_app.fragments.specialist.results
 
 import android.graphics.Color
 import android.os.Bundle
@@ -42,9 +42,9 @@ class GeneralResultsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_general_results, container, false)
 
-        val detalleObesidad = view.findViewById<LinearLayout>(R.id.detalleIMCPorTipoDePaciente)
+        //val detalleObesidad = view.findViewById<LinearLayout>(R.id.detalleIMCPorTipoDePaciente)
 
-        pieChartPacientesPorNiveles = view.findViewById(R.id.pieChartNivelesMejoraPacientes)
+       // pieChartPacientesPorNiveles = view.findViewById(R.id.pieChartNivelesMejoraPacientes)
 
 
         var tratamiento = ""
@@ -60,7 +60,7 @@ class GeneralResultsFragment : Fragment() {
 
         val patientService = ApiClient.retrofit().create(PatientService::class.java)
 
-        patientService.obtenerCantidadPacientesPorSexo(tratamiento).enqueue(object:
+     /*   patientService.obtenerCantidadPacientesPorSexo(tratamiento).enqueue(object:
             Callback<CantidadPacientesPorSexo>{
             override fun onFailure(call: Call<CantidadPacientesPorSexo>, t: Throwable) {
                 Log.i("Fallo", "Fallo en recuperar datos")
@@ -118,7 +118,7 @@ class GeneralResultsFragment : Fragment() {
                 }
             }
         })
-
+*/
 
 
         /////////////// PACIENTES POR NIVEL DE MEJORA /////////////////
@@ -140,17 +140,17 @@ class GeneralResultsFragment : Fragment() {
 
         pieDataPacientesPorNiveles = PieData(pieDataSetPacientesPorNiveles)
 
-        pieChartPacientesPorNiveles.data = pieDataPacientesPorNiveles
+        /*pieChartPacientesPorNiveles.data = pieDataPacientesPorNiveles
         pieChartPacientesPorNiveles.description.isEnabled = false
         pieChartPacientesPorNiveles.centerText = "Cantidad de pacientes\npor nivel"
         pieChartPacientesPorNiveles.setTouchEnabled(false)
-        pieChartPacientesPorNiveles.setDrawEntryLabels(false)
+        pieChartPacientesPorNiveles.setDrawEntryLabels(false)*/
 
-        val leyendaPorNiveles = pieChartPacientesPorNiveles.legend
+        /*val leyendaPorNiveles = pieChartPacientesPorNiveles.legend
         leyendaPorNiveles.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
         leyendaPorNiveles.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         leyendaPorNiveles.orientation = Legend.LegendOrientation.HORIZONTAL
-        leyendaPorNiveles.setDrawInside(false)
+        leyendaPorNiveles.setDrawInside(false)*/
         ////////////////////////////////////////
 
 

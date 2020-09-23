@@ -85,9 +85,6 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         imagenAEditar = findViewById(R.id.toEditPhoto)
         imagenAEditar.setImagenUrl(imagenUrlAreaFectada)
 
-
-       /* bitmapActual = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
-        bitmapAlterado = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)*/
         cancelarBoton = findViewById(R.id.cancelButton)
         botonLimpiar = findViewById(R.id.clearPoints)
 
@@ -95,7 +92,6 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         urlImagenEnCloudinary = ""
 
         enviarForm = findViewById(R.id.saveFormTreatment)
-
 
         cancelarBoton.setOnClickListener{
             finish()
@@ -192,7 +188,7 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
         }
 
     }
-
+}
   /*  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -286,4 +282,3 @@ class EditPhotoFromRequestActivity : AppCompatActivity() {
           }*/
 
 
-}

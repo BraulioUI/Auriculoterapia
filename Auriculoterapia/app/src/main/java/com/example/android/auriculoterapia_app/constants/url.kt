@@ -10,3 +10,4 @@ package com.example.android.auriculoterapia_app.constants
 const val BASE_URL = "http://192.168.0.153:8080/"   //Braulio2
 
 
+

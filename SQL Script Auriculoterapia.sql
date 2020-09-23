@@ -1,6 +1,6 @@
 use auriculoterapiadb;
 use m9wogfp1a7afp76v;
-
+sagsfgsgr
 /* por si me equivoco al poner el ejecutar */
 /*ROL 1 - ESPECIALISTA*/
 INSERT INTO Roles(Descripcion) VALUES ('ESPECIALISTA');
@@ -20,7 +20,7 @@ VALUES ('Marcos Alonso', 'Rivas Torres', 'marcosrt@gmail.com', 'primerpaciente',
 INSERT INTO Usuarios(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
 
-1
+select * from usuarios;
 DELETE FROM Usuarios Where Id = 5;
 ALTER TABLE Usuarios auto_increment=1;
 SELECT * FROM Rol_Usuarios;
@@ -80,7 +80,7 @@ VALUES(26, 67, 1.71, 'Malestar lumbar', 'sdgdsgdsagsdag', 'Me duele la cabeza y 
 select * from solicitudtratamientos;
 DELETE FROM solicitudtratamientos WHERE id = 2;
 ALTER TABLE solicitudtratamientos AUTO_INCREMENT = 1;
-
+UPDATE solicitudtratamientos SET Estado = "En proceso" where Id = 2;
 SELECT * FROM DISPONIBILIDADES;
 SELECT * FROM HORARIOSDESCARTADOS;
 
@@ -90,9 +90,11 @@ DELETE FROM DISPONIBILIDADES WHERE Id = 5;
 ALTER TABLE DISPONIBILIDADES AUTO_INCREMENT = 1;
 ALTER TABLE tratamientos AUTO_INCREMENT = 1;
 SELECT * FROM tratamientos;
+DELETE FROM tratamientos where id = 4;
 UPDATE tratamientos set ImagenEditada = "http://res.cloudinary.com/dyifsbjuf/image/upload/v1600646069/wwzvqizz4voddcsoxpoe.jpg" where Id = 1;
 DELETE FROM tratamientos where SolicitudTratamientoId = 2;
 UPDATE tratamientos SET Id = 1 WHERE Id = 2;
+
 
 select* from evoluciones;
 

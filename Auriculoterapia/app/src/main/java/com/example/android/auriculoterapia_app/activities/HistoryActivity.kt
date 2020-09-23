@@ -1,5 +1,6 @@
 package com.example.android.auriculoterapia_app.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -9,6 +10,11 @@ import com.example.android.auriculoterapia_app.fragments.specialist.ResultsHisto
 import kotlinx.android.synthetic.main.activity_history.*
 
 class HistoryActivity : AppCompatActivity() {
+    var pacienteId = 0
+    var nombrePaciente = ""
+    var apellidoPaciente = ""
+    lateinit var bundleToFragment: Bundle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
@@ -16,9 +22,7 @@ class HistoryActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Historial"
 
-        var pacienteId = 0
-        var nombrePaciente = ""
-        var apellidoPaciente = ""
+
         intent.extras?.let{
             val bundle: Bundle = it
             pacienteId = bundle.getInt("pacienteId")
@@ -26,7 +30,7 @@ class HistoryActivity : AppCompatActivity() {
             apellidoPaciente = bundle.getString("apellidoPaciente").toString()
         }
 
-        val bundleToFragment = Bundle()
+        bundleToFragment = Bundle()
         bundleToFragment.putInt("pacienteId", pacienteId)
         bundleToFragment.putString("nombrePaciente", nombrePaciente)
         bundleToFragment.putString("apellidoPaciente",apellidoPaciente)
@@ -59,6 +63,14 @@ class HistoryActivity : AppCompatActivity() {
         }
         }
 
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, PatientsManagementActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
 
     }
 
