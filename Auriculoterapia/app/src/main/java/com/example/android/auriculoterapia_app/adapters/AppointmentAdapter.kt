@@ -36,9 +36,6 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
     private var items : List<Cita> = ArrayList()
     private var rol: String = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-
-
         return CitaViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
         )

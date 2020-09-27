@@ -79,8 +79,12 @@ class GeneralResultsActivity : AppCompatActivity() {
 
             botonFiltrar.setOnClickListener{
                 when(tratamiento){
+                    "--Seleccionar" ->
+                        if(genero == "--Seleccionar--"){
+                            loadFragment(generalResultsFragment)
+                        }
                     "Obesidad" ->
-                        if(genero != "--Seleccione--"){
+                        if(genero != "--Seleccionar--"){
                             obesityResultsFragment.arguments = bundle
                             loadFragment(obesityResultsFragment)
                         }
