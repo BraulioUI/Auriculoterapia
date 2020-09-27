@@ -14,7 +14,10 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.Cita
@@ -22,6 +25,7 @@ import com.example.android.auriculoterapia_app.models.helpers.AvailabilityTimeRa
 import com.example.android.auriculoterapia_app.models.helpers.FormularioCitaPaciente
 import com.example.android.auriculoterapia_app.services.AppointmentService
 import com.example.android.auriculoterapia_app.services.AvailabilityService
+import kotlinx.android.synthetic.main.activity_appointment_management.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -221,6 +225,9 @@ class AppointmentPatientRagisterFragment : Fragment() {
                         Log.i("Cita a actualizar", cita.toString())
                         actualizarCita(cita, citaId, "Bearer $token")
                         actualizacionExitosa = true
+                        val fragment = AppointmentPatientStateFragment()
+                        cargarFragmento(fragment)
+
                     } else{
                         Log.i("Cita a registrar", cita.toString())
                         registrarCita(cita, usuarioId, horaTextView)
@@ -254,6 +261,7 @@ class AppointmentPatientRagisterFragment : Fragment() {
                 horaTextView.text = "__:__"
                 reservaExitosa = false
                 actualizacionExitosa = false
+
             }
 
 
@@ -263,6 +271,15 @@ class AppointmentPatientRagisterFragment : Fragment() {
 
 
         return view
+    }
+
+    fun cargarFragmento(fragment: Fragment){
+        val fm = this.context as AppointmentPatientManagement
+        val manager: FragmentManager = fm.supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
+        ft.replace(R.id.fragmentContainer, fragment)
+        manager.popBackStack(null, 0)
+        ft.commit()
     }
 
 
