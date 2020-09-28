@@ -1,7 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="resultados"
+            type="java.util.List&lt;com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad&gt;"
+            />
+    </data>
+    
+<ScrollView
+
+
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.specialist.results.ObesityResultsFragment">
@@ -20,160 +30,13 @@
             android:layout_marginVertical="8dp"
             android:textStyle="bold"
             />
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            >
 
-            <TableRow
-                android:background="#E5E9EC">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IMC"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-            </TableRow>
-            <TableRow
-                android:background="#E5E9EC">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Categoría"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cantidad"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Indicador"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    />
-            </TableRow>
+        <include
+            android:id="@+id/IMCTable"
+            layout="@layout/table_layout"
+            bind:resultados="@{resultados}"
+            />
 
-            <!-- DATA  -->
-
-            <TableRow>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pacientes Adolescentes"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-
-                <TextView
-                    android:id="@+id/tvCantidadAdolescentes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="1"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/tvIndicadorAdolescentes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FF0000"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pacientes Jóvenes"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tvCantidadJovenes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tvIndicadorJovenes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FF0000"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-
-            </TableRow>
-            <TableRow>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Pacientes Adultos"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/tvCantidadAdultos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tvIndicadorAdultos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FF0000"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pacientes Adultos Mayores"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tvCantidadAdultosMayores"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tvIndicadorAdultosMayores"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FF0000"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-
-            </TableRow>
-
-
-        </TableLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -185,14 +48,24 @@
             android:textStyle="bold"
             />
 
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChartImc"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginBottom="12dp"/>
-        
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Cantidad de pacientes e indicador de gravedad %GC\npor categoría"
+            android:layout_marginVertical="8dp"
+            android:textStyle="bold"
+            />
 
         
     </LinearLayout>
 
 </ScrollView>
+</layout>

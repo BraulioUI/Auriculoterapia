@@ -47,6 +47,8 @@ SELECT * FROM Especialistas;
 SELECT * FROM Pacientes;
 SELECT * FROM Rol_Usuarios;
 
+UPDATE Pacientes SET Edad = 26 WHERE Id = 6;
+
 /*Tipo de atenciones*/
 
 INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
@@ -62,7 +64,7 @@ DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM Citas;
 
-UPDATE CITAS SET Estado = "En Proceso" WHERE Id >= 1;
+UPDATE CITAS SET Estado = "En Proceso" WHERE Id = 48;
 
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
@@ -102,6 +104,46 @@ INSERT INTO tratamientos(TipoTratamiento,FechaInicio,FechaFin,FrecuenciaAlDia,Ti
 VALUES("Dolor lumbar","2020-09-07", "2020-09-14", 5, 10, 2, "2020-09-07", "asdgsdgdgds.jpg", "En Proceso" );
 
 SELECT DISTINCT COUNT(u.Id) FROM Usuarios u JOIN Pacientes p ON p.UsuarioId = u.Id JOIN SolicitudTratamientos s ON p.Id = s.PacienteId
-JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE t.TipoTratamiento = "Dolor lumbar"
-AND u.Sexo = "Masculino";
+JOIN Tratamientos t ON t.SolicitudTratamientoId = s.Id WHERE u.Sexo = "Femenino";
+
+SELECT p.Id from tratamientos t 
+JOIN solicitudtratamientos s 
+ON s.Id = t.SolicitudTratamientoId
+JOIN pacientes p
+ON p.Id = s.PacienteId 
+WHERE p.Edad between 18 and 30;
+
+select * from evoluciones;
+
+
+select e.tipoTratamiento,e.Sesion, s.PacienteId, e.EvolucionNumero from evoluciones e 
+join tratamientos t on e.TratamientoId = t.Id		
+join solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
+JOIN Pacientes p on p.Id = s.PacienteId
+order by e.TipoTratamiento desc, e.Sesion desc;
+
+select e.Sesion, e.TipoTratamiento, s.PacienteId from evoluciones e
+join tratamientos t on e.TratamientoId = t.Id		
+join solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
+JOIN Pacientes p on p.Id = s.PacienteId;
+
+
+
+DELIMITER //
+CREATE PROCEDURE obtenerPacientesYUltimaSesion(IN sexo longtext, IN tipoTratamiento longtext)
+BEGIN
+select p.Id, MAX(e.Sesion), p.FechaNacimiento from evoluciones e 
+INNER JOIN tratamientos t ON t.Id = e.TratamientoId
+INNER JOIN solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
+INNER JOIN pacientes p ON p.Id = s.PacienteId
+INNER join usuarios u ON p.UsuarioId = u.Id
+WHERE u.Sexo = "Masculino"
+AND e.tipoTratamiento = "Dolor lumbar"
+group by p.Id;
+END //
+DELIMITER ;
+
+CALL obtenerPacientesYUltimaSesion("Femenino", "Obesidad")
+
+
 
