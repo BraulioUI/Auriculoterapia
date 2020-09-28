@@ -1,6 +1,6 @@
 use auriculoterapiadb;
 use m9wogfp1a7afp76v;
-sagsfgsgr
+
 /* por si me equivoco al poner el ejecutar */
 /*ROL 1 - ESPECIALISTA*/
 INSERT INTO Roles(Descripcion) VALUES ('ESPECIALISTA');

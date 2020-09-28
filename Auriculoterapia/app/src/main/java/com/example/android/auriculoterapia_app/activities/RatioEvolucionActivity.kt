@@ -36,16 +36,33 @@ class RatioEvolucionActivity : AppCompatActivity() {
 
         Log.i("TIPOTRATAMIENTO",tipoTratamiento.toString())
 
-        val sharedPreferences = this.getSharedPreferences("db_auriculoterapia",0)
+        /*val sharedPreferences = this.getSharedPreferences("db_auriculoterapia",0)
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
 
         val userId = sharedPreferences.getInt("id",0)
 
 
-        val evolucionesNum:ArrayList<Int> = ArrayList()
+        val evolucionesNum:ArrayList<Int> = ArrayList()*/
+        val ratioEvolucion = bundle.getInt("ratioEvolucion")
+
+        if (ratioEvolucion <= 20){
+            backgroundShape.setColor(Color.parseColor("#FF0000"))
+        } else if(ratioEvolucion <= 40){
+            backgroundShape.setColor(Color.parseColor("#FDC629"))
+        }else if(ratioEvolucion <= 60){
+            backgroundShape.setColor(Color.parseColor("#CFFE11"))
+        }
+        else if(ratioEvolucion <= 80){
+            backgroundShape.setColor( Color.parseColor("#21E545"))
+        }
+        else{
+            backgroundShape.setColor( Color.parseColor("#18B034"))
+        }
+
+        tvRatioEvolucion.text = "${ratioEvolucion.toInt()}%"
 
 
-        userService.getUserById(userId).enqueue(object: Callback<ResponseUserById> {
+        /*userService.getUserById(userId).enqueue(object: Callback<ResponseUserById> {
             override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
                 Log.i("RATIOEVOLUCION: ","NO ENTRO")
             }
@@ -80,7 +97,7 @@ class RatioEvolucionActivity : AppCompatActivity() {
                                 val lastEvolucionesNum = evolucionesNum.last()
                                 val ratio = (100*lastEvolucionesNum)/5
                                 if (ratio <= 20){
-                                    backgroundShape.setColor(Color.parseColor("#43AD28"))
+                                    backgroundShape.setColor(Color.parseColor("#FF0000"))
                                 } else if(ratio <= 40){
                                     backgroundShape.setColor(Color.parseColor("#FDC629"))
                                 }else if(ratio <= 60){
@@ -107,7 +124,7 @@ class RatioEvolucionActivity : AppCompatActivity() {
                 }
             }
 
-        })
+        })*/
 
 
 
@@ -126,5 +143,6 @@ class RatioEvolucionActivity : AppCompatActivity() {
         }
 
         tvRatioEvolucion.text = "${ratio.toInt()}%"*/
+
     }
 }

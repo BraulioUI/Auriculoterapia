@@ -69,7 +69,7 @@ class ChangeKeyWordActivity : AppCompatActivity() {
             completeAll = false
         }
 
-        if (palabraClaveNueva.text.toString().length < 4 || palabraClaveActual.text.toString().length > 15){
+        if (palabraClaveNueva.text.toString().length < 4 || palabraClaveNueva.text.toString().length > 15){
             palabraClaveNueva.setError("La palabra clave de tener al menos 4 caracteres y máximo 15")
             palabraClaveNueva.setText("")
             palabraClaveNueva.requestFocus()
