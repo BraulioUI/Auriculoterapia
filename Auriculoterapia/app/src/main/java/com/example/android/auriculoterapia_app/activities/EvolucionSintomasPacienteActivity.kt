@@ -57,4 +57,9 @@ class EvolucionSintomasPacienteActivity : AppCompatActivity(){
         linechart.animateY(2000)
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

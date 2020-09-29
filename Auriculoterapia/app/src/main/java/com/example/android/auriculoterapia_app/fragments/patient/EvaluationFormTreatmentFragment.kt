@@ -1,7 +1,9 @@
 package com.example.android.auriculoterapia_app.fragments.patient
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,8 @@ import com.example.android.auriculoterapia_app.services.FormularioEvolucion
 import com.example.android.auriculoterapia_app.services.ResponseUserById
 import com.example.android.auriculoterapia_app.services.TreatmentService
 import com.example.android.auriculoterapia_app.services.UserService
+import com.tooltip.Tooltip
+import kotlinx.android.synthetic.main.fragment_evaluation_form_treatment.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,6 +69,9 @@ class EvaluationFormTreatmentFragment : Fragment() {
         resultCodigo.visibility = View.INVISIBLE
 
         val ButtonGuardar = view.findViewById<Button>(R.id.btn_guardar_formulario)
+        val tooltipEvolucion = view.findViewById<Button>(R.id.btn_tooltip_evolucion)
+        val tooltipOtros = view.findViewById<Button>(R.id.btn_tooltip_otros2)
+
 
         val optionsMalestar = arrayOf(1,2,3,4,5)
 
@@ -118,6 +125,32 @@ class EvaluationFormTreatmentFragment : Fragment() {
             completeAll = true
             registrarFormulario()
         }
+        tooltipEvolucion.setOnClickListener {
+            val tooltip = Tooltip.Builder(tooltipEvolucion)
+                .setText("¿Cual ha sido su mejoría?\n" +
+                        "5 = Muy Alta\n " +
+                        "4 = Alta\n " +
+                        "3 = Media\n " +
+                        "2 = Baja\n " +
+                        "1 = Muy baja\n")
+                .setTextColor(Color.WHITE)
+                .setGravity(Gravity.END)
+                .setCornerRadius(8f)
+                .setDismissOnClick(true)
+
+            tooltip.show()
+        }
+        tooltipOtros.setOnClickListener {
+            val tooltip = Tooltip.Builder(tooltipOtros)
+                .setText("¿Que otros sintomas tiene?")
+                .setTextColor(Color.WHITE)
+                .setGravity(Gravity.END)
+                .setCornerRadius(8f)
+                .setDismissOnClick(true)
+
+            tooltip.show()
+        }
+
 
 
         return view

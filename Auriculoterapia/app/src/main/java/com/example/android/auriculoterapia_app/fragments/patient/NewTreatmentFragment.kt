@@ -2,9 +2,11 @@ package com.example.android.auriculoterapia_app.fragments.patient
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,7 @@ import com.example.android.auriculoterapia_app.services.ResponseUserById
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
 import com.example.android.auriculoterapia_app.services.UserService
 import com.google.gson.JsonParser
+import com.tooltip.Tooltip
 import kotlinx.android.synthetic.main.activity_treatment_pacient.*
 import kotlinx.coroutines.android.awaitFrame
 import retrofit2.Call
@@ -57,6 +60,7 @@ class NewTreatmentFragment  : Fragment(){
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
         val resultEdad = view.findViewById<TextView>(R.id.tv_resultEdad)
         val checkimage = view.findViewById<ImageView>(R.id.iv_checkImage)
+        val tooltipOtros = view.findViewById<Button>(R.id.btn_tooltip_otros)
 
         val tv_imageURL = view.findViewById<TextView>(R.id.tv_urlImage)
         tv_imageURL.visibility = View.INVISIBLE
@@ -134,6 +138,16 @@ class NewTreatmentFragment  : Fragment(){
                 //system os is < Marshmellow
                 startActivityForResult(intentInitialImage,REQUEST_CODE)
             }
+        }
+        tooltipOtros.setOnClickListener {
+            val tooltip = Tooltip.Builder(tooltipOtros)
+                .setText("¿Que otros sintomas tiene?")
+                .setTextColor(Color.WHITE)
+                .setGravity(Gravity.END)
+                .setCornerRadius(8f)
+                .setDismissOnClick(true)
+
+            tooltip.show()
         }
 
 

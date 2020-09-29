@@ -12,7 +12,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
-        android:hint="70.0"
+        android:hint="70.5"
+        android:maxLength="5"
         android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_peso"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +47,8 @@
 
     <TextView
         android:id="@+id/tv_malestar"
-        android:layout_width="115dp"
-        android:layout_height="43dp"
+        android:layout_width="68dp"
+        android:layout_height="29dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="Evolución:"
@@ -151,5 +152,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/spinner_codigoTratamiento"
         app:layout_constraintVertical_bias="0.47" />
+
+    <Button
+        android:id="@+id/btn_tooltip_evolucion"
+        android:layout_width="28dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="11dp"
+        android:background="@drawable/info_image"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_malestar"
+        app:layout_constraintStart_toEndOf="@+id/tv_malestar"
+        app:layout_constraintTop_toTopOf="@+id/tv_malestar" />
+
+    <Button
+        android:id="@+id/btn_tooltip_otros2"
+        android:layout_width="28dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="11dp"
+        android:background="@drawable/info_image"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

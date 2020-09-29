@@ -30,6 +30,9 @@ class ResultPatientActivity : AppCompatActivity() {
 
     var pacienteId = 0
     var estadoBotones :Boolean = false
+    var edad = 0
+    var sexo = ""
+    var ciclovida = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_patient)
@@ -39,6 +42,7 @@ class ResultPatientActivity : AppCompatActivity() {
         val selectorTratamiento = findViewById<Spinner>(R.id.spinner_TratamientosResultadosPacientes)
         val pesoButton = findViewById<Button>(R.id.btn_Peso)
         val ratioButton = findViewById<Button>(R.id.btn_RatioEvolucion)
+        val gcButton = findViewById<Button>(R.id.btn_GC)
 
         //tables
         val tableLayoutresult = findViewById<TableLayout>(R.id.tableLayout_resultpatient)
@@ -52,9 +56,7 @@ class ResultPatientActivity : AppCompatActivity() {
         val scrollview = findViewById<ScrollView>(R.id.scrollView2)
 
 
-        //barEntries
-        val yvaluesIMC :ArrayList<BarEntry> = ArrayList()
-        val yvaluesEvolucion : ArrayList<Entry> = ArrayList()
+
 
 
         val sharedPreferences = this.getSharedPreferences("db_auriculoterapia",0)
@@ -68,6 +70,7 @@ class ResultPatientActivity : AppCompatActivity() {
         val intentEvolucionSintomas = Intent(this,EvolucionSintomasPacienteActivity::class.java)
         val intentPeso = Intent(this,PesoPatientActivity::class.java)
         val intentRatio = Intent(this, RatioEvolucionActivity::class.java)
+        val intentGC = Intent(this,PesoPatientActivity::class.java)
 
         userService.getUserById(userId).enqueue(object: Callback<ResponseUserById> {
             override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
@@ -81,9 +84,14 @@ class ResultPatientActivity : AppCompatActivity() {
                 if(response.isSuccessful) {
                     val res = response.body()
                     pacienteId = res?.pacienteId!!
+                    edad = res.edad
+                    sexo= res.sexo
                     Log.i("RESULTPATIENT: ",pacienteId.toString())
 
                     Log.i("PACIENTEID",pacienteId.toString())
+                    Log.i("EDAD",edad.toString())
+                    Log.i("EDAD2",edad.toString())
+                    ciclovida = AsignarCicloVida(edad)
 
                 }else{
                     Log.i("RESULTPATIENT: ","QUE FUE")
@@ -91,7 +99,6 @@ class ResultPatientActivity : AppCompatActivity() {
             }
 
         })
-
 
         selectorTratamiento.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ListaTiposDeTratamiento.lista)
 
@@ -113,6 +120,7 @@ class ResultPatientActivity : AppCompatActivity() {
                 val tratamientoService = ApiClient.retrofit().create(TreatmentService::class.java)
 
 
+                Log.i("PACIENTEIDX: ",pacienteId.toString())
                 tratamientoService.getByIdPacienteTipoTratamientoResults(tratamiento,pacienteId).enqueue(object:
                     Callback<List<ResultsByPatient>> {
                     override fun onFailure(call: Call<List<ResultsByPatient>>, t: Throwable) {
@@ -125,21 +133,37 @@ class ResultPatientActivity : AppCompatActivity() {
                     ) {
                         if(response.isSuccessful){
                             Log.i("RESPONSE: ",response.body().toString())
+                            Log.i("PACIENTEID: ",pacienteId.toString())
+
+                            //barEntries
+                            val yvaluesIMC :ArrayList<BarEntry> = ArrayList()
+                            val yvaluesEvolucion : ArrayList<Entry> = ArrayList()
+                            val yvaluesGC:ArrayList<BarEntry> = ArrayList()
+
                             data = response.body()!!
                             response.body()?.map {
                                 yvaluesIMC.add(BarEntry(it.sesion?.toFloat()!!,it.imc.toFloat()))
                                 yvaluesEvolucion.add(Entry(it.sesion?.toFloat()!!,it.evolucionNumero.toFloat()))
+                                yvaluesGC.add(BarEntry(it.sesion?.toFloat()!!,it.grasaCorporal.toFloat()))
                             }
                             intentPeso.putExtra("yvaluesIMC",Gson().toJson(yvaluesIMC))
                             intentEvolucionSintomas.putExtra("yvaluesEvolucion",Gson().toJson(yvaluesEvolucion))
+                            intentGC.putExtra("yvaluesGC",Gson().toJson(yvaluesGC))
                             Log.i("VALUES: ",yvaluesIMC.toString())
+
+                            /*if(yvaluesIMC.isEmpty()){
+                                estadoBotones = false
+                            }else{
+                                estadoBotones = true
+                            }*/
 
                             if(tratamiento == "Obesidad"){
                                 tableLayoutresult.visibility = View.VISIBLE
                                 scrollview.visibility = View.VISIBLE
                                 val ultimoTratamiento = data.last()
                                 val ratioEvolucion = ((100*ultimoTratamiento.evolucionNumero)/5)
-                                estadoBotones = true
+                                val ultimoGC = ultimoTratamiento.grasaCorporal
+
 
                                 ultimaSesion.text = ultimoTratamiento.sesion.toString()
                                 nivelEfiencia.text = "${ratioEvolucion}%"
@@ -147,7 +171,7 @@ class ResultPatientActivity : AppCompatActivity() {
                                 grasaC.text = ultimoTratamiento.grasaCorporal.toString()
 
                                 intentRatio.putExtra("ratioEvolucion",ratioEvolucion)
-                                //COLORES NIVELEFICIENCIA-RATIOEVOLUCION
+                                //COLORES NIVELEFICIENCIA-RATIOEVOLUCION//////////////////////////////////////////////////////////////////
                                 if (ratioEvolucion <= 20){
                                     nivelEficienciaSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
                                 } else if(ratioEvolucion <= 40){
@@ -162,7 +186,7 @@ class ResultPatientActivity : AppCompatActivity() {
                                     nivelEficienciaSeveridad.setBackgroundColor(Color.parseColor("#18B034"))
                                 }
 
-                                //COLORES IMC
+                                //COLORES IMC////////////////////////////////////////////////////////////////////////////////////////////
                                 if(ultimoTratamiento.imc <= 15){
                                     imcSeveridad.setBackgroundColor(Color.parseColor("##F2BA52"))
                                 }else if(ultimoTratamiento.imc <= 15.9){
@@ -178,6 +202,82 @@ class ResultPatientActivity : AppCompatActivity() {
                                 }else if(ultimoTratamiento.imc >= 40){
                                     imcSeveridad.setBackgroundColor(Color.parseColor("#B8450F"))
                                 }
+
+                                //Colores GC/////////////////////////////////////////////////////////////////////////////
+
+                                if(sexo == "Masculino") {
+                                    if (ciclovida == "Jovenes"||ciclovida == "Adolescentes") {
+                                        if (ultimoGC <= 13) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>13 && ultimoGC <= 20){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>20 && ultimoGC <= 23){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>23){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }else if(ciclovida == "Adulto"){
+                                        if (ultimoGC <= 14) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>14 && ultimoGC <= 21){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>21 && ultimoGC <= 24){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>24){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }else if(ciclovida == "Adulto Mayor"){
+                                        if (ultimoGC <= 17) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>17 && ultimoGC <= 24){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>24 && ultimoGC <= 27){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>27){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }
+                                }else{
+                                    if (ciclovida == "Jovenes"||ciclovida == "Adolescentes") {
+                                        if (ultimoGC <= 19) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>19 && ultimoGC <= 28){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>28 && ultimoGC <= 31){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>31){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }else if(ciclovida == "Adulto"){
+                                        if (ultimoGC <= 20) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>20 && ultimoGC <= 29){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>29 && ultimoGC <= 32){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>32){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }else if(ciclovida == "Adulto Mayor"){
+                                        if (ultimoGC <= 22) {
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
+                                        }
+                                        else if(ultimoGC>22 && ultimoGC <= 31){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#CFFE11"))
+                                        }else if(ultimoGC>31 && ultimoGC <= 34){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#FDC629"))
+                                        }else if(ultimoGC>34){
+                                            grasaCorporalSeveridad.setBackgroundColor(Color.parseColor("#43AD28"))
+                                        }
+                                    }
+                                }
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
                             }else{
                                 tableLayoutresult.visibility = View.GONE
@@ -224,7 +324,7 @@ class ResultPatientActivity : AppCompatActivity() {
         }
 
         pesoButton.setOnClickListener {
-
+            intentPeso.putExtra("Grafico", "IMC")
             intentPeso.putExtra("TipoTratamiento", tratamiento)
             startActivity(intentPeso)
         }
@@ -235,5 +335,29 @@ class ResultPatientActivity : AppCompatActivity() {
             startActivity(intentRatio)
         }
 
+        gcButton.setOnClickListener {
+            intentGC.putExtra("Grafico", "GC")
+            intentGC.putExtra("Sexo",sexo)
+            intentGC.putExtra("TipoTratamiento", tratamiento)
+            intentGC.putExtra("ciclodevida",ciclovida)
+            startActivity(intentGC)
+        }
+
+    }
+
+    private fun AsignarCicloVida(edad:Int): String {
+        var cicloVida = ""
+
+        if(edad >= 14 && edad <= 17){
+            cicloVida = "Adolescentes"
+        }else if (edad>=18 && edad<=30){
+            cicloVida = "Jovenes"
+        }else if(edad >=31 && edad <=45){
+            cicloVida = "Adulto"
+        }else if(edad > 45 && edad <= 60){
+            cicloVida = "Adulto Mayor"
+        }
+
+        return cicloVida
     }
 }
