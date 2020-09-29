@@ -8,7 +8,7 @@ data class ResponsePacientesObesidad(
     var imcPromedio: Double,
     var porcentajeGcPromedio: Double,
     var tipoIndicadorImc: String,
-    var tipoIndicadorGc: String /*IMC o GC*/
+    var tipoIndicadorGc: String
 
 /*
 * peso saludable = #D2E1CB

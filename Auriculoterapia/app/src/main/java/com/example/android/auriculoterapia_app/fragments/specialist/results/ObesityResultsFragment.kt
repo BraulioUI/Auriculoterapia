@@ -3,11 +3,11 @@ package com.example.android.auriculoterapia_app.fragments.specialist.results
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.databinding.FragmentObesityResultsBinding
@@ -15,15 +15,17 @@ import com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesO
 import com.example.android.auriculoterapia_app.services.PatientService
 import com.example.android.auriculoterapia_app.util.ColorIndicatorFactory
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.formatter.ValueFormatter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.round
+
 
 class ObesityResultsFragment : Fragment() {
 
@@ -86,10 +88,10 @@ class ObesityResultsFragment : Fragment() {
                         val promImcAdul = resultados.get(2).imcPromedio
                         val promImcMay = resultados.get(3).imcPromedio
                         barEntriesImc = arrayListOf(
-                            BarEntry(1f, (round(promImcAdol*100)/100).toFloat()),
-                            BarEntry(2f, (round(promImcJov*100)/100).toFloat()),
-                            BarEntry(3f, (round(promImcAdul*100)/100).toFloat()),
-                            BarEntry(4f, (round(promImcMay*100)/100).toFloat()))
+                            BarEntry(0f, (round(promImcAdol*100)/100).toFloat()),
+                            BarEntry(1f, (round(promImcJov*100)/100).toFloat()),
+                            BarEntry(2f, (round(promImcAdul*100)/100).toFloat()),
+                            BarEntry(3f, (round(promImcMay*100)/100).toFloat()))
 
                         barDataSetImc = BarDataSet(barEntriesImc, "IMC Promedio")
                         barDataImc = BarData(barDataSetImc)
@@ -103,11 +105,29 @@ class ObesityResultsFragment : Fragment() {
                         barDataSetImc.valueTextColor = Color.BLACK
                         barDataSetImc.valueTextSize = 16f
 
-                        val xAxisImcLabels = listOf("Adolescentes", "Jóvenes", "Adultos", "Adultos mayores")
-                        barChartImc.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisImcLabels)
+                        val xAxisLabels = listOf("Adolescentes", "Jóvenes", "Adultos", "Adultos mayores")
+                        val xAxisImc = barChartImc.xAxis
+                        xAxisImc.setPosition(XAxis.XAxisPosition.BOTTOM)
+
+                        val formatter1: ValueFormatter =
+                            object : ValueFormatter() {
+                                override fun getFormattedValue(value: Float): String {
+                                    return xAxisLabels.get(value.toInt())
+                                }
+                            }
+
+                        xAxisImc.setGranularity(1f)
+
+                        xAxisImc.setValueFormatter(formatter1)
+                        xAxisImc.textColor = Color.BLACK
+                        xAxisImc.textSize = 12f
+
                         barDataImc.setBarWidth(0.9f)
                         barChartImc.data = barDataImc
                         barChartImc.setFitBars(true)
+                        barChartImc.description.isEnabled = false
+                        barChartImc.legend.isEnabled = false
+
 
                         ///////////////////////////////////////////
 
@@ -116,10 +136,10 @@ class ObesityResultsFragment : Fragment() {
                         val promGcAdul = resultados.get(2).porcentajeGcPromedio
                         val promGcMay = resultados.get(3).porcentajeGcPromedio
                         barEntriesGc = arrayListOf(
-                            BarEntry(1f, (round(promGcAdol*100)/100).toFloat()),
-                            BarEntry(2f, (round(promGcJov*100)/100).toFloat()),
-                            BarEntry(3f, (round(promGcAdul*100)/100).toFloat()),
-                            BarEntry(4f, (round(promGcMay*100)/100).toFloat()))
+                            BarEntry(0f, (round(promGcAdol*100)/100).toFloat()),
+                            BarEntry(1f, (round(promGcJov*100)/100).toFloat()),
+                            BarEntry(2f, (round(promGcAdul*100)/100).toFloat()),
+                            BarEntry(3f, (round(promGcMay*100)/100).toFloat()))
 
                         barDataSetGc = BarDataSet(barEntriesGc, "GC Promedio")
                         barDataGc = BarData(barDataSetGc)
@@ -133,11 +153,26 @@ class ObesityResultsFragment : Fragment() {
                         barDataSetGc.valueTextColor = Color.BLACK
                         barDataSetGc.valueTextSize = 16f
 
-                        val xAxisGcLabels = listOf("Adolescentes", "Jóvenes", "Adultos", "Adultos mayores")
-                        barChartGc.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisGcLabels)
+
+                        val xAxisGc = barChartGc.xAxis
+                        xAxisGc.setPosition(XAxis.XAxisPosition.BOTTOM)
+
+                        val formatter2: ValueFormatter =
+                            object : ValueFormatter() {
+                                override fun getFormattedValue(value: Float): String {
+                                    return xAxisLabels.get(value.toInt())
+                                }
+                            }
+
+                        xAxisGc.setValueFormatter(formatter2)
+                        xAxisGc.textColor = Color.BLACK
+                        xAxisGc.textSize = 12f
+
                         barDataGc.setBarWidth(0.9f)
                         barChartGc.data = barDataGc
                         barChartGc.setFitBars(true)
+                        barChartGc.description.isEnabled = false
+                        barChartGc.legend.isEnabled = false
 
                         ////////////////////////////////////////////
 

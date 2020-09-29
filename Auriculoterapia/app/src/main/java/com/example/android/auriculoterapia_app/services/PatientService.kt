@@ -1,10 +1,7 @@
 package com.example.android.auriculoterapia_app.services
 
 import com.example.android.auriculoterapia_app.models.Paciente
-import com.example.android.auriculoterapia_app.models.helpers.CantidadPacientesPorEdad
-import com.example.android.auriculoterapia_app.models.helpers.CantidadPacientesPorNivelMejora
-import com.example.android.auriculoterapia_app.models.helpers.CantidadPacientesPorSexo
-import com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad
+import com.example.android.auriculoterapia_app.models.helpers.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,6 +27,9 @@ interface PatientService {
 
     @GET("api/paciente/pacientesObesidad")
     fun retornarResultadosPacientesObesidad(@Query("sexo") sexo: String): Call<List<ResponsePacientesObesidad>>
+
+    @GET("api/paciente/{id}")
+    fun resultParametersByPacienteId(@Path("id") id: Int): Call<PacienteResultsParameters>
 
 
 }
