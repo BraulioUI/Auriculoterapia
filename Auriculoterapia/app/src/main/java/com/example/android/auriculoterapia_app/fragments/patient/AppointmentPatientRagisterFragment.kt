@@ -278,7 +278,6 @@ class AppointmentPatientRagisterFragment : Fragment() {
         val manager: FragmentManager = fm.supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
         ft.replace(R.id.fragmentContainer, fragment)
-        manager.popBackStack(null, 0)
         ft.commit()
     }
 

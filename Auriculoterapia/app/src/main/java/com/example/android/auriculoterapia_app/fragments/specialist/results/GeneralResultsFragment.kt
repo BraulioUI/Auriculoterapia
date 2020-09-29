@@ -20,20 +20,22 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 
 
 class GeneralResultsFragment : Fragment() {
 
 
-    private lateinit var pieChartPorCategoriaDeEdad: PieChart
+    private lateinit var barChartPorCategoriaDeEdad: BarChart
 
 
     private lateinit var pieChartPorSexo: PieChart
 
-    private lateinit var barChartPorNiveles: BarChart
+    //private lateinit var barChartPorNiveles: BarChart
 
 
     private lateinit var colorsArrayPacientesPorNiveles: ArrayList<Int>
@@ -50,44 +52,14 @@ class GeneralResultsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_general_results, container, false)
 
         //val detalleObesidad = view.findViewById<LinearLayout>(R.id.detalleIMCPorTipoDePaciente)
-        pieChartPorCategoriaDeEdad = view.findViewById(R.id.pieChartCantidadPacientesPorCategoriaDeEdad)
+        barChartPorCategoriaDeEdad = view.findViewById(R.id.barChartCantidadPacientesPorCategoriaDeEdad)
         pieChartPorSexo =view.findViewById(R.id.pieChartPacientesPorSexo)
-        barChartPorNiveles = view.findViewById(R.id.barChartNivelesMejoraPacientes)
 
 
-       /* var tratamiento = ""
-        var genero = ""
-        arguments?.let{
-            val bundle: Bundle = it
-            tratamiento = bundle.getString("tratamiento").toString()
-            genero = bundle.getString("genero").toString()
-        }
-*/
 
         val patientService = ApiClient.retrofit().create(PatientService::class.java)
 
         /////////////// PACIENTES POR SEXO /////////////////
-
-        /*  val colorsArrayPacientesPorGenero = arrayListOf(
-             Color.parseColor("#0D17F5"),
-             Color.parseColor("#F52519")
-         )
-
-        val pieEntriesPorGenero = arrayListOf<PieEntry>(
-             PieEntry(5F, "Masculino"),
-             PieEntry(4F, "Femenino")
-         )
-
-         val pieDataSetPorGenero = PieDataSet(pieEntriesPorGenero, "Género")
-         pieDataSetPorGenero.colors = colorsArrayPacientesPorGenero
-         pieDataSetPorGenero.valueTextColor = Color.WHITE
-         pieDataSetPorGenero.valueTextSize = 16F
-
-         val pieDataPorGenero = PieData(pieDataSetPorGenero)
-
-         pieChartPorSexo.data = pieDataPorGenero
-         pieChartPorSexo.setTouchEnabled(false)
-         pieChartPorSexo.setDrawEntryLabels(false)*/
         patientService.obtenerCantidadPacientesPorSexo().enqueue(object: Callback<CantidadPacientesPorSexo>{
             override fun onFailure(call: Call<CantidadPacientesPorSexo>, t: Throwable) {
                 Log.i("Error", "Fallo en cargar los datos")
@@ -124,36 +96,13 @@ class GeneralResultsFragment : Fragment() {
 
                     val leyendaPorSexo = pieChartPorSexo.legend
                     leyendaPorSexo.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                    pieChartPorSexo.invalidate()
                 }
             }
         })
 
 
         /////////////// PACIENTES POR CATEGORÍA DE EDAD /////////////////
-       /* val colorsArrayPacientesPorEdad = arrayListOf(
-            Color.parseColor("#0D17F5"),
-            Color.parseColor("#F52519"),
-            Color.parseColor("#F56412"),
-            Color.parseColor("#1EF53B")
-        )
-
-        val pieEntriesPorEdad = arrayListOf<PieEntry>(
-            PieEntry(1F, "Adolescentes"),
-            PieEntry(3F, "Jóvenes"),
-            PieEntry(4F, "Adultos"),
-            PieEntry(5F, "Adultos mayores")
-        )
-
-        val pieDataSetPorEdad = PieDataSet(pieEntriesPorEdad, "Categoría por Edad")
-        pieDataSetPorEdad.colors = colorsArrayPacientesPorEdad
-        pieDataSetPorEdad.valueTextColor = Color.WHITE
-        pieDataSetPorEdad.valueTextSize = 16F
-
-        val pieDataPorEdad = PieData(pieDataSetPorEdad)
-
-        pieChartPorCategoriaDeEdad.data = pieDataPorEdad
-        pieChartPorCategoriaDeEdad.setTouchEnabled(false)
-        pieChartPorCategoriaDeEdad.setDrawEntryLabels(false)*/
 
         patientService.obtenerCantidadPacientesPorEdad().enqueue(object: Callback<CantidadPacientesPorEdad>{
             override fun onFailure(call: Call<CantidadPacientesPorEdad>, t: Throwable) {
@@ -165,7 +114,7 @@ class GeneralResultsFragment : Fragment() {
                 response: Response<CantidadPacientesPorEdad>
             ) {
                 if(response.isSuccessful){
-                    val pieEntriesPorEdad = ArrayList<PieEntry>()
+                    var barEntriesPorEdad = ArrayList<BarEntry>()
 
                     val colorsArrayPacientesPorEdad = arrayListOf(
                         Color.parseColor("#0D17F5"),
@@ -174,40 +123,34 @@ class GeneralResultsFragment : Fragment() {
                         Color.parseColor("#1EF53B")
                     )
 
-                    if (response.body()!!.cantAdolescentes != 0){
-                        pieEntriesPorEdad.add(PieEntry(response.body()!!.cantAdolescentes.toFloat(), "Adolescentes"))
-                    }
-                    if(response.body()!!.cantJovenes != 0){
-                        pieEntriesPorEdad.add(PieEntry(response.body()!!.cantJovenes.toFloat(), "Jóvenes"))
-                    }
-                    if(response.body()!!.cantAdultos != 0){
-                        pieEntriesPorEdad.add(PieEntry(response.body()!!.cantAdultos.toFloat(), "Adultos"))
-                    }
-                    if(response.body()!!.cantAdultosMayores != 0){
-                        pieEntriesPorEdad.add(PieEntry(response.body()!!.cantAdultosMayores.toFloat(), "Adultos mayores"))
-                    }
+                    barEntriesPorEdad = arrayListOf(
+                        BarEntry(1f, response.body()!!.cantAdolescentes.toFloat()),
+                        BarEntry(2f,response.body()!!.cantJovenes.toFloat()),
+                        BarEntry(3f,response.body()!!.cantAdultos.toFloat()),
+                        BarEntry(4f,response.body()!!.cantAdultosMayores.toFloat()))
 
-                    val pieDataSetPorEdad = PieDataSet(pieEntriesPorEdad, "Categoría por Edad")
-                    pieDataSetPorEdad.colors = colorsArrayPacientesPorEdad
-                    pieDataSetPorEdad.valueTextColor = Color.WHITE
-                    pieDataSetPorEdad.valueTextSize = 16F
 
-                    val pieDataPorEdad = PieData(pieDataSetPorEdad)
+                    val barDataSetPorEdad = BarDataSet(barEntriesPorEdad, "Categoría por Edad")
+                    barDataSetPorEdad.colors = colorsArrayPacientesPorEdad
+                    barDataSetPorEdad.valueTextColor = Color.BLACK
+                    barDataSetPorEdad.valueTextSize = 16F
 
-                    pieChartPorCategoriaDeEdad.data = pieDataPorEdad
-                    pieChartPorCategoriaDeEdad.setTouchEnabled(false)
-                    pieChartPorCategoriaDeEdad.setDrawEntryLabels(false)
-                    pieChartPorCategoriaDeEdad.draw(Canvas(pieChartPorCategoriaDeEdad.chartBitmap))
 
-                    val leyendaPorEdad = pieChartPorCategoriaDeEdad.legend
+                    val barDataPorEdad = BarData(barDataSetPorEdad)
+                    barDataPorEdad.barWidth = 0.7f
+                    barChartPorCategoriaDeEdad.data = barDataPorEdad
+
+
+                    val leyendaPorEdad = barChartPorCategoriaDeEdad.legend
                     leyendaPorEdad.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                    barChartPorCategoriaDeEdad.invalidate()
                 }
 
             }
         })
 
         /////////////// PACIENTES POR NIVEL DE MEJORA /////////////////
-
+/*
         colorsArrayPacientesPorNiveles = arrayListOf(
             Color.parseColor("#F53F21"),
             Color.parseColor("#F59627"),
@@ -230,7 +173,7 @@ class GeneralResultsFragment : Fragment() {
 
         val barDataPorNivel = BarData(barDataSetPorNivel)
 
-        barChartPorNiveles.data = barDataPorNivel
+        barChartPorNiveles.data = barDataPorNivel*/
 
 /*
         patientService.obtenerCantidadPacientesPorNivelDeMejora().enqueue(object: Callback<CantidadPacientesPorNivelMejora>{

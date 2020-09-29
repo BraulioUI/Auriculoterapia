@@ -7,6 +7,10 @@
             name="resultados"
             type="java.util.List&lt;com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad&gt;"
             />
+
+        <variable
+            name="colorFactory"
+            type="com.example.android.auriculoterapia_app.util.ColorIndicatorFactory" />
     </data>
 <TableLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,19 +18,8 @@
 
 
     <TableRow
-        android:background="#E5E9EC">
-        <TextView
-            android:id="@+id/titleTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            />
-    </TableRow>
-    <TableRow
-        android:background="#E5E9EC">
+        android:background="#E5E9EC"
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="IMC\nIndicador"
+            android:text="IMC\nindicador"
             android:textAlignment="center"
             android:textStyle="bold" />
         <TextView
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="%GC\nIndicador"
+            android:text="%GC\nindicador"
             android:layout_weight="1"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -67,21 +60,22 @@
 
     <!-- DATA  -->
 
-    <TableRow>
+    <TableRow
+        android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(0).tipoPacientePorEdad}"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center"
-            />
+            android:text="@{resultados.get(0).tipoPacientePorEdad}"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/tvCantidadAdolescentes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@{resultados.get(0).cantidad}"
+            android:text="@{String.valueOf(resultados.get(0).cantidad)}"
             android:textAlignment="center" />
 
         <TextView
@@ -89,22 +83,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@{resultados.get(0).tipoIndicadorImc}"
+            android:background="@{colorFactory.obtenerColorIMC(resultados.get(0).tipoIndicadorImc)}"
             android:textAlignment="center" />
         <TextView
             android:id="@+id/tvIndicadorGCAdolescentes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{resultados.get(0).tipoIndicadorGc}"
+            android:background="@{colorFactory.obtenerColorGC(resultados.get(0).tipoIndicadorGc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
 
     </TableRow>
-    <TableRow>
+    <TableRow
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@{resultados.get(1).tipoPacientePorEdad}"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -112,16 +107,16 @@
         <TextView
             android:id="@+id/tvCantidadJovenes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(1).cantidad}"
+            android:layout_height="match_parent"
+            android:text="@{String.valueOf(resultados.get(1).cantidad)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
         <TextView
             android:id="@+id/tvIndicadorJovenes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(1).tipoIndicadorImc}"
+            android:layout_height="match_parent"
+            android:background="@{colorFactory.obtenerColorIMC(resultados.get(1).tipoIndicadorImc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
@@ -131,11 +126,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@{resultados.get(1).tipoIndicadorGc}"
+            android:background="@{colorFactory.obtenerColorGC(resultados.get(1).tipoIndicadorGc)}"
             android:textAlignment="center" />
 
     </TableRow>
-    <TableRow>
+    <TableRow
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -146,33 +142,34 @@
         <TextView
             android:id="@+id/tvCantidadAdultos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(2).cantidad}"
+            android:layout_height="match_parent"
+            android:text="@{String.valueOf(resultados.get(2).cantidad)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
         <TextView
             android:id="@+id/tvIndicadorAdultos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(2).tipoIndicadorImc}"
+            android:layout_height="match_parent"
+            android:background="@{colorFactory.obtenerColorIMC(resultados.get(2).tipoIndicadorImc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
         <TextView
             android:id="@+id/tvIndicadorGCAdultos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(2).tipoIndicadorGc}"
+            android:layout_height="match_parent"
+            android:background="@{colorFactory.obtenerColorGC(resultados.get(2).tipoIndicadorGc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
 
     </TableRow>
-    <TableRow>
+    <TableRow
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@{resultados.get(3).tipoPacientePorEdad}"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -180,24 +177,24 @@
         <TextView
             android:id="@+id/tvCantidadAdultosMayores"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(3).cantidad}"
+            android:layout_height="match_parent"
+            android:text="@{String.valueOf(resultados.get(3).cantidad)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
         <TextView
             android:id="@+id/tvIndicadorAdultosMayores"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(3).tipoIndicadorImc}"
+            android:layout_height="match_parent"
+            android:background="@{colorFactory.obtenerColorIMC(resultados.get(3).tipoIndicadorImc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />
         <TextView
             android:id="@+id/tvIndicadorGCAdultosMayores"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{resultados.get(3).tipoIndicadorGc}"
+            android:layout_height="match_parent"
+            android:background="@{colorFactory.obtenerColorGC(resultados.get(3).tipoIndicadorGc)}"
             android:layout_weight="1"
             android:textAlignment="center"
             />

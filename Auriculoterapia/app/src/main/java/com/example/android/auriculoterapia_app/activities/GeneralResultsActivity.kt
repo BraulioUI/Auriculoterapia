@@ -36,9 +36,9 @@ class GeneralResultsActivity : AppCompatActivity() {
         spinnerTratamientos = findViewById(R.id.spinnerTratamientosResultados)
         spinnerSexo = findViewById(R.id.spinnerSeleccionarSexo)
         buttonFiltrar = findViewById(R.id.botonFiltrar)
-        val bundle = Bundle()
+
         val generalResultsFragment =  GeneralResultsFragment()
-        val obesityResultsFragment = ObesityResultsFragment()
+
         loadFragment(GeneralResultsFragment())
 
         spinnerTratamientos.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ListaTiposDeTratamiento.lista)
@@ -55,7 +55,7 @@ class GeneralResultsActivity : AppCompatActivity() {
             ) {
 
                 tratamiento = ListaTiposDeTratamiento.lista.get(position)
-                bundle.putString("tratamiento", tratamiento)
+
 
                 }
             }
@@ -73,18 +73,22 @@ class GeneralResultsActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     genero = ListaGeneros.lista.get(position)
-                    bundle.putString("genero", genero)
+
                 }
             }
 
             botonFiltrar.setOnClickListener{
+
                 when(tratamiento){
-                    "--Seleccionar" ->
+                    "--Seleccionar--" ->
                         if(genero == "--Seleccionar--"){
                             loadFragment(generalResultsFragment)
                         }
                     "Obesidad" ->
                         if(genero != "--Seleccionar--"){
+                            val obesityResultsFragment = ObesityResultsFragment()
+                            val bundle = Bundle()
+                            bundle.putString("genero", genero)
                             obesityResultsFragment.arguments = bundle
                             loadFragment(obesityResultsFragment)
                         }
@@ -98,7 +102,10 @@ class GeneralResultsActivity : AppCompatActivity() {
     private fun loadFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().also{
                 fragmentTransaction -> fragmentTransaction.replace(R.id.fragmentContainerGeneralResults, fragment)
+
             fragmentTransaction.commit()
         }
     }
+
+
 }
