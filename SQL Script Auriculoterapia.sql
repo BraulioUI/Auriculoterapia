@@ -127,7 +127,11 @@ join tratamientos t on e.TratamientoId = t.Id
 join solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
 JOIN Pacientes p on p.Id = s.PacienteId;
 
-
+select p.Id from evoluciones e
+JOIN tratamientos t ON t.Id = e.TratamientoId
+JOIN solicitudtratamientos
+join solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
+JOIN Pacientes p on p.Id = s.PacienteId;
 
 DELIMITER //
 CREATE PROCEDURE obtenerPacientesYUltimaSesion(IN sexo longtext, IN tipoTratamiento longtext)
@@ -138,7 +142,7 @@ INNER JOIN solicitudtratamientos s ON t.SolicitudTratamientoId = s.Id
 INNER JOIN pacientes p ON p.Id = s.PacienteId
 INNER join usuarios u ON p.UsuarioId = u.Id
 WHERE u.Sexo = "Masculino"
-AND e.tipoTratamiento = "Dolor lumbar"
+AND e.tipoTratamiento = "Obesidad"
 group by p.Id;
 END //
 DELIMITER ;

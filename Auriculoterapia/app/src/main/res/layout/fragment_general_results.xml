@@ -16,14 +16,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pieChartCantidadPacientesPorCategoriaDeEdad"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de pacientes por categoría de edad"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChartCantidadPacientesPorCategoriaDeEdad"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
                 android:layout_gravity="center"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de pacientes por sexo"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChartPacientesPorSexo"
@@ -32,16 +47,6 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
                 android:layout_gravity="center"/>
-
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barChartNivelesMejoraPacientes"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_gravity="center"
-                android:layout_marginVertical="16dp"
-                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </ScrollView>

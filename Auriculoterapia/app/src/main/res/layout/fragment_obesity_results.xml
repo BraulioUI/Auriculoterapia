@@ -6,6 +6,10 @@
             name="resultados"
             type="java.util.List&lt;com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad&gt;"
             />
+
+        <variable
+            name="colorFactory"
+            type="com.example.android.auriculoterapia_app.util.ColorIndicatorFactory" />
     </data>
     
 <ScrollView
@@ -26,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Cantidad de pacientes e indicador de gravedad IMC\npor categoría"
+            android:text="Cantidad de pacientes y sus indicadores de IMC y %GC por categoría"
             android:layout_marginVertical="8dp"
             android:textStyle="bold"
             />
@@ -35,13 +39,15 @@
             android:id="@+id/IMCTable"
             layout="@layout/table_layout"
             bind:resultados="@{resultados}"
+            bind:colorFactory="@{colorFactory}"
             />
+        
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="IMC promedio por cantidad de pacientes"
+            android:text="IMC promedio por categoría de pacientes"
             android:textAlignment="center"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
@@ -58,11 +64,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="%GC promedio por categoría de pacientes"
             android:textAlignment="center"
-            android:text="Cantidad de pacientes e indicador de gravedad %GC\npor categoría"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
             android:textStyle="bold"
             />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChartGc"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="12dp"/>
+
 
         
     </LinearLayout>

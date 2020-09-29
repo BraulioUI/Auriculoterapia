@@ -19,5 +19,4 @@ sobrepeso = #F5C09E
 obesidad severa = #EEA070
 obesidad mórbida = #B8450F*/
 ): Serializable{
-
 }

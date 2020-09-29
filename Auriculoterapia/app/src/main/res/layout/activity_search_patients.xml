@@ -24,7 +24,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPatients"
             android:layout_width="match_parent"
-            android:layout_height="729dp"
+            android:layout_height="wrap_content"
             android:layout_margin="4dp"
             />
     </LinearLayout>
