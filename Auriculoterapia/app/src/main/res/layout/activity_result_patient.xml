@@ -185,7 +185,7 @@
         android:id="@+id/btn_EvolucionSintomas"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="35dp"
         android:background="@drawable/line_chart_3_"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_Peso"
         app:layout_constraintStart_toStartOf="parent" />
