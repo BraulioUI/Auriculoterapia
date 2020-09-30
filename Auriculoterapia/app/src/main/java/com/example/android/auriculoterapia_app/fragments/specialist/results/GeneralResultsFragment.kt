@@ -19,8 +19,10 @@ import com.example.android.auriculoterapia_app.services.PatientService
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -124,10 +126,10 @@ class GeneralResultsFragment : Fragment() {
                     )
 
                     barEntriesPorEdad = arrayListOf(
-                        BarEntry(1f, response.body()!!.cantAdolescentes.toFloat()),
-                        BarEntry(2f,response.body()!!.cantJovenes.toFloat()),
-                        BarEntry(3f,response.body()!!.cantAdultos.toFloat()),
-                        BarEntry(4f,response.body()!!.cantAdultosMayores.toFloat()))
+                        BarEntry(0f, response.body()!!.cantAdolescentes.toFloat()),
+                        BarEntry(1f,response.body()!!.cantJovenes.toFloat()),
+                        BarEntry(2f,response.body()!!.cantAdultos.toFloat()),
+                        BarEntry(3f,response.body()!!.cantAdultosMayores.toFloat()))
 
 
                     val barDataSetPorEdad = BarDataSet(barEntriesPorEdad, "Categoría por Edad")
@@ -138,11 +140,30 @@ class GeneralResultsFragment : Fragment() {
 
                     val barDataPorEdad = BarData(barDataSetPorEdad)
                     barDataPorEdad.barWidth = 0.7f
+
+                    val xAxisLabels = listOf("Adolescentes", "Jóvenes", "Adultos", "Adultos mayores")
+
+                    val xAxis = barChartPorCategoriaDeEdad.xAxis
+                    xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
+
+                    val formatter: ValueFormatter =
+                        object : ValueFormatter() {
+                            override fun getFormattedValue(value: Float): String {
+                                return xAxisLabels.get(value.toInt())
+                            }
+                        }
+
+                    xAxis.setValueFormatter(formatter)
+                    xAxis.textColor = Color.BLACK
+                    xAxis.textSize = 12f
+
+                    xAxis.setGranularity(1f)
+
+
                     barChartPorCategoriaDeEdad.data = barDataPorEdad
 
-
-                    val leyendaPorEdad = barChartPorCategoriaDeEdad.legend
-                    leyendaPorEdad.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                    barChartPorCategoriaDeEdad.description.isEnabled = false
+                    barChartPorCategoriaDeEdad.legend.isEnabled = false
                     barChartPorCategoriaDeEdad.invalidate()
                 }
 

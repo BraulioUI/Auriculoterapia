@@ -168,6 +168,8 @@ class ObesityResultsFragment : Fragment() {
                         xAxisGc.textColor = Color.BLACK
                         xAxisGc.textSize = 12f
 
+                        xAxisGc.setGranularity(1f)
+
                         barDataGc.setBarWidth(0.9f)
                         barChartGc.data = barDataGc
                         barChartGc.setFitBars(true)

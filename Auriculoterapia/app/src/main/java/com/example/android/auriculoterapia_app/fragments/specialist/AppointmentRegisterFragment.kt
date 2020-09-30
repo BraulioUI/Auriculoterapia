@@ -134,7 +134,7 @@ class AppointmentRegisterFragment : Fragment() {
                 var yearText = "$mYear"
                 var monthText = "${mMonth + 1}"
                 var dayText = "$mDay"
-                if(mMonth < 10){
+                if(mMonth < 9){
                     monthText = "0$monthText"
                 }
                 if(mDay < 10){
