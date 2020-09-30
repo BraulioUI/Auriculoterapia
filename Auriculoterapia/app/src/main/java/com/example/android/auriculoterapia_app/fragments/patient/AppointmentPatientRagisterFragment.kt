@@ -225,8 +225,6 @@ class AppointmentPatientRagisterFragment : Fragment() {
                         Log.i("Cita a actualizar", cita.toString())
                         actualizarCita(cita, citaId, "Bearer $token")
                         actualizacionExitosa = true
-                        val fragment = AppointmentPatientStateFragment()
-                        cargarFragmento(fragment)
 
                     } else{
                         Log.i("Cita a registrar", cita.toString())
@@ -314,6 +312,10 @@ class AppointmentPatientRagisterFragment : Fragment() {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 if(response.isSuccessful){
                     Toast.makeText(mContext, "Se modificó correctamente la cita", Toast.LENGTH_SHORT).show()
+                    if(response.body() != null && response.body()!!){
+                        val fragment = AppointmentPatientStateFragment()
+                        cargarFragmento(fragment)
+                    }
                 }
             }
         })

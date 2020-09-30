@@ -85,6 +85,7 @@
             android:layout_weight="1"
             android:background="@{colorFactory.obtenerColorIMC(resultados.get(0).tipoIndicadorImc)}"
             android:textAlignment="center" />
+
         <TextView
             android:id="@+id/tvIndicadorGCAdolescentes"
             android:layout_width="match_parent"
