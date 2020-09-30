@@ -162,57 +162,51 @@ class ResultsHistoryFragment : Fragment() {
                                         if (!response.body()!!.isEmpty()) {
 
 
+                                            Log.i("RESPONSE: ", response.body().toString())
+                                            Log.i("PACIENTEID: ", pacienteId.toString())
+
+                                            //barEntries
+                                            val yvaluesIMC: ArrayList<BarEntry> = ArrayList()
+                                            val yvaluesEvolucion: ArrayList<Entry> = ArrayList()
+                                            val yvaluesGC: ArrayList<BarEntry> = ArrayList()
+
+                                            data = response.body()!!
+                                            response.body()?.map {
+                                                yvaluesIMC.add(
+                                                    BarEntry(
+                                                        it.sesion?.toFloat()!!,
+                                                        it.imc.toFloat()
+                                                    )
+                                                )
+                                                yvaluesEvolucion.add(
+                                                    Entry(
+                                                        it.sesion?.toFloat()!!,
+                                                        it.evolucionNumero.toFloat()
+                                                    )
+                                                )
+                                                yvaluesGC.add(
+                                                    BarEntry(
+                                                        it.sesion?.toFloat()!!,
+                                                        it.grasaCorporal.toFloat()
+                                                    )
+                                                )
+                                            }
+                                            intentPeso.putExtra(
+                                                "yvaluesIMC",
+                                                Gson().toJson(yvaluesIMC)
+                                            )
+                                            intentEvolucionSintomas.putExtra(
+                                                "yvaluesEvolucion",
+                                                Gson().toJson(yvaluesEvolucion)
+                                            )
+                                            intentGC.putExtra(
+                                                "yvaluesGC",
+                                                Gson().toJson(yvaluesGC)
+                                            )
+                                            Log.i("VALUES: ", yvaluesIMC.toString())
+
+                                            estadoBotones = true
                                             if (tratamiento == "Obesidad") {
-                                                Log.i("RESPONSE: ", response.body().toString())
-                                                Log.i("PACIENTEID: ", pacienteId.toString())
-
-                                                //barEntries
-                                                val yvaluesIMC: ArrayList<BarEntry> = ArrayList()
-                                                val yvaluesEvolucion: ArrayList<Entry> = ArrayList()
-                                                val yvaluesGC: ArrayList<BarEntry> = ArrayList()
-
-                                                data = response.body()!!
-                                                response.body()?.map {
-                                                    yvaluesIMC.add(
-                                                        BarEntry(
-                                                            it.sesion?.toFloat()!!,
-                                                            it.imc.toFloat()
-                                                        )
-                                                    )
-                                                    yvaluesEvolucion.add(
-                                                        Entry(
-                                                            it.sesion?.toFloat()!!,
-                                                            it.evolucionNumero.toFloat()
-                                                        )
-                                                    )
-                                                    yvaluesGC.add(
-                                                        BarEntry(
-                                                            it.sesion?.toFloat()!!,
-                                                            it.grasaCorporal.toFloat()
-                                                        )
-                                                    )
-                                                }
-                                                intentPeso.putExtra(
-                                                    "yvaluesIMC",
-                                                    Gson().toJson(yvaluesIMC)
-                                                )
-                                                intentEvolucionSintomas.putExtra(
-                                                    "yvaluesEvolucion",
-                                                    Gson().toJson(yvaluesEvolucion)
-                                                )
-                                                intentGC.putExtra(
-                                                    "yvaluesGC",
-                                                    Gson().toJson(yvaluesGC)
-                                                )
-                                                Log.i("VALUES: ", yvaluesIMC.toString())
-
-                                                /*if(yvaluesIMC.isEmpty()){
-                                                    estadoBotones = false
-                                                }else{
-                                                    estadoBotones = true
-                                                }*/
-
-
                                                 tableLayoutresult.visibility = View.VISIBLE
                                                 scrollview.visibility = View.VISIBLE
                                                 val ultimoTratamiento = data.last()
@@ -431,66 +425,59 @@ class ResultsHistoryFragment : Fragment() {
                                             } else {
                                                 tableLayoutresult.visibility = View.GONE
                                                 scrollview.visibility = View.GONE
-                                                estadoBotones = false
+
                                             }
 
 
                                         } else {
-                                            Log.i("IMC: ", "FALLO")
+                                            Log.i("NO HAY DATOS: ", "FALLO")
+                                            tableLayoutresult.visibility = View.GONE
+                                            scrollview.visibility = View.GONE
                                             estadoBotones = false
+                                        }
+                                        evolucionbutton.setOnClickListener {
+                                            if (estadoBotones) {
+                                                intentEvolucionSintomas.putExtra(
+                                                    "TipoTratamiento",
+                                                    tratamiento
+                                                )
+                                                startActivity(intentEvolucionSintomas)
+                                            }
+                                        }
+
+                                        pesoButton.setOnClickListener {
+                                            if (estadoBotones) {
+                                                intentPeso.putExtra("Grafico", "IMC")
+                                                intentPeso.putExtra("TipoTratamiento", tratamiento)
+                                                startActivity(intentPeso)
+                                            }
+                                        }
+
+                                        ratioButton.setOnClickListener {
+                                            if (estadoBotones) {
+                                                intentRatio.putExtra("TipoTratamiento", tratamiento)
+                                                startActivity(intentRatio)
+                                            }
+                                        }
+
+                                        gcButton.setOnClickListener {
+                                            if (estadoBotones) {
+                                                intentGC.putExtra("Grafico", "GC")
+                                                intentGC.putExtra("Sexo", sexo)
+                                                intentGC.putExtra("TipoTratamiento", tratamiento)
+                                                intentGC.putExtra("ciclodevida", ciclovida)
+                                                startActivity(intentGC)
+                                            }
                                         }
                                     }
                                 }
 
                             })
-                            /*if(estadoBotones) {
-                                evolucionbutton.setOnClickListener {
-                                    intentEvolucionSintomas.putExtra("TipoTratamiento", tratamiento)
-                                    startActivity(intentEvolucionSintomas)
-                                }
-
-                                pesoButton.setOnClickListener {
-
-                                    intentPeso.putExtra("TipoTratamiento", tratamiento)
-                                    startActivity(intentPeso)
-                                }
-
-                                ratioButton.setOnClickListener {
-
-                                    intentRatio.putExtra("TipoTratamiento", tratamiento)
-                                    startActivity(intentRatio)
-                                }
-                            }*/
 
                         }
                     }
 
                 }
-
-            evolucionbutton.setOnClickListener {
-                intentEvolucionSintomas.putExtra("TipoTratamiento", tratamiento)
-                startActivity(intentEvolucionSintomas)
-            }
-
-            pesoButton.setOnClickListener {
-                intentPeso.putExtra("Grafico", "IMC")
-                intentPeso.putExtra("TipoTratamiento", tratamiento)
-                startActivity(intentPeso)
-            }
-
-            ratioButton.setOnClickListener {
-
-                intentRatio.putExtra("TipoTratamiento", tratamiento)
-                startActivity(intentRatio)
-            }
-
-            gcButton.setOnClickListener {
-                intentGC.putExtra("Grafico", "GC")
-                intentGC.putExtra("Sexo", sexo)
-                intentGC.putExtra("TipoTratamiento", tratamiento)
-                intentGC.putExtra("ciclodevida", ciclovida)
-                startActivity(intentGC)
-            }
 
         }
 
