@@ -71,6 +71,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
         val ButtonGuardar = view.findViewById<Button>(R.id.btn_guardar_formulario)
         val tooltipEvolucion = view.findViewById<Button>(R.id.btn_tooltip_evolucion)
         val tooltipOtros = view.findViewById<Button>(R.id.btn_tooltip_otros2)
+        val peso = requireView().findViewById<EditText>(R.id.et_peso2)
 
 
         val optionsMalestar = arrayOf(1,2,3,4,5)
@@ -93,6 +94,13 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 resultMalestar.text = optionsMalestar.get(position).toString()
             }
 
+        }
+
+        peso.setOnFocusChangeListener { _, hasFocus ->
+            if(!hasFocus){
+                val aux = peso.text.toString()
+                peso.setText(aux.toFloat().toString())
+            }
         }
 
 
@@ -165,6 +173,13 @@ class EvaluationFormTreatmentFragment : Fragment() {
         val tipoTratamiento = resultTratamiento.text.toString()
         val evolucion = resultMalestar.text.toString().toInt()
 
+
+        val auxpeso = peso.text.toString().toDouble().toInt()
+        val auxpeso2 = peso.text.toString().toDouble() % auxpeso
+        val auxpeso3 = auxpeso2.toFloat()
+        val auxpeso4 = auxpeso3 * 10
+        val auxpeso5 = auxpeso4 % auxpeso4.toInt()
+
         if(resultCodigo.text.toString().toInt() == -1||peso.text.isEmpty()){
             completeAll = false
             peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
@@ -187,7 +202,14 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 peso.requestFocus()
                 completeAll = false
             }
+            if(auxpeso5 != 0.0.toFloat()){
+                peso.setError("El peso debe como máximo un decimal")
+                peso.setText("")
+                peso.requestFocus()
+                completeAll = false
+            }
         }
+
 
         if(completeAll){
             val formularioEvolucion = FormularioEvolucion(evolucion,

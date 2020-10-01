@@ -56,11 +56,16 @@ class InitialImageActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        filepath = this!!.getRealPathFromUri(data?.data!!,this)!!
-        if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            iv_initialImage.setImageURI(data?.data)
+        if(resultCode == Activity.RESULT_OK && null != data) {
+            filepath = this!!.getRealPathFromUri(data?.data!!, this)!!
+            if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
+                iv_initialImage.setImageURI(data?.data)
 
+            }
+        }else if(resultCode == Activity.RESULT_CANCELED){
+            finishAndRemoveTask()
         }
+
     }
 
     private fun getRealPathFromUri(imageUri : Uri,activity:Activity): String? {
@@ -77,5 +82,8 @@ class InitialImageActivity : AppCompatActivity() {
         }
     }
 
-    
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAndRemoveTask()
+    }
 }

@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat
 import java.time.Period
 import java.util.*
 import java.util.jar.Manifest
+import kotlin.math.pow
 
 class NewTreatmentFragment  : Fragment(){
 
@@ -72,7 +73,21 @@ class NewTreatmentFragment  : Fragment(){
         val registerButton = view.findViewById<Button>(R.id.btn_registrarTratamiento)
         val instertImageButton = view.findViewById<Button>(R.id.btn_InsertarImagen)
 
+        val peso = view.findViewById<EditText>(R.id.et_peso)
+        val altura = view.findViewById<EditText>(R.id.et_altura)
+        val sintomas = view.findViewById<EditText>(R.id.et_Sintomas)
+        val otros = view.findViewById<EditText>(R.id.et_otros)
+        val imagenAreaAfectada = view.findViewById<TextView>(R.id.tv_urlImage)
+        val edad = view.findViewById<TextView>(R.id.tv_resultEdad)
+
         val intentInitialImage = Intent(requireContext(),InitialImageActivity::class.java)
+
+        peso.setOnFocusChangeListener { _, hasFocus ->
+            if(!hasFocus){
+                val aux = peso.text.toString()
+                peso.setText(aux.toFloat().toString())
+            }
+        }
 
         userService.getUserById(userId).enqueue(object : Callback<ResponseUserById>{
             override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
@@ -94,20 +109,15 @@ class NewTreatmentFragment  : Fragment(){
 
         registerButton.setOnClickListener {
             completeAll = true
-            val peso = requireView().findViewById<EditText>(R.id.et_peso)
-            val altura = requireView().findViewById<EditText>(R.id.et_altura)
-            val sintomas = requireView().findViewById<EditText>(R.id.et_Sintomas)
-            val otros = requireView().findViewById<EditText>(R.id.et_otros)
-            val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage)
-            val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad)
 
 
-            if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() || imagenAreaAfectada!!.text.isEmpty()){
+
+            if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty()){
                 Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
                 completeAll = false
             }
 
-            if(filePath!="" && completeAll){
+            /*if(filePath!="" && completeAll){
                 uploadToCloudinary(filePath)
             }
             else{
@@ -118,7 +128,9 @@ class NewTreatmentFragment  : Fragment(){
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
+            }*/
+
+            registrarTratamiento()
         }
 
         instertImageButton.setOnClickListener {
@@ -149,7 +161,6 @@ class NewTreatmentFragment  : Fragment(){
 
             tooltip.show()
         }
-
 
 
         return view
@@ -197,21 +208,30 @@ class NewTreatmentFragment  : Fragment(){
         val dateInString = formatter.format(date)
 
 
-
         val peso = requireView().findViewById<EditText>(R.id.et_peso)
         val altura = requireView().findViewById<EditText>(R.id.et_altura)
         val sintomas = requireView().findViewById<EditText>(R.id.et_Sintomas)
         val otros = requireView().findViewById<EditText>(R.id.et_otros)
-        val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage)
         val edad = requireView().findViewById<TextView>(R.id.tv_resultEdad)
 
+        val auxpeso = peso.text.toString().toDouble().toInt()
+        val auxpeso2 = peso.text.toString().toDouble() % auxpeso
+        val auxpeso3 = auxpeso2.toFloat()
+        val auxpeso4 = auxpeso3 * 10
+        val auxpeso5 = auxpeso4 % auxpeso4.toInt()
 
-        if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() || imagenAreaAfectada!!.text.isEmpty()){
+        if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() ){
             Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
             completeAll = false
         }else{
             if(peso.text.toString().toDouble() < 20 || peso.text.toString().toDouble() > 200){
                 peso.setError("El peso debe estar dentro de las 20.0 y 200.0 kg")
+                peso.setText("")
+                peso.requestFocus()
+                completeAll = false
+            }
+            if(auxpeso5 != 0.0.toFloat()){
+                peso.setError("El peso debe como máximo un decimal")
                 peso.setText("")
                 peso.requestFocus()
                 completeAll = false
@@ -233,45 +253,62 @@ class NewTreatmentFragment  : Fragment(){
 
 
 
-        if(completeAll){
-            val solicitudTratamiento = SolicitudTratamiento(altura.text.toString().toDouble(),
-                edad.text.toString().toInt(),null, imagenAreaAfectada.text.toString(),otros.text.toString(),null,
-                peso.text.toString().toDouble(),sintomas.text.toString(),
-                dateInString,"En proceso",null)
 
-            Log.i("UserId: ","$userId")
 
-            treatmentRequestService.registerTreatment("Bearer $token",userId,solicitudTratamiento)
-                .enqueue(object : Callback<SolicitudTratamiento>{
-                    override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
-                        Log.i("REGISTRAR TRATAMIENTO","GG WP")
-                    }
+        if(filePath!="" && completeAll){
+            uploadToCloudinary(filePath)
+            val imagenAreaAfectada = requireView().findViewById<TextView>(R.id.tv_urlImage)
+            if(completeAll && imagenAreaAfectada!!.text.isNotEmpty()){
+                val solicitudTratamiento = SolicitudTratamiento(altura.text.toString().toDouble(),
+                    edad.text.toString().toInt(),null, imagenAreaAfectada.text.toString(),otros.text.toString(),null,
+                    peso.text.toString().toDouble(),sintomas.text.toString(),
+                    dateInString,"En proceso",null)
 
-                    override fun onResponse(
-                        call: Call<SolicitudTratamiento>,
-                        response: Response<SolicitudTratamiento>
-                    ) {
-                        if(response.isSuccessful){
-                            Log.i("REGISTRAR TRATAMIENTO: ", response.body().toString())
-                            Toast.makeText(requireContext(),"Se registró el tratamiento correctamente",Toast.LENGTH_SHORT).show()
-                            activity?.finish() //REVISAR
-                            //fragmentTreatmentContainer.
-                            //startActivity(intentContinueTreatment)
+                Log.i("UserId: ","$userId")
+
+                treatmentRequestService.registerTreatment("Bearer $token",userId,solicitudTratamiento)
+                    .enqueue(object : Callback<SolicitudTratamiento>{
+                        override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
+                            Log.i("REGISTRAR TRATAMIENTO","GG WP")
                         }
-                        else{
-                            when(response.code()){
-                                400 ->{
-                                    val res = response.errorBody()?.string()
-                                    val message = JsonParser().parse(res).asJsonObject["message"].asString
 
-                                    Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+                        override fun onResponse(
+                            call: Call<SolicitudTratamiento>,
+                            response: Response<SolicitudTratamiento>
+                        ) {
+                            if(response.isSuccessful){
+                                Log.i("REGISTRAR TRATAMIENTO: ", response.body().toString())
+                                Toast.makeText(requireContext(),"Se registró el tratamiento correctamente",Toast.LENGTH_SHORT).show()
+                                activity?.finish() //REVISAR
+                                //fragmentTreatmentContainer.
+                                //startActivity(intentContinueTreatment)
+                            }
+                            else{
+                                when(response.code()){
+                                    400 ->{
+                                        val res = response.errorBody()?.string()
+                                        val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                                        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
                         }
-                    }
 
-                })
+                    })
+            }
         }
+        else{
+            if(completeAll) {
+                Toast.makeText(
+                    requireContext(),
+                    "No ha registrado la imagen",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+
 
 
     }
@@ -285,7 +322,7 @@ class NewTreatmentFragment  : Fragment(){
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
                 //Toast.makeText(requireContext(), resultData?.get("url").toString(),Toast.LENGTH_LONG).show()
                 tv_imageURL!!.text = resultData?.get("url").toString()
-                registrarTratamiento()
+                //registrarTratamiento()
             }
 
             override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
@@ -328,6 +365,10 @@ class NewTreatmentFragment  : Fragment(){
             completeAll = false
         }
     }
+    /*override fun onFocusChange(v:View, hasFocus:Boolean){
+
+    }*/
+
 
 
 }
