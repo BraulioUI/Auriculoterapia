@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_result_patient.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,12 +52,16 @@ class ResultPatientActivity : AppCompatActivity() {
         val nivelEfiencia = findViewById<TextView>(R.id.tvNivelEficiencia)
         val imc = findViewById<TextView>(R.id.tvIMC)
         val grasaC = findViewById<TextView>(R.id.tvGC)
-        val nivelEficienciaSeveridad = findViewById<TextView>(R.id.tvNivelEficienciaSeveridad)
+        val nivelEficienciaSeveridadVerde = findViewById<TextView>(R.id.tvNivelEficienciaSeveridadVerde)
+        val nivelEficienciaSeveridadAmarillo = findViewById<TextView>(R.id.tvNivelEficienciaSeveridadAmarillo)
+        val nivelEficienciaSeveridadRojo = findViewById<TextView>(R.id.tvNivelEficienciaSeveridadRojo)
+
         val imcSeveridad = findViewById<TextView>(R.id.tvIMCSeveridad)
         val grasaCorporalSeveridad = findViewById<TextView>(R.id.tvGCSeveridad)
         val scrollview = findViewById<ScrollView>(R.id.scrollView2)
-
-
+        val backgroundShape1Ratio = tvNivelEficienciaSeveridadVerde.background as GradientDrawable
+        val backgroundShape2Ratio = tvNivelEficienciaSeveridadAmarillo.background as GradientDrawable
+        val backgroundShape3Ratio = tvNivelEficienciaSeveridadRojo.background as GradientDrawable
         val sharedPreferences = this.getSharedPreferences("db_auriculoterapia", 0)
 
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
@@ -204,37 +209,36 @@ class ResultPatientActivity : AppCompatActivity() {
                                         grasaC.text = ultimoTratamiento.grasaCorporal.toString()
 
                                         intentRatio.putExtra("ratioEvolucion", ratioEvolucion)
+
+                                        backgroundShape1Ratio.setColor(
+                                            Color.parseColor(
+                                                "#FF0000"
+                                            )
+                                        )
+
+                                        backgroundShape2Ratio.setColor(
+                                            Color.parseColor(
+                                                "#CFFE11"
+                                            )
+                                        )
+                                        backgroundShape3Ratio.setColor(
+                                            Color.parseColor(
+                                                "#18B034"
+                                            )
+                                        )
                                         //COLORES NIVELEFICIENCIA-RATIOEVOLUCION//////////////////////////////////////////////////////////////////
                                         if (ratioEvolucion <= 20) {
-                                            nivelEficienciaSeveridad.setBackgroundColor(
-                                                Color.parseColor(
-                                                    "#43AD28"
-                                                )
-                                            )
-                                        } else if (ratioEvolucion <= 40) {
-                                            nivelEficienciaSeveridad.setBackgroundColor(
-                                                Color.parseColor(
-                                                    "#FDC629"
-                                                )
-                                            )
+                                            nivelEficienciaSeveridadRojo.alpha = 1F
+                                            nivelEficienciaSeveridadAmarillo.alpha = 0.3F
+                                            nivelEficienciaSeveridadVerde.alpha = 0.3F
                                         } else if (ratioEvolucion <= 60) {
-                                            nivelEficienciaSeveridad.setBackgroundColor(
-                                                Color.parseColor(
-                                                    "#CFFE11"
-                                                )
-                                            )
-                                        } else if (ratioEvolucion <= 80) {
-                                            nivelEficienciaSeveridad.setBackgroundColor(
-                                                Color.parseColor(
-                                                    "#21E545"
-                                                )
-                                            )
-                                        } else {
-                                            nivelEficienciaSeveridad.setBackgroundColor(
-                                                Color.parseColor(
-                                                    "#18B034"
-                                                )
-                                            )
+                                            nivelEficienciaSeveridadRojo.alpha = 0.3F
+                                            nivelEficienciaSeveridadAmarillo.alpha = 1F
+                                            nivelEficienciaSeveridadVerde.alpha = 0.3F
+                                        } else if (ratioEvolucion <= 100) {
+                                            nivelEficienciaSeveridadRojo.alpha = 0.3F
+                                            nivelEficienciaSeveridadAmarillo.alpha = 0.3F
+                                            nivelEficienciaSeveridadVerde.alpha = 1F
                                         }
 
                                         //COLORES IMC////////////////////////////////////////////////////////////////////////////////////////////

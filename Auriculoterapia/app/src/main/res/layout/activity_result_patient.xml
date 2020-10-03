@@ -28,16 +28,18 @@
 
     <TableLayout
         android:id="@+id/tableLayout_resultpatient"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_TratamientosResultadosPacientes">
 
         <TableRow android:background="#E5E9EC">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
@@ -50,7 +52,7 @@
         <TableRow android:background="#E5E9EC">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Categoría"
@@ -58,7 +60,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Indicador"
@@ -66,7 +68,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Severidad"
@@ -79,23 +81,23 @@
         <TableRow>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Última Sesión"
-                android:textAlignment="center" />
+                android:gravity="center"
+                android:text="Última Sesión" />
 
             <TextView
                 android:id="@+id/tvUltimaSesion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="1"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/tvUltimaSesionVacio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center" />
@@ -104,27 +106,51 @@
         <TableRow>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nivel de eficiencia"
-                android:textAlignment="center" />
+                android:gravity="center"
+                android:text="Nivel de eficiencia" />
 
             <TextView
                 android:id="@+id/tvNivelEficiencia"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="1"
-                android:textAlignment="center" />
+                android:gravity="center"
+                android:text="1" />
 
-            <TextView
-                android:id="@+id/tvNivelEficienciaSeveridad"
-                android:layout_width="match_parent"
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#FF0000"
-                android:textAlignment="center" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNivelEficienciaSeveridadVerde"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/ratio_evolucion_forma" />
+
+                <TextView
+                    android:id="@+id/tvNivelEficienciaSeveridadAmarillo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/ratio_evolucion_forma" />
+
+                <TextView
+                    android:id="@+id/tvNivelEficienciaSeveridadRojo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/ratio_evolucion_forma" />
+
+            </LinearLayout>
+
+
         </TableRow>
 
         <TableRow>
