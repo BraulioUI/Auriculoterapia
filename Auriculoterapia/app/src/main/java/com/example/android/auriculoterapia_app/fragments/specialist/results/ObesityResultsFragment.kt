@@ -1,11 +1,16 @@
 package com.example.android.auriculoterapia_app.fragments.specialist.results
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
@@ -14,6 +19,7 @@ import com.example.android.auriculoterapia_app.databinding.FragmentObesityResult
 import com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad
 import com.example.android.auriculoterapia_app.services.PatientService
 import com.example.android.auriculoterapia_app.util.ColorIndicatorFactory
+import com.example.android.auriculoterapia_app.util.ImcDetailObesity
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -40,6 +46,9 @@ class ObesityResultsFragment : Fragment() {
     private lateinit var barDataSetGc: BarDataSet
     private lateinit var barEntriesGc: ArrayList<BarEntry>
 
+    private lateinit var btLeyendaImc: Button
+    private lateinit var btLeyendaGc: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +57,12 @@ class ObesityResultsFragment : Fragment() {
 
         val binding = DataBindingUtil.inflate<FragmentObesityResultsBinding>(inflater, R.layout.fragment_obesity_results, container, false)
         val view = binding.root
+
+        btLeyendaImc = view.findViewById(R.id.verImcLeyenda)
+        btLeyendaGc = view.findViewById(R.id.verGcLeyenda)
+
+        val leyendaImcDialog = ImcDetailObesity()
+
 
         val pacienteService = ApiClient.retrofit().create(PatientService::class.java)
 
@@ -59,6 +74,26 @@ class ObesityResultsFragment : Fragment() {
 
         barChartImc = view.findViewById(R.id.barChartImc)
         barChartGc = view.findViewById(R.id.barChartGc)
+
+        btLeyendaImc.setOnClickListener {
+            leyendaImcDialog.show(requireActivity().supportFragmentManager, "")
+        }
+
+        btLeyendaGc.setOnClickListener {
+            val builder = AlertDialog.Builder(requireActivity())
+            val inflaterImc = requireActivity().layoutInflater
+
+            val viewImc = inflaterImc.inflate(R.layout.layout_gc_detail_dialog, null)
+
+            builder.setView(viewImc).setTitle("Leyenda (%GC)")
+                .setNegativeButton("Cerrar", DialogInterface.OnClickListener{
+                        dialog, id ->
+                    dialog.dismiss()
+                })
+
+            val dialog = builder.create()
+            dialog.show()
+        }
 
 
         if (sexo != ""){
@@ -82,11 +117,41 @@ class ObesityResultsFragment : Fragment() {
 
                         ///////////////////////////////////////////
 
-
                         val promImcAdol = resultados!!.get(0).imcPromedio
                         val promImcJov = resultados.get(1).imcPromedio
                         val promImcAdul = resultados.get(2).imcPromedio
                         val promImcMay = resultados.get(3).imcPromedio
+
+                        val colorFactory = ColorIndicatorFactory(requireContext())
+                        val arrayImcColors = arrayListOf(
+
+                            colorFactory.obtenerColorIMC(resultados.get(0).tipoIndicadorImc),
+                            colorFactory.obtenerColorIMC(resultados.get(1).tipoIndicadorImc),
+                            colorFactory.obtenerColorIMC(resultados.get(2).tipoIndicadorImc),
+                            colorFactory.obtenerColorIMC(resultados.get(3).tipoIndicadorImc)
+                        )
+
+                        /*CIRCULOS DE LA TABLA (IMC)*/
+                        val imcTable = view.findViewById<View>(R.id.IMCTable)
+                        val tvImcAdol = imcTable.findViewById<TextView>(R.id.tvIndicadorIMCAdolescentes)
+                        val tvImcJov = imcTable.findViewById<TextView>(R.id.tvIndicadorJovenes)
+                        val tvImcAdul = imcTable.findViewById<TextView>(R.id.tvIndicadorAdultos)
+                        val tvImcAdulMay = imcTable.findViewById<TextView>(R.id.tvIndicadorAdultosMayores)
+
+                        val circleImcAdol = tvImcAdol.background as GradientDrawable
+                        circleImcAdol.setColor(arrayImcColors.get(0))
+
+                        val circleImcJov = tvImcJov.background as GradientDrawable
+                        circleImcJov.setColor(arrayImcColors.get(1))
+
+                        val circleImcAdul = tvImcAdul.background as GradientDrawable
+                        circleImcAdul.setColor(arrayImcColors.get(2))
+
+                        val circleImcAdulMay = tvImcAdulMay.background as GradientDrawable
+                        circleImcAdulMay.setColor(arrayImcColors.get(3))
+
+
+                        ///////////////////////////////////////////////////////
                         barEntriesImc = arrayListOf(
                             BarEntry(0f, (round(promImcAdol*100)/100).toFloat()),
                             BarEntry(1f, (round(promImcJov*100)/100).toFloat()),
@@ -94,14 +159,10 @@ class ObesityResultsFragment : Fragment() {
                             BarEntry(3f, (round(promImcMay*100)/100).toFloat()))
 
                         barDataSetImc = BarDataSet(barEntriesImc, "IMC Promedio")
+
+
+                        barDataSetImc.colors = arrayImcColors
                         barDataImc = BarData(barDataSetImc)
-
-
-
-                        barDataSetImc.colors.add(Color.RED)
-                        barDataSetImc.colors.add(Color.BLUE)
-                        barDataSetImc.colors.add(Color.GREEN)
-                        barDataSetImc.colors.add(Color.YELLOW)
                         barDataSetImc.valueTextColor = Color.BLACK
                         barDataSetImc.valueTextSize = 16f
 
@@ -131,6 +192,32 @@ class ObesityResultsFragment : Fragment() {
 
                         ///////////////////////////////////////////
 
+                        val arrayGcColors = arrayListOf(
+                            colorFactory.obtenerColorGC(resultados.get(0).tipoIndicadorGc),
+                            colorFactory.obtenerColorGC(resultados.get(1).tipoIndicadorGc),
+                            colorFactory.obtenerColorGC(resultados.get(2).tipoIndicadorGc),
+                            colorFactory.obtenerColorGC(resultados.get(3).tipoIndicadorGc)
+
+                        )
+                        /*CIRCULOS DE LA TABLA (GC)*/
+
+                        val tvGcAdol = imcTable.findViewById<TextView>(R.id.tvIndicadorGCAdolescentes)
+                        val tvGcJov = imcTable.findViewById<TextView>(R.id.tvIndicadorGCJovenes)
+                        val tvGcAdul = imcTable.findViewById<TextView>(R.id.tvIndicadorGCAdultos)
+                        val tvGcAdulMay = imcTable.findViewById<TextView>(R.id.tvIndicadorGCAdultosMayores)
+
+                        val circleGcAdol = tvGcAdol.background as GradientDrawable
+                        circleGcAdol.setColor(arrayGcColors.get(0))
+
+                        val circleGcJov = tvGcJov.background as GradientDrawable
+                        circleGcJov.setColor(arrayGcColors.get(1))
+
+                        val circleGcAdul = tvGcAdul.background as GradientDrawable
+                        circleGcAdul.setColor(arrayGcColors.get(2))
+
+                        val circleGcAdulMay = tvGcAdulMay.background as GradientDrawable
+                        circleGcAdulMay.setColor(arrayGcColors.get(3))
+
                         val promGcAdol = resultados.get(0).porcentajeGcPromedio
                         val promGcJov = resultados.get(1).porcentajeGcPromedio
                         val promGcAdul = resultados.get(2).porcentajeGcPromedio
@@ -142,14 +229,9 @@ class ObesityResultsFragment : Fragment() {
                             BarEntry(3f, (round(promGcMay*100)/100).toFloat()))
 
                         barDataSetGc = BarDataSet(barEntriesGc, "GC Promedio")
+
+                        barDataSetGc.colors = arrayGcColors
                         barDataGc = BarData(barDataSetGc)
-
-
-
-                        barDataSetGc.colors.add(Color.RED)
-                        barDataSetGc.colors.add(Color.BLUE)
-                        barDataSetGc.colors.add(Color.GREEN)
-                        barDataSetGc.colors.add(Color.YELLOW)
                         barDataSetGc.valueTextColor = Color.BLACK
                         barDataSetGc.valueTextSize = 16f
 

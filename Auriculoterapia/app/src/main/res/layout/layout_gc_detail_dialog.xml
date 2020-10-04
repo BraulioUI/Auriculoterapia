@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Masculino"
+        android:textStyle="bold"
+        android:textSize="18sp"
+       />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="12dp"
+       >
+
+        <TableRow>
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="Bueno"
+                android:paddingHorizontal="8dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+
+            <TextView
+                android:text="Normal"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+            <TextView
+                android:text="Elevado"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+
+            <TextView
+                android:text="Muy elevado"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+        </TableRow>
+
+        <TableRow
+          >
+            <TextView
+                android:text="Adolescentes\ny jóvenes"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="13% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="14% - 20%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="21% - 23%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="Mayor a 13%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+            />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="14% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="15% - 21%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+               >
+                <TextView
+                    android:text="22% - 24%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+             >
+                <TextView
+                    android:text="Mayor a 24%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos\nmayores"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+               >
+                <TextView
+                    android:text="17% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+            >
+                <TextView
+                    android:text="18% - 24%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+               >
+                <TextView
+                    android:text="25% - 27%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+         >
+                <TextView
+                    android:text="Mayor a 27%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Femenino"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TableRow>
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+
+            <TextView
+                android:text="Bueno"
+                android:layout_weight="1"
+                android:layout_column="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:background="#E6E1E1"/>
+
+            <TextView
+                android:text="Normal"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+            <TextView
+                android:text="Elevado"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+
+            <TextView
+                android:text="Muy elevado"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#E6E1E1"/>
+        </TableRow>
+
+        <TableRow
+            >
+            <TextView
+                android:text="Adolescentes\ny jóvenes"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="19% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="20% - 28%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="29% - 31%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="Mayor a 31%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="20% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="21% - 29%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="30% - 32%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="Mayor a 32%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos\nmayores"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="22% o menos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="23% - 31%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="32% - 34%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:text="Mayor a 34%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</LinearLayout>

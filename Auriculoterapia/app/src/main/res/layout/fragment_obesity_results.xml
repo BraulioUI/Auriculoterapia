@@ -41,8 +41,27 @@
             bind:resultados="@{resultados}"
             bind:colorFactory="@{colorFactory}"
             />
-        
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/verImcLeyenda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leyenda IMC"
+                android:layout_marginEnd="6dp"/>
+
+            <Button
+                android:id="@+id/verGcLeyenda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leyenda %GC"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
