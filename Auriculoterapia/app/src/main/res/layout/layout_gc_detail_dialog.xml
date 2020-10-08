@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="4dp"
+    android:padding="8dp"
     >
 
     <TextView
@@ -27,124 +27,141 @@
             <TextView
                 android:layout_weight="1"
                 android:textAlignment="center" />
-
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
             <TextView
                 android:text="Bueno"
                 android:paddingHorizontal="8dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
+                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoBueno"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Normal"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoNormal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:text="Normal"
+            <LinearLayout
                 android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
-            <TextView
-                android:text="Elevado"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
-
-            <TextView
-                android:text="Muy elevado"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Muy elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoMuyElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
         </TableRow>
 
-        <TableRow
-          >
+        <TableRow>
             <TextView
-                android:text="Adolescentes\ny jóvenes"
+                android:text="Adolescentes\ny\njóvenes"
                 android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textSize="12sp"
+                android:paddingVertical="8dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="#E6E1E1"
                 />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="13% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
                 <TextView
-                    android:text="14% - 20%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="13%\no\nmenos"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:text="21% - 23%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:text="Mayor a 13%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
+                <TextView
+                    android:text="14%\na\n20%"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    />
+                <TextView
+                    android:text="21%\na\n23%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
 
+                <TextView
+                    android:text="Mayor\na\n23%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
         </TableRow>
 
         <TableRow>
@@ -156,82 +173,41 @@
                 android:textSize="12sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:paddingVertical="8dp"
                 android:background="#E6E1E1"
             />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
                 <TextView
-                    android:text="14% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="14%\no\nmenos"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
                 <TextView
-                    android:text="15% - 21%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="15%\na\n21%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-               >
-                <TextView
-                    android:text="22% - 24%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="22%\na\n24%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-             >
-                <TextView
-                    android:text="Mayor a 24%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="Mayor\na\n24%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
+
 
 
         </TableRow>
@@ -246,81 +222,41 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="#E6E1E1"
+                android:paddingVertical="8dp"
                 />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-               >
                 <TextView
-                    android:text="17% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="17%\no\nmenos"
                     android:textAlignment="center"
                     android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
+                    android:paddingVertical="8dp"/>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-            >
                 <TextView
-                    android:text="18% - 24%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="18%\na\n24%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-               >
-                <TextView
-                    android:text="25% - 27%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="25%\na\n27%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-         >
-                <TextView
-                    android:text="Mayor a 27%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="Mayor\na\n27%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
+
+
 
 
         </TableRow>
@@ -347,50 +283,104 @@
         <TableRow>
             <TextView
                 android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
+                android:textAlignment="center" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Bueno"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoBueno"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Normal"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoNormal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:text="Bueno"
+            <LinearLayout
                 android:layout_weight="1"
-                android:layout_column="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:paddingHorizontal="8dp"
-                android:background="#E6E1E1"/>
-
-            <TextView
-                android:text="Normal"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
-            <TextView
-                android:text="Elevado"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
-
-            <TextView
-                android:text="Muy elevado"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="#E6E1E1"/>
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Muy elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoMuyElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
         </TableRow>
 
         <TableRow
             >
             <TextView
-                android:text="Adolescentes\ny jóvenes"
+                android:text="Adolescentes\ny\njóvenes"
                 android:layout_weight="1"
+                android:paddingVertical="8dp"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textSize="12sp"
@@ -398,76 +388,44 @@
                 android:textStyle="bold"
                 android:background="#E6E1E1"
                 />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="19% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
                 <TextView
-                    android:text="20% - 28%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="19%\no\nmenos"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:text="29% - 31%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="20%\na\n28%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:text="Mayor a 31%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="29%\na\n31%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
+                    android:text="Mayor\na\n31%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-            </LinearLayout>
+
 
 
         </TableRow>
@@ -482,81 +440,44 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="#E6E1E1"
+                android:paddingVertical="8dp"
                 />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="20% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
                 <TextView
-                    android:text="21% - 29%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="20%\no\nmenos"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="30% - 32%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="21%\na\n29%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="Mayor a 32%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="30%\na\n32%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
+                    android:text="Mayor\na\n32%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-            </LinearLayout>
+
 
 
         </TableRow>
@@ -568,84 +489,48 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textSize="12sp"
+                android:paddingVertical="8dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="#E6E1E1"
                 />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="22% o menos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
                 <TextView
-                    android:text="23% - 31%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="22%\no\nmenos"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="32% - 34%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="23%\na\n31%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:text="Mayor a 34%"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="32%\na\n34%"
+                    android:layout_weight="1"
                     android:textAlignment="center"
                     android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
+
+
                 <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/ratio_evolucion_forma"
-                    android:layout_gravity="center"
+                    android:text="Mayor\na\n34%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
                     />
-            </LinearLayout>
+
 
 
         </TableRow>

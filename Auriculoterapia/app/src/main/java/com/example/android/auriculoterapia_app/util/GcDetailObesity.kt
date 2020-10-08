@@ -12,51 +12,52 @@ import com.example.android.auriculoterapia_app.R
 
 class GcDetailObesity: AppCompatDialogFragment() {
 
-    private lateinit var delgadezMuySevera: TextView
-    private lateinit var delgadezSevera: TextView
-    private lateinit var delgadez: TextView
-    private lateinit var pesoSaludable: TextView
-    private lateinit var sobrepeso: TextView
-    private lateinit var obesidadSevera: TextView
-    private lateinit var obesidadMorbida: TextView
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val builder = AlertDialog.Builder(requireActivity())
         val inflaterImc = requireActivity().layoutInflater
 
-        val viewImc = inflaterImc.inflate(R.layout.layout_imc_detail_dialog, null)
+        val viewImc = inflaterImc.inflate(R.layout.layout_gc_detail_dialog, null)
 
         val colorFactory = ColorIndicatorFactory(requireContext())
 
-        delgadezMuySevera = viewImc.findViewById(R.id.imcDelgadezMuySevera)
-        delgadezSevera = viewImc.findViewById(R.id.imcDelgadezSevera)
-        delgadez = viewImc.findViewById(R.id.imcDelgadez)
-        pesoSaludable = viewImc.findViewById(R.id.imcPesoSaludable)
-        sobrepeso = viewImc.findViewById(R.id.imcSobrepeso)
-        obesidadSevera = viewImc.findViewById(R.id.imcObesidadSevera)
-        obesidadMorbida = viewImc.findViewById(R.id.imcObesidadMorbida)
+        val colorBueno = colorFactory.obtenerColorGC("BUENA")
+        val colorNormal = colorFactory.obtenerColorGC("NORMAL")
+        val colorElevado = colorFactory.obtenerColorGC("ELEVADA")
+        val colorMuyElevado = colorFactory.obtenerColorGC("MUY ELEVADA")
 
-        val circulo1 = delgadezMuySevera.background as GradientDrawable
-        circulo1.setColor(colorFactory.obtenerColorIMC("Delgadez muy severa"))
+        val masculinoBueno = viewImc.findViewById<TextView>(R.id.masculinoBueno)
+        val masculinoNormal = viewImc.findViewById<TextView>(R.id.masculinoNormal)
+        val masculinoElevado = viewImc.findViewById<TextView>(R.id.masculinoElevado)
+        val masculinoMuyElevado = viewImc.findViewById<TextView>(R.id.masculinoMuyElevado)
 
-        val circulo2 = delgadezSevera.background as GradientDrawable
-        circulo2.setColor(colorFactory.obtenerColorIMC("Delgadez severa"))
+        val femeninoBueno = viewImc.findViewById<TextView>(R.id.femeninoBueno)
+        val femeninoNormal = viewImc.findViewById<TextView>(R.id.femeninoNormal)
+        val femeninoElevado = viewImc.findViewById<TextView>(R.id.femeninoElevado)
+        val femeninoMuyElevado = viewImc.findViewById<TextView>(R.id.femeninoMuyElevado)
 
-        val circulo3 = delgadez.background as GradientDrawable
-        circulo3.setColor(colorFactory.obtenerColorIMC("Delgadez"))
 
-        val circulo4 = pesoSaludable.background as GradientDrawable
-        circulo4.setColor(colorFactory.obtenerColorIMC("Peso saludable"))
 
-        val circulo5 = sobrepeso.background as GradientDrawable
-        circulo5.setColor(colorFactory.obtenerColorIMC("Sobrepeso"))
+        val circuloBuenoMasc = masculinoBueno.background as GradientDrawable
+        circuloBuenoMasc.setColor(colorBueno)
+        val circuloNormalMasc = masculinoNormal.background as GradientDrawable
+        circuloNormalMasc.setColor(colorNormal)
+        val circuloElevadoMasc = masculinoElevado.background as GradientDrawable
+        circuloElevadoMasc.setColor(colorElevado)
+        val circuloMuyElevadoMasc = masculinoMuyElevado.background as GradientDrawable
+        circuloMuyElevadoMasc.setColor(colorMuyElevado)
 
-        val circulo6 = obesidadSevera.background as GradientDrawable
-        circulo6.setColor(colorFactory.obtenerColorIMC("Obesidad severa"))
 
-        val circulo7 = obesidadMorbida.background as GradientDrawable
-        circulo7.setColor(colorFactory.obtenerColorIMC("Obesidad mórbida"))
+        val circuloBuenoFem = femeninoBueno.background as GradientDrawable
+        circuloBuenoFem.setColor(colorBueno)
+        val circuloNormalFem = femeninoNormal.background as GradientDrawable
+        circuloNormalFem.setColor(colorNormal)
+        val circuloElevadoFem = femeninoElevado.background as GradientDrawable
+        circuloElevadoFem.setColor(colorElevado)
+        val circuloMuyElevadoFem = femeninoMuyElevado.background as GradientDrawable
+        circuloMuyElevadoFem.setColor(colorMuyElevado)
 
         builder.setView(viewImc).setTitle("Leyenda (IMC)")
             .setNegativeButton("Cerrar", DialogInterface.OnClickListener{

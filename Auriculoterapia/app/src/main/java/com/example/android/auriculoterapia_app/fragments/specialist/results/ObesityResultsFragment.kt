@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +20,19 @@ import com.example.android.auriculoterapia_app.databinding.FragmentObesityResult
 import com.example.android.auriculoterapia_app.models.helpers.ResponsePacientesObesidad
 import com.example.android.auriculoterapia_app.services.PatientService
 import com.example.android.auriculoterapia_app.util.ColorIndicatorFactory
+import com.example.android.auriculoterapia_app.util.GcDetailObesity
 import com.example.android.auriculoterapia_app.util.ImcDetailObesity
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.tooltip.Tooltip
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,8 +67,11 @@ class ObesityResultsFragment : Fragment() {
         btLeyendaImc = view.findViewById(R.id.verImcLeyenda)
         btLeyendaGc = view.findViewById(R.id.verGcLeyenda)
 
-        val leyendaImcDialog = ImcDetailObesity()
+        val positionImc = view.findViewById<TextView>(R.id.posicionToolTipImc)
+        val positionGc = view.findViewById<TextView>(R.id.posicionToolTipGc)
 
+        val leyendaImcDialog = ImcDetailObesity()
+        val leyendaGcDialog = GcDetailObesity()
 
         val pacienteService = ApiClient.retrofit().create(PatientService::class.java)
 
@@ -80,19 +89,7 @@ class ObesityResultsFragment : Fragment() {
         }
 
         btLeyendaGc.setOnClickListener {
-            val builder = AlertDialog.Builder(requireActivity())
-            val inflaterImc = requireActivity().layoutInflater
-
-            val viewImc = inflaterImc.inflate(R.layout.layout_gc_detail_dialog, null)
-
-            builder.setView(viewImc).setTitle("Leyenda (%GC)")
-                .setNegativeButton("Cerrar", DialogInterface.OnClickListener{
-                        dialog, id ->
-                    dialog.dismiss()
-                })
-
-            val dialog = builder.create()
-            dialog.show()
+            leyendaGcDialog.show(requireActivity().supportFragmentManager, "")
         }
 
 
@@ -189,6 +186,44 @@ class ObesityResultsFragment : Fragment() {
                         barChartImc.description.isEnabled = false
                         barChartImc.legend.isEnabled = false
 
+                        barChartImc.setOnChartValueSelectedListener(object:
+                            OnChartValueSelectedListener{
+                            override fun onNothingSelected() {
+                                val tooltip = Tooltip.Builder(positionImc)
+                                    .setText("Nada seleccionado")
+                                    .setTextColor(Color.WHITE)
+                                    .setGravity(Gravity.BOTTOM)
+                                    .setCornerRadius(8f)
+                                    .setDismissOnClick(true)
+
+
+                                tooltip.show()
+                            }
+
+                            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                                val x = h?.xPx
+                                val y = h?.yPx
+                                positionImc.x = x!!
+                                positionImc.y = y!!
+                                var descripcion = ""
+                                val positionX = e!!.x
+                                when(positionX){
+                                    0f ->  descripcion = resultados.get(0).tipoIndicadorImc
+                                    1f ->  descripcion = resultados.get(1).tipoIndicadorImc
+                                    2f ->  descripcion = resultados.get(2).tipoIndicadorImc
+                                    3f ->  descripcion = resultados.get(3).tipoIndicadorImc
+                                }
+                                val tooltip = Tooltip.Builder(positionImc)
+                                    .setText(descripcion)
+                                    .setTextColor(Color.WHITE)
+                                    .setGravity(Gravity.BOTTOM)
+                                    .setCornerRadius(8f)
+                                    .setDismissOnClick(true)
+
+                                tooltip.show()
+
+                            }
+                        })
 
                         ///////////////////////////////////////////
 
@@ -257,6 +292,48 @@ class ObesityResultsFragment : Fragment() {
                         barChartGc.setFitBars(true)
                         barChartGc.description.isEnabled = false
                         barChartGc.legend.isEnabled = false
+
+                        barChartGc.setOnChartValueSelectedListener(object:
+                            OnChartValueSelectedListener{
+                            override fun onNothingSelected() {
+                                val tooltip = Tooltip.Builder(positionImc)
+                                    .setText("Nada seleccionado")
+                                    .setTextColor(Color.WHITE)
+                                    .setGravity(Gravity.BOTTOM)
+                                    .setCornerRadius(8f)
+                                    .setCancelable(true)
+                                    .setDismissOnClick(true)
+
+
+                                tooltip.show()
+                            }
+
+                            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                                val x = h?.xPx
+                                val y = h?.yPx
+                                positionImc.x = x!!
+                                positionImc.y = y!!
+                                var descripcion = ""
+                                val positionX = e!!.x
+                                when(positionX){
+                                    0f ->  descripcion = resultados.get(0).tipoIndicadorGc
+                                    1f ->  descripcion = resultados.get(1).tipoIndicadorGc
+                                    2f ->  descripcion = resultados.get(2).tipoIndicadorGc
+                                    3f ->  descripcion = resultados.get(3).tipoIndicadorGc
+                                }
+                                val tooltip = Tooltip.Builder(positionImc)
+                                    .setText(descripcion)
+                                    .setTextColor(Color.WHITE)
+                                    .setGravity(Gravity.BOTTOM)
+                                    .setCornerRadius(8f)
+                                    .setCancelable(true)
+                                    .setDismissOnClick(true)
+
+                                tooltip.show()
+
+                            }
+                        })
+
 
                         ////////////////////////////////////////////
 

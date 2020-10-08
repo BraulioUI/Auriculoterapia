@@ -78,7 +78,12 @@
             android:id="@+id/barChartImc"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/posicionToolTipImc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </com.github.mikephil.charting.charts.BarChart>
 
         <TextView
             android:layout_width="match_parent"
@@ -94,7 +99,14 @@
             android:id="@+id/barChartGc"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/posicionToolTipGc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </com.github.mikephil.charting.charts.BarChart>
 
 
         
