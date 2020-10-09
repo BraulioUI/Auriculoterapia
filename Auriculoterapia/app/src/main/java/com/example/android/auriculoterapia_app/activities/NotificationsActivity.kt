@@ -47,6 +47,12 @@ class NotificationsActivity : AppCompatActivity() {
         val notificationsAdapter = NotificationsAdapter()
         notificationRecycler.adapter = notificationsAdapter
 
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        var rol = ""
+        sharedPreferences.getString("rol", "")?.let{
+            rol = it
+        }
+
         val textSinNotificaciones = findViewById<TextView>(R.id.sin_notificaciones_text)
 
         notificacionService.getAllNotificationsByReceptorId(userId).enqueue(object:
@@ -73,7 +79,7 @@ class NotificationsActivity : AppCompatActivity() {
 
                             textSinNotificaciones.visibility = View.GONE
 
-                            notificationsAdapter.submitList(notificaciones)
+                            notificationsAdapter.submitList(notificaciones, rol)
                             val itemTouchHelper = ItemTouchHelper(
                                 object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
 

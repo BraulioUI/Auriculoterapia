@@ -61,7 +61,8 @@
     <!-- DATA  -->
 
     <TableRow
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingVertical="3dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -105,6 +106,7 @@
 
     </TableRow>
     <TableRow
+        android:paddingVertical="3dp"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
@@ -148,6 +150,7 @@
 
     </TableRow>
     <TableRow
+        android:paddingVertical="3dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -191,6 +194,7 @@
         </LinearLayout>
     </TableRow>
     <TableRow
+        android:paddingVertical="3dp"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"

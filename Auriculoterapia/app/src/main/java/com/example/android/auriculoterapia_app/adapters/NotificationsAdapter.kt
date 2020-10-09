@@ -16,12 +16,14 @@ import kotlin.collections.ArrayList
 class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var notificaciones: ArrayList<Notificacion> = ArrayList()
+    var rol: String = ""
 
-    inner class NotificationViewHolder constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class NotificationViewHolder constructor(var view: View): RecyclerView.ViewHolder(view){
         val titulo = view.findViewById<TextView>(R.id.tituloNotificacion)
         val descripcion = view.findViewById<TextView>(R.id.descripcionNotificacion)
         val fechaNotificacion = view.findViewById<TextView>(R.id.fechaNotificacion)
         val horaNotificacion = view.findViewById<TextView>(R.id.horaNotificacion)
+
 
         fun bind(notificacion: Notificacion){
 
@@ -37,6 +39,37 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             descripcion.text = notificacion.descripcion
             fechaNotificacion.text = fecha
             horaNotificacion.text = hora
+
+            /* view.setOnClickListener{
+               when(notificacion.tipoNotificacion){
+                    "NUEVACITA" -> {
+
+                    }
+
+                    "MODIFICARCITA" ->{
+
+                    }
+
+                    "CANCELARCITA" ->{
+
+                    }
+
+                    "NUEVOTRATAMIENTO" ->  {
+
+                    }
+
+                    "RESPONDERTRATAMIENTO" ->{
+
+                    }
+
+                    "CANCELARTRATAMIENTO" ->{
+
+                    }
+
+
+                }
+            }*/
+
         }
     }
 
@@ -67,8 +100,9 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun submitList(notificaciones: ArrayList<Notificacion>){
+    fun submitList(notificaciones: ArrayList<Notificacion>, rol: String){
         this.notificaciones = notificaciones
+        this.rol = rol
     }
 
     fun removeElement(position: Int){
