@@ -175,15 +175,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:textAlignment="center">
 
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="63dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/notifications_image"
-                        android:backgroundTint="@color/colorAccent" />
+                    <include
+                        android:id="@+id/notification_main_image"
+                        layout="@layout/bell_notifications"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"

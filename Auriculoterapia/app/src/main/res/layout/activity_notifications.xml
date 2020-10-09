@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.NotificationsActivity"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sin_notificaciones_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No hay notificaciones"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:padding="12dp"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationRecycler"

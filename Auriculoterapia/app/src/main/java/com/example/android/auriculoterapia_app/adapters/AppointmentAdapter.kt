@@ -35,6 +35,7 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
     private var items : List<Cita> = ArrayList()
     private var rol: String = ""
+    private var usuarioId = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CitaViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
@@ -169,9 +170,10 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
     }
 
-    fun submitList(citaList: List<Cita>, rol: String){
+    fun submitList(citaList: List<Cita>, rol: String, usuarioId: Int){
         this.items = citaList
         this.rol = rol
+        this.usuarioId = usuarioId
 
     }
 
@@ -212,7 +214,7 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
         val appointmentService = ApiClient.retrofit().create(AppointmentService::class.java)
 
-        appointmentService.updateStateOfAppointment(citaId, estado).enqueue(object:
+        appointmentService.updateStateOfAppointment(citaId, estado, usuarioId).enqueue(object:
             Callback<Boolean>{
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
                 Log.i("Fallamos: ", "F")

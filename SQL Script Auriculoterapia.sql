@@ -63,6 +63,7 @@ VALUES(1, '2020-08-24', '2020-08-24 09:00:00', '2020-08-24 09:30:00', 'En proces
 DELETE FROM CITAS WHERE Id > 1 AND Id <= 5;
 ALTER TABLE CITAS AUTO_INCREMENT = 1;
 SELECT * FROM Citas;
+DELETE FROM Citas Where Id = 52;
 
 UPDATE CITAS SET Estado = "En Proceso" WHERE Id = 48;
 
@@ -147,7 +148,9 @@ group by p.Id;
 END //
 DELIMITER ;
 
-CALL obtenerPacientesYUltimaSesion("Femenino", "Obesidad")
+CALL obtenerPacientesYUltimaSesion("Femenino", "Obesidad");
 
-
-
+ALTER TABLE Notificaciones AUTO_INCREMENT = 1;
+DELETE FROM Notificaciones WHERE Id = 2;
+SELECT * FROM Notificaciones;
+UPDATE Notificaciones SET Leido = 0 WHERE Id = 2;

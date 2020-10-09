@@ -70,7 +70,7 @@ class AppointmentPatientStateFragment : Fragment() {
                         it.horaFinAtencion = formatter2.format(parser.parse(it.horaFinAtencion))
                         //*********************
                     }
-                    appointmentAdapter.submitList(citas, rol!!)
+                    appointmentAdapter.submitList(citas, rol!!, usuarioId)
                 }
 
                 Log.i("Cita", response.body().toString())

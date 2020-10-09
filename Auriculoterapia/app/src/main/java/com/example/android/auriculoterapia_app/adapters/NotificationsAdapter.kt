@@ -1,5 +1,6 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.models.Notificacion
 import kotlinx.android.synthetic.main.notification_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -20,10 +24,19 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val horaNotificacion = view.findViewById<TextView>(R.id.horaNotificacion)
 
         fun bind(notificacion: Notificacion){
+
+            val parserFecha = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val parserHora = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val formatterFecha = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formatterHora = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+            val fecha = formatterFecha.format(parserFecha.parse(notificacion.fechaNotificacion)!!)
+            val hora = formatterHora.format(parserHora.parse(notificacion.horaNotificacion)!!)
+
             titulo.text = notificacion.titulo
             descripcion.text = notificacion.descripcion
-            fechaNotificacion.text = notificacion.fechaNotificacion
-            horaNotificacion.text = notificacion.horaNotificacion
+            fechaNotificacion.text = fecha
+            horaNotificacion.text = hora
         }
     }
 
@@ -35,6 +48,10 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return notificaciones.size
+    }
+
+    fun getNotificationByPosition(position: Int): Notificacion{
+        return notificaciones.get(position)
     }
 
     fun deshabilitarNotificacion(position: Int){

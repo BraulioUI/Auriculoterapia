@@ -52,7 +52,7 @@
                 android:id="@+id/tituloNotificacion"
                 android:textStyle="bold"
                 android:text="Marcos Rivas"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

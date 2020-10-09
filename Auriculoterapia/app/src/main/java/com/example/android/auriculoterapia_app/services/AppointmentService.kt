@@ -22,7 +22,7 @@ interface AppointmentService {
     fun listPatientAppointment(@Header("Authorization") token: String, @Query("usuarioId") usuarioId: Int): Call<List<Cita>>
 
     @PUT("api/cita/estado")
-    fun updateStateOfAppointment(@Query("citaId") citaId: Int, @Query("estado") estado: String): Call<Boolean>
+    fun updateStateOfAppointment(@Query("citaId") citaId: Int, @Query("estado") estado: String, @Query("usuarioId") usuarioId: Int): Call<Boolean>
 
     @GET("api/cita/{id}")
     fun findAppointmentById(@Header("Authorization") token: String, @Path("id") citaId: Int): Call<Cita>

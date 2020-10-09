@@ -67,7 +67,7 @@ class AppointmentStateFragment : Fragment() {
 
         val AppointmentService = ApiClient.retrofit().create(AppointmentService::class.java)
 
-
+        val id = sharedPreferences.getInt("id", 0)
         AppointmentService.listAppointment().enqueue(object: Callback<List<Cita>>{
             override fun onFailure(call: Call<List<Cita>>, t: Throwable) {
                 Log.i("No hay citas:", "F")
@@ -80,12 +80,12 @@ class AppointmentStateFragment : Fragment() {
                 if(citas != null){
                     citas.map{
                         //*********************
-                        it.fecha = formatter1.format(parser.parse(it.fecha))
+                        it.fecha = formatter1.format(parser.parse(it.fecha)!!)
                         it.horaInicioAtencion = formatter2.format(parser.parse(it.horaInicioAtencion))
                         it.horaFinAtencion = formatter2.format(parser.parse(it.horaFinAtencion))
                         //*********************
                     }
-                    appointmentAdapter.submitList(citas, rol)
+                    appointmentAdapter.submitList(citas, rol, id)
                 }
 
                 Log.i("Cita", response.body().toString())
