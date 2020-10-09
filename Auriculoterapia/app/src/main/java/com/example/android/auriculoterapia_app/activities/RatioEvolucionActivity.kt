@@ -36,113 +36,17 @@ class RatioEvolucionActivity : AppCompatActivity() {
 
         Log.i("TIPOTRATAMIENTO",tipoTratamiento.toString())
 
-        /*val sharedPreferences = this.getSharedPreferences("db_auriculoterapia",0)
-        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
-
-        val userId = sharedPreferences.getInt("id",0)
-
-
-        val evolucionesNum:ArrayList<Int> = ArrayList()*/
         val ratioEvolucion = bundle.getInt("ratioEvolucion")
 
         if (ratioEvolucion <= 20){
             backgroundShape.setColor(Color.parseColor("#FF0000"))
-        } else if(ratioEvolucion <= 40){
-            backgroundShape.setColor(Color.parseColor("#FDC629"))
-        }else if(ratioEvolucion <= 60){
+        } else if(ratioEvolucion <= 60){
             backgroundShape.setColor(Color.parseColor("#CFFE11"))
-        }
-        else if(ratioEvolucion <= 80){
-            backgroundShape.setColor( Color.parseColor("#21E545"))
-        }
-        else{
+        } else if(ratioEvolucion <= 100){
             backgroundShape.setColor( Color.parseColor("#18B034"))
         }
 
         tvRatioEvolucion.text = "${ratioEvolucion.toInt()}%"
-
-
-        /*userService.getUserById(userId).enqueue(object: Callback<ResponseUserById> {
-            override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
-                Log.i("RATIOEVOLUCION: ","NO ENTRO")
-            }
-
-            override fun onResponse(
-                call: Call<ResponseUserById>,
-                response: Response<ResponseUserById>
-            ) {
-                if(response.isSuccessful) {
-                    val res = response.body()
-                    pacienteId = res?.pacienteId!!
-                    Log.i("RATIOEVOLUCION: ",pacienteId.toString())
-
-                    Log.i("PACIENTEID",pacienteId.toString())
-                    val tratamientoService = ApiClient.retrofit().create(TreatmentService::class.java)
-
-                    tratamientoService.getByIdPacienteTipoTratamiento(tipoTratamiento!!,pacienteId).enqueue(object:
-                        Callback<List<FormularioEvolucion>> {
-                        override fun onFailure(call: Call<List<FormularioEvolucion>>, t: Throwable) {
-                            Log.i("RATIOEVOLUCION: ","ONFAILURE")
-                        }
-
-                        override fun onResponse(
-                            call: Call<List<FormularioEvolucion>>,
-                            response: Response<List<FormularioEvolucion>>
-                        ) {
-                            if(response.isSuccessful){
-                                Log.i("RESPONSE: ",response.body().toString())
-                                response.body()?.map{
-                                    evolucionesNum.add(it.evolucionNumero)
-                                }
-                                val lastEvolucionesNum = evolucionesNum.last()
-                                val ratio = (100*lastEvolucionesNum)/5
-                                if (ratio <= 20){
-                                    backgroundShape.setColor(Color.parseColor("#FF0000"))
-                                } else if(ratio <= 40){
-                                    backgroundShape.setColor(Color.parseColor("#FDC629"))
-                                }else if(ratio <= 60){
-                                    backgroundShape.setColor(Color.parseColor("#CFFE11"))
-                                }
-                                else if(ratio <= 80){
-                                    backgroundShape.setColor( Color.parseColor("#21E545"))
-                                }
-                                else{
-                                    backgroundShape.setColor( Color.parseColor("#18B034"))
-                                }
-
-                                tvRatioEvolucion.text = "${ratio.toInt()}%"
-
-                            }else{
-                                Log.i("RATIOEVOLUCION: ","FALLO")
-                            }
-                        }
-
-                    })
-
-                }else{
-                    Log.i("RATIOEVOLUCION: ","QUE FUE")
-                }
-            }
-
-        })*/
-
-
-
-
-
-
-
-
-        /*var ratio = (100*3)/5
-        if (ratio < 60){
-            backgroundShape.setColor(Color.RED)
-        } else if(ratio > 60){
-            backgroundShape.setColor(Color.GREEN)
-        } else{
-            backgroundShape.setColor(Color.YELLOW)
-        }
-
-        tvRatioEvolucion.text = "${ratio.toInt()}%"*/
 
     }
 }
