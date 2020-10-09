@@ -467,12 +467,17 @@ class ResultPatientActivity : AppCompatActivity() {
                                     } else {
                                         tableLayoutresult.visibility = View.GONE
                                         scrollview.visibility = View.GONE
+                                        textUltimaSesion.visibility = View.GONE
+                                        ultimaSesion.visibility = View.GONE
+                                        estadoBotones = false
                                     }
 
                                 } else {
                                     Log.i("NO HAY DATOS: ", "FALLO")
                                     tableLayoutresult.visibility = View.GONE
                                     scrollview.visibility = View.GONE
+                                    textUltimaSesion.visibility = View.GONE
+                                    ultimaSesion.visibility = View.GONE
                                     estadoBotones = false
                                 }
                                 evolucionbutton.setOnClickListener {
