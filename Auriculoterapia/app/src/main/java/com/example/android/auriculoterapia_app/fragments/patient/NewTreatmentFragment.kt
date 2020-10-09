@@ -190,6 +190,7 @@ class NewTreatmentFragment  : Fragment(){
                 .setGravity(Gravity.END)
                 .setCornerRadius(8f)
                 .setDismissOnClick(true)
+                .setCancelable(true)
 
             tooltip.show()
         }

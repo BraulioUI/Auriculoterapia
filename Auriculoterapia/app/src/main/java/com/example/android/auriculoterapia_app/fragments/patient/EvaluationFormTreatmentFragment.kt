@@ -145,6 +145,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 .setGravity(Gravity.END)
                 .setCornerRadius(8f)
                 .setDismissOnClick(true)
+                .setCancelable(true)
 
             tooltip.show()
         }
@@ -155,6 +156,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 .setGravity(Gravity.END)
                 .setCornerRadius(8f)
                 .setDismissOnClick(true)
+                .setCancelable(true)
 
             tooltip.show()
         }
