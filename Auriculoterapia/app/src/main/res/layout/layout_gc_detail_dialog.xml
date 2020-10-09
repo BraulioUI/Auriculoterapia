@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Masculino"
+        android:textStyle="bold"
+        android:textSize="18sp"
+       />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="12dp"
+       >
+
+        <TableRow>
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+            <TextView
+                android:text="Bueno"
+                android:paddingHorizontal="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoBueno"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Normal"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoNormal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Muy elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/masculinoMuyElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adolescentes\ny\njóvenes"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:paddingVertical="8dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+                <TextView
+                    android:text="13%\no\nmenos"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="14%\na\n20%"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    />
+                <TextView
+                    android:text="21%\na\n23%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="Mayor\na\n23%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:paddingVertical="8dp"
+                android:background="#E6E1E1"
+            />
+
+                <TextView
+                    android:text="14%\no\nmenos"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="15%\na\n21%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="22%\na\n24%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+                <TextView
+                    android:text="Mayor\na\n24%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos\nmayores"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                android:paddingVertical="8dp"
+                />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="17%\no\nmenos"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"/>
+
+                <TextView
+                    android:text="18%\na\n24%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="25%\na\n27%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="Mayor\na\n27%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Femenino"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TableRow>
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Bueno"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoBueno"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Normal"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoNormal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="#F1EDED"
+                android:gravity="center">
+                <TextView
+                    android:text="Muy elevado"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/femeninoMuyElevado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            >
+            <TextView
+                android:text="Adolescentes\ny\njóvenes"
+                android:layout_weight="1"
+                android:paddingVertical="8dp"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+                <TextView
+                    android:text="19%\no\nmenos"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+                <TextView
+                    android:text="20%\na\n28%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+                <TextView
+                    android:text="29%\na\n31%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+                <TextView
+                    android:text="Mayor\na\n31%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                android:paddingVertical="8dp"
+                />
+
+
+                <TextView
+                    android:text="20%\no\nmenos"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+                <TextView
+                    android:text="21%\na\n29%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="30%\na\n32%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+                <TextView
+                    android:text="Mayor\na\n32%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Adultos\nmayores"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:paddingVertical="8dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#E6E1E1"
+                />
+
+
+                <TextView
+                    android:text="22%\no\nmenos"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+                <TextView
+                    android:text="23%\na\n31%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+                <TextView
+                    android:text="32%\na\n34%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+                <TextView
+                    android:text="Mayor\na\n34%"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:paddingVertical="8dp"
+                    />
+
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</LinearLayout>

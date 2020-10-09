@@ -78,22 +78,30 @@
             android:text="@{String.valueOf(resultados.get(0).cantidad)}"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/tvIndicadorIMCAdolescentes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <LinearLayout
             android:layout_weight="1"
-            android:background="@{colorFactory.obtenerColorIMC(resultados.get(0).tipoIndicadorImc)}"
-            android:textAlignment="center" />
+            android:gravity="center">
+                <TextView
+                    android:id="@+id/tvIndicadorIMCAdolescentes"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ratio_evolucion_forma"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvIndicadorGCAdolescentes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@{colorFactory.obtenerColorGC(resultados.get(0).tipoIndicadorGc)}"
+        <LinearLayout
             android:layout_weight="1"
-            android:textAlignment="center"
-            />
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorGCAdolescentes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
 
     </TableRow>
     <TableRow
@@ -113,22 +121,30 @@
             android:layout_weight="1"
             android:textAlignment="center"
             />
-        <TextView
-            android:id="@+id/tvIndicadorJovenes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{colorFactory.obtenerColorIMC(resultados.get(1).tipoIndicadorImc)}"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            />
 
-        <TextView
-            android:id="@+id/tvIndicadorGCJovenes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+
+        <LinearLayout
             android:layout_weight="1"
-            android:background="@{colorFactory.obtenerColorGC(resultados.get(1).tipoIndicadorGc)}"
-            android:textAlignment="center" />
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorJovenes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorGCJovenes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center" />
+        </LinearLayout>
 
     </TableRow>
     <TableRow
@@ -148,23 +164,31 @@
             android:layout_weight="1"
             android:textAlignment="center"
             />
-        <TextView
-            android:id="@+id/tvIndicadorAdultos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{colorFactory.obtenerColorIMC(resultados.get(2).tipoIndicadorImc)}"
+
+
+        <LinearLayout
             android:layout_weight="1"
-            android:textAlignment="center"
-            />
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorAdultos"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center">
         <TextView
             android:id="@+id/tvIndicadorGCAdultos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{colorFactory.obtenerColorGC(resultados.get(2).tipoIndicadorGc)}"
-            android:layout_weight="1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ratio_evolucion_forma"
             android:textAlignment="center"
             />
-
+        </LinearLayout>
     </TableRow>
     <TableRow
         android:layout_height="wrap_content">
@@ -183,22 +207,31 @@
             android:layout_weight="1"
             android:textAlignment="center"
             />
-        <TextView
-            android:id="@+id/tvIndicadorAdultosMayores"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{colorFactory.obtenerColorIMC(resultados.get(3).tipoIndicadorImc)}"
+
+        <LinearLayout
             android:layout_weight="1"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:id="@+id/tvIndicadorGCAdultosMayores"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@{colorFactory.obtenerColorGC(resultados.get(3).tipoIndicadorGc)}"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorAdultosMayores"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_weight="1"
-            android:textAlignment="center"
-            />
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvIndicadorGCAdultosMayores"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ratio_evolucion_forma"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
 
     </TableRow>
 

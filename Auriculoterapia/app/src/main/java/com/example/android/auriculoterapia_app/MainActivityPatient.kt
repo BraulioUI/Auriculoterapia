@@ -22,10 +22,12 @@ class MainActivityPatient : AppCompatActivity() {
         val appointmentOption = findViewById<CardView>(R.id.appointment_option_patient)
         val configurationOption = findViewById<CardView>(R.id.configuration_option_patient)
         val resultOption = findViewById<CardView>(R.id.results_option_patient)
+        val notificationsOption = findViewById<CardView>(R.id.notification_option_patient)
         val username = findViewById<TextView>(R.id.user_name)
 
         //val sb = StringBuilder()
         //sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
+        val id = sharedPreferences.getInt("id", 0)
         val nombre = sharedPreferences.getString("nombre", "")
         val apellido = sharedPreferences.getString("apellido", "")
         val nombreUsuario = "$nombre $apellido"
@@ -50,6 +52,12 @@ class MainActivityPatient : AppCompatActivity() {
         }
         resultOption.setOnClickListener {
             val intent = Intent(this,ResultPatientActivity::class.java)
+            startActivity(intent)
+        }
+
+        notificationsOption.setOnClickListener{
+            val intent = Intent(this,NotificationsActivity::class.java)
+            intent.putExtra("id", id)
             startActivity(intent)
         }
     }

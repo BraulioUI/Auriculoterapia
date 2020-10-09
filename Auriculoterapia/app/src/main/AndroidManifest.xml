@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.RatioEvolucionActivity"></activity>
+        <activity android:name=".activities.NotificationsActivity"></activity>
+        <activity android:name=".activities.RatioEvolucionActivity" />
         <activity android:name=".activities.PesoPatientActivity" />
         <activity android:name=".activities.EvolucionSintomasPacienteActivity" />
         <activity android:name=".activities.ResultPatientActivity" />
@@ -36,19 +37,26 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.PatientsManagementActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.AppointmentPatientManagement"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivityPatient"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.AppointmentManagement"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.LogInActivity"
+        <activity
+            android:name=".activities.PatientsManagementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AppointmentPatientManagement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivityPatient"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AppointmentManagement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LogInActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

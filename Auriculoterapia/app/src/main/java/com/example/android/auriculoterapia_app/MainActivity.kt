@@ -8,10 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import com.example.android.auriculoterapia_app.activities.AppointmentManagement
-import com.example.android.auriculoterapia_app.activities.GeneralResultsActivity
-import com.example.android.auriculoterapia_app.activities.PatientsManagementActivity
-import com.example.android.auriculoterapia_app.activities.SettingsActivity
+import com.example.android.auriculoterapia_app.activities.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +16,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+
         val appointmentOption = findViewById<CardView>(R.id.appointment_option)
         val patientOption = findViewById<CardView>(R.id.patient_option)
         val configurationOption = findViewById<CardView>(R.id.configuration_option)
         val resultsOption = findViewById<CardView>(R.id.results_option)
+        val notificationsOption = findViewById<CardView>(R.id.notification_option)
+
         val username = findViewById<TextView>(R.id.user_name)
 
         val actionBar = supportActionBar
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         /*val sb = StringBuilder()
         sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
         username.text = sb.toString()*/
+        val id = sharedPreferences.getInt("id", 0)
         val nombre = sharedPreferences.getString("nombre", "")
         val apellido = sharedPreferences.getString("apellido", "")
         val nombreUsuario = "$nombre $apellido"
@@ -56,6 +57,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GeneralResultsActivity::class.java)
             startActivity(intent)
         }
+
+        notificationsOption.setOnClickListener{
+            val intent = Intent(this, NotificationsActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+        }
+
 
 
     }
