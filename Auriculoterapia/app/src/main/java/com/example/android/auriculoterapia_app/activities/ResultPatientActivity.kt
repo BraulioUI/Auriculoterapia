@@ -49,6 +49,7 @@ class ResultPatientActivity : AppCompatActivity() {
         //tables
         val tableLayoutresult = findViewById<TableLayout>(R.id.tableLayout_resultpatient)
         val ultimaSesion = findViewById<TextView>(R.id.tvUltimaSesion)
+        val textUltimaSesion = findViewById<TextView>(R.id.textView10)
         val nivelEfiencia = findViewById<TextView>(R.id.tvNivelEficiencia)
         val imc = findViewById<TextView>(R.id.tvIMC)
         val grasaC = findViewById<TextView>(R.id.tvGC)
@@ -122,6 +123,8 @@ class ResultPatientActivity : AppCompatActivity() {
                 tratamiento = ListaTiposDeTratamiento.lista.get(0)
                 tableLayoutresult.visibility = View.GONE
                 scrollview.visibility = View.GONE
+                textUltimaSesion.visibility = View.GONE
+                ultimaSesion.visibility = View.GONE
                 estadoBotones = false
                 Log.i("ESTADOBOTONES1:",estadoBotones.toString())
             }
@@ -137,6 +140,8 @@ class ResultPatientActivity : AppCompatActivity() {
                 if (tratamiento == "--Seleccionar--") {
                     tableLayoutresult.visibility = View.GONE
                     scrollview.visibility = View.GONE
+                    textUltimaSesion.visibility = View.GONE
+                    ultimaSesion.visibility = View.GONE
                     estadoBotones = false
                     Log.i("ESTADOBOTONES2:",estadoBotones.toString())
                 } else {
@@ -205,6 +210,8 @@ class ResultPatientActivity : AppCompatActivity() {
                                     if (tratamiento == "Obesidad") {
                                         tableLayoutresult.visibility = View.VISIBLE
                                         scrollview.visibility = View.VISIBLE
+                                        textUltimaSesion.visibility = View.VISIBLE
+                                        ultimaSesion.visibility = View.VISIBLE
                                         val ultimoTratamiento = data.last()
                                         val ratioEvolucion =
                                             ((100 * ultimoTratamiento.evolucionNumero) / 5)
