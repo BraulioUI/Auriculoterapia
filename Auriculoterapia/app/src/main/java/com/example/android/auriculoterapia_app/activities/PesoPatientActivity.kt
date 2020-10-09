@@ -62,7 +62,7 @@ class PesoPatientActivity : AppCompatActivity() {
             sexo = bundle!!.getString("Sexo")!!
         }
 
-        val barDataSet = BarDataSet(yvalues,"IMC por tratamiento")
+        val barDataSet = BarDataSet(yvalues,"$tipoGrafico por sesión de tratamiento")
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS.toMutableList())
         barDataSet.valueTextColor = Color.BLACK
         barDataSet.valueTextSize = 16f
@@ -70,29 +70,45 @@ class PesoPatientActivity : AppCompatActivity() {
 
         val sesiones:ArrayList<Int> = ArrayList()
         for(sesion in yvalues){
-            val s = sesion.x
+            val s = sesion.x +1
             sesiones.add(s.toInt());
         }
 
+        val xvalues: ArrayList<String> = ArrayList()
+        for(x in sesiones){
+            xvalues.add("s${x}")
+        }
 
         //val barData = BarData(barDataSet)
         val barData = BarData(barDataSet)
         //barchart.legend.isEnabled = false
+
+
+        val xAxisLabels = xvalues
+        val xAxis = barchart.xAxis
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
+
+        val formatter:ValueFormatter =
+            object : ValueFormatter(){
+                override fun getFormattedValue(value: Float): String {
+                    return xAxisLabels.get(value.toInt())
+                }
+            }
+
+        xAxis.granularity = 1f
+        xAxis.valueFormatter = formatter
+        xAxis.textColor = Color.BLACK
+        xAxis.textSize = 12f
+
         barchart.setFitBars(true)
         barchart.data = barData
         barchart.animateY(2000)
 
+        barchart.invalidate()
+
         barchart.setOnChartValueSelectedListener(object: OnChartValueSelectedListener{
             override fun onNothingSelected() {
-                val tooltip = Tooltip.Builder(position)
-                    .setText("Nada seleccionado")
-                    .setTextColor(Color.WHITE)
-                    .setGravity(Gravity.BOTTOM)
-                    .setCornerRadius(8f)
-                    .setDismissOnClick(true)
-
-
-                tooltip.show()
+                position.text=""
             }
 
             override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -202,6 +218,7 @@ class PesoPatientActivity : AppCompatActivity() {
                     .setGravity(Gravity.END)
                     .setCornerRadius(8f)
                     .setDismissOnClick(true)
+                    .setCancelable(true)
 
                 tooltip.show()
             }

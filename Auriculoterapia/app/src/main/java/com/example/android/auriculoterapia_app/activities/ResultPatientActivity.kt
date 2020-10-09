@@ -64,6 +64,14 @@ class ResultPatientActivity : AppCompatActivity() {
         val backgroundShape3Ratio = tvNivelEficienciaSeveridadRojo.background as GradientDrawable
         val sharedPreferences = this.getSharedPreferences("db_auriculoterapia", 0)
 
+        //table GC
+        val indiceGCBueno = findViewById<TextView>(R.id.tvGCBuena)
+        val indiceGCNormal = findViewById<TextView>(R.id.tvGCNormal)
+        val indiceGCElevada = findViewById<TextView>(R.id.tvGCElevada)
+        val indiceGCMuyElevada = findViewById<TextView>(R.id.tvGCMuyElevada)
+        /////////
+
+
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
         val userId = sharedPreferences.getInt("id", 0)
         var data: List<ResultsByPatient> = listOf()
@@ -167,19 +175,19 @@ class ResultPatientActivity : AppCompatActivity() {
                                     response.body()?.map {
                                         yvaluesIMC.add(
                                             BarEntry(
-                                                it.sesion?.toFloat()!!,
+                                                it.sesion?.toFloat()!!-1,
                                                 it.imc.toFloat()
                                             )
                                         )
                                         yvaluesEvolucion.add(
                                             Entry(
-                                                it.sesion?.toFloat()!!,
+                                                it.sesion?.toFloat()!!-1,
                                                 it.evolucionNumero.toFloat()
                                             )
                                         )
                                         yvaluesGC.add(
                                             BarEntry(
-                                                it.sesion?.toFloat()!!,
+                                                it.sesion?.toFloat()!!-1,
                                                 it.grasaCorporal.toFloat()
                                             )
                                         )
@@ -212,7 +220,7 @@ class ResultPatientActivity : AppCompatActivity() {
 
                                         backgroundShape1Ratio.setColor(
                                             Color.parseColor(
-                                                "#FF0000"
+                                                "#18B034"
                                             )
                                         )
 
@@ -223,7 +231,7 @@ class ResultPatientActivity : AppCompatActivity() {
                                         )
                                         backgroundShape3Ratio.setColor(
                                             Color.parseColor(
-                                                "#18B034"
+                                                "#FF0000"
                                             )
                                         )
                                         //COLORES NIVELEFICIENCIA-RATIOEVOLUCION//////////////////////////////////////////////////////////////////
@@ -232,11 +240,11 @@ class ResultPatientActivity : AppCompatActivity() {
                                             nivelEficienciaSeveridadAmarillo.alpha = 0.3F
                                             nivelEficienciaSeveridadVerde.alpha = 0.3F
                                         } else if (ratioEvolucion <= 60) {
-                                            nivelEficienciaSeveridadRojo.alpha = 0.3F
+                                            nivelEficienciaSeveridadRojo.alpha = 0.1F
                                             nivelEficienciaSeveridadAmarillo.alpha = 1F
                                             nivelEficienciaSeveridadVerde.alpha = 0.3F
                                         } else if (ratioEvolucion <= 100) {
-                                            nivelEficienciaSeveridadRojo.alpha = 0.3F
+                                            nivelEficienciaSeveridadRojo.alpha = 0.1F
                                             nivelEficienciaSeveridadAmarillo.alpha = 0.3F
                                             nivelEficienciaSeveridadVerde.alpha = 1F
                                         }
@@ -249,7 +257,7 @@ class ResultPatientActivity : AppCompatActivity() {
                                         } else if (ultimoTratamiento.imc <= 18.4) {
                                             imcSeveridad.setBackgroundColor(Color.parseColor("#FEF0C1"))
                                         } else if (ultimoTratamiento.imc <= 24.9) {
-                                            imcSeveridad.setBackgroundColor(Color.parseColor("#D2E1CB"))
+                                            imcSeveridad.setBackgroundColor(Color.parseColor("#21E545"))
                                         } else if (ultimoTratamiento.imc <= 29.9) {
                                             imcSeveridad.setBackgroundColor(Color.parseColor("#F5C09E"))
                                         } else if (ultimoTratamiento.imc <= 34.9) {
@@ -258,10 +266,15 @@ class ResultPatientActivity : AppCompatActivity() {
                                             imcSeveridad.setBackgroundColor(Color.parseColor("#B8450F"))
                                         }
 
-                                        //Colores GC/////////////////////////////////////////////////////////////////////////////
+                                        //Colores GC y valores de tabla/////////////////////////////////////////////////////////////////////////////
 
                                         if (sexo == "Masculino") {
                                             if (ciclovida == "Jovenes" || ciclovida == "Adolescentes") {
+                                                indiceGCBueno.text = "menos del 13%"
+                                                indiceGCNormal.text = "14 - 20%"
+                                                indiceGCElevada.text = "21 - 23%"
+                                                indiceGCMuyElevada.text = "más 23%"
+
                                                 if (ultimoGC <= 13) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
@@ -288,6 +301,10 @@ class ResultPatientActivity : AppCompatActivity() {
                                                     )
                                                 }
                                             } else if (ciclovida == "Adulto") {
+                                                indiceGCBueno.text = "menos del 14%"
+                                                indiceGCNormal.text = "15 - 21%"
+                                                indiceGCElevada.text = "22 - 24%"
+                                                indiceGCMuyElevada.text = "más 24%"
                                                 if (ultimoGC <= 14) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
@@ -314,6 +331,10 @@ class ResultPatientActivity : AppCompatActivity() {
                                                     )
                                                 }
                                             } else if (ciclovida == "Adulto Mayor") {
+                                                indiceGCBueno.text = "menos del 17%"
+                                                indiceGCNormal.text = "18 - 24%"
+                                                indiceGCElevada.text = "25 - 27%"
+                                                indiceGCMuyElevada.text = "más 27%"
                                                 if (ultimoGC <= 17) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
@@ -342,6 +363,10 @@ class ResultPatientActivity : AppCompatActivity() {
                                             }
                                         } else {
                                             if (ciclovida == "Jovenes" || ciclovida == "Adolescentes") {
+                                                indiceGCBueno.text = "menos del 19%"
+                                                indiceGCNormal.text = "20 - 28%"
+                                                indiceGCElevada.text = "29 - 31%"
+                                                indiceGCMuyElevada.text = "más 31%"
                                                 if (ultimoGC <= 19) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
@@ -368,6 +393,10 @@ class ResultPatientActivity : AppCompatActivity() {
                                                     )
                                                 }
                                             } else if (ciclovida == "Adulto") {
+                                                indiceGCBueno.text = "menos del 20%"
+                                                indiceGCNormal.text = "21 - 29%"
+                                                indiceGCElevada.text = "30 - 32%"
+                                                indiceGCMuyElevada.text = "más 32%"
                                                 if (ultimoGC <= 20) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
@@ -394,6 +423,10 @@ class ResultPatientActivity : AppCompatActivity() {
                                                     )
                                                 }
                                             } else if (ciclovida == "Adulto Mayor") {
+                                                indiceGCBueno.text = "menos del 22%"
+                                                indiceGCNormal.text = "23 - 31%"
+                                                indiceGCElevada.text = "32 - 34%"
+                                                indiceGCMuyElevada.text = "más 34%"
                                                 if (ultimoGC <= 22) {
                                                     grasaCorporalSeveridad.setBackgroundColor(
                                                         Color.parseColor(
