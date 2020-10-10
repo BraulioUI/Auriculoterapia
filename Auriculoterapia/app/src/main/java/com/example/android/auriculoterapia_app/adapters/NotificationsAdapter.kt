@@ -1,10 +1,12 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.models.Notificacion
@@ -22,6 +24,7 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val descripcion = view.findViewById<TextView>(R.id.descripcionNotificacion)
         val fechaNotificacion = view.findViewById<TextView>(R.id.fechaNotificacion)
         val horaNotificacion = view.findViewById<TextView>(R.id.horaNotificacion)
+        val cardNotificacion = view.findViewById<CardView>(R.id.cv_notificacion)
 
         fun bind(notificacion: Notificacion){
 
@@ -32,11 +35,16 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             val fecha = formatterFecha.format(parserFecha.parse(notificacion.fechaNotificacion)!!)
             val hora = formatterHora.format(parserHora.parse(notificacion.horaNotificacion)!!)
-
+            //val leido = notificacion.leido
             titulo.text = notificacion.titulo
             descripcion.text = notificacion.descripcion
             fechaNotificacion.text = fecha
             horaNotificacion.text = hora
+
+            /*if(!leido){
+                cardNotificacion.setCardBackgroundColor(Color.BLUE)
+            }*/
+
         }
     }
 

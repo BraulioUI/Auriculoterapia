@@ -13,5 +13,6 @@ data class Notificacion(
     var fechaNotificacion: String,
     var horaNotificacion: String,
     var titulo: String,
-    var descripcion: String
+    var descripcion: String,
+    var leido: Boolean
 ): Serializable
