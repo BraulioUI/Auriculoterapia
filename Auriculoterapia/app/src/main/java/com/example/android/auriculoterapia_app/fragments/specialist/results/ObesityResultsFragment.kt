@@ -189,15 +189,7 @@ class ObesityResultsFragment : Fragment() {
                         barChartImc.setOnChartValueSelectedListener(object:
                             OnChartValueSelectedListener{
                             override fun onNothingSelected() {
-                                val tooltip = Tooltip.Builder(positionImc)
-                                    .setText("Nada seleccionado")
-                                    .setTextColor(Color.WHITE)
-                                    .setGravity(Gravity.BOTTOM)
-                                    .setCornerRadius(8f)
-                                    .setDismissOnClick(true)
-
-
-                                tooltip.show()
+                                positionImc.text = ""
                             }
 
                             override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -218,6 +210,7 @@ class ObesityResultsFragment : Fragment() {
                                     .setTextColor(Color.WHITE)
                                     .setGravity(Gravity.BOTTOM)
                                     .setCornerRadius(8f)
+                                    .setCancelable(true)
                                     .setDismissOnClick(true)
 
                                 tooltip.show()
@@ -296,23 +289,14 @@ class ObesityResultsFragment : Fragment() {
                         barChartGc.setOnChartValueSelectedListener(object:
                             OnChartValueSelectedListener{
                             override fun onNothingSelected() {
-                                val tooltip = Tooltip.Builder(positionImc)
-                                    .setText("Nada seleccionado")
-                                    .setTextColor(Color.WHITE)
-                                    .setGravity(Gravity.BOTTOM)
-                                    .setCornerRadius(8f)
-                                    .setCancelable(true)
-                                    .setDismissOnClick(true)
-
-
-                                tooltip.show()
+                                positionGc.text = ""
                             }
 
                             override fun onValueSelected(e: Entry?, h: Highlight?) {
                                 val x = h?.xPx
                                 val y = h?.yPx
-                                positionImc.x = x!!
-                                positionImc.y = y!!
+                                positionGc.x = x!!
+                                positionGc.y = y!!
                                 var descripcion = ""
                                 val positionX = e!!.x
                                 when(positionX){
@@ -321,7 +305,7 @@ class ObesityResultsFragment : Fragment() {
                                     2f ->  descripcion = resultados.get(2).tipoIndicadorGc
                                     3f ->  descripcion = resultados.get(3).tipoIndicadorGc
                                 }
-                                val tooltip = Tooltip.Builder(positionImc)
+                                val tooltip = Tooltip.Builder(positionGc)
                                     .setText(descripcion)
                                     .setTextColor(Color.WHITE)
                                     .setGravity(Gravity.BOTTOM)
