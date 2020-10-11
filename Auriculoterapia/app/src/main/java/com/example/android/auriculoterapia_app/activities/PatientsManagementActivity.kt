@@ -34,18 +34,21 @@ class PatientsManagementActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    lateinit var patientsAdapter : PatientsAdapter
+    lateinit var patientsAdapter: PatientsAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var errorBuscador: TextView
+    private var patientId : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_patients)
 
+        patientId = intent.getIntExtra("ID", 0)
+
         val actionBar = supportActionBar
         actionBar!!.title = "Pacientes"
 
-        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia", 0)
         val token = sharedPreferences.getString("token", "")
         recyclerView = findViewById(R.id.recyclerViewPatients)
         patientsAdapter = PatientsAdapter(this)
@@ -65,16 +68,17 @@ class PatientsManagementActivity : AppCompatActivity() {
         val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.patientSearch)
         val searchView = searchItem?.actionView as SearchView
-        searchView.inputType =  InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PERSON_NAME
+        searchView.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PERSON_NAME
 
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
         searchView.setIconifiedByDefault(false)
 
 
-        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia", 0)
         val token = sharedPreferences.getString("token", "")
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 searchView.clearFocus()
@@ -87,10 +91,10 @@ class PatientsManagementActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                if(hasOnlyLetters(newText!!)){
+                if (hasOnlyLetters(newText!!)) {
                     errorBuscador.visibility = View.GONE
                     fetchPatients(token!!, newText, patientsAdapter)
-                } else{
+                } else {
                     errorBuscador.visibility = View.VISIBLE
                     errorBuscador.setError("Solo se deben ingresar letras")
                 }
@@ -110,27 +114,34 @@ class PatientsManagementActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun fetchPatients(token: String, key: String, patientsAdapter: PatientsAdapter){
+    fun fetchPatients(token: String, key: String, patientsAdapter: PatientsAdapter) {
         val patientService = retrofit.create(PatientService::class.java)
-        patientService.listPatientsByWord("Bearer $token", key).enqueue(object: Callback<List<Paciente>>{
+        patientService.listPatientsByWord("Bearer $token", key)
+            .enqueue(object : Callback<List<Paciente>> {
                 override fun onFailure(call: Call<List<Paciente>>, t: Throwable) {
                     progressBarPatients.visibility = View.GONE
                     Log.i("Error", "No hay pacientes")
                 }
-                override fun onResponse(call: Call<List<Paciente>>, response: Response<List<Paciente>>) {
-                    if(response.isSuccessful){
+
+                override fun onResponse(
+                    call: Call<List<Paciente>>,
+                    response: Response<List<Paciente>>
+                ) {
+                    if (response.isSuccessful) {
                         val pacientes = response.body()
                         patientsAdapter.clear()
                         patientsAdapter.submitList(pacientes!!)
                         progressBarPatients.visibility = View.GONE
                         patientsAdapter.notifyDataSetChanged()
-                    }
-                    else{
-                        Log.i("No funcionó: ","F")
+                    } else {
+                        Log.i("No funcionó: ", "F")
                     }
                 }
             })
 
+        if(patientId != 0){
+            patientsAdapter.getPatientFromNotification(patientId,true)
+        }
 
     }
 

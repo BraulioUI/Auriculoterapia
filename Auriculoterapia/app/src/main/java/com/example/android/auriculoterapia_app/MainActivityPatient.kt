@@ -103,6 +103,7 @@ class MainActivityPatient : AppCompatActivity() {
                     } else {
                         circuloNotificaciones.visibility = View.VISIBLE
                         numeroNotificaciones.text = response.body().toString()
+                        Log.i("NUMERONOTIFICACIONES",response.body().toString())
                     }
                 }
             }

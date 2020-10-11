@@ -7,6 +7,7 @@ import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentRegisterFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AvailabilityFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_appointment_management.*
 
 class AppointmentManagement : AppCompatActivity() {
@@ -14,10 +15,18 @@ class AppointmentManagement : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val actionBar = supportActionBar
+        val isFromNotificationsActivity = intent.getBooleanExtra("Cita",false)
         actionBar!!.title = "Citas"
 
         setContentView(R.layout.activity_appointment_management)
-        loadFragment(AppointmentRegisterFragment())
+
+        if(!isFromNotificationsActivity) {
+            loadFragment(AppointmentRegisterFragment())
+        }else{
+            val navegationDrawer = findViewById<BottomNavigationView>(R.id.bottomNavigationSpecialist)
+            loadFragment(AppointmentStateFragment())
+            navegationDrawer.menu.getItem(1).isChecked = true;
+        }
         bottomNavigationSpecialist.setOnNavigationItemSelectedListener {
                 menuItem -> when{
 
@@ -41,7 +50,7 @@ class AppointmentManagement : AppCompatActivity() {
                         }
 
 
-        }
+                }
         }
     }
 
