@@ -25,7 +25,7 @@ class AppointmentManagement : AppCompatActivity() {
         }else{
             val navegationDrawer = findViewById<BottomNavigationView>(R.id.bottomNavigationSpecialist)
             loadFragment(AppointmentStateFragment())
-            navegationDrawer.menu.getItem(1).isChecked = true;
+            navegationDrawer.menu.getItem(1).isChecked = true
         }
         bottomNavigationSpecialist.setOnNavigationItemSelectedListener {
                 menuItem -> when{

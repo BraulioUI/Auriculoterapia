@@ -2,10 +2,12 @@ package com.example.android.auriculoterapia_app
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -103,7 +105,6 @@ class MainActivityPatient : AppCompatActivity() {
                     } else {
                         circuloNotificaciones.visibility = View.VISIBLE
                         numeroNotificaciones.text = response.body().toString()
-                        Log.i("NUMERONOTIFICACIONES",response.body().toString())
                     }
                 }
             }

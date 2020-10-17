@@ -101,12 +101,12 @@ class NotificationsActivity : AppCompatActivity() {
                                                 notificationsAdapter.removeElement(position)
 
                                                 Log.i("Size", "${notificationsAdapter.getItemCount()}")
-
                                             }
                                         }
                                     }
                                 }
                             )
+
                             itemTouchHelper.attachToRecyclerView(notifcationRecycler)
 
                         }

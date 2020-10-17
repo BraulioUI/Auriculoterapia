@@ -11,16 +11,26 @@ import com.example.android.auriculoterapia_app.fragments.patient.NewTreatmentFra
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentRegisterFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
 import com.example.android.auriculoterapia_app.fragments.specialist.AvailabilityFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_appointment_management.*
 import kotlinx.android.synthetic.main.activity_treatment_pacient.*
 
 class TreatmentPacientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isFromNotificationActivity = intent.getBooleanExtra("Tratamiento",false)
+
         setContentView(R.layout.activity_treatment_pacient)
 
+        if (!isFromNotificationActivity){
+            loadFragment(NewTreatmentFragment())
+        }else{
+            val navegationDrawer = findViewById<BottomNavigationView>(R.id.bnv_tratamiento)
+            loadFragment(ContinueTreatmentFragment())
+            navegationDrawer.menu.getItem(1).isChecked = true
+        }
 
-        loadFragment(NewTreatmentFragment())
         bnv_tratamiento.setOnNavigationItemSelectedListener {
                 menuItem -> when{
 

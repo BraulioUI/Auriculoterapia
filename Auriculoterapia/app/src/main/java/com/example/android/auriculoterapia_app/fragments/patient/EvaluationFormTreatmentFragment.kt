@@ -71,7 +71,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
         val ButtonGuardar = view.findViewById<Button>(R.id.btn_guardar_formulario)
         val tooltipEvolucion = view.findViewById<Button>(R.id.btn_tooltip_evolucion)
         val tooltipOtros = view.findViewById<Button>(R.id.btn_tooltip_otros2)
-        val peso = requireView().findViewById<EditText>(R.id.et_peso2)
+        val peso = view.findViewById<EditText>(R.id.et_peso2)
 
 
         val optionsMalestar = arrayOf(1,2,3,4,5)
@@ -204,7 +204,7 @@ class EvaluationFormTreatmentFragment : Fragment() {
                 peso.requestFocus()
                 completeAll = false
             }
-            if(auxpeso5 != 0.0.toFloat()){
+            if(auxpeso5 != 0.0.toFloat() && auxpeso4 > 0.0){
                 peso.setError("El peso debe como máximo un decimal")
                 peso.setText("")
                 peso.requestFocus()

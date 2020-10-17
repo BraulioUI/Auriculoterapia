@@ -14,12 +14,16 @@ class HistoryActivity : AppCompatActivity() {
     var nombrePaciente = ""
     var apellidoPaciente = ""
     lateinit var bundleToFragment: Bundle
+    var isFromNotificationsActivity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
         val actionBar = supportActionBar
+        isFromNotificationsActivity =
+            intent.getBooleanExtra("FormularioEvolucion",false)
+
         actionBar!!.title = "Historial"
 
 
@@ -41,7 +45,16 @@ class HistoryActivity : AppCompatActivity() {
         val fragmentResults = ResultsHistoryFragment()
         fragmentResults.arguments = bundleToFragment
 
-        loadFragment(fragmenteIndications)
+
+        if (!isFromNotificationsActivity){
+            loadFragment(fragmenteIndications)
+        }else{
+            loadFragment(fragmentResults)
+            bottomNavigationViewHistory.menu.getItem(1).isChecked = true
+        }
+
+
+
         bottomNavigationViewHistory.setOnNavigationItemSelectedListener {
                 menuItem -> when{
 
@@ -68,10 +81,13 @@ class HistoryActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this, PatientsManagementActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-
+        if (!isFromNotificationsActivity) {
+            val intent = Intent(this, PatientsManagementActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+        }else{
+            finish()
+        }
     }
 
     private fun loadFragment(fragment: Fragment){

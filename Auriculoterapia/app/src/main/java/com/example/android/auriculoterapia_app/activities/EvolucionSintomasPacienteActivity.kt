@@ -78,7 +78,11 @@ class EvolucionSintomasPacienteActivity : AppCompatActivity(){
         val formatter: ValueFormatter =
             object : ValueFormatter(){
                 override fun getFormattedValue(value: Float): String {
-                    return xAxisLabels.get(value.toInt())
+                    if(xAxisLabels.size > 1){
+                        return xAxisLabels.get(value.toInt())
+                    }else{
+                        return xAxisLabels.get(0)
+                    }
                 }
             }
 

@@ -22,20 +22,21 @@
         android:layout_height="18dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:cardBackgroundColor="#DF1666"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/campana"
-        app:layout_constraintTop_toTopOf="@+id/campana"
         android:visibility="gone"
-        >
-       <TextView
-           android:id="@+id/contador_notificaciones"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text=""
-           android:textColor="#FFF"
-           android:textSize="12sp"
-           android:layout_gravity="center"/>
+        app:cardBackgroundColor="#DF1666"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/campana"
+        app:layout_constraintTop_toTopOf="@+id/campana">
+
+        <TextView
+            android:id="@+id/contador_notificaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0"
+            android:textColor="#FFF"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
-import com.example.android.auriculoterapia_app.activities.AppointmentManagement
-import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
-import com.example.android.auriculoterapia_app.activities.PatientsManagementActivity
+import com.example.android.auriculoterapia_app.activities.*
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
 import com.example.android.auriculoterapia_app.models.Notificacion
@@ -43,6 +41,10 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val intentCita = Intent(view.context,AppointmentManagement::class.java)
         val intentCitaPaciente = Intent(view.context,AppointmentPatientManagement::class.java)
         val intentPatientManagment = Intent(view.context,PatientsManagementActivity::class.java)
+        val intentTratamiento = Intent(view.context,TreatmentPacientActivity::class.java)
+
+        val intentTreatmentRequest = Intent(view.context,TreatmentRequestActivity::class.java)
+        val intentHistoryActivity = Intent(view.context,HistoryActivity::class.java)
 
         val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
 
@@ -65,6 +67,9 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             if(!leido) {
                 cardNotificacion.setCardBackgroundColor(Color.parseColor("#B8C2FD"))
+            }
+            else{
+                cardNotificacion.setCardBackgroundColor(Color.WHITE)
             }
              view.setOnClickListener {
                  when (notificacion.tipoNotificacion) {
@@ -115,8 +120,13 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                  response: Response<ResponseUserById>
                              ) {
                                  if (response.isSuccessful){
-                                     intentPatientManagment.putExtra("ID",response.body()?.pacienteId)
-                                     view.context.startActivity(intentPatientManagment)
+                                     //intentPatientManagment.putExtra("ID",response.body()?.pacienteId)
+                                     //view.context.startActivity(intentPatientManagment)
+
+                                     intentTreatmentRequest.putExtra("pacienteId",response.body()?.pacienteId)
+                                     intentTreatmentRequest.putExtra("nombrePaciente",response.body()?.nombre)
+                                     intentTreatmentRequest.putExtra("apellidoPaciente",response.body()?.apellido)
+                                     view.context.startActivity(intentTreatmentRequest)
                                  }else{
                                      Log.i("FALLO","NO consiguo Datos")
                                  }
@@ -128,14 +138,41 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                      }
 
                      "RESPONDERTRATAMIENTO" -> {
-
+                         intentTratamiento.putExtra("Tratamiento",true)
+                         view.context.startActivity(intentTratamiento)
                      }
 
                      "CANCELARTRATAMIENTO" -> {
 
                      }
 
+                     "REGISTRARFORMULARIOEVOLUCION" -> {
 
+                         userService.getUserById(notificacion.emisorId).enqueue(object:
+                             Callback<ResponseUserById>{
+                             override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                                 Log.i("Fallo","Fallo conseguir ID")
+                             }
+
+                             override fun onResponse(
+                                 call: Call<ResponseUserById>,
+                                 response: Response<ResponseUserById>
+                             ) {
+                                 if (response.isSuccessful){
+
+                                     intentHistoryActivity.putExtra("pacienteId",response.body()?.pacienteId)
+                                     intentHistoryActivity.putExtra("nombrePaciente",response.body()?.nombre)
+                                     intentHistoryActivity.putExtra("apellidoPaciente",response.body()?.apellido)
+                                     intentHistoryActivity.putExtra("FormularioEvolucion",true)
+                                     view.context.startActivity(intentHistoryActivity)
+                                 }else{
+                                     Log.i("FALLO","NO consiguo Datos")
+                                 }
+                             }
+
+                         })
+
+                     }
                  }
 
              }
