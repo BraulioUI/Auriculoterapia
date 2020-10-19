@@ -206,7 +206,7 @@
         android:id="@+id/btn_EvolucionSintomas"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="35dp"
         android:background="@drawable/line_chart_3_"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_Peso"
         app:layout_constraintStart_toStartOf="parent" />
@@ -215,7 +215,7 @@
         android:id="@+id/btn_Peso"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:background="@drawable/chart_image"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_GC"
         app:layout_constraintStart_toEndOf="@+id/btn_EvolucionSintomas" />
@@ -224,7 +224,7 @@
         android:id="@+id/btn_RatioEvolucion"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:background="@drawable/chart_image"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_GC"
         app:layout_constraintStart_toEndOf="@+id/btn_GC" />
@@ -243,7 +243,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:text="IMC"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -253,17 +253,38 @@
         android:id="@+id/btn_GC"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/chart_image"
         app:layout_constraintStart_toEndOf="@+id/btn_Peso"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout_resultpatient" />
 
+
+    <Button
+        android:id="@+id/btn_comentarios"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/results_image"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_RatioEvolucion"
+        app:layout_constraintStart_toEndOf="@+id/btn_RatioEvolucion" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="66dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:text="Comentarios Evolción"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="55dp"
         android:layout_height="38dp"
-        android:layout_marginStart="53dp"
+        android:layout_marginStart="33dp"
         android:text="Grasa Corporal"
         android:textAlignment="center"
         android:textSize="10sp"
@@ -589,7 +610,7 @@
         android:id="@+id/textView7"
         android:layout_width="56dp"
         android:layout_height="29dp"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="15dp"
         android:text="Nivel de eficiencia"
         android:textAlignment="center"
         android:textSize="10sp"

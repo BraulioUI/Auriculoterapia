@@ -3,6 +3,8 @@ package com.example.android.auriculoterapia_app.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.fragments.patient.ContinueTreatmentFragment
@@ -16,11 +18,13 @@ import kotlinx.android.synthetic.main.activity_appointment_management.*
 import kotlinx.android.synthetic.main.activity_treatment_pacient.*
 
 class TreatmentPacientActivity : AppCompatActivity() {
+
+    lateinit var bundleToFragment: Bundle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val isFromNotificationActivity = intent.getBooleanExtra("Tratamiento",false)
-
+        val isFromSpecialist = intent.getBooleanExtra("IsFromSpecialist",false)
         setContentView(R.layout.activity_treatment_pacient)
 
         if (!isFromNotificationActivity){
@@ -29,6 +33,23 @@ class TreatmentPacientActivity : AppCompatActivity() {
             val navegationDrawer = findViewById<BottomNavigationView>(R.id.bnv_tratamiento)
             loadFragment(ContinueTreatmentFragment())
             navegationDrawer.menu.getItem(1).isChecked = true
+        }
+
+        if (isFromSpecialist) {
+            bnv_tratamiento.menu.getItem(1).isVisible = false
+            bnv_tratamiento.menu.getItem(2).isVisible = false
+
+            val bundle : Bundle ?=intent.extras
+            bundle?.putBoolean("IsFromSpecialist",true)
+
+            bundleToFragment = Bundle()
+            bundleToFragment.putBoolean("IsFromSpecialist", true)
+
+
+            val newTreatmentFragment = NewTreatmentFragment()
+            newTreatmentFragment.arguments = bundleToFragment
+            Log.i("ARGS", newTreatmentFragment.arguments.toString())
+            loadFragment(newTreatmentFragment)
         }
 
         bnv_tratamiento.setOnNavigationItemSelectedListener {

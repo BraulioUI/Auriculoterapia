@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.NotificationsActivity"></activity>
+        <activity android:name=".activities.CommentsActivity"></activity>
+        <activity android:name=".activities.NotificationsActivity" />
         <activity android:name=".activities.RatioEvolucionActivity" />
         <activity android:name=".activities.PesoPatientActivity" />
         <activity android:name=".activities.EvolucionSintomasPacienteActivity" />

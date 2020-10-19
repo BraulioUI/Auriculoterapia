@@ -71,18 +71,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_settingLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="164dp"
-        android:text="Cerrar sesión"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settingKeyWord2" />
-
-    <TextView
         android:id="@+id/tv_settingNombre2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -160,7 +148,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
         android:layout_marginEnd="56dp"
-        android:text="Modificar"
+        android:text="@string/modificar_setting"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_settingContrasena2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_settingContrasena2" />
@@ -171,9 +161,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="138dp"
         android:layout_marginEnd="56dp"
-        android:text="Modificar"
+        android:text="@string/modificar_setting"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_settingKeyWord2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_settingKeyWord2" />
+
+    <Button
+        android:id="@+id/btn_settingLogOut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="130dp"
+        android:text="Cerrar sesión"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settingKeyWord2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

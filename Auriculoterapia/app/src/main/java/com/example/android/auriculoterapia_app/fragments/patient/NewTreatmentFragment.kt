@@ -18,9 +18,10 @@ import com.cloudinary.android.callback.UploadCallback
 import com.cloudinary.android.uploadwidget.model.Media
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.activities.InitialImageActivity
-import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.constants.ConfigCloudinary
+import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.models.SolicitudTratamiento
+import com.example.android.auriculoterapia_app.services.PatientService
 import com.example.android.auriculoterapia_app.services.ResponseUserById
 import com.example.android.auriculoterapia_app.services.TreatmentRequestService
 import com.example.android.auriculoterapia_app.services.UserService
@@ -36,6 +37,7 @@ import java.time.Period
 import java.util.*
 import java.util.jar.Manifest
 import kotlin.math.pow
+import com.example.android.auriculoterapia_app.constants.ApiClient
 
 class NewTreatmentFragment  : Fragment(){
 
@@ -45,6 +47,7 @@ class NewTreatmentFragment  : Fragment(){
     lateinit var filePath :String
     var completeAll: Boolean = true
     var imagenSubida:Boolean = false;
+    var isFromSpecialist = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +58,7 @@ class NewTreatmentFragment  : Fragment(){
         val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
 
         val userId = sharedPreferences.getInt("id",0)
-
+        val token = sharedPreferences.getString("token", "")
 
 
         //val optionEdad = view.findViewById<Spinner>(R.id.spinner_edad)
@@ -82,6 +85,109 @@ class NewTreatmentFragment  : Fragment(){
         val edad = view.findViewById<TextView>(R.id.tv_resultEdad)
 
         val intentInitialImage = Intent(requireContext(),InitialImageActivity::class.java)
+        Log.i("ARGUMENTS:",arguments.toString())
+        arguments?.let {
+            val bundle: Bundle = it
+           isFromSpecialist = bundle.getBoolean("IsFromSpecialist",true)
+        }
+
+        //isFromSpecialist = arguments?.getBoolean("isFromSpecialist",true)!!
+
+        Log.i("ARGS2: ",isFromSpecialist.toString())
+
+        if (isFromSpecialist){
+            val tvSeleccionarPaciente = view.findViewById<TextView>(R.id.tv_PacienteSolicitudSpecialist)
+            val selectorPacientes = view.findViewById<Spinner>(R.id.spn_lisPatinetSolicitud)
+            val options: MutableList<String> = ArrayList()
+
+            tvSeleccionarPaciente.visibility = View.VISIBLE
+            selectorPacientes.visibility = View.VISIBLE
+
+            val PacienteService = ApiClient.retrofit().create<PatientService>(PatientService::class.java)
+
+            var idUserPaciente: Int = -1
+            PacienteService.listPatients("Bearer $token").enqueue(object: Callback<List<Paciente>>{
+                override fun onResponse(call: Call<List<Paciente>>, response: Response<List<Paciente>>) {
+                    val ids: ArrayList<Int> = ArrayList()
+                    options.add("--Seleccionar--")
+                    if(response.isSuccessful){
+                        response.body()?.map {
+                            options.add("${it.usuario.nombre} ${it.usuario.apellido}")
+                            ids.add(it.usuario.id!!)
+                        }
+                        Log.i("Pacientes: ", response.body().toString())
+                    } else {
+                        Log.i("Código", response.code().toString())
+                    }
+
+                    selectorPacientes.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, options)
+                    selectorPacientes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                            idUserPaciente = -1
+                        }
+
+                        override fun onItemSelected(parent: AdapterView<*>?,view: View?,
+                                                    position: Int,id: Long) {
+
+                            if(position == 0 || options.get(position) == "--Seleccionar--"){
+                                idUserPaciente = -1
+                                AuxUserID = idUserPaciente
+                            }
+                            if(position >= 1) {
+                                idUserPaciente = ids.get(position - 1)
+                                AuxUserID = idUserPaciente
+
+                                userService.getUserById(idUserPaciente).enqueue(object : Callback<ResponseUserById>{
+                                    override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                                        Log.i("NewTreatment: ","Fallo edad")
+                                    }
+
+                                    override fun onResponse(
+                                        call: Call<ResponseUserById>,
+                                        response: Response<ResponseUserById>
+                                    ) {
+                                        if(response.isSuccessful){
+                                            val res = response.body()
+                                            resultEdad.text = res?.edad.toString()
+                                        }
+                                    }
+
+                                })
+                            }
+                            Log.i("Paciente ID", "$idUserPaciente")
+                            //Toast.makeText(requireContext(),idUserPaciente.toString(),Toast.LENGTH_LONG).show()
+                        }
+                    }
+
+                }
+                override fun onFailure(call: Call<List<Paciente>>, t: Throwable) {
+                    Log.i("Pacientes: ", "No hay pacientes")
+                }
+
+
+            })
+
+
+
+        }else{
+            userService.getUserById(userId).enqueue(object : Callback<ResponseUserById>{
+                override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                    Log.i("NewTreatment: ","Fallo edad")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseUserById>,
+                    response: Response<ResponseUserById>
+                ) {
+                    if(response.isSuccessful){
+                        val res = response.body()
+                        resultEdad.text = res?.edad.toString()
+                    }
+                }
+
+            })
+            AuxUserID = userId
+        }
 
         peso.setOnFocusChangeListener { _, hasFocus ->
             if(!hasFocus){
@@ -90,27 +196,13 @@ class NewTreatmentFragment  : Fragment(){
             }
         }
 
-        userService.getUserById(userId).enqueue(object : Callback<ResponseUserById>{
-            override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
-                Log.i("NewTreatment: ","Fallo edad")
-            }
 
-            override fun onResponse(
-                call: Call<ResponseUserById>,
-                response: Response<ResponseUserById>
-            ) {
-                if(response.isSuccessful){
-                    val res = response.body()
-                    resultEdad.text = res?.edad.toString()
-                }
-            }
 
-        })
 
 
         registerButton.setOnClickListener {
             completeAll = true
-
+            Log.i("AUXUSERID: ", AuxUserID.toString())
             if(peso.text.isEmpty() || altura.text.isEmpty() || sintomas.text.isEmpty() || edad.text.isEmpty() ){
                 Toast.makeText(requireContext(),"Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
                 completeAll = false
@@ -206,6 +298,8 @@ class NewTreatmentFragment  : Fragment(){
         private val PERMISSION_CODE =1001;
 
         private var urlImage2 = ""
+
+        private var AuxUserID = -1
     }
 
     override fun onRequestPermissionsResult(
@@ -232,7 +326,7 @@ class NewTreatmentFragment  : Fragment(){
         val treatmentRequestService = ApiClient.retrofit().create(TreatmentRequestService::class.java)
         val sharedPreferences = this.requireActivity().getSharedPreferences("db_auriculoterapia",0)
         val token = sharedPreferences.getString("token","")
-        val userId = sharedPreferences.getInt("id",0)
+        //val userId = sharedPreferences.getInt("id",0)
         //val intentContinueTreatment = Intent(requireContext(),EvaluationFormTreatmentFragment::class.java)
 
         val date = Calendar.getInstance().time
@@ -254,9 +348,10 @@ class NewTreatmentFragment  : Fragment(){
                 peso.text.toString().toDouble(),sintomas.text.toString(),
                 dateInString,"En proceso",null)
 
-            Log.i("UserId: ","$userId")
+            Log.i("UserId: ","$AuxUserID")
 
-            treatmentRequestService.registerTreatment("Bearer $token",userId,solicitudTratamiento)
+            treatmentRequestService.registerTreatment("Bearer $token",
+                AuxUserID,solicitudTratamiento)
                 .enqueue(object : Callback<SolicitudTratamiento>{
                     override fun onFailure(call: Call<SolicitudTratamiento>, t: Throwable) {
                         Log.i("REGISTRAR TRATAMIENTO","GG WP")

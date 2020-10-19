@@ -12,10 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.android.auriculoterapia_app.R
+import com.example.android.auriculoterapia_app.activities.CommentsActivity
 import com.example.android.auriculoterapia_app.activities.EvolucionSintomasPacienteActivity
 import com.example.android.auriculoterapia_app.activities.PesoPatientActivity
 import com.example.android.auriculoterapia_app.activities.RatioEvolucionActivity
 import com.example.android.auriculoterapia_app.constants.ApiClient
+import com.example.android.auriculoterapia_app.models.helpers.CommentResponse
 import com.example.android.auriculoterapia_app.models.helpers.PacienteResultsParameters
 import com.example.android.auriculoterapia_app.services.*
 import com.example.android.auriculoterapia_app.util.ListaTiposDeTratamiento
@@ -49,6 +51,7 @@ class ResultsHistoryFragment : Fragment() {
         val pesoButton = view.findViewById<Button>(R.id.btn_Peso)
         val ratioButton = view.findViewById<Button>(R.id.btn_RatioEvolucion)
         val gcButton = view.findViewById<Button>(R.id.btn_GC)
+        val commentButton = view.findViewById<Button>(R.id.btn_comentarios)
 
         //tables
         val tableLayoutresult = view.findViewById<TableLayout>(R.id.tableLayout_resultpatient)
@@ -93,6 +96,7 @@ class ResultsHistoryFragment : Fragment() {
             val intentPeso = Intent(requireContext(), PesoPatientActivity::class.java)
             val intentRatio = Intent(requireContext(), RatioEvolucionActivity::class.java)
             val intentGC = Intent(requireContext(), PesoPatientActivity::class.java)
+            val intentComment = Intent(requireContext(), CommentsActivity::class.java)
 
             pacienteService.resultParametersByPacienteId(pacienteId)
                 .enqueue(object : Callback<PacienteResultsParameters> {
@@ -189,6 +193,7 @@ class ResultsHistoryFragment : Fragment() {
                                             val yvaluesIMC: ArrayList<BarEntry> = ArrayList()
                                             val yvaluesEvolucion: ArrayList<Entry> = ArrayList()
                                             val yvaluesGC: ArrayList<BarEntry> = ArrayList()
+                                            val comments: ArrayList<CommentResponse> = ArrayList()
 
                                             data = response.body()!!
                                             response.body()?.map {
@@ -210,6 +215,12 @@ class ResultsHistoryFragment : Fragment() {
                                                         it.grasaCorporal.toFloat()
                                                     )
                                                 )
+                                                comments.add(
+                                                    CommentResponse(
+                                                        it.sesion!!,
+                                                        it.otros
+                                                    )
+                                                )
                                             }
                                             intentPeso.putExtra(
                                                 "yvaluesIMC",
@@ -224,6 +235,9 @@ class ResultsHistoryFragment : Fragment() {
                                                 Gson().toJson(yvaluesGC)
                                             )
                                             Log.i("VALUES: ", yvaluesIMC.toString())
+
+                                            intentComment.putExtra("comments", Gson().toJson(comments))
+
 
                                             estadoBotones = true
                                             if (tratamiento == "Obesidad") {
@@ -522,6 +536,11 @@ class ResultsHistoryFragment : Fragment() {
                                                 intentGC.putExtra("TipoTratamiento", tratamiento)
                                                 intentGC.putExtra("ciclodevida", ciclovida)
                                                 startActivity(intentGC)
+                                            }
+                                        }
+                                        commentButton.setOnClickListener {
+                                            if(estadoBotones){
+                                                startActivity(intentComment)
                                             }
                                         }
                                     }

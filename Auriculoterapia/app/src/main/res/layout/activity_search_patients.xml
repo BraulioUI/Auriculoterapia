@@ -21,12 +21,15 @@
             android:focusableInTouchMode="true"
             android:clickable="true"
             android:layout_marginTop="2dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPatients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             />
+
+
     </LinearLayout>
 
     <ProgressBar
@@ -34,5 +37,19 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonSolicitudTratamiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorAccent"
+        app:srcCompat="@drawable/tratamiento_nuevo" />
+
+
 
 </RelativeLayout>

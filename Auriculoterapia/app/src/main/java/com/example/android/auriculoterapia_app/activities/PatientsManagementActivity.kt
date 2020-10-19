@@ -3,6 +3,7 @@ package com.example.android.auriculoterapia_app.activities
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -19,6 +20,7 @@ import com.example.android.auriculoterapia_app.adapters.PatientsAdapter
 import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.Paciente
 import com.example.android.auriculoterapia_app.services.PatientService
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_search_patients.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,6 +60,14 @@ class PatientsManagementActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = patientsAdapter
         fetchPatients(token!!, "", patientsAdapter) //Empty keyword
+
+        val floatingActionButtonSolicitudTratamiento = findViewById<FloatingActionButton>(R.id.floatingActionButtonSolicitudTratamiento)
+
+        floatingActionButtonSolicitudTratamiento.setOnClickListener {
+            val intentSolicitudTratamiento = Intent(this,TreatmentPacientActivity::class.java)
+            intentSolicitudTratamiento.putExtra("IsFromSpecialist",true)
+            startActivity(intentSolicitudTratamiento)
+        }
 
     }
 

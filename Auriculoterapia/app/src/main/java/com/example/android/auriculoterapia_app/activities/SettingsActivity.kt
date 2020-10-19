@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.constants.ApiClient
@@ -40,7 +41,8 @@ class SettingsActivity : AppCompatActivity() {
         val modificarPalabraClave = findViewById<TextView>(R.id.tv_settingModicar2)
         val fechaNacimiento1 = findViewById<TextView>(R.id.tv_settingFecha)
 
-        val cerrarSesion = findViewById<TextView>(R.id.tv_settingLogOut)
+
+        val cerrarSesion = findViewById<Button>(R.id.btn_settingLogOut)
 
         val intentActualizarContrasena = Intent(this, ForgotPasswordActivity::class.java)
         val intentLogin = Intent(this, LogInActivity::class.java)

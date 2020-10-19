@@ -154,10 +154,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="result"
         app:layout_constraintStart_toEndOf="@+id/tv_edad"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_PacienteSolicitudSpecialist" />
 
     <TextView
         android:id="@+id/tv_urlImage"
@@ -187,5 +187,26 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_otros"
         app:layout_constraintStart_toEndOf="@+id/tv_otros"
         app:layout_constraintTop_toTopOf="@+id/tv_otros" />
+
+    <Spinner
+        android:id="@+id/spn_lisPatinetSolicitud"
+        android:layout_width="208dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_PacienteSolicitudSpecialist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_PacienteSolicitudSpecialist"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_PacienteSolicitudSpecialist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="Seleccionar:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

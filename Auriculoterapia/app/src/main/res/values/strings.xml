@@ -77,4 +77,7 @@
     <string name="confirmacion_modificar_cita">¿Seguro que desea modificar la cita?</string>
     <string name="confirmacion_envio_tratamiento">¿Está conforme con los datos ingresados?</string>
 
+
+    <string name="modificar_setting"><u>Modificar</u></string>
+
 </resources>

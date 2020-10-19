@@ -32,4 +32,6 @@ interface TreatmentService {
 data class FormularioEvolucion(var evolucionNumero:Int,var peso:Double,
                           var otros:String,var tipoTratamiento:String,var tratamientoId:Int,var sesion:Int?)
 
-data class ResultsByPatient(var evolucionNumero:Int,var peso:Double,var tipoTratamiento:String,var tratamientoId:Int,var sesion:Int?,var imc:Double,var grasaCorporal:Double)
+data class ResultsByPatient(var evolucionNumero:Int,var peso:Double,var tipoTratamiento:String,
+                            var tratamientoId:Int,var sesion:Int?,var imc:Double,
+                            var grasaCorporal:Double,var otros: String)
