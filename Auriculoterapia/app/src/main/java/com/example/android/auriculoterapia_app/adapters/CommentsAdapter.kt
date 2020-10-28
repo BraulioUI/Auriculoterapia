@@ -1,5 +1,6 @@
 package com.example.android.auriculoterapia_app.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,9 @@ class CommentsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(comment: CommentResponse){
             sesion.text = "$sesionname${comment.sesion.toString()}"
             descripcion.text = comment.descripcion
+            if (descripcion.text == "No presentó otros síntomas"){
+                descripcion.setTextColor(Color.RED)
+            }
         }
 
     }

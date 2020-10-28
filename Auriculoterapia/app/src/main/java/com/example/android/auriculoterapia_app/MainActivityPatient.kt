@@ -7,14 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
+import com.cloudinary.Transformation
+import com.cloudinary.android.MediaManager
 import com.example.android.auriculoterapia_app.activities.*
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.services.NotificationService
+import com.example.android.auriculoterapia_app.services.ResponseFoto
+import com.example.android.auriculoterapia_app.services.UserService
 import kotlinx.android.synthetic.main.activity_main_patient.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,11 +39,15 @@ class MainActivityPatient : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Inicio"
 
+        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
+
+
         val appointmentOption = findViewById<CardView>(R.id.appointment_option_patient)
         val configurationOption = findViewById<CardView>(R.id.configuration_option_patient)
         val resultOption = findViewById<CardView>(R.id.results_option_patient)
         notificationsOption = findViewById<CardView>(R.id.notification_option_patient)
         val username = findViewById<TextView>(R.id.user_name)
+        val avatarImage = findViewById<ImageView>(R.id.avatar_image)
 
         //val sb = StringBuilder()
         //sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
@@ -74,6 +84,30 @@ class MainActivityPatient : AppCompatActivity() {
             intent.putExtra("id", id)
             startActivity(intent)
         }
+
+        userService.getFotoByUserId(id).enqueue(object : Callback<ResponseFoto>{
+            override fun onFailure(call: Call<ResponseFoto>, t: Throwable) {
+                Log.i("FALLO: ", "NO FUNCIONA")
+            }
+
+            override fun onResponse(call: Call<ResponseFoto>, response: Response<ResponseFoto>) {
+                if (response.isSuccessful){
+                    val res = response.body()
+                    if (res?.foto != null){
+                        Glide.with(this@MainActivityPatient)
+                            .load(res.foto)
+                            .into(avatarImage)
+                    }
+                }else{
+                    Log.i("ERROR:","ERROR")
+                }
+
+
+            }
+
+
+        })
+
     }
 
     override fun onBackPressed() {

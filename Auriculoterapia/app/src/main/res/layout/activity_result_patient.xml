@@ -11,10 +11,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
         android:layout_marginTop="16dp"
         android:text="Tratamiento:"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
@@ -30,13 +29,11 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:gravity="center"
         android:text="Última Sesión:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
+        app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
     <TextView
         android:id="@+id/tvUltimaSesion"
@@ -53,9 +50,10 @@
         android:id="@+id/tableLayout_resultpatient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10">
 
@@ -210,28 +208,25 @@
         android:id="@+id/btn_EvolucionSintomas"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="35dp"
         android:background="@drawable/line_chart_3_"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_Peso"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/guideline26" />
 
     <Button
         android:id="@+id/btn_Peso"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
         android:background="@drawable/chart_image"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_GC"
-        app:layout_constraintStart_toEndOf="@+id/btn_EvolucionSintomas" />
+        app:layout_constraintStart_toStartOf="@+id/guideline29" />
 
     <Button
         android:id="@+id/btn_RatioEvolucion"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
         android:background="@drawable/chart_image"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_GC"
-        app:layout_constraintStart_toEndOf="@+id/btn_GC" />
+        app:layout_constraintStart_toStartOf="@+id/guideline32" />
 
     <TextView
         android:id="@+id/textView3"
@@ -241,67 +236,66 @@
         android:textAlignment="center"
         android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/btn_EvolucionSintomas"
         app:layout_constraintStart_toStartOf="@+id/btn_EvolucionSintomas" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:text="IMC"
         android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Peso"
+        app:layout_constraintStart_toStartOf="@+id/btn_Peso"
         app:layout_constraintTop_toBottomOf="@+id/btn_Peso" />
 
     <Button
         android:id="@+id/btn_GC"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="4dp"
         android:background="@drawable/chart_image"
-        app:layout_constraintStart_toEndOf="@+id/btn_Peso"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout_resultpatient" />
+        app:layout_constraintStart_toStartOf="@+id/guideline30"
+        app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
     <Button
         android:id="@+id/btn_comentarios"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
         android:background="@drawable/results_image"
         app:layout_constraintBaseline_toBaselineOf="@+id/btn_RatioEvolucion"
-        app:layout_constraintStart_toEndOf="@+id/btn_RatioEvolucion" />
+        app:layout_constraintStart_toStartOf="@+id/guideline33" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="66dp"
         android:layout_height="24dp"
-        android:layout_marginStart="10dp"
         android:text="Comentarios Evolción"
         android:textAlignment="center"
         android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/textView7" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_comentarios"
+        app:layout_constraintStart_toStartOf="@+id/btn_comentarios" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="55dp"
         android:layout_height="38dp"
-        android:layout_marginStart="33dp"
         android:text="Grasa Corporal"
         android:textAlignment="center"
         android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/btn_GC"
+        app:layout_constraintStart_toStartOf="@+id/btn_GC"
         app:layout_constraintTop_toBottomOf="@+id/btn_GC" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="287dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toTopOf="@+id/guideline35">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -310,9 +304,12 @@
 
             <TableLayout
                 android:id="@+id/tableLayout_infoNivelEficiencia"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TableRow android:background="#E5E9EC">
@@ -349,7 +346,6 @@
                 </TableRow>
 
                 <!-- DATA  -->
-
 
 
                 <TableRow>
@@ -613,14 +609,68 @@
         android:id="@+id/textView7"
         android:layout_width="56dp"
         android:layout_height="29dp"
-        android:layout_marginStart="15dp"
         android:text="Nivel de eficiencia"
         android:textAlignment="center"
         android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_RatioEvolucion"
+        app:layout_constraintStart_toStartOf="@+id/btn_RatioEvolucion" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.047222223" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.41" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.63" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.83" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
