@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -17,8 +18,10 @@ import com.example.android.auriculoterapia_app.constants.BASE_URL
 import com.example.android.auriculoterapia_app.models.RespuestaLogin
 import com.example.android.auriculoterapia_app.models.Usuario
 import com.example.android.auriculoterapia_app.services.*
+import com.example.android.auriculoterapia_app.util.ValidateEmail
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import kotlinx.android.synthetic.main.activity_log_in.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,20 +33,34 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LogInActivity : AppCompatActivity() {
 
     var completeAll: Boolean = true
-
+    val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
+    lateinit var bundleToDialog: Bundle
+    var isCreate: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         
         val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
-        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
 
         val intentMainPatient = Intent(this, MainActivityPatient::class.java)
         val intentMain = Intent(this, MainActivity::class.java)
 
-        val iduser =sharedPreferences.getInt("id",0)
+        val iduser =sharedPreferences.getInt("id",-10)
+        val existEmailSharedPreferences = sharedPreferences.getBoolean("ExistEmail",false)
+        AuxUser = iduser
 
         super.onCreate(savedInstanceState)
 
-        if(sharedPreferences.contains("id")){
+        Log.i("ISCREATE: ", isCreate.toString())
+
+        validarCorreoUsuario(AuxUser,"ninguno")
+
+        Log.i("EXISTEMAILCREATE: ", existEmailSharedPreferences.toString())
+
+
+        Log.i("IDDDDDDDDDD: ", AuxUser.toString())
+
+        if(sharedPreferences.contains("id") && existEmailSharedPreferences){
+            Log.i("IDDDDDDDDDD: ", AuxUser.toString())
+
             userService.getUserById(iduser).enqueue(object:Callback<ResponseUserById>{
                 override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
                     Log.i("LOGIN: ","NO HAY CONEXION")
@@ -79,11 +96,20 @@ class LogInActivity : AppCompatActivity() {
             val registerButton = findViewById<TextView>(R.id.tv_optionregister)
             val forgetButton = findViewById<TextView>(R.id.tv_optionForgetPassword)
             val loginButton = findViewById<Button>(R.id.bt_login)
+            val validarCorreoButton = findViewById<Button>(R.id.btn_validarCorreo)
+            val nombreUsuario = findViewById<EditText>(R.id.et_nombreUsuario)
+
+
+            val validarDialog = ValidateEmail()
+
+            validarCorreoButton.visibility = View.GONE
+
 
             loginButton.setOnClickListener{
-                completeAll = true
-                auth()
-                //Toast.makeText(applicationContext,"Inicio de sesión exitoso!!!",Toast.LENGTH_SHORT).show()
+                if(ExistEmail) {
+                    completeAll = true
+                    auth()
+                }
             }
 
             registerButton.setOnClickListener{
@@ -94,8 +120,64 @@ class LogInActivity : AppCompatActivity() {
                 startActivity(intentForget)
             }
 
+            validarCorreoButton.setOnClickListener {
+                bundleToDialog = Bundle()
+                bundleToDialog.putInt("IDUSER", AuxUser)
+                Log.i("AUXUSER",AuxUser.toString())
+                validarDialog.arguments = bundleToDialog
+                validarDialog.show(this.supportFragmentManager,"")
+            }
+
+            nombreUsuario.setOnFocusChangeListener { _, hasFocus ->
+                if(!hasFocus){
+                    val nombre = nombreUsuario.text.toString()
+                    if(nombre != "") {
+                        isCreate = false
+                        validarCorreoUsuario(-10,nombre)
+                        Log.i("EXISTEMAIL2: ", ExistEmail.toString())
+                    }
+
+
+                }
+            }
+
         }
 
+
+        /*userService.getUserById(iduser).enqueue(object:Callback<ResponseUserById>{
+            override fun onFailure(call: Call<ResponseUserById>, t: Throwable) {
+                Log.i("LOGIN: ","NO HAY CONEXION")
+                setContentView(R.layout.activity_log_in)
+            }
+
+            override fun onResponse(
+                call: Call<ResponseUserById>,
+                response: Response<ResponseUserById>
+            ) {
+                if(response.isSuccessful){
+
+                    val res = response.body()
+
+
+                    if(sharedPreferences.getString("rol",null)=="PACIENTE"){
+                        startActivity(intentMainPatient)
+                    }else{
+                        startActivity(intentMain)
+                    }
+                }else{
+                    Log.i("LOGIN: ","TODAVIA NO INICA SESION")
+                    //setContentView(R.layout.activity_log_in)
+
+                }
+            }
+        })*/
+
+
+    }
+
+    companion object{
+        private var AuxUser = -10
+        private var ExistEmail = false
     }
 
     private fun auth(){
@@ -166,6 +248,60 @@ class LogInActivity : AppCompatActivity() {
 
     }
 
+    private fun validarCorreoUsuario(id:Int, nombreusuario:String){
+
+        userService.getValidateEmail(id,nombreusuario).enqueue(object : Callback<ResponseValidationEmail>{
+            override fun onFailure(call: Call<ResponseValidationEmail>, t: Throwable) {
+                Log.i("EMAIL: ","NO HAY CONEXION")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseValidationEmail>,
+                response: Response<ResponseValidationEmail>
+            ) {
+                if (response.isSuccessful){
+                    Log.i("EMAIL: ","OK")
+
+                    val res = response.body()
+
+                    ExistEmail = res?.emailExist!!
+                    Log.i("EXISTEMAIL: ", ExistEmail.toString())
+                    AuxUser = res?.id
+                    Log.i("ISCREATE2: ", isCreate.toString())
+
+                    if (!isCreate) {
+                        val validarCorreoButton = findViewById<Button>(R.id.btn_validarCorreo)
+
+                        if (!ExistEmail) {
+                            Toast.makeText(
+                                applicationContext,
+                                "correo no validado",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            validarCorreoButton.visibility = View.VISIBLE
+                        } else {
+                            validarCorreoButton.visibility = View.GONE
+
+                        }
+                    }
+
+                }else{
+                    Log.i("EMAIL: ","ERROR")
+                    val res = response.errorBody()?.string()
+                    val message = JsonParser().parse(res).asJsonObject["message"].asString
+
+                    ExistEmail = false
+
+                    if (!isCreate) {
+                        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+            }
+
+        })
+    }
+
 
     private fun saveData(id:Int,usuario:String,token:String,rol:String,nombre:String,apellido:String){
         val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
@@ -175,6 +311,7 @@ class LogInActivity : AppCompatActivity() {
         editor.putString("rol",rol)
         editor.putString("nombre",nombre)
         editor.putString("apellido",apellido)
+        editor.putBoolean("ExistEmail", ExistEmail)
 
         editor.apply()
     }

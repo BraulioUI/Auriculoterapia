@@ -20,7 +20,7 @@ VALUES ('Marcos Alonso', 'Rivas Torres', 'marcosrt@gmail.com', 'primerpaciente',
 INSERT INTO Usuarios(Nombre,Apellido,Email,Contrasena,NombreUsuario,Sexo,PalabraClave,Token)
 VALUES ('Julio Alonso', 'Alvarado Reynoso', 'julioa@gmail.com', 'julioa', 'julioa', 'Masculino', 'Perro', 'asdgadsg584658sdfghsadgh');
 select * from notificaciones;
-select * from usuarios;
+
 DELETE FROM Usuarios Where Id = 5;
 ALTER TABLE Usuarios auto_increment=1;
 SELECT * FROM Rol_Usuarios;
@@ -49,6 +49,10 @@ SELECT * FROM Rol_Usuarios;
 
 UPDATE Pacientes SET Edad = 26 WHERE Id = 6;
 
+UPDATE Usuarios SET FechaEnvioCorreoConfirmacion = '2020-10-28 17:24:42.613813' WHERE Id = 14;
+UPDATE Usuarios SET FechaConfirmacionCodigo = '0001-01-01 00:00:00.000000' WHERE Id = 14;
+UPDATE Usuarios SET EmailExist = 1 WHERE Id =18;
+SELECT* FROM Usuarios;
 /*Tipo de atenciones*/
 
 INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
@@ -67,6 +71,7 @@ DELETE FROM Citas Where Id = 52;
 
 UPDATE CITAS SET Estado = "En Proceso" WHERE Id = 48;
 
+UPDATE USUARIOS SET Email = "pruebasmndrd@gmail.com" Where Id = 1;
 
 SELECT* FROM SOLICITUDTRATAMIENTOS;
 INSERT INTO SOLICITUDTRATAMIENTOS(Edad,Peso,Altura,Sintomas,ImagenAreaAfectada,OtrosSintomas,Estado,fechaInicio,PacienteId)
@@ -153,4 +158,4 @@ CALL obtenerPacientesYUltimaSesion("Femenino", "Obesidad");
 ALTER TABLE Notificaciones AUTO_INCREMENT = 1;
 DELETE FROM Notificaciones WHERE Id = 2;
 SELECT * FROM Notificaciones;
-UPDATE Notificaciones SET Leido = 0 WHERE Id = 2;
+UPDATE Notificaciones SET Leido = 1 WHERE Id = 7;

@@ -2,6 +2,7 @@ package com.example.android.auriculoterapia_app.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +35,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
 
         optionGenero = findViewById(R.id.spinner3)
         resultGenero = findViewById(R.id.tv_resultadoGenero)
@@ -191,6 +193,8 @@ class RegisterActivity : AppCompatActivity() {
                         Log.i("REGISTRAR PACIENTE: ", response.body().toString())
                         Toast.makeText(applicationContext,
                             "Se registró el usuario correctamente, por favor inicie sesión",Toast.LENGTH_SHORT).show()
+
+                        //saveData(response.body()?.usuario?.id!!)
                         startActivity(intentLogIn)
                     }
                     else{
@@ -209,5 +213,11 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun saveData(id:Int){
+        val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
+        editor.putInt("id",id)
+        editor.apply()
     }
 }
