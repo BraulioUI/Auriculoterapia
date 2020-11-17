@@ -29,6 +29,7 @@ import retrofit2.Response
 class MainActivityPatient : AppCompatActivity() {
     lateinit var notificationsOption: CardView
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var avatarImage:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,7 @@ class MainActivityPatient : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "Inicio"
 
-        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
+
 
 
         val appointmentOption = findViewById<CardView>(R.id.appointment_option_patient)
@@ -47,7 +48,7 @@ class MainActivityPatient : AppCompatActivity() {
         val resultOption = findViewById<CardView>(R.id.results_option_patient)
         notificationsOption = findViewById<CardView>(R.id.notification_option_patient)
         val username = findViewById<TextView>(R.id.user_name)
-        val avatarImage = findViewById<ImageView>(R.id.avatar_image)
+        avatarImage = findViewById(R.id.avatar_image)
 
         //val sb = StringBuilder()
         //sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
@@ -85,28 +86,7 @@ class MainActivityPatient : AppCompatActivity() {
             startActivity(intent)
         }
 
-        userService.getFotoByUserId(id).enqueue(object : Callback<ResponseFoto>{
-            override fun onFailure(call: Call<ResponseFoto>, t: Throwable) {
-                Log.i("FALLO: ", "NO FUNCIONA")
-            }
-
-            override fun onResponse(call: Call<ResponseFoto>, response: Response<ResponseFoto>) {
-                if (response.isSuccessful){
-                    val res = response.body()
-                    if (res?.foto != null){
-                        Glide.with(this@MainActivityPatient)
-                            .load(res.foto)
-                            .into(avatarImage)
-                    }
-                }else{
-                    Log.i("ERROR:","ERROR")
-                }
-
-
-            }
-
-
-        })
+        setAvatarImage(id)
 
     }
 
@@ -119,6 +99,8 @@ class MainActivityPatient : AppCompatActivity() {
         super.onResume()
         val id = sharedPreferences.getInt("id", 0)
         setNumberOfUnreadNotifications(notificationsOption, id)
+        setAvatarImage(id)
+
     }
 
     fun setNumberOfUnreadNotifications(notificationsView: CardView, id: Int){
@@ -142,6 +124,34 @@ class MainActivityPatient : AppCompatActivity() {
                     }
                 }
             }
+        })
+    }
+
+    fun setAvatarImage(id:Int){
+        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
+        userService.getFotoByUserId(id).enqueue(object : Callback<ResponseFoto>{
+            override fun onFailure(call: Call<ResponseFoto>, t: Throwable) {
+                Log.i("FALLO: ", "NO FUNCIONA")
+            }
+
+            override fun onResponse(call: Call<ResponseFoto>, response: Response<ResponseFoto>) {
+                if (response.isSuccessful){
+                    val res = response.body()
+                    if (res?.foto != null){
+                        Glide.with(this@MainActivityPatient)
+                            .load(res.foto)
+                            .into(avatarImage)
+                    }else{
+                        avatarImage.setImageResource(R.drawable.avatar_image)
+                    }
+                }else{
+                    Log.i("ERROR:","ERROR")
+                }
+
+
+            }
+
+
         })
     }
 }

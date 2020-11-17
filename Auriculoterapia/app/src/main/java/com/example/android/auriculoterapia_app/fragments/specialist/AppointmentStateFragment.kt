@@ -51,7 +51,7 @@ class AppointmentStateFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         appointmentAdapter = AppointmentAdapter(requireContext())
-
+        appointmentAdapter.getActivity(this.requireActivity())
 
         loadAppointments()
         super.onResume()
@@ -92,6 +92,7 @@ class AppointmentStateFragment : Fragment() {
 
             }
         })
+
 
     }
 

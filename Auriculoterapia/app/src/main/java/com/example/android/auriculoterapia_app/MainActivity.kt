@@ -6,15 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 import com.example.android.auriculoterapia_app.activities.*
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.services.NotificationService
+import com.example.android.auriculoterapia_app.services.ResponseFoto
+import com.example.android.auriculoterapia_app.services.UserService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var sharedPreferences: SharedPreferences
     lateinit var notificationsOption: CardView
+    lateinit var avatarImage:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +37,14 @@ class MainActivity : AppCompatActivity() {
         val configurationOption = findViewById<CardView>(R.id.configuration_option)
         val resultsOption = findViewById<CardView>(R.id.results_option)
         notificationsOption = findViewById<CardView>(R.id.notification_option)
+        avatarImage = findViewById<ImageView>(R.id.avatar_image)
 
         val username = findViewById<TextView>(R.id.user_name)
 
         val actionBar = supportActionBar
         actionBar!!.title = "Inicio"
+
+
 
         /*val sb = StringBuilder()
         sb.append(sharedPreferences.getString("nombre","")).append(" ").append(sharedPreferences.getString("apellido",""))
@@ -80,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        setAvatarImage(id)
 
     }
 
@@ -93,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val id = sharedPreferences.getInt("id", 0)
         setNumberOfUnreadNotifications(notificationsOption, id)
+        setAvatarImage(id)
     }
 
     fun setNumberOfUnreadNotifications(notificationsView: CardView, id: Int){
@@ -116,6 +121,35 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        })
+    }
+
+    fun setAvatarImage(id:Int){
+        val userService = ApiClient.retrofit().create<UserService>(UserService::class.java)
+
+        userService.getFotoByUserId(id).enqueue(object : Callback<ResponseFoto>{
+            override fun onFailure(call: Call<ResponseFoto>, t: Throwable) {
+                Log.i("FALLO: ", "NO FUNCIONA")
+            }
+
+            override fun onResponse(call: Call<ResponseFoto>, response: Response<ResponseFoto>) {
+                if (response.isSuccessful){
+                    val res = response.body()
+                    if (res?.foto != null){
+                        Glide.with(this@MainActivity)
+                            .load(res.foto)
+                            .into(avatarImage)
+                    }else{
+                        avatarImage.setImageResource(R.drawable.avatar_image)
+                    }
+                }else{
+                    Log.i("ERROR:","ERROR")
+                }
+
+
+            }
+
+
         })
     }
 

@@ -6,15 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.activities.*
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.fragments.specialist.AppointmentStateFragment
 import com.example.android.auriculoterapia_app.models.Notificacion
+import com.example.android.auriculoterapia_app.services.ResponseFoto
 import com.example.android.auriculoterapia_app.services.ResponseUserById
 import com.example.android.auriculoterapia_app.services.UserService
 import kotlinx.android.synthetic.main.notification_item.view.*
@@ -36,7 +39,7 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val fechaNotificacion = view.findViewById<TextView>(R.id.fechaNotificacion)
         val horaNotificacion = view.findViewById<TextView>(R.id.horaNotificacion)
         val cardNotificacion = view.findViewById<CardView>(R.id.cv_notificacion)
-
+        val avatarImage = view.findViewById<ImageView>(R.id.avatar_image)
 
         val intentCita = Intent(view.context,AppointmentManagement::class.java)
         val intentCitaPaciente = Intent(view.context,AppointmentPatientManagement::class.java)
@@ -64,6 +67,30 @@ class NotificationsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             fechaNotificacion.text = fecha
             horaNotificacion.text = hora
 
+            userService.getFotoByUserId(notificacion.emisorId).enqueue(object : Callback<ResponseFoto>{
+                override fun onFailure(call: Call<ResponseFoto>, t: Throwable) {
+                    Log.i("Fallo: ","NO HAY CONEXION")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseFoto>,
+                    response: Response<ResponseFoto>
+                ) {
+                    if(response.isSuccessful){
+                        val res = response.body()
+                        if (res?.foto != null){
+                            Glide.with(view.context)
+                                .load(res.foto)
+                                .into(avatarImage)
+                        }else{
+                            avatarImage.setImageResource(R.drawable.avatar_image)
+                        }
+                    }else{
+                        Log.i("Error: ","Error")
+                    }
+                }
+
+            })
 
             if(!leido) {
                 cardNotificacion.setCardBackgroundColor(Color.parseColor("#B8C2FD"))

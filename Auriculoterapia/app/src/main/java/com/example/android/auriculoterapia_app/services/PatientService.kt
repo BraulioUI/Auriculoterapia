@@ -16,6 +16,7 @@ interface PatientService {
     @POST("api/paciente")
     fun registerPatient(@Body paciente: Paciente):Call<Paciente>
 
+
     @GET("api/paciente/pacientesPorSexo")
     fun obtenerCantidadPacientesPorSexo(): Call<CantidadPacientesPorSexo>
 

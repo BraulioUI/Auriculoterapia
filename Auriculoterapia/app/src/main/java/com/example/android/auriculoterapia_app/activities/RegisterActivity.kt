@@ -35,17 +35,19 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val sharedPreferences = getSharedPreferences("db_auriculoterapia",0)
+        val sharedPreferences = getSharedPreferences("db_auriculoterapia", 0)
+
 
         optionGenero = findViewById(R.id.spinner3)
         resultGenero = findViewById(R.id.tv_resultadoGenero)
         resultGenero.visibility = View.GONE
 
-        val options = arrayOf("masculino","femenino")
+        val options = arrayOf("masculino", "femenino")
 
-        optionGenero.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options)
+        optionGenero.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
 
-        optionGenero.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+        optionGenero.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 resultGenero.text = "Seleccionar:"
             }
@@ -77,36 +79,40 @@ class RegisterActivity : AppCompatActivity() {
         //val dateInString = formatter.format(date)
         //dateEditText.text = dateInString
 
-        dateEditText.setOnClickListener{
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{
-                    view, mYear, mMonth, mDay -> dateEditText.text = "$mYear-${mMonth + 1}-$mDay"
-            }, year, month, day
+        dateEditText.setOnClickListener {
+            val dpd = DatePickerDialog(
+                this,
+                R.style.MySpinnerDatePickerStyle,
+                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                    dateEditText.text = "$mYear-${mMonth + 1}-$mDay"
+                },
+                year,
+                month,
+                day
             )
-            c.add(Calendar.YEAR,-61)
-            c.add(Calendar.DATE,1)
+            c.add(Calendar.YEAR, -61)
+            c.add(Calendar.DATE, 1)
             dpd.datePicker.minDate = c.timeInMillis
-            c.add(Calendar.YEAR, 61 -14)
-            c.add(Calendar.DATE,-1)
+            c.add(Calendar.YEAR, 61 - 14)
+            c.add(Calendar.DATE, -1)
             dpd.datePicker.maxDate = c.timeInMillis
+
             dpd.show()
         }
 
 
-
         //val intent = Intent(this, MainActivity::class.java)
-        buttonRegister.setOnClickListener{
+        buttonRegister.setOnClickListener {
             completeAll = true
             registrarPaciente()
         }
-
     }
 
-    private fun registrarPaciente(){
+    private fun registrarPaciente() {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
 
 
         val pacienteService = retrofit.create<PatientService>(PatientService::class.java)
@@ -121,103 +127,106 @@ class RegisterActivity : AppCompatActivity() {
 
         val intentLogIn = Intent(this, LogInActivity::class.java)
 
-        if(nombre.text.isEmpty()|| apellido.text.isEmpty() || fechaNacimiento.text.isEmpty()||
-            sexo.text.isEmpty()|| nombreUsuario.text.isEmpty() ||
-            contrasena.text.isEmpty()||palabraClave.text.isEmpty()||
-            email.text.isEmpty()){
-            Toast.makeText(applicationContext,
-                "Por favor complete todos los campos",Toast.LENGTH_SHORT).show()
+        if (nombre.text.isEmpty() || apellido.text.isEmpty() || fechaNacimiento.text.isEmpty() ||
+            sexo.text.isEmpty() || nombreUsuario.text.isEmpty() ||
+            contrasena.text.isEmpty() || palabraClave.text.isEmpty() ||
+            email.text.isEmpty()
+        ) {
+            Toast.makeText(
+                applicationContext,
+                "Por favor complete todos los campos", Toast.LENGTH_SHORT
+            ).show()
             completeAll = false
 
         }
 
-        if (nombreUsuario.text.toString().length <2 || nombreUsuario.text.toString().length >15){
+        if (nombreUsuario.text.toString().length < 2 || nombreUsuario.text.toString().length > 15) {
             nombreUsuario.setError("Debe contener entre 2 y 15 caracteres")
             nombreUsuario.setText("")
             nombreUsuario.requestFocus()
             completeAll = false
         }
-        if (nombre.text.toString().length < 2 || nombre.text.toString().length > 15){
+        if (nombre.text.toString().length < 2 || nombre.text.toString().length > 15) {
             nombre.setError("Debe contener entre 2 y 15 caracteres")
             nombre.setText("")
             nombre.requestFocus()
             completeAll = false
         }
 
-        if(apellido.text.toString().length < 2 || apellido.text.toString().length >15){
+        if (apellido.text.toString().length < 2 || apellido.text.toString().length > 15) {
             apellido.setError("Debe contener entre 2 y 15 caracteres")
             apellido.setText("")
             apellido.requestFocus()
             completeAll = false
         }
 
-        if (contrasena.text.toString().length < 6 || contrasena.text.toString().length > 15){
+        if (contrasena.text.toString().length < 6 || contrasena.text.toString().length > 15) {
             contrasena.setError("La contraseña de tener al menos 6 caracteres")
             contrasena.setText("")
             contrasena.requestFocus()
             completeAll = false
         }
-        if (palabraClave.text.toString().length < 4 || palabraClave.text.toString().length > 15){
+        if (palabraClave.text.toString().length < 4 || palabraClave.text.toString().length > 15) {
             palabraClave.setError("La palabra clave de tener al menos 4 caracteres")
             palabraClave.setText("")
             palabraClave.requestFocus()
             completeAll = false
         }
-        if(fechaNacimiento.text.isEmpty()){
+        if (fechaNacimiento.text.isEmpty()) {
             fechaNacimiento.setError("Selecciona su fecha de nacimiento")
             fechaNacimiento.requestFocus()
             completeAll = false
         }
-        if(email.text.isEmpty()){
+        if (email.text.isEmpty()) {
             email.setError("Ingrese su correo")
             email.requestFocus()
             completeAll = false
         }
 
-        if(completeAll){
-            val usuario = Usuario(null,nombre.text.toString(),apellido.text.toString(),
+        if (completeAll) {
+            val usuario = Usuario(
+                null, nombre.text.toString(), apellido.text.toString(),
                 email.text.toString(),
-                contrasena.text.toString(),nombreUsuario.text.toString(),sexo.text.toString(),
+                contrasena.text.toString(), nombreUsuario.text.toString(), sexo.text.toString(),
                 palabraClave.text.toString(),
-                null)
+                null
+            )
 
-            val paciente = Paciente(null,fechaNacimiento.text.toString(),"",usuario)
+            val paciente = Paciente(null, fechaNacimiento.text.toString(), "", usuario)
 
-            pacienteService.registerPatient(paciente).enqueue(object : Callback<Paciente>{
+
+            pacienteService.registerPatient(paciente).enqueue(object : Callback<Paciente> {
                 override fun onFailure(call: Call<Paciente>, t: Throwable) {
-                    Log.i("REGISTRAR PACIENTE","NO ENTRO")
+                    Log.i("REGISTRAR PACIENTE", "NO ENTRO")
                 }
 
                 override fun onResponse(call: Call<Paciente>, response: Response<Paciente>) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         Log.i("REGISTRAR PACIENTE: ", response.body().toString())
-                        Toast.makeText(applicationContext,
-                            "Se registró el usuario correctamente, por favor inicie sesión",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            applicationContext,
+                            "Se registró el usuario correctamente, por favor inicie sesión",
+                            Toast.LENGTH_LONG
+                        ).show()
 
-                        //saveData(response.body()?.usuario?.id!!)
                         startActivity(intentLogIn)
-                    }
-                    else{
-                        when(response.code()){
-                            400 ->{
+                    } else {
+                        when (response.code()) {
+                            400 -> {
                                 val res = response.errorBody()?.string()
-                                val message = JsonParser().parse(res).asJsonObject["message"].asString
+                                val message =
+                                    JsonParser().parse(res).asJsonObject["message"].asString
 
-                                Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, message, Toast.LENGTH_LONG)
+                                    .show()
                             }
                         }
                     }
                 }
 
             })
+
         }
-
-
     }
 
-    private fun saveData(id:Int){
-        val editor: SharedPreferences.Editor= getSharedPreferences("db_auriculoterapia",0).edit()
-        editor.putInt("id",id)
-        editor.apply()
-    }
 }

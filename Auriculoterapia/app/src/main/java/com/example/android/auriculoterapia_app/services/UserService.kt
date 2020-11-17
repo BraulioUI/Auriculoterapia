@@ -22,11 +22,6 @@ interface UserService {
     @GET("api/usuario/foto/{id}")
     fun getFotoByUserId(@Path("id") id: Int): Call<ResponseFoto>
 
-    @POST("api/usuario/validarcodigo")
-    fun validateEmail(@Body responseValidationEmail: ResponseValidationEmail): Call<ResponseValidationEmail>
-
-    @GET("api/usuario/validarcorreo/{id}/{nombreusuario}")
-    fun getValidateEmail(@Path("id") id:Int,@Path("nombreusuario") nombreusuario:String):Call<ResponseValidationEmail>
 }
 
 class ForgotPasswordRequest(
@@ -53,6 +48,3 @@ class ResponseKeyWord(var id: Int, var palabraClave: String, var nuevaPalabraCla
 
 data class ResponseFoto(var id: Int, var foto: String)
 
-data class ResponseValidationEmail(var id: Int, var codigo: String, var emailExist: Boolean)
-
-//class ValidationEmailRequest(var id:Int, var nombreUsuario:String)

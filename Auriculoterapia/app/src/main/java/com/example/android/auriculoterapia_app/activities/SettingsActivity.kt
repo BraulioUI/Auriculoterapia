@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.Guideline
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
@@ -64,7 +65,12 @@ class SettingsActivity : AppCompatActivity() {
         val intentPalabraClave = Intent(this, ChangeKeyWordActivity::class.java)
         val intentInitialImage = Intent(this,InitialImageActivity::class.java)
 
-
+        val guideline4 = findViewById<Guideline>(R.id.guideline4)
+        val guideline5 = findViewById<Guideline>(R.id.guideline5)
+        val guideline6 = findViewById<Guideline>(R.id.guideline6)
+        val guideline7 = findViewById<Guideline>(R.id.guideline7)
+        val guideline8 = findViewById<Guideline>(R.id.guideline8)
+        val guideline9 = findViewById<Guideline>(R.id.guideline9)
 
         modificarContrasena.setOnClickListener {
             startActivity(intentActualizarContrasena)
@@ -124,6 +130,12 @@ class SettingsActivity : AppCompatActivity() {
                     if(res?.fechaNacimiento == null){
                         fechaNacimiento1.visibility = View.GONE
                         fechaNacimiento.visibility = View.GONE
+                        guideline4.setGuidelinePercent(0.2F)
+                        guideline5.setGuidelinePercent(0.3F)
+                        guideline6.setGuidelinePercent(0.4F)
+                        guideline7.setGuidelinePercent(0.5F)
+                        guideline8.setGuidelinePercent(0.6F)
+                        guideline9.setGuidelinePercent(0.7F)
                     }else{
                         fechaNacimiento1.visibility =   View.VISIBLE
                         fechaNacimiento.visibility = View.VISIBLE

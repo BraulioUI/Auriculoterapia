@@ -4,21 +4,28 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.auriculoterapia_app.R
 import com.example.android.auriculoterapia_app.activities.AppointmentPatientManagement
+import com.example.android.auriculoterapia_app.activities.InitialImageActivity
 import com.example.android.auriculoterapia_app.constants.ApiClient
 import com.example.android.auriculoterapia_app.fragments.patient.AppointmentPatientRagisterFragment
 import com.example.android.auriculoterapia_app.models.Cita
@@ -31,11 +38,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>(),ActivityCompat.OnRequestPermissionsResultCallback {
 
     private var items : List<Cita> = ArrayList()
     private var rol: String = ""
     private var usuarioId = 0
+    lateinit var activity: Activity
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CitaViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
@@ -164,6 +172,23 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
                 }
 
+                ///////////
+
+                holder.imgButtonPhone.setOnClickListener {
+                    if (cita.paciente.celular.trim().isNotEmpty()) {
+                        if(ContextCompat.checkSelfPermission(context,
+                            android.Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
+                            val permissions = arrayOf(android.Manifest.permission.CALL_PHONE);
+                            ActivityCompat.requestPermissions(activity,permissions,
+                                REQUEST_CALL)
+
+                        }else{
+                            dial = "tel:"+cita.paciente.celular
+                            val intentCall =Intent(Intent.ACTION_CALL,Uri.parse(dial))
+                            context.startActivity(intentCall)
+                        }
+                    }
+                }
 
             }
         }
@@ -192,6 +217,7 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
         val buttonModificar = itemView.findViewById<Button>(R.id.botonModificar)
         val buttonCancelar = itemView.findViewById<Button>(R.id.botonCancelar)
         val buttonFinalizar = itemView.findViewById<Button>(R.id.botonFinalizar)
+        val imgButtonPhone = itemView.findViewById<ImageButton>(R.id.ib_phone)
 
         fun bind(cita: Cita){
             dateText.text = cita.fecha
@@ -201,8 +227,10 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
 
             if(rol == "ESPECIALISTA"){
                 numeroCelular.text = cita.paciente.celular
+                imgButtonPhone.visibility = View.VISIBLE
             } else {
                 numeroCelular.visibility = View.GONE
+                imgButtonPhone.visibility = View.GONE
             }
 
 
@@ -238,6 +266,42 @@ class AppointmentAdapter(val context: Context): RecyclerView.Adapter<RecyclerVie
         ft.commit()
     }
 
+    companion object{
+        private val  REQUEST_CALL =1
+        private var dial=""
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            REQUEST_CALL->{
+                if(grantResults.size>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    //permision from popup granted
+                    if (dial.trim().isNotEmpty()) {
+                        if(ContextCompat.checkSelfPermission(context,
+                                android.Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
+                            val permissions = arrayOf(android.Manifest.permission.CALL_PHONE);
+                            ActivityCompat.requestPermissions(activity,permissions,
+                                REQUEST_CALL)
+
+                        }else{
+
+                            val intentCall =Intent(Intent.ACTION_CALL,Uri.parse(dial))
+                            context.startActivity(intentCall)
+                        }
+                    }
+                }else{
+                    Toast.makeText(context,"Permiso denegado",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    fun getActivity(activity: Activity){
+        this.activity=activity
+    }
 
 }
 
