@@ -49,10 +49,10 @@ SELECT * FROM Rol_Usuarios;
 
 UPDATE Pacientes SET Edad = 26 WHERE Id = 6;
 
-UPDATE Usuarios SET FechaEnvioCorreoConfirmacion = '2020-10-28 17:24:42.613813' WHERE Id = 14;
+/*UPDATE Usuarios SET FechaEnvioCorreoConfirmacion = '2020-10-28 17:24:42.613813' WHERE Id = 14;
 UPDATE Usuarios SET FechaConfirmacionCodigo = '0001-01-01 00:00:00.000000' WHERE Id = 14;
 UPDATE Usuarios SET EmailExist = 1 WHERE Id =18;
-SELECT* FROM Usuarios;
+SELECT* FROM Usuarios;*/
 /*Tipo de atenciones*/
 
 INSERT INTO TipoAtencions(Descripcion) VALUES ('Presencial');
